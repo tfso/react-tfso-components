@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 
-import { SearchField } from 'react-tfso-components'
+import Button from '@material-ui/core/Button'
+
+import { SearchField, ConfirmationDialog, ConfirmationDialogProps } from 'react-tfso-components'
 
 export default class App extends Component {
+    state = {
+        openConfirmationDialog: false
+    }
+
+    onClickOpenConfirmationDialog = () => {
+        this.setState({openConfirmationDialog: true})
+    }
+
     render(){
         return (
             <React.Fragment>
@@ -12,6 +22,19 @@ export default class App extends Component {
                 <SearchField
                     
                 />
+
+                <Button onClick={this.onClickOpenConfirmationDialog}>Open ConfirmationDialog</Button>
+                {this.state.openConfirmationDialog && // For some reason, if the dialog is rendered, opened then closed, no clicks work on the page afterwards. not rendering it does not render the slide animation properly... fixme
+                <ConfirmationDialog 
+                    open={this.state.openConfirmationDialog}
+                    okButtonText='Ok'
+                    cancelButtonText='Cancel'
+                    onOk={() => this.setState({openConfirmationDialog: false})}
+                    onCancel={() => this.setState({openConfirmationDialog: false})}
+                    message='Confirmation dialog message'
+                    //message={undefined as any as string} //testing validations
+                    //title='Confirmation dialog title'
+                 />}
             </React.Fragment>
         )
     }
