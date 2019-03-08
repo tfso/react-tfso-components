@@ -8,11 +8,21 @@ import DialogActions from '@material-ui/core/DialogActions'
 import Button from '@material-ui/core/Button'
 import Slide from '@material-ui/core/Slide'
 
+export type ConfirmationDialogProps = {
+    open: boolean
+    title?: string
+    message: string
+    okButtonText: string
+    cancelButtonText: string
+    onOk(): void
+    onCancel(): void
+}
+
 /**
  * 
  * @param {ConfirmationDialogProps} props 
  */
-const ConfirmationDialog = (props) => {
+const ConfirmationDialog: React.FunctionComponent<ConfirmationDialogProps> = (props: ConfirmationDialogProps) => {
     const { open, onCancel, onOk, title, message, okButtonText, cancelButtonText } = props    
     return(
         <Dialog

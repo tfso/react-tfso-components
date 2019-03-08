@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 
 import Button from '@material-ui/core/Button'
 
-import { SearchField, ConfirmationDialog, ConfirmationDialogProps } from 'react-tfso-components'
+//import { SearchField, ConfirmationDialog, ConfirmationDialogProps } from 'react-tfso-components'
+import ConfirmationDialog from 'react-tfso-components/dist/ConfirmationDialog'
+import SearchField from 'react-tfso-components/dist/SearchField'
 
 export default class App extends Component {
     state = {
@@ -32,8 +34,7 @@ export default class App extends Component {
                     onOk={() => this.setState({openConfirmationDialog: false})}
                     onCancel={() => this.setState({openConfirmationDialog: false})}
                     message='Confirmation dialog message'
-                    //message={undefined as any as string} //testing validations
-                    //title='Confirmation dialog title'
+                    title='Confirmation dialog title'
                  />}
             </React.Fragment>
         )

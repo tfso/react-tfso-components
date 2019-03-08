@@ -1,4 +1,6 @@
 import React from 'react'
+
+import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -58,7 +60,18 @@ const SectionMobile = styled.div`
 }
 `
 
-export class TopBar extends React.Component{
+export type TopBarProps = {
+  title: string
+  handleOpenDrawer(e: React.SyntheticEvent): void
+  mobile?: React.ReactNode
+} 
+
+export class TopBar extends React.PureComponent<TopBarProps> {
+    static propTypes = {
+		title: PropTypes.string.isRequired
+		//.. todo
+	}
+
     state = {
         mobileMoreAnchorEl: null
     }

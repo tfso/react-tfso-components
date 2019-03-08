@@ -3,8 +3,18 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
+import { TextFieldProps} from '@material-ui/core/TextField'
 
-class SearchField extends React.PureComponent {
+export type SearchFieldProps = TextFieldProps
+
+export default class SearchField extends React.PureComponent<SearchFieldProps> {
+    static propTypes = TextField.propTypes
+    static defaultProps = {
+        placeholder: 'Search',
+        margin: 'dense',
+        InputProps: { startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small" /></InputAdornment>}
+    }
+
     state = {
         editing: false
     }
@@ -37,12 +47,3 @@ class SearchField extends React.PureComponent {
         )
     }
 }
-
-SearchField.propTypes = TextField.propTypes
-SearchField.defaultProps = {
-    placeholder: 'Search',
-    margin: 'dense',
-    InputProps: { startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small" /></InputAdornment>}
-}
-
-export default SearchField
