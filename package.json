@@ -4,6 +4,7 @@
   "description": "",
   "author": "tfso",
   "license": "unlicensed",
+  "homepage": "https://tfso.github.io/react-tfso-components",
   "repository": "tfso/react-tfso-components",
   "main": "dist/",
   "types": "dist/",
