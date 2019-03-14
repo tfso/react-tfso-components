@@ -1,5 +1,4 @@
 import React from 'react'
-
 import PropTypes from 'prop-types'
 import List from '@material-ui/core/List'
 import Drawer from '@material-ui/core/Drawer'
@@ -34,7 +33,7 @@ export type MenuProps = {
     open: boolean
 }
 
-export class Menu extends React.PureComponent<MenuProps> {
+export class Menu extends React.PureComponent<MenuProps>{
     static propTypes = {
         open: PropTypes.bool.isRequired
     }

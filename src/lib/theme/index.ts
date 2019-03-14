@@ -55,7 +55,7 @@ const colors = {
     bodyBackgroundColor: '#F7F7F7',
     listOverBackgroundColor: '#E6E6E6',
     borderColor: '#C4C4C4',
-    tabBarColor: '#C4C4C4'
+    tabBarColor: colorScheme.white
 }
 
 const palette = {

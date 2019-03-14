@@ -1,5 +1,4 @@
 import React from 'react'
-
 import PropTypes from 'prop-types'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
@@ -18,19 +17,15 @@ export type ConfirmationDialogProps = {
     onCancel(): void
 }
 
-/**
- * 
- * @param {ConfirmationDialogProps} props 
- */
 const ConfirmationDialog: React.FunctionComponent<ConfirmationDialogProps> = (props: ConfirmationDialogProps) => {
-    const { open, onCancel, onOk, title, message, okButtonText, cancelButtonText } = props    
-    return(
+    const {open, onCancel, onOk, title, message, okButtonText, cancelButtonText} = props
+    return (
         <Dialog
             TransitionComponent={props => <Slide direction='up' {...props} />}
             keepMounted
             open={open}
             onClose={onCancel}
-            maxWidth={"xs"}
+            maxWidth={'xs'}
         >
             {title && <DialogTitle>{title}</DialogTitle>}
             <DialogContent>{message}</DialogContent>

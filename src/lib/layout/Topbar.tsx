@@ -1,5 +1,4 @@
 import React from 'react'
-
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -61,17 +60,16 @@ const SectionMobile = styled.div`
 `
 
 export type TopBarProps = {
-  title: string
-  handleOpenDrawer(e: React.SyntheticEvent): void
-  mobile?: React.ReactNode
-} 
+    title: string
+    onMenuToggle: Function
+    mobileMenu?: React.ReactNode
+}
 
-export class TopBar extends React.PureComponent<TopBarProps> {
+export class TopBar extends React.PureComponent<TopBarProps, any>{
     static propTypes = {
-		title: PropTypes.string.isRequired
-		//.. todo
-	}
-
+        title: PropTypes.string.isRequired,
+        mobileMenu: PropTypes.node.isRequired
+    }
     state = {
         mobileMoreAnchorEl: null
     }
@@ -90,7 +88,7 @@ export class TopBar extends React.PureComponent<TopBarProps> {
             <Root>
                 <StyledAppBar position="static" color="default">
                     <Toolbar>
-                        <MenuButton color="inherit" aria-label="Open drawer" onClick={this.props.handleOpenDrawer}>
+                        <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle()}>
                             <MenuIcon/>
                         </MenuButton>
                         <Title variant="h6" color="inherit" noWrap>
@@ -114,7 +112,7 @@ export class TopBar extends React.PureComponent<TopBarProps> {
                     open={isMobileMenuOpen}
                     onClose={this.handleMobileMenuClose}
                 >
-                    {this.props.mobile}
+                    {this.props.mobileMenu}
                 </Menu>
             </Root>
         )

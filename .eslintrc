@@ -2,6 +2,7 @@
   "extends": [
     "./node_modules/eslint-config/react.js"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module"
   }

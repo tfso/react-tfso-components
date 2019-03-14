@@ -1,32 +1,40 @@
 {
-    "compileOnSave": true,
-    "compilerOptions": {
-        "target": "es5",
-        "lib": [
-            "es2018",
-            "dom"
-        ],
-        "allowJs": false,
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "noEmit": false,
-        "jsx": "react",
-        "noImplicitAny": false,
-        "declaration": true,
-        "declarationMap": true,
-        "sourceMap": true,
-        "typeRoots": [
-            "./node_modules/@types"
-        ]
-    },
-    "include": ["src", "index.ts"],
-    "exclude": ["node_modules", "**/*.test.js", "**/*.test.ts"]
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "allowJs": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "isolatedModules": true
+  },
+  "include": [
+    "src",
+    "index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.js",
+    "**/*.test.ts"
+  ]
 }

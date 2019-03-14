@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import {theme} from 'react-tfso-components'
+import {theme} from '../lib'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {MuiThemeProvider} from '@material-ui/core/styles'
-
+import {MainLayout} from './demos/layout'
 import App from './demos/App'
 
 ReactDOM.render(
@@ -13,7 +13,9 @@ ReactDOM.render(
         <CssBaseline />
         <MuiThemeProvider theme={theme.materialuiTheme}>
             <StyledThemeProvider theme={theme.styledTheme}>
-                <App />
+                <MainLayout>
+                    <App />
+                </MainLayout>
             </StyledThemeProvider>
         </MuiThemeProvider>
     </React.Fragment>,
