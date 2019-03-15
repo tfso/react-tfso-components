@@ -1,0 +1,1 @@
+{"version":3,"file":"Menu.d.ts","sourceRoot":"","sources":["../../src/lib/layout/Menu.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAA;AACzB,OAAO,SAAS,MAAM,YAAY,CAAA;AA8BlC,oBAAY,SAAS,GAAG;IACpB,IAAI,EAAE,OAAO,CAAA;CAChB,CAAA;AAED,qBAAa,IAAK,SAAQ,KAAK,CAAC,aAAa,CAAC,SAAS,CAAC;IACpD,MAAM,CAAC,SAAS;;MAEf;IAED,MAAM;CAST"}
