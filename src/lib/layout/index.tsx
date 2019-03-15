@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import {TopBar} from './Topbar'
 import DocumentTitle from './DocumentTitle'
+import './index.css'
 
 export {Menu} from './Menu'
 export {TopBar} from './Topbar'
