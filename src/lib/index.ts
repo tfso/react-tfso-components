@@ -1,9 +1,9 @@
 import * as theme from './theme'
 import * as layout from './layout'
-import ConfirmationDialog from './ConfirmationDialog'
-import SearchField from './SearchField'
+import * as misc from './misc'
+import * as utils from './utils'
 
 export {theme}
 export {layout}
-export {ConfirmationDialog}
-export {SearchField}
+export {misc}
+export {utils}

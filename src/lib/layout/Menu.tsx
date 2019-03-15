@@ -9,6 +9,7 @@ const StyledDrawer = styled(Drawer).attrs({
 })`
     &&{
       width: ${props => props.open ? 260 : props.theme.mui.spacing.unit * 9 + 1}px;
+      height: 100%;
       transition: none;
       transform: none;
       white-space: nowrap;

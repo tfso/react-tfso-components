@@ -61,7 +61,7 @@ const SectionMobile = styled.div`
 
 export type TopBarProps = {
     title: string
-    onMenuToggle: Function
+    onMenuToggle: Function | null
     mobileMenu?: React.ReactNode
 }
 
@@ -88,9 +88,11 @@ export class TopBar extends React.PureComponent<TopBarProps, any>{
             <Root>
                 <StyledAppBar position="static" color="default">
                     <Toolbar>
-                        <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle()}>
-                            <MenuIcon/>
-                        </MenuButton>
+                        {this.props.onMenuToggle !== null &&
+                            <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle && this.props.onMenuToggle()}>
+                                <MenuIcon/>
+                            </MenuButton>
+                        }
                         <Title variant="h6" color="inherit" noWrap>
                             {this.props.title}
                         </Title>
