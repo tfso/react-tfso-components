@@ -12,12 +12,12 @@ type State = {
     show: boolean
 }
 
-export default class Delay extends React.Component<Props, State>{
+export default class Delay extends React.PureComponent<Props, State>{
     static propTypes = {
-        beforeShow: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+        beforeShow: PropTypes.node,
         delayMs: PropTypes.number,
         show: PropTypes.bool,
-        children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired
+        children: PropTypes.node.isRequired
     }
 
     _timer: any = null

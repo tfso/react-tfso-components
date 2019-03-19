@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import React from 'react'
 
 function setTitle(text){
     document.title = text
@@ -8,7 +8,7 @@ type Props = {
     text: string
 }
 
-export default class DocumentTitle extends Component<Props>{
+export default class DocumentTitle extends React.PureComponent<Props>{
     constructor(props){
         super(props)
         setTitle(props.text)

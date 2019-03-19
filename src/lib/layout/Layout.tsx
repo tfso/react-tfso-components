@@ -43,7 +43,7 @@ type LayoutProps = {
     onMenuToggle: Function
 }
 
-export class Layout extends React.Component<LayoutProps>{
+export class Layout extends React.PureComponent<LayoutProps>{
     render(){
         return (
             <LayoutWrapper>
@@ -77,7 +77,7 @@ type LayoutNoMenuProps = {
     topMenu: React.ReactNode
 }
 
-export class LayoutNoMenu extends React.Component<LayoutNoMenuProps>{
+export class LayoutNoMenu extends React.PureComponent<LayoutNoMenuProps>{
     render(){
         return (
             <LayoutWrapper>
