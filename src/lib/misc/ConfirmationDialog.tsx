@@ -17,12 +17,14 @@ export type ConfirmationDialogProps = {
     onCancel(): void
 }
 
+const TransitionComponent = props => <Slide direction='up' {...props} />
+
 const ConfirmationDialog: React.FunctionComponent<ConfirmationDialogProps> = (props: ConfirmationDialogProps) => {
     const {open, onCancel, onOk, title, message, okButtonText, cancelButtonText} = props
     return (
         <Dialog
-            TransitionComponent={props => <Slide direction='up' {...props} />}
-            keepMounted
+            TransitionComponent={TransitionComponent}
+            keepMounted={false}
             open={open}
             onClose={onCancel}
             maxWidth={'xs'}
