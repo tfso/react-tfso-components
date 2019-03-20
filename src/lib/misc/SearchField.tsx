@@ -5,39 +5,39 @@ import SearchIcon from '@material-ui/icons/Search'
 
 export type SearchFieldProps = TextFieldProps
 
-export default class SearchField extends React.PureComponent<SearchFieldProps>{
-    static propTypes = TextField.propTypes
+type State = {
+    editing: boolean
+}
+
+export default class SearchField extends React.PureComponent<SearchFieldProps, State>{
     static defaultProps = {
         placeholder: 'Search',
         margin: 'dense',
-        InputProps: {startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small"/></InputAdornment>}
+        InputProps: {
+            startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small"/></InputAdornment>
+        }
     }
 
-    state = {
+    state: State = {
         editing: false
     }
 
-    onBlur = (e) => {
-        const {onBlur} = this.props
+    onBlur = (e: React.EventHandler<any>) => {
         this.setState({editing: false})
+        const { onBlur } = this.props
         onBlur && onBlur(e)
     }
 
-    onFocus = (e) => {
-        const {onFocus} = this.props
+    onFocus = (e: React.EventHandler<any>) => {
         this.setState({editing: true})
+        const { onFocus } = this.props
         onFocus && onFocus(e)
     }
 
     render(){
         return (
             <TextField
-                // placeholder="Search"
-                // margin="dense"
                 fullWidth={this.state.editing}
-                InputProps={{
-                    startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small"/></InputAdornment>,
-                }}
                 {...this.props}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
