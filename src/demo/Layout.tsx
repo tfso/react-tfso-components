@@ -30,7 +30,7 @@ export default class Layout extends Component<any, any>{
             <layout.Menu open={this.state.menuOpen}>
                 {Object.keys(demoComponents).map(demo => {
                     return (
-                        <ListItem button selected={this.state.selectedDemo === demo} onClick={() => this.onChangeDemo(demo)}>
+                        <ListItem key={demo} button selected={this.state.selectedDemo === demo} onClick={() => this.onChangeDemo(demo)}>
                             <ListItemIcon><PeopleIcon/></ListItemIcon>
                             <ListItemText>{demo}</ListItemText>
                         </ListItem>

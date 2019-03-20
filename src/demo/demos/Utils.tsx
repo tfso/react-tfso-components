@@ -1,5 +1,5 @@
 import React from 'react'
-import {utils} from '../../lib'
+import { Delay, Hoverable, Wizard } from '../../lib'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -32,9 +32,9 @@ class DelayDemo extends React.PureComponent{
                     <DemoProp name="children" type="React element" default="" description="Content to show after delay" />
                 </DemoProps>
                 <DemoContent>
-                    <utils.Delay beforeShow="Waiting for delay...">
+                    <Delay beforeShow="Waiting for delay...">
                         <CircularProgress />
-                    </utils.Delay>
+                    </Delay>
                 </DemoContent>
             </Demo>
         )
@@ -51,7 +51,7 @@ class HoverableDemo extends React.PureComponent{
                     <DemoProp name="children" type="(hover: boolean, ref: RefObject) => ReactElement" default="" description="A function that returns a react component" />
                 </DemoProps>
                 <DemoContent>
-                    <utils.Hoverable>
+                    <Hoverable>
                         {(hover) => (
                             <React.Fragment>
                                 {hover
@@ -60,7 +60,7 @@ class HoverableDemo extends React.PureComponent{
                                 }
                             </React.Fragment>
                         )}
-                    </utils.Hoverable>
+                    </Hoverable>
                 </DemoContent>
             </Demo>
         )
@@ -80,7 +80,7 @@ class WizardDemo extends React.PureComponent{
                     <DemoProp name="length" type="number (optional)" default="" description="The max length. The index will always be lower than this" />
                 </DemoProps>
                 <DemoContent>
-                    <utils.Wizard length={length + 1}>
+                    <Wizard length={length + 1}>
                         {(index, next, prev) => (
                             <React.Fragment>
                                 <Stepper activeStep={index}>
@@ -101,7 +101,7 @@ class WizardDemo extends React.PureComponent{
                                 </div>
                             </React.Fragment>
                         )}
-                    </utils.Wizard>
+                    </Wizard>
                 </DemoContent>
             </Demo>
         )

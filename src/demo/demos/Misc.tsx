@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { misc } from '../../lib'
+import { Alert, TextFieldEditor, ConfirmationDialog, SearchField } from '../../lib'
 import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../demo'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -8,7 +8,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import Snackbar from '@material-ui/core/Snackbar'
-import { AlertProps } from '../../lib/misc/Alert';
+import { AlertProps } from '../../lib/Alert';
 
 export default class Misc extends React.PureComponent{
     render(){
@@ -64,7 +64,7 @@ class AlertDemo extends React.PureComponent<{}, {variant: AlertProps['variant'],
                         autoHideDuration={2000}
                         onClose={this.onClose}
                     >
-                        <misc.Alert
+                        <Alert
                             onClose={this.onClose}
                             message={this.state.message}
                             variant={this.state.variant}
@@ -119,7 +119,7 @@ class TextFieldEditorDemo extends React.PureComponent {
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                 <DemoContent>
-                    <misc.TextFieldEditor 
+                    <TextFieldEditor 
                         value={this.state.value}
                         enableDirtyCheck={this.state.enableDirtyCheck}
                         dirty={this.state.dirty}
@@ -147,7 +147,7 @@ class SearchFieldDemo extends React.PureComponent{
                     <DemoProp name='...' type='TextFieldProps' default='' description='Any other prop is spread to the TextField'></DemoProp>
                 </DemoProps>
                 <DemoContent>
-                    <misc.SearchField />
+                    <SearchField />
                 </DemoContent>
             </Demo>
         )
@@ -179,7 +179,7 @@ class ConfirmationDialogDemo extends React.PureComponent{
                 </DemoProps>
                 <DemoContent>
                     <Button variant='outlined' onClick={this.onClickOpenConfirmationDialog}>Open ConfirmationDialog</Button>
-                    <misc.ConfirmationDialog
+                    <ConfirmationDialog
                         open={this.state.openConfirmationDialog}
                         okButtonText='Ok'
                         cancelButtonText='Cancel'

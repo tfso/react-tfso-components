@@ -1,9 +1,27 @@
 import * as theme from './theme'
 import * as layout from './layout'
-import * as misc from './misc'
-import * as utils from './utils'
 
 export {theme}
 export {layout}
-export {misc}
-export {utils}
+
+// Components
+
+import ConfirmationDialog from './ConfirmationDialog'
+import SearchField from './SearchField'
+import Alert from './Alert'
+import TextFieldEditor from './TextFieldEditor'
+
+export {ConfirmationDialog}
+export {SearchField}
+export {Alert}
+export {TextFieldEditor}
+
+// Utility components
+
+import Delay from './Delay'
+import Hoverable from './Hoverable'
+import Wizard from './Wizard'
+
+export {Delay}
+export {Hoverable}
+export {Wizard}

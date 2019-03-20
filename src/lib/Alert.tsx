@@ -9,7 +9,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
 import MuiSnackbarContent from '@material-ui/core/SnackbarContent'
 import WarningIcon from '@material-ui/icons/Warning'
-import { TfsoTheme } from '../theme'
+import { TfsoTheme } from './theme'
 
 const variantIcon = {
     success: CheckCircleIcon,
