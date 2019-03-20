@@ -32,6 +32,7 @@ export const LayoutBodyRight = styled.div`
   flex: 1;
   min-height: 0;
   padding: 15px;
+  overflow-y: auto;
 `
 
 type LayoutProps = {
