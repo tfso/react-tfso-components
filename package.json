@@ -1,6 +1,6 @@
 {
   "name": "react-tfso-components",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "author": "tfso",
   "license": "unlicensed",
@@ -17,8 +17,8 @@
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "deploy": "npm run build:demo && gh-pages -d build",
-    "publish": "npm run build && publish-to-git --tag 1.0.6",
-    "lint": "node node_modules/eslint/bin/eslint.js ./src",
+    "publish": "npm run build && publish-to-git --tag 1.0.7",
+    "lint": "node node_modules/eslint/bin/eslint.js --ext .ts,.tsx,.js ./src",
     "build": "npm run build:clean && npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly -p tsconfig-build.json",
     "build:js": "cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files --source-maps --extensions \".ts\",\".tsx\" --ignore \"src/**/*.test.js\"",
