@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Table from '@material-ui/core/Table'
@@ -45,11 +45,19 @@ export const DemoProps = (props) => (
         </ExpansionPanelDetails>
     </ExpansionPanel>
 )
-export const DemoProp = (props) => (
+
+export type DemoPropProps = {
+    name: string
+    type: string
+    default?: string
+    description?: string
+}
+
+export const DemoProp = (props: DemoPropProps) => (
     <TableRow>
-        <TableCell>{props.name}</TableCell>
-        <TableCell>{props.type}</TableCell>
-        <TableCell>{props.default}</TableCell>
-        <TableCell>{props.description}</TableCell>
+        <TableCell><code>{props.name}</code></TableCell>
+        <TableCell><code>{props.type}</code></TableCell>
+        <TableCell><code>{props.default}</code></TableCell>
+        <TableCell><Typography>{props.description}</Typography></TableCell>
     </TableRow>
 )
