@@ -1,6 +1,6 @@
 {
   "name": "react-tfso-components",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "author": "tfso",
   "license": "unlicensed",
@@ -17,7 +17,7 @@
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "deploy": "npm run build:demo && gh-pages -d build",
-    "publish": "npm run build && publish-to-git --tag 1.0.7",
+    "publish": "npm run build && publish-to-git --tag 1.0.8",
     "lint": "node node_modules/eslint/bin/eslint.js --ext .ts,.tsx,.js ./src",
     "build": "npm run build:clean && npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly -p tsconfig-build.json",
@@ -40,6 +40,7 @@
     "@material-ui/icons": "3.0.2",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
+    "@types/styled-components": "^4.1.12",
     "@typescript-eslint/parser": "1.4.2",
     "babel-preset-react-app": "7.0.2",
     "cross-env": "^5.1.4",
@@ -63,8 +64,5 @@
     "not dead",
     "not ie < 11",
     "not op_mini all"
-  ],
-  "dependencies": {
-    "@types/styled-components": "^4.1.12"
-  }
+  ]
 }
