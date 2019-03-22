@@ -41,6 +41,7 @@
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
     "@types/styled-components": "^4.1.12",
+    "@typescript-eslint/eslint-plugin": "1.5.0",
     "@typescript-eslint/parser": "1.4.2",
     "babel-preset-react-app": "7.0.2",
     "cross-env": "^5.1.4",
