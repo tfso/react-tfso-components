@@ -76,12 +76,12 @@ export const materialuiTheme = createMuiTheme({
         useNextVariants: true,
     },
     palette: {
-        primary: {
+        secondary: {
             dark: '#1b2c3c',
             main: '#456',
             light: '#708194'
         },
-        secondary: {
+        primary: {
             dark: '#0090cc',
             main: '#11c0ff',
             light: '#6df3ff',

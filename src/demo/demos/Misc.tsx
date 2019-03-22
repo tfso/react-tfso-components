@@ -48,7 +48,7 @@ class AlertDemo extends React.PureComponent<{}, {variant: AlertProps['variant'],
         return(
             <Demo>
                 <DemoTitle>Alert</DemoTitle>
-                <DemoHelp>An dismissable alert-box that can be used in a SnackBar or as a standard component in a page</DemoHelp>
+                <DemoHelp>A dismissable alert-box that can be used in a SnackBar or as a standard component in a page</DemoHelp>
                 <DemoProps>
                     <DemoProp name='message' type='string | ReactNode' description='The message string or Element to be displayed' />
                     <DemoProp name='variant' type='success | error | info | warning' description='The variant of the alert. Icon and background-color is selected based on the variant' />

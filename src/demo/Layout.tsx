@@ -2,17 +2,19 @@ import React, {Component} from 'react'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
 import Chip from '@material-ui/core/Chip'
 import PeopleIcon from '@material-ui/icons/People'
 import {layout} from '../lib'
 
 import Misc from './demos/Misc'
 import Utils from './demos/Utils'
-import Divider from '@material-ui/core/Divider'
+import Icons from './demos/Icons'
 
 const demoComponents = {
     Misc: Misc,
-    Utils: Utils
+    Utils: Utils,
+    Icons: Icons,
 }
 
 export default class Layout extends Component<any, any>{
