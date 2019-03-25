@@ -34,7 +34,7 @@ export type MenuProps = {
     open: boolean
 }
 
-export class Menu extends React.PureComponent<MenuProps>{
+export default class Menu extends React.PureComponent<MenuProps>{
     static propTypes = {
         open: PropTypes.bool.isRequired
     }

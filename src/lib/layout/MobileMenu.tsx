@@ -1,6 +1,6 @@
 import React from 'react'
 
-export class MobileMenu extends React.PureComponent{
+export default class MobileMenu extends React.PureComponent{
     render(){
         return (
             <React.Fragment>

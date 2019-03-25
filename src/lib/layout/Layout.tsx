@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import {TopBar} from './Topbar'
+import TopBar from './Topbar'
 import DocumentTitle from './DocumentTitle'
 
 // Wrap everything
@@ -44,7 +44,7 @@ type LayoutProps = {
     onMenuToggle: Function
 }
 
-export class Layout extends React.PureComponent<LayoutProps>{
+export default class Layout extends React.PureComponent<LayoutProps>{
     render(){
         return (
             <LayoutWrapper>

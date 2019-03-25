@@ -65,7 +65,7 @@ export type TopBarProps = {
     mobileMenu?: React.ReactNode
 }
 
-export class TopBar extends React.PureComponent<TopBarProps, any>{
+export default class TopBar extends React.PureComponent<TopBarProps, any>{
     static propTypes = {
         title: PropTypes.string.isRequired,
         mobileMenu: PropTypes.node.isRequired

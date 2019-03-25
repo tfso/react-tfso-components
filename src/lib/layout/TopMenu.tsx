@@ -1,6 +1,6 @@
 import React from 'react'
 
-export class TopMenu extends React.PureComponent{
+export default class TopMenu extends React.PureComponent{
     render(){
         return (
             <React.Fragment>
