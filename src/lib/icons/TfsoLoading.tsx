@@ -87,7 +87,7 @@ const StyledSvgIcon: React.ComponentType<SvgIconProps> = Styled(SvgIcon)`&&{
 }` as any // seems like returntype of styled-components adds string as a type of _ref.. dunnp why
 
 export type TfsoLoadingIconProps = {
-    color?: 'primary' | 'secondary'
+    //color?: 'primary' | 'secondary'
 } & SvgIconProps
 
 export default (props: SvgIconProps) => (
@@ -98,7 +98,6 @@ export default (props: SvgIconProps) => (
         viewBox="0 0 37 23"
         fillRule='evenodd'
         stroke-width="1"
-        color={props.color || 'primary'}
         //fill="#445566"
     >    
         <path d="M21.79 9.81C21.17789 8.5323532 19.886707 7.7195303 18.47 7.72 16.444136 7.7143752 14.803816 6.0724096 14.800223 4.0465408 14.79663 2.020672 16.431115 0.37289845 18.456947 0.36008776 20.482778 0.34727707 22.137972 1.9742478 22.16 4c-0.01782 1.4288443 0.793121 2.7388262 2.08 3.36-1.120033 0.4431782-2.006822 1.3299671-2.45 2.45l0 0z" id="path5"/>
