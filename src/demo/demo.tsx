@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { ReactChild } from 'react'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
@@ -15,14 +16,24 @@ import {Divider} from '@material-ui/core'
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
 export const DemoTitle = (props) => <Typography variant="h5" >{props.children}</Typography>
 export const DemoHelp = (props) => <Typography variant="caption">{props.children}</Typography>
-export const DemoContent = (props) => (
+export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) => (
     <div style={{marginTop: 30}}>
         <Typography variant="subtitle1" >Example</Typography>
         <Divider />
         <br />
-        {props.children}
+        <Grid container spacing={16} alignItems='center'>
+            {props.children && Array.isArray(props.children) 
+                ? props.children.map((child, i) => (
+                    <Grid item key={i} xs={i === 0 ? 12 : false}>
+                        {child}
+                    </Grid>
+                ))
+                : <Grid item xs={12} >{props.children}</Grid>
+            }
+        </Grid>
     </div>
 )
+
 export const DemoProps = (props) => (
     <ExpansionPanel style={{marginTop: 15}}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

@@ -8,7 +8,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import Snackbar from '@material-ui/core/Snackbar'
-import { AlertProps } from '../../lib/Alert';
+import { AlertProps } from '../../lib/Alert'
+import TrendingDemo from './Misc/Trending'
 
 export default class Misc extends React.PureComponent{
     render(){
@@ -18,6 +19,7 @@ export default class Misc extends React.PureComponent{
                 <ConfirmationDialogDemo />
                 <SearchFieldDemo />
                 <TextFieldEditorDemo />
+                <TrendingDemo />
             </React.Fragment>
         )
     }

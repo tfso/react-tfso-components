@@ -45,52 +45,42 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
                     <DemoProp name='...' type='SvgIconProps' description='Any props will be spread to the material-ui SvgIcon'/>
                 </DemoProps>
                 <DemoContent>
-                    <Grid container spacing={16} alignItems='center'>
-                        <Grid item>
-                            <Tfso 
-                                color={this.state.color} 
-                                fontSize={this.state.fontSize} 
-                                nativeColor={this.state.nativeColor}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <TextField 
-                                select
-                                label='color'
-                                value={this.state.color}
-                                onChange={this.handleChange('color')}
-                                >
-                                <MenuItem value='inherit' >inherit</MenuItem>
-                                <MenuItem value='primary' >primary</MenuItem>
-                                <MenuItem value='secondary' >secondary</MenuItem>
-                                <MenuItem value='default' >default</MenuItem>
-                                <MenuItem value='action' >action</MenuItem>
-                                <MenuItem value='disabled' >disabled</MenuItem>
-                                <MenuItem value='error' >error</MenuItem>
-                            </TextField>
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                select
-                                label='fontSize'
-                                value={this.state.fontSize}
-                                onChange={this.handleChange('fontSize')}
-                                >
-                                <MenuItem value='small'>small</MenuItem>
-                                <MenuItem value='default'>default</MenuItem>
-                                <MenuItem value='large'>large</MenuItem>
+                    <Tfso 
+                        color={this.state.color} 
+                        fontSize={this.state.fontSize} 
+                        nativeColor={this.state.nativeColor}
+                    />
+                    <TextField 
+                        select
+                        label='color'
+                        value={this.state.color}
+                        onChange={this.handleChange('color')}
+                        >
+                        <MenuItem value='inherit' >inherit</MenuItem>
+                        <MenuItem value='primary' >primary</MenuItem>
+                        <MenuItem value='secondary' >secondary</MenuItem>
+                        <MenuItem value='default' >default</MenuItem>
+                        <MenuItem value='action' >action</MenuItem>
+                        <MenuItem value='disabled' >disabled</MenuItem>
+                        <MenuItem value='error' >error</MenuItem>
+                    </TextField>
+                    <TextField
+                        select
+                        label='fontSize'
+                        value={this.state.fontSize}
+                        onChange={this.handleChange('fontSize')}
+                        >
+                        <MenuItem value='small'>small</MenuItem>
+                        <MenuItem value='default'>default</MenuItem>
+                        <MenuItem value='large'>large</MenuItem>
 
-                            </TextField>
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                label='nativeColor'
-                                placeholder='#00B8F3'
-                                value={this.state.nativeColor}
-                                onChange={this.handleChange('nativeColor')}
-                            />
-                        </Grid>
-                    </Grid>
+                    </TextField>
+                    <TextField
+                        label='nativeColor'
+                        placeholder='#00B8F3'
+                        value={this.state.nativeColor}
+                        onChange={this.handleChange('nativeColor')}
+                    />
                 </DemoContent>
             </Demo>
         )
@@ -118,52 +108,42 @@ class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
                     <DemoProp name='...' type='SvgIconProps' description='Any props will be spread to the material-ui SvgIcon'/>
                 </DemoProps>
                 <DemoContent>
-                    <Grid container spacing={16} alignItems='center'>
-                        <Grid item>
-                            <TfsoLoading 
-                                color={this.state.color} 
-                                fontSize={this.state.fontSize} 
-                                nativeColor={this.state.nativeColor}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <TextField 
-                                select
-                                label='color'
-                                value={this.state.color}
-                                onChange={this.handleChange('color')}
-                                >
-                                <MenuItem value='inherit' >inherit</MenuItem>
-                                <MenuItem value='primary' >primary</MenuItem>
-                                <MenuItem value='secondary' >secondary</MenuItem>
-                                <MenuItem value='default' >default</MenuItem>
-                                <MenuItem value='action' >action</MenuItem>
-                                <MenuItem value='disabled' >disabled</MenuItem>
-                                <MenuItem value='error' >error</MenuItem>
-                            </TextField>
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                select
-                                label='fontSize'
-                                value={this.state.fontSize}
-                                onChange={this.handleChange('fontSize')}
-                                >
-                                <MenuItem value='small'>small</MenuItem>
-                                <MenuItem value='default'>default</MenuItem>
-                                <MenuItem value='large'>large</MenuItem>
+                    <TfsoLoading 
+                        color={this.state.color} 
+                        fontSize={this.state.fontSize} 
+                        nativeColor={this.state.nativeColor}
+                    />
+                    <TextField 
+                        select
+                        label='color'
+                        value={this.state.color}
+                        onChange={this.handleChange('color')}
+                        >
+                        <MenuItem value='inherit' >inherit</MenuItem>
+                        <MenuItem value='primary' >primary</MenuItem>
+                        <MenuItem value='secondary' >secondary</MenuItem>
+                        <MenuItem value='default' >default</MenuItem>
+                        <MenuItem value='action' >action</MenuItem>
+                        <MenuItem value='disabled' >disabled</MenuItem>
+                        <MenuItem value='error' >error</MenuItem>
+                    </TextField>
+                    <TextField
+                        select
+                        label='fontSize'
+                        value={this.state.fontSize}
+                        onChange={this.handleChange('fontSize')}
+                        >
+                        <MenuItem value='small'>small</MenuItem>
+                        <MenuItem value='default'>default</MenuItem>
+                        <MenuItem value='large'>large</MenuItem>
 
-                            </TextField>
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                label='nativeColor'
-                                placeholder='#00B8F3'
-                                value={this.state.nativeColor}
-                                onChange={this.handleChange('nativeColor')}
-                            />
-                        </Grid>
-                    </Grid>
+                    </TextField>
+                    <TextField
+                        label='nativeColor'
+                        placeholder='#00B8F3'
+                        value={this.state.nativeColor}
+                        onChange={this.handleChange('nativeColor')}
+                    />
                 </DemoContent>
             </Demo>
         )
