@@ -19,7 +19,7 @@ export type ConfirmationDialogProps = {
 
 const TransitionComponent = props => <Slide direction='up' {...props} />
 
-const ConfirmationDialog: React.FunctionComponent<ConfirmationDialogProps> = (props: ConfirmationDialogProps) => {
+const ConfirmationDialog = (props: ConfirmationDialogProps) => {
     const {open, onCancel, onOk, title, message, okButtonText, cancelButtonText} = props
     return (
         <Dialog
