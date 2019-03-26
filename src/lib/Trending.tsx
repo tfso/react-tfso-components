@@ -7,13 +7,14 @@ import TrendingUp from '@material-ui/icons/TrendingUp'
 import TrendingFlat from '@material-ui/icons/TrendingFlat'
 import TrendingDown from '@material-ui/icons/TrendingDown'
 import { SvgIconProps } from '@material-ui/core/SvgIcon'
+import { TfsoTheme } from './theme'
 
 export type TrendingProps = {
     variant: 'up' | 'down' | 'flat'
 } & SvgIconProps
 
 type InjectedProps = {
-    theme: DefaultTheme
+    theme: TfsoTheme
 }
 
 const iconMap: {[P in TrendingProps['variant']]: React.ComponentType<SvgIconProps>} = {
@@ -22,7 +23,7 @@ const iconMap: {[P in TrendingProps['variant']]: React.ComponentType<SvgIconProp
     down: TrendingDown,
 }
 
-const getColor = (variant: TrendingProps['variant'], theme: DefaultTheme) => {
+const getColor = (variant: TrendingProps['variant'], theme: TfsoTheme) => {
     switch(variant){
         case 'up': return theme.tfso.palette.success
         case 'down': return theme.tfso.palette.warning
