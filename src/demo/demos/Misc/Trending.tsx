@@ -17,7 +17,10 @@ export default class TrendingDemo extends React.PureComponent<{}, TrendingDemoSt
         return (
             <Demo>
                 <DemoTitle>Trending</DemoTitle>
-                <DemoHelp>A colored icon indicating a trending direction</DemoHelp>
+                <DemoHelp>
+                    A colored icon indicating a trending direction. <br/> 
+                    Tip: You can use the <code>color</code> or <code>nativeColor</code> property to override the color of the icon.
+                </DemoHelp>
                 <DemoProps>
                     <DemoProp name='variant' type='up | down | flat' default='' description=''></DemoProp>
                     <DemoProp name='...' type='SvgIconProps' default='' description='Any other prop is spread to the SvgIcon'></DemoProp>

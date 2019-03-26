@@ -136,7 +136,6 @@ class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
                         <MenuItem value='small'>small</MenuItem>
                         <MenuItem value='default'>default</MenuItem>
                         <MenuItem value='large'>large</MenuItem>
-
                     </TextField>
                     <TextField
                         label='nativeColor'
