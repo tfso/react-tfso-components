@@ -18,11 +18,11 @@ export default class TextFieldEditorDemo extends React.PureComponent {
     onReset = () => {
         this.setState({value: ''})
     }
-
+      
     render(){
         return(
             <Demo>
-                <DemoTitle>TextFieldEditor</DemoTitle>
+                <DemoTitle demoPath='Misc/TextFieldEditorDemo.tsx' srcPath='TextFieldEditor.tsx' >TextFieldEditor</DemoTitle>
                 <DemoHelp>A wrapper around material-ui's TextField with some added features</DemoHelp>
                 <DemoProps>
                     <DemoProp name='value' type='string' default='' description='' />

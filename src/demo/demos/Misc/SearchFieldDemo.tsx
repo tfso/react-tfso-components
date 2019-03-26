@@ -6,7 +6,7 @@ export default class SearchFieldDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle>SearchField</DemoTitle>
+                <DemoTitle demoPath='Misc/SearchFieldDemo.tsx' srcPath='SearchField.tsx' >SearchField</DemoTitle>
                 <DemoHelp>A TextField that gets full width on typing. It also has a search icon adornnment.</DemoHelp>
                 <DemoProps>
                     <DemoProp name='placeholder' type='string (optional)' default='Search' description=''></DemoProp>

@@ -28,7 +28,7 @@ const defaultProps: Required<Pick<BigNumberProps,'color' | 'size'>> = {
 }
 
 const wrapper = ({size, color, ...props}: Required<BigNumberProps>) => <div {...props} />
-
+// TODO: These should be on the BigNumber component instead.. 
 wrapper.defaultProps = defaultProps
 wrapper.propTypes = {
     color: PropTypes.oneOf(['light', 'dark']),

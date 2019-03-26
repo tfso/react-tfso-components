@@ -16,7 +16,7 @@ export default class TrendingDemo extends React.PureComponent<{}, TrendingDemoSt
     render(){
         return (
             <Demo>
-                <DemoTitle>Trending</DemoTitle>
+                <DemoTitle demoPath='Misc/TrendingDemo.tsx' srcPath='Trending.tsx' >Trending</DemoTitle>
                 <DemoHelp>
                     A colored icon indicating a trending direction. <br/> 
                     Tip: You can use the <code>color</code> or <code>nativeColor</code> property to override the color of the icon.

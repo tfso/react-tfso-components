@@ -12,9 +12,39 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {Divider} from '@material-ui/core'
+import GitHubLink from './GitHubLink'
 
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
-export const DemoTitle = (props) => <Typography variant="h5" >{props.children}</Typography>
+
+export type DemoTitleProps = {
+    children: string
+    /**
+     * The path to the Demo component. `src/demo/demos/` will be appended in front of the path
+     */
+    demoPath?: string
+
+    /**
+     * The path to the Implementation of the component. `src/lib/` will be appended in front of the path
+     */
+    srcPath?: string
+}
+export const DemoTitle = (props: DemoTitleProps) => {
+    return (
+        <Grid container justify='space-between' alignItems='baseline' >
+            <Grid item>
+                <Typography variant="h5" >
+                    {props.children}
+                </Typography>
+            </Grid>
+            {props.srcPath || props.demoPath ? 
+            <Grid item xs={2} container spacing={16} justify='flex-end'>
+                {props.demoPath && <Grid item><GitHubLink color='secondary' path={`blob/master/src/demo/demos/${props.demoPath}`} tooltip={`View demo source for ${props.children}`} /></Grid>}
+                {props.srcPath && <Grid item><GitHubLink color='primary' path={`blob/master/src/lib/${props.srcPath}`} tooltip={`View source for ${props.children}`}/></Grid> }
+            </Grid>
+            : null}
+        </Grid>
+    )
+}
 export const DemoHelp = (props) => <Typography variant='subtitle1'>{props.children}</Typography>
 export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) => (
     <div style={{marginTop: 30}}>

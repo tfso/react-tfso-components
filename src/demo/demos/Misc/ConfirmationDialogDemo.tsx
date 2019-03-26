@@ -15,7 +15,7 @@ export default class ConfirmationDialogDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle>ConfirmationDialog</DemoTitle>
+                <DemoTitle demoPath='Misc/ConfirmationDialogDemo.tsx' srcPath='ConfirmationDialog.tsx' >ConfirmationDialog</DemoTitle>
                 <DemoHelp>A Dialog containing Ok and Cancel buttons</DemoHelp>
                 <DemoProps>
                     <DemoProp name="open" type="boolean" default="" description="Show dialog" />

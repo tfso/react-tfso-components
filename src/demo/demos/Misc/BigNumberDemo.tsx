@@ -21,7 +21,7 @@ export default class BigNumberDemo extends React.PureComponent<{}, BigNumberStat
     render(){
         return (
             <Demo>
-                <DemoTitle>BigNumber</DemoTitle>
+                <DemoTitle demoPath='Misc/BigNumberDemo.tsx' srcPath='BigNumber.tsx' >BigNumber</DemoTitle>
                 <DemoHelp>
                     A Big Number is a number stands out
                 </DemoHelp>

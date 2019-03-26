@@ -28,7 +28,7 @@ export default class AlertDemo extends React.PureComponent<{}, {variant: AlertPr
     render(){
         return(
             <Demo>
-                <DemoTitle>Alert</DemoTitle>
+                <DemoTitle demoPath='Misc/AlertDemo.tsx' srcPath='Alert.tsx' >Alert</DemoTitle>
                 <DemoHelp>A dismissable alert-box that can be used in a SnackBar or as a standard component in a page</DemoHelp>
                 <DemoProps>
                     <DemoProp name='message' type='string | ReactNode' description='The message string or Element to be displayed' />
