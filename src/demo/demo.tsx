@@ -15,7 +15,7 @@ import {Divider} from '@material-ui/core'
 
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
 export const DemoTitle = (props) => <Typography variant="h5" >{props.children}</Typography>
-export const DemoHelp = (props) => <Typography variant='subheading'>{props.children}</Typography>
+export const DemoHelp = (props) => <Typography variant='subtitle1'>{props.children}</Typography>
 export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) => (
     <div style={{marginTop: 30}}>
         <Typography variant="subtitle1" >Example</Typography>

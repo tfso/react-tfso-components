@@ -12,6 +12,10 @@ export type TrendingProps = {
     variant: 'up' | 'down' | 'flat'
 } & SvgIconProps
 
+type InjectedProps = {
+    theme: DefaultTheme
+}
+
 const iconMap: {[P in TrendingProps['variant']]: React.ComponentType<SvgIconProps>} = {
     up: TrendingUp,
     flat: TrendingFlat,
@@ -28,7 +32,7 @@ const getColor = (variant: TrendingProps['variant'], theme: DefaultTheme) => {
     }
 }
 
-const trending = ({variant, theme, ...iconProps}: TrendingProps & { theme: DefaultTheme }) =>{ 
+const trending = ({variant, theme, ...iconProps}: TrendingProps & InjectedProps) =>{ 
     const Icon = iconMap[variant]
     const nativeColor = getColor(variant, theme)
     return (
@@ -39,7 +43,7 @@ const trending = ({variant, theme, ...iconProps}: TrendingProps & { theme: Defau
 )}
 
 trending.propTypes = {
-    variant: PropTypes.oneOf(['up', 'down', 'flat'])
+    variant: PropTypes.oneOf(['up', 'down', 'flat']).isRequired
 }
 
 export default React.memo(withTheme(trending))

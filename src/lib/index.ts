@@ -6,15 +6,19 @@ export {layout}
 
 // Components
 
+import Alert from './Alert'
+import BigNumber from './BigNumber'
 import ConfirmationDialog from './ConfirmationDialog'
 import SearchField from './SearchField'
-import Alert from './Alert'
 import TextFieldEditor from './TextFieldEditor'
+import Trending from './Trending'
 
+export {Alert}
+export {BigNumber}
 export {ConfirmationDialog}
 export {SearchField}
-export {Alert}
 export {TextFieldEditor}
+export {Trending}
 
 // Utility components
 
