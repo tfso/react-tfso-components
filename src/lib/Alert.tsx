@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
@@ -9,7 +9,6 @@ import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
 import MuiSnackbarContent from '@material-ui/core/SnackbarContent'
 import WarningIcon from '@material-ui/icons/Warning'
-import { TfsoTheme } from './theme'
 
 const variantIcon = {
     success: CheckCircleIcon,
@@ -18,7 +17,7 @@ const variantIcon = {
     info: InfoIcon,
 }
 
-const bgColor = (variant: AlertVariant, palette: TfsoTheme['tfso']['palette']) => {
+const bgColor = (variant: AlertVariant, palette: DefaultTheme['tfso']['palette']) => {
     switch(variant){
         case 'success': return palette.success
         case 'error': return palette.alert 

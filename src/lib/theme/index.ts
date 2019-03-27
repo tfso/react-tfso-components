@@ -104,4 +104,5 @@ export type TfsoTheme = typeof styledTheme
 
 declare module 'styled-components' {
     export interface DefaultTheme extends TfsoTheme {}
+    export type WithTheme = { theme: DefaultTheme }
 }
