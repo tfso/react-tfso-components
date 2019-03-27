@@ -12,7 +12,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import {layout} from '../lib'
 
 import Home from './Home'
-import Misc from './demos/Components'
+import Components from './demos/Components'
 import Utils from './demos/Utils'
 import Icons from './demos/Icons'
 import GitHubLink from './components/GitHubLink'
@@ -20,7 +20,7 @@ import MaterialUiLink from './components/MaterialUiLink'
 
 const demoComponents = {
     Home: Home,
-    Misc: Misc,
+    Components: Components,
     Utils: Utils,
     Icons: Icons,
 }

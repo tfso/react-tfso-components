@@ -6,7 +6,7 @@ import SearchFieldDemo from './ComponentDemos/SearchFieldDemo'
 import TextFieldEditorDemo from './ComponentDemos/TextFieldEditorDemo'
 import ConfirmationDialogDemo from './ComponentDemos/ConfirmationDialogDemo'
 
-export default class Misc extends React.PureComponent{
+export default class Components extends React.PureComponent{
     render(){
         return (
             <React.Fragment>
