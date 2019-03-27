@@ -4,7 +4,7 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 
 type Props = {
     value: string
-    onChange(value: string): void
+    onChange: (value: string) => void
     dirty?: boolean
     enableDirtyCheck?: boolean
 } 
@@ -16,6 +16,13 @@ type State = {
 }
 
 type Omit<T,K> = Pick<T, Exclude<keyof T, K>>
+
+function handleEvent(event: React.KeyboardEvent<HTMLDivElement>){
+    event.preventDefault()
+    event.stopPropagation()
+    // the above only prevents other synthetic events, if we want to prevent global listeners too, we need to stop the propagation on the native event as well
+    event.nativeEvent.stopImmediatePropagation()
+}
 
 export type TextFieldEditorProps = Props & Partial<Omit<TextFieldProps, 'value' | 'onChange'>>
 
@@ -115,11 +122,4 @@ export default class TextFieldEditor extends React.PureComponent<TextFieldEditor
             />
         )
     }
-}
-
-function handleEvent(event: React.KeyboardEvent<HTMLDivElement>){
-    event.preventDefault()
-    event.stopPropagation()
-    // the above only prevents other synthetic events, if we want to prevent global listeners too, we need to stop the propagation on the native event as well
-    event.nativeEvent.stopImmediatePropagation()
 }

@@ -13,8 +13,8 @@ export type ConfirmationDialogProps = {
     message: string
     okButtonText: string
     cancelButtonText: string
-    onOk(): void
-    onCancel(): void
+    onOk: () => void
+    onCancel: () => void
 }
 
 const TransitionComponent = props => <Slide direction='up' {...props} />

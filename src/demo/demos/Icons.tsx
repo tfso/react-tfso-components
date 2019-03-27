@@ -1,12 +1,9 @@
 import React from 'react'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../demo'
-import TfsoLoading, { TfsoLoadingIconProps } from '../../lib/icons/TfsoLoading'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import TfsoLoading from '../../lib/icons/TfsoLoading'
 import Tfso, { TfsoIconProps } from '../../lib/icons/Tfso'
-import Button from '@material-ui/core/Button'
-import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
 
 export default class Icons extends React.PureComponent {
     render(){
@@ -39,7 +36,7 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
     render(){
         return(
             <Demo>
-                <DemoTitle>Tfso</DemoTitle>
+                <DemoTitle demoPath='Icons.tsx' srcPath='icons/Tfso.tsx'>Tfso</DemoTitle>
                 <DemoHelp>Tfso logo icon</DemoHelp>
                 <DemoProps>
                     <DemoProp name='...' type='SvgIconProps' description='Any props will be spread to the material-ui SvgIcon'/>
@@ -102,9 +99,10 @@ class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
     render(){
         return(
             <Demo>
-                <DemoTitle>Tfso Loading</DemoTitle>
+                <DemoTitle demoPath='Icons.tsx' srcPath='icons/TfsoLoading.tsx'>Tfso Loading</DemoTitle>
                 <DemoHelp>Tfso logo loading icon</DemoHelp>
                 <DemoProps>
+                    <DemoProp name='once' type='boolean' default='false' description='If true, the icon will animate once'/>
                     <DemoProp name='...' type='SvgIconProps' description='Any props will be spread to the material-ui SvgIcon'/>
                 </DemoProps>
                 <DemoContent>

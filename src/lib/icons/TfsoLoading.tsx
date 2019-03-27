@@ -1,48 +1,41 @@
 import React from 'react'
 
 import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon'
-import Styled from 'styled-components';
+import Styled, {css} from 'styled-components/macro';
 
-const StyledSvgIcon: React.ComponentType<SvgIconProps> = Styled(SvgIcon)`&&{
+export type TfsoLoadingIconProps = {
+    /**
+     * @default infinite
+     */
+    once?: boolean
+} & SvgIconProps
+
+const TfsoLoadingIconWrapper = ({once, ...other}: TfsoLoadingIconProps) => <SvgIcon {...other}/>
+
+const path = css`
+    opacity: 1;
+    animation-delay: 1.5s;
+`
+const StyledSvgIcon: React.ComponentType<SvgIconProps> = Styled(TfsoLoadingIconWrapper)`&&{
     #path1{
-        opacity: 1;
-        animation-delay: 1.5s;
-        -webkit-animation: fade-in1 1.5s infinite; /* Safari 4+ */
-        -moz-animation:    fade-in1 1.5s infinite; /* Fx 5+ */
-        -o-animation:      fade-in1 1.5s infinite; /* Opera 12+ */
-        animation:        fade-in1 1.5s infinite; /* IE 10+, Fx 29+ */
+        ${path}
+        animation: fade-in1 1.5s ${({once}) => once ? 1 : 'infinite'}
     }
     #path2{
-        opacity: 1;
-        animation-delay: 1.5s;
-        -webkit-animation: fade-in2 1.5s infinite; /* Safari 4+ */
-        -moz-animation:    fade-in2 1.5s infinite; /* Fx 5+ */
-        -o-animation:      fade-in2 1.5s infinite; /* Opera 12+ */
-        animation:        fade-in2 1.5s infinite; /* IE 10+, Fx 29+ */
+        ${path}
+        animation: fade-in2 1.5s ${({once}) => once ? 1 : 'infinite'}
     }
     #path3{
-        opacity: 1;
-        animation-delay: 1.5s;
-        -webkit-animation: fade-in3 1.5s infinite; /* Safari 4+ */
-        -moz-animation:    fade-in3 1.5s infinite; /* Fx 5+ */
-        -o-animation:      fade-in3 1.5s infinite; /* Opera 12+ */
-        animation:        fade-in3 1.5s infinite; /* IE 10+, Fx 29+ */
+        ${path}
+        animation: fade-in3 1.5s ${({once}) => once ? 1 : 'infinite'}
     }
     #path4{
-        opacity: 1;
-        animation-delay: 1.5s;
-        -webkit-animation: fade-in4 1.5s infinite; /* Safari 4+ */
-        -moz-animation:    fade-in4 1.5s infinite; /* Fx 5+ */
-        -o-animation:      fade-in4 1.5s infinite; /* Opera 12+ */
-        animation:        fade-in4 1.5s infinite; /* IE 10+, Fx 29+ */
+        ${path}
+        animation: fade-in4 1.5s ${({once}) => once ? 1 : 'infinite'}
     }
     #path5{
-        opacity: 1;
-        animation-delay: 1.5s;
-        -webkit-animation: fade-in5 1.5s infinite; /* Safari 4+ */
-        -moz-animation:    fade-in5 1.5s infinite; /* Fx 5+ */
-        -o-animation:      fade-in5 1.5s infinite; /* Opera 12+ */
-        animation:        fade-in5 1.5s infinite; /* IE 10+, Fx 29+ */
+        ${path}
+        animation: fade-in5 1.5s ${({once}) => once ? 1 : 'infinite'}
     }
     @keyframes fade-in1 {
         0%   { opacity: 0.2; }
@@ -86,9 +79,7 @@ const StyledSvgIcon: React.ComponentType<SvgIconProps> = Styled(SvgIcon)`&&{
     }
 }` as any // seems like returntype of styled-components adds string as a type of _ref.. dunnp why
 
-export type TfsoLoadingIconProps = { } & SvgIconProps
-
-export default React.memo((props: SvgIconProps) => (
+export default React.memo((props: TfsoLoadingIconProps) => (
     <StyledSvgIcon
         {...props}
         viewBox="0 0 37 23"

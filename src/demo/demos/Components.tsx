@@ -1,10 +1,10 @@
 import React from 'react'
-import TrendingDemo from './Misc/TrendingDemo'
-import BigNumberDemo from './Misc/BigNumberDemo'
-import AlertDemo from './Misc/AlertDemo'
-import SearchFieldDemo from './Misc/SearchFieldDemo'
-import TextFieldEditorDemo from './Misc/TextFieldEditorDemo'
-import ConfirmationDialogDemo from './Misc/ConfirmationDialogDemo';
+import TrendingDemo from './ComponentDemos/TrendingDemo'
+import BigNumberDemo from './ComponentDemos/BigNumberDemo'
+import AlertDemo from './ComponentDemos/AlertDemo'
+import SearchFieldDemo from './ComponentDemos/SearchFieldDemo'
+import TextFieldEditorDemo from './ComponentDemos/TextFieldEditorDemo'
+import ConfirmationDialogDemo from './ComponentDemos/ConfirmationDialogDemo'
 
 export default class Misc extends React.PureComponent{
     render(){

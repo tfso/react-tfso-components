@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextFieldEditor from '../../../lib/TextFieldEditor'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../demo'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../components/demo'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -22,7 +22,7 @@ export default class TextFieldEditorDemo extends React.PureComponent {
     render(){
         return(
             <Demo>
-                <DemoTitle demoPath='Misc/TextFieldEditorDemo.tsx' srcPath='TextFieldEditor.tsx' >TextFieldEditor</DemoTitle>
+                <DemoTitle demoPath='ComponentDemos/TextFieldEditorDemo.tsx' srcPath='TextFieldEditor.tsx' >TextFieldEditor</DemoTitle>
                 <DemoHelp>A wrapper around material-ui's TextField with some added features</DemoHelp>
                 <DemoProps>
                     <DemoProp name='value' type='string' default='' description='' />

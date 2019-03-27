@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import ConfirmationDialog from '../../../lib/ConfirmationDialog'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../demo'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../components/demo'
 
 export default class ConfirmationDialogDemo extends React.PureComponent{
     state = {
@@ -15,7 +15,7 @@ export default class ConfirmationDialogDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='Misc/ConfirmationDialogDemo.tsx' srcPath='ConfirmationDialog.tsx' >ConfirmationDialog</DemoTitle>
+                <DemoTitle demoPath='ComponentDemos/ConfirmationDialogDemo.tsx' srcPath='ConfirmationDialog.tsx' >ConfirmationDialog</DemoTitle>
                 <DemoHelp>A Dialog containing Ok and Cancel buttons</DemoHelp>
                 <DemoProps>
                     <DemoProp name="open" type="boolean" default="" description="Show dialog" />

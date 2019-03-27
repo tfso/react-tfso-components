@@ -5,7 +5,7 @@ import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
-import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../demo'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 
 export default class Utils extends React.PureComponent{
     render(){
@@ -23,7 +23,7 @@ class DelayDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle>Delay</DemoTitle>
+                <DemoTitle demoPath='Utils.tsx' srcPath='Delay.tsx'>Delay</DemoTitle>
                 <DemoHelp>Shows the component inside after a set delay. Can be used to only show loaders if exceptionally slow</DemoHelp>
                 <DemoProps>
                     <DemoProp name="beforeShow" type="React element or string (optional)" default="" description="What you want to show before the delay is finished" />
@@ -45,7 +45,7 @@ class HoverableDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle>Hoverable</DemoTitle>
+                <DemoTitle demoPath='Utils.tsx' srcPath='Hoverable.tsx'>Hoverable</DemoTitle>
                 <DemoHelp>A HOC that passes hover true/false as a render prop</DemoHelp>
                 <DemoProps>
                     <DemoProp name="children" type="(hover: boolean, ref: RefObject) => ReactElement" default="" description="A function that returns a react component" />
@@ -72,7 +72,7 @@ class WizardDemo extends React.PureComponent{
         const length = 3
         return (
             <Demo>
-                <DemoTitle>Wizard</DemoTitle>
+                <DemoTitle demoPath='Utils.tsx' srcPath='Wizard.tsx'>Wizard</DemoTitle>
                 <DemoHelp>A HOC that passes an index and next/prev functions in a render prop. Can be used along with material ui stepper or any other wizard</DemoHelp>
                 <DemoProps>
                     <DemoProp name="children" type="(index: number, next: function, prev: function) => ReactElement" default="" description="A function that returns a react component" />
