@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+import 'styled-components'
 
 const colorScheme = {
     fiord: '#445566',
@@ -100,3 +101,7 @@ export const styledTheme = {
 }
 
 export type TfsoTheme = typeof styledTheme
+
+declare module 'styled-components' {
+    export interface DefaultTheme extends TfsoTheme {}
+}
