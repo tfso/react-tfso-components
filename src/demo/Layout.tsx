@@ -81,7 +81,7 @@ export default class Layout extends React.PureComponent<any, any> {
                     return (
                         <Link to={page} key={page} >
                             <ListItem
-                                selected={this.state.location.pathname.indexOf(page.toLowerCase()) > -1}
+                                selected={this.state.location.pathname.slice(this.state.location.pathname.lastIndexOf('/')).indexOf(page.toLowerCase()) > -1}
                             >
                                     <ListItemIcon><Icon/></ListItemIcon>
                                     <ListItemText >{page}</ListItemText>
@@ -105,7 +105,7 @@ export default class Layout extends React.PureComponent<any, any> {
             </layout.TopMenu>
         )
 
-        const { pathname } = this.state.location
+        const pathname = this.state.location.pathname.slice(this.state.location.pathname.lastIndexOf('/')+1)
         const pageName = Object.keys(pages).find(page => pathname.indexOf(page.toLowerCase()) > -1) || 'Home'
         const Page = pages[pageName]
 

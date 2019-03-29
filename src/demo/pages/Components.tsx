@@ -8,18 +8,12 @@ import TextFieldEditorDemo from '../demos/TextFieldEditorDemo'
 import ConfirmationDialogDemo from '../demos/ConfirmationDialogDemo'
 // import DashBoardDemo from '../demos/DashBoardDemo'
 
-export default class Components extends React.PureComponent {
-    render(){
-        return (
-            <React.Fragment>
-                <AlertDemo />
-                <BigNumberDemo />
-                <ConfirmationDialogDemo />
-                {/* <DashBoardDemo /> */}
-                <SearchFieldDemo />
-                <TextFieldEditorDemo />
-                <TrendingDemo />
-            </React.Fragment>
-        )
-    }
-}
+export default () => (<>
+    <AlertDemo />
+    <BigNumberDemo />
+    <ConfirmationDialogDemo />
+    {/* <DashBoardDemo /> */}
+    <SearchFieldDemo />
+    <TextFieldEditorDemo />
+    <TrendingDemo />
+</>)
