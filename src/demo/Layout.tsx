@@ -11,55 +11,84 @@ import PeopleIcon from '@material-ui/icons/People'
 
 import {layout} from '../lib'
 
-import Home from './Home'
-import Components from './demos/Components'
-import Utils from './demos/Utils'
-import Icons from './demos/Icons'
+import Home from './pages/Home'
+import Components from './pages/Components'
+import Utils from './pages/Utils'
+import Icons from './pages/Icons'
 import GitHubLink from './components/GitHubLink'
 import MaterialUiLink from './components/MaterialUiLink'
+import Guidelines from './pages/Guidelines'
+import Theme from './pages/Theme'
+import Lab from './pages/Lab'
 
-const demoComponents = {
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
+import HomeIcon from '@material-ui/icons/Home'
+import CodeIcon from '@material-ui/icons/Code'
+import StyleIcon from '@material-ui/icons/Style'
+import BuildIcon from '@material-ui/icons/Build'
+import StraightenIcon from '@material-ui/icons/Straighten'
+import ViewCompactIcon from '@material-ui/icons/ViewCompact'
+import FontDownloadIcon from '@material-ui/icons/FontDownload'
+import history from './history';
+import { Location } from 'history';
+import Link from './components/Link';
+
+const pages = {
     Home: Home,
+    Guidelines: Guidelines,
     Components: Components,
+    Theme: Theme,
     Utils: Utils,
     Icons: Icons,
+    Lab: Lab,
+}
+
+const pageIcon: {[P in keyof typeof pages]: React.ComponentType<SvgIconProps>} = {
+    Home: HomeIcon,
+    Guidelines: StraightenIcon,
+    Components: ViewCompactIcon,
+    Theme: StyleIcon,
+    Utils: BuildIcon,
+    Icons: FontDownloadIcon,
+    Lab: CodeIcon,
 }
 
 export default class Layout extends React.PureComponent<any, any> {
+    constructor(props){
+        super(props)
+
+        history.listen(this.onNavigation)
+    }
+
     state = {
+        location: history.location,
         menuOpen: true,
-        selectedDemo: Object.keys(demoComponents)[0]
+    }
+
+    onNavigation = (location: Location<any> ) => {
+        this.setState({location})
     }
 
     onMenuToggle = () => {
         this.setState(state => ({menuOpen: !state.menuOpen}))
     }
 
-    onChangeDemo = (selectedDemo) => this.setState({selectedDemo})
-
     render(){
         const menu = (
             <layout.Menu open={this.state.menuOpen}>
-                {Object.keys(demoComponents).map(demo => {
+                {Object.keys(pages).map(page => {
+                    const Icon = pageIcon[page]
                     return (
-                        <ListItem key={demo} button selected={this.state.selectedDemo === demo} onClick={() => this.onChangeDemo(demo)}>
-                            {/* <ListItemIcon><PeopleIcon/></ListItemIcon> */}
-                            <ListItemText >{demo}</ListItemText>
-                        </ListItem>
+                        <Link to={page} key={page} >
+                            <ListItem
+                                selected={this.state.location.pathname.indexOf(page.toLowerCase()) > -1}
+                            >
+                                    <ListItemIcon><Icon/></ListItemIcon>
+                                    <ListItemText >{page}</ListItemText>
+                            </ListItem>
+                        </Link>
                     )
                 })}
-
-                <br />
-                <Divider />
-
-                <ListItem button>
-                    <ListItemIcon><PeopleIcon/></ListItemIcon>
-                    <ListItemText>Chip</ListItemText>
-                    <Chip
-                        label="Badge"
-                        color="secondary"
-                    />
-                </ListItem>
             </layout.Menu>
         )
         const mobileMenu = (
@@ -76,7 +105,9 @@ export default class Layout extends React.PureComponent<any, any> {
             </layout.TopMenu>
         )
 
-        const SelectedDemo = demoComponents[this.state.selectedDemo]
+        const { pathname } = this.state.location
+        const pageName = Object.keys(pages).find(page => pathname.indexOf(page.toLowerCase()) > -1) || 'Home'
+        const Page = pages[pageName]
 
         return (
             <layout.Layout
@@ -87,7 +118,7 @@ export default class Layout extends React.PureComponent<any, any> {
                 docTitle="Tfso Components"
                 onMenuToggle={this.onMenuToggle}
             >
-                <SelectedDemo />
+                <Page />
             </layout.Layout>
         )
     }

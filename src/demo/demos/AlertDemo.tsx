@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../components/demo'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
 import Snackbar from '@material-ui/core/Snackbar'
-import Alert, { AlertProps } from '../../../lib/Alert'
+import Alert, { AlertProps } from '../../lib/Alert'
 
 const variantMessage: {[P in AlertProps['variant']]: string } = {
     success: 'GRATE SUCCÉSS!',
@@ -28,7 +28,7 @@ export default class AlertDemo extends React.PureComponent<{}, {variant: AlertPr
     render(){
         return(
             <Demo>
-                <DemoTitle demoPath='ComponentDemos/AlertDemo.tsx' srcPath='Alert.tsx' >Alert</DemoTitle>
+                <DemoTitle demoPath='AlertDemo.tsx' srcPath='Alert.tsx' >Alert</DemoTitle>
                 <DemoHelp>A dismissable alert-box that can be used in a SnackBar or as a standard component in a page</DemoHelp>
                 <DemoProps>
                     <DemoProp name='message' type='string | ReactNode' description='The message string or Element to be displayed' />

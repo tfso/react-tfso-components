@@ -1,12 +1,12 @@
 import React from 'react'
-import SearchField from '../../../lib/SearchField'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../components/demo'
+import SearchField from '../../lib/SearchField'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
 
 export default class SearchFieldDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='ComponentDemos/SearchFieldDemo.tsx' srcPath='SearchField.tsx' >SearchField</DemoTitle>
+                <DemoTitle demoPath='SearchFieldDemo.tsx' srcPath='SearchField.tsx' >SearchField</DemoTitle>
                 <DemoHelp>A TextField that gets full width on typing. It also has a search icon adornnment.</DemoHelp>
                 <DemoProps>
                     <DemoProp name='placeholder' type='string (optional)' default='Search' description=''></DemoProp>

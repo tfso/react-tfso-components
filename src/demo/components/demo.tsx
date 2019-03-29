@@ -11,8 +11,9 @@ import TableCell from '@material-ui/core/TableCell'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Divider from '@material-ui/core/Divider'
+
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import GitHubLink from './GitHubLink'
 

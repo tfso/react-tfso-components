@@ -1,8 +1,8 @@
 import React from 'react'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../../components/demo'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-import BigNumber, { BigNumberProps } from '../../../lib/BigNumber';
+import BigNumber, { BigNumberProps } from '../../lib/BigNumber';
 import { Grid, Typography } from '@material-ui/core';
 
 type BigNumberState = {
@@ -21,7 +21,7 @@ export default class BigNumberDemo extends React.PureComponent<{}, BigNumberStat
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='ComponentDemos/BigNumberDemo.tsx' srcPath='BigNumber.tsx' >BigNumber</DemoTitle>
+                <DemoTitle demoPath='BigNumberDemo.tsx' srcPath='BigNumber.tsx' >BigNumber</DemoTitle>
                 <DemoHelp>
                     A Big Number is a number stands out
                 </DemoHelp>

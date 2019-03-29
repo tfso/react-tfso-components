@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 import Typography from '@material-ui/core/Typography'
-import TfsoLoading from '../lib/icons/TfsoLoading'
+import TfsoLoading from '../../lib/icons/TfsoLoading'
 
 // TODO: this could be a Util HOC component
 const CenterTop = styled.div`
