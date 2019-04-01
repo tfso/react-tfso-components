@@ -51,6 +51,7 @@
     "eslint-config-standard-react": "^6.0.0",
     "gh-pages": "^1.2.0",
     "history": "^4.9.0",
+    "prismjs": "^1.16.0",
     "publish-to-git": "github:tfso/publish-to-git",
     "react": "^16.8.4",
     "react-dom": "^16.8.2",
