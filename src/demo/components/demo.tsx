@@ -18,9 +18,7 @@ import CodeIcon from '@material-ui/icons/Code'
 
 import GitHubLink from './GitHubLink'
 import { Code } from './code'
-import { Anchor } from './Link';
-
-const getPage = () => window.location.hash.split('/')[1]
+import { Anchor } from './Link'
 
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
 
@@ -40,8 +38,8 @@ export const DemoTitle = (props: DemoTitleProps) => {
     return (
         <Grid container justify='space-between' alignItems='baseline' >
             <Grid item>
-                <Typography variant="h5" id={`/${getPage()}/${props.children}`}>
-                    {props.children} <Anchor href={`/#/${getPage()}/${props.children}`} style={{}}>#</Anchor>
+                <Typography variant="h5">
+                    {props.children} <Anchor id={props.children} />
                 </Typography>
             </Grid>
             {props.srcPath || props.demoPath ? 
@@ -75,7 +73,7 @@ export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) 
 export const DemoProps = (props) => (
     <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Props</Typography>
+            <Typography variant='h6'>Props</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <Table>
@@ -115,7 +113,7 @@ type DemoCodeProps = Code['props']
 export const DemoCode = (props: DemoCodeProps) => (
     <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<CodeIcon />}>
-            <Typography>{`View Demo (${props.language})`}</Typography>
+            <Typography variant='h6'>{`View Demo (${props.language})`}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <Code {...props} />

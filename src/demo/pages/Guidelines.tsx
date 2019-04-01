@@ -74,8 +74,8 @@ export default class Guidelines extends React.PureComponent {
     )
 
     renderGuidelines = () => (
-        <Section id='/guidelines/general'>
-            <SubHeading>General <Anchor href={`/#/guidelines/general`}>#</Anchor></SubHeading>
+        <Section>
+            <SubHeading>General <Anchor id={'general'}/></SubHeading>
             <Guideline title='Material Design'>
                 We strive to follow <Link underline='hover' href='https://material.io/design/' target='_blank'>Google's Material Design</Link> principles. <br /> 
                 Use components and icons from the <Link underline='hover' href='https://material-ui.com/' target='_blank'>MaterialUi package</Link><br />
@@ -85,9 +85,9 @@ export default class Guidelines extends React.PureComponent {
     )
 
     renderTips = () => (
-        <Section id='/guidelines/dodont'>
+        <Section>
             <SubHeading>
-                {emojis.indexFinger} Do's &amp; Don'ts {emojis.middleFinger} <Anchor href={`/#/guidelines/dodont`}>#</Anchor>
+                {emojis.indexFinger} Do's &amp; Don'ts {emojis.middleFinger} <Anchor id={'dodont'} />
             </SubHeading>
             <Tip title={<>Specific imports</>}>
                 Reducing bundle size!<br />
@@ -123,8 +123,8 @@ import Alert from 'react-tfso-components/dist/Alert'`
     )
 
     renderContributing = () => (<>
-        <SubHeading id='/guidelines/contributing'>
-            Contributing to <code>react-tfso-components</code> {emojis.rocket} <Anchor href={`/#/guidelines/contributing`}>#</Anchor>
+        <SubHeading>
+            Contributing to <code>react-tfso-components</code> {emojis.rocket} <Anchor id='contributing' />
         </SubHeading>
         <Paragraph>
             Components in this package should:

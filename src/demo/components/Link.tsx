@@ -34,9 +34,17 @@ export default class Link extends React.PureComponent<LinkProps> {
     }
 }
 
-export const Anchor = styled(Link)`&&{
+const AnchorLink = styled(Link)`&&{
     opacity: 0.2;
     :hover{
         opacity: 1;
     }
 }`
+
+const getPage = () => window.location.hash.split('/')[1]
+export const Anchor = (props: {id: string}) => {
+    const id = `/${getPage()}/${props.id.toLowerCase()}`
+    return(
+        <AnchorLink id={id} to={id}>#</AnchorLink>
+    )
+}
