@@ -3,6 +3,7 @@ import React from 'react'
 import history from '../history'
 
 import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link'
+import styled from 'styled-components/macro'
 
 export type LinkProps = {
     to?: string
@@ -17,6 +18,7 @@ export default class Link extends React.PureComponent<LinkProps> {
             return
         }
         event.preventDefault()
+        //history.location.
         history.push(this.props.to.toLowerCase())
     }
 
@@ -31,3 +33,10 @@ export default class Link extends React.PureComponent<LinkProps> {
         />
     }
 }
+
+export const Anchor = styled(Link)`&&{
+    opacity: 0.2;
+    :hover{
+        opacity: 1;
+    }
+}`

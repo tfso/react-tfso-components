@@ -1,15 +1,15 @@
 import React from 'react'
 import Prism from 'prismjs'
-// import Prism from 'prismjs/components/prism-core'
-import 'prismjs/components/prism-clike'
 
 // Load languages
+import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-markup'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-tsx'
+
 // Load style
 import 'prismjs/themes/prism.css'
 

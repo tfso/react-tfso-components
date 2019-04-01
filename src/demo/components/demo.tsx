@@ -14,8 +14,13 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Divider from '@material-ui/core/Divider'
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import CodeIcon from '@material-ui/icons/Code'
 
 import GitHubLink from './GitHubLink'
+import { Code } from './code'
+import { Anchor } from './Link';
+
+const getPage = () => window.location.hash.split('/')[1]
 
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
 
@@ -35,8 +40,8 @@ export const DemoTitle = (props: DemoTitleProps) => {
     return (
         <Grid container justify='space-between' alignItems='baseline' >
             <Grid item>
-                <Typography variant="h5" >
-                    {props.children}
+                <Typography variant="h5" id={`/${getPage()}/${props.children}`}>
+                    {props.children} <Anchor href={`/#/${getPage()}/${props.children}`} style={{}}>#</Anchor>
                 </Typography>
             </Grid>
             {props.srcPath || props.demoPath ? 
@@ -48,7 +53,7 @@ export const DemoTitle = (props: DemoTitleProps) => {
         </Grid>
     )
 }
-export const DemoHelp = (props) => <Typography variant='subtitle1'>{props.children}</Typography>
+export const DemoHelp = (props) => <Typography variant='subtitle1' paragraph>{props.children}</Typography>
 export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) => (
     <div style={{marginTop: 30}}>
         <Typography variant="subtitle1" >Example</Typography>
@@ -68,7 +73,7 @@ export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) 
 )
 
 export const DemoProps = (props) => (
-    <ExpansionPanel style={{marginTop: 15}}>
+    <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>Props</Typography>
         </ExpansionPanelSummary>
@@ -104,4 +109,16 @@ export const DemoProp = (props: DemoPropProps) => (
         <TableCell><code>{props.default}</code></TableCell>
         <TableCell><Typography>{props.description}</Typography></TableCell>
     </TableRow>
+)
+
+type DemoCodeProps = Code['props']
+export const DemoCode = (props: DemoCodeProps) => (
+    <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<CodeIcon />}>
+            <Typography>{`View Demo (${props.language})`}</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+            <Code {...props} />
+        </ExpansionPanelDetails>
+    </ExpansionPanel>
 )

@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Divider from '@material-ui/core/Divider'
 
 import { Code } from '../components/code'
-import Link from '../components/Link'
+import Link, { Anchor } from '../components/Link'
 
 // https://www.w3schools.com/charsets/ref_emoji.asp
 const emojis = {
@@ -74,8 +74,8 @@ export default class Guidelines extends React.PureComponent {
     )
 
     renderGuidelines = () => (
-        <Section>
-            <SubHeading>General</SubHeading>
+        <Section id='/guidelines/general'>
+            <SubHeading>General <Anchor href={`/#/guidelines/general`}>#</Anchor></SubHeading>
             <Guideline title='Material Design'>
                 We strive to follow <Link underline='hover' href='https://material.io/design/' target='_blank'>Google's Material Design</Link> principles. <br /> 
                 Use components and icons from the <Link underline='hover' href='https://material-ui.com/' target='_blank'>MaterialUi package</Link><br />
@@ -85,9 +85,9 @@ export default class Guidelines extends React.PureComponent {
     )
 
     renderTips = () => (
-        <Section>
+        <Section id='/guidelines/dodont'>
             <SubHeading>
-                {emojis.indexFinger} Do's &amp; Don'ts {emojis.middleFinger} 
+                {emojis.indexFinger} Do's &amp; Don'ts {emojis.middleFinger} <Anchor href={`/#/guidelines/dodont`}>#</Anchor>
             </SubHeading>
             <Tip title={<>Specific imports</>}>
                 Reducing bundle size!<br />
@@ -99,7 +99,7 @@ import { Alert } from 'react-tfso-components' // All of react-tfso-components wi
                     }
                 </Code>
                 <b>Good:</b>
-                <Code language='tsx'>
+                <Code language='js'>
                     {
 `import Button from '@material-ui/core/Button'
 import Alert from 'react-tfso-components/dist/Alert'`
@@ -123,8 +123,8 @@ import Alert from 'react-tfso-components/dist/Alert'`
     )
 
     renderContributing = () => (<>
-        <SubHeading>
-            Contributing to <code>react-tfso-components</code> {emojis.rocket}
+        <SubHeading id='/guidelines/contributing'>
+            Contributing to <code>react-tfso-components</code> {emojis.rocket} <Anchor href={`/#/guidelines/contributing`}>#</Anchor>
         </SubHeading>
         <Paragraph>
             Components in this package should:

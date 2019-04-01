@@ -92,7 +92,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState> {
                 {Object.keys(pages).map(page => {
                     const Icon = pageIcon[page]
                     return (
-                        <Link to={page} key={page} >
+                        <Link to={`/${page}`} key={page} >
                             <ListItem selected={this.getSelectedPageName() === page}>
                                 <ListItemIcon><Icon/></ListItemIcon>
                                 <ListItemText>{page}</ListItemText>

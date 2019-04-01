@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle, DemoCode } from '../components/demo'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert, { AlertProps } from '../../lib/Alert'
 
@@ -35,6 +35,44 @@ export default class AlertDemo extends React.PureComponent<{}, {variant: AlertPr
                     <DemoProp name='variant' type='success | error | info | warning' description='The variant of the alert. Icon and background-color is selected based on the variant' />
                     <DemoProp name='onClose' type='() => void' description='Callback function invoked when the alert is dismissed' />
                 </DemoProps>
+                <DemoCode language='tsx'>
+                    {`import React from 'react'
+import Alert from 'react-tfso-components/dist/Alert'
+import Snacbar from '@material-ui/core/Snackbar'
+import Button from '@material-ui/core/Button'
+
+class Alerter extends React.PureComponent<{}, {open: boolean}> {
+    state = {
+        open: false
+    }
+
+    onClose = () => this.setState({open: false})
+
+    render(){
+        return(
+            <React.Fragment>
+                <Snackbar
+                    open={this.state.open}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    autoHideDuration={2000}
+                    onClose={this.onClose}
+                >
+                    <Alert
+                        onClose={this.onClose}
+                        message='An unexpected error occured'
+                        variant='error'
+                    />
+                </Snackbar>
+                <Button variant='outlined' onClick={() => this.setState({open: true})}>Show Alert</Button>
+            </React.Fragment>
+        )
+    }
+}`
+                    }
+                </DemoCode>
                 <DemoContent>
                     <Snackbar
                         open={this.state.open}
