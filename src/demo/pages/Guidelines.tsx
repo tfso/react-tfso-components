@@ -6,7 +6,8 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Divider from '@material-ui/core/Divider'
 
-import { JavaScriptCode } from '../components/code'
+import { Code } from '../components/code'
+import Link from '../components/Link'
 
 // https://www.w3schools.com/charsets/ref_emoji.asp
 const emojis = {
@@ -76,9 +77,9 @@ export default class Guidelines extends React.PureComponent {
         <Section>
             <SubHeading>General</SubHeading>
             <Guideline title='Material Design'>
-                We strive to follow <a href='https://material.io/design/' target='_blank'>Google's Material Design</a> principles. <br /> 
-                Use components and icons from the <a href='https://material-ui.com/' target='_blank'>MaterialUi package</a>
-                
+                We strive to follow <Link underline='hover' href='https://material.io/design/' target='_blank'>Google's Material Design</Link> principles. <br /> 
+                Use components and icons from the <Link underline='hover' href='https://material-ui.com/' target='_blank'>MaterialUi package</Link><br />
+                This package also provides a theme to be used with <code>material-ui</code>, <Link underline='hover' to='/theme'>get started using it here</Link>
             </Guideline>
         </Section>
     )
@@ -91,19 +92,19 @@ export default class Guidelines extends React.PureComponent {
             <Tip title={<>Specific imports</>}>
                 Reducing bundle size!<br />
                 <b>Bad:</b> 
-                <JavaScriptCode>
+                <Code language='js'>
                     {
 `import { Button } from '@material-ui/core' // All of material-ui/core will be included in the bundle!
 import { Alert } from 'react-tfso-components' // All of react-tfso-components will be included in the bundle!`
                     }
-                </JavaScriptCode>
+                </Code>
                 <b>Good:</b>
-                <JavaScriptCode>
+                <Code language='tsx'>
                     {
 `import Button from '@material-ui/core/Button'
 import Alert from 'react-tfso-components/dist/Alert'`
                     }
-                </JavaScriptCode>
+                </Code>
             </Tip>
 
             <Tip title={<>{/*emojis.thumbsUp*/}Extend from <code>React.PureComponet</code> instead of <code>React.Component</code></>}>
@@ -112,7 +113,7 @@ import Alert from 'react-tfso-components/dist/Alert'`
             </Tip>
             <Tip title={<>{/*emojis.thumbsDown*/}Don't use <code>componentWillReceiveProps</code></>}>
                 It's deprecated and going away in React 17 {emojis.brokenHeart}<br />
-                More information <a href='https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops'>here</a>
+                More information <Link underline='hover' href='https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops' target='_blank'>here</Link>
             </Tip>
             <Tip title={<>{/*emojis.thumbsDown*/}Avoid copying props to state</>}>
                 ...unless you absolutely need to, there are legit reasons, however there is most likely a better solution. <br />
@@ -144,7 +145,7 @@ import Alert from 'react-tfso-components/dist/Alert'`
                             <ul>
                                 <li><code>React.ReactCild</code> for single child<br /></li>
                                 <li><code>React.ReactNode</code> for multiple children</li>
-                                <li>native type (<code>undefined</code>, <code>string</code>, <code>number</code> etc.)</li>
+                                <li>primitive type (<code>undefined</code>, <code>string</code>, <code>number</code> etc.)</li>
                             </ul>
                         </li>
                     </ul>

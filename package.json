@@ -39,6 +39,7 @@
     "@material-ui/core": "3.9.2",
     "@material-ui/icons": "3.0.2",
     "@types/history": "^4.7.2",
+    "@types/prismjs": "^1.16.0",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
     "@types/styled-components": "^4.1.12",

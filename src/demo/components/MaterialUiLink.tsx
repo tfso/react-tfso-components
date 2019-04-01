@@ -13,7 +13,7 @@ export const MaterialUiIcon = React.memo((props: SvgIconProps) => (
 ))
 
 const MaterialUiLink = () => (
-    <Link href='https://material-ui.com/' target='_blank' >
+    <Link href='https://material-ui.com/' target='_blank' rel='noreferrer'>
         <MaterialUiIcon fontSize='large' />
     </Link>
 )

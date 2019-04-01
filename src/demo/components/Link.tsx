@@ -2,28 +2,32 @@ import React from 'react'
 
 import history from '../history'
 
+import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link'
+
 export type LinkProps = {
-    to: string
+    to?: string
     children: React.ReactNode
-}
+} & MuiLinkProps
 
 export default class Link extends React.PureComponent<LinkProps> {
     onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        if(event.defaultPrevented){
+        this.props.onClick && this.props.onClick(event)
+
+        if(event.defaultPrevented || !this.props.to){
             return
         }
         event.preventDefault()
-        
         history.push(this.props.to.toLowerCase())
     }
 
     render(){
-        const { to, ...other } = this.props
-        return <a 
+        const { to, href, underline, ...other } = this.props
+        return <MuiLink 
             {...other}
-            href={to.toLowerCase()}
+            href={to && to.toLowerCase() || href}
+            underline={underline || 'none'}
+            rel={this.props.target === '_blank' ? 'noreferrer' : undefined}
             onClick={this.onClick}
-            style={{textDecoration: 'none'}}
         />
     }
 }
