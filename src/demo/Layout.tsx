@@ -30,7 +30,7 @@ import StraightenIcon from '@material-ui/icons/Straighten'
 import ViewCompactIcon from '@material-ui/icons/ViewCompact'
 import FontDownloadIcon from '@material-ui/icons/FontDownload'
 import history from './history';
-import { Location } from 'history';
+import { Location, UnregisterCallback } from 'history';
 import Link from './components/Link';
 
 const pages = {
@@ -53,20 +53,33 @@ const pageIcon: {[P in keyof typeof pages]: React.ComponentType<SvgIconProps>} =
     Lab: CodeIcon,
 }
 
-export default class Layout extends React.PureComponent<any, any> {
-    constructor(props){
-        super(props)
+type LayoutState = {
+    menuOpen: boolean,
+    location: Location<any>
+}
 
-        history.listen(this.onNavigation)
+export default class Layout extends React.PureComponent<{}, LayoutState> {
+    _unsubHistory: UnregisterCallback | null = null
+    componentDidMount(){
+        this._unsubHistory = history.listen(this.onNavigation)
+    }
+    componentWillUnmount(){
+        this._unsubHistory && this._unsubHistory()
     }
 
-    state = {
+    state: LayoutState = {
         location: history.location,
         menuOpen: true,
     }
 
     onNavigation = (location: Location<any> ) => {
         this.setState({location})
+    }
+
+    getSelectedPageName = () => {
+        const { location: { pathname } } = this.state
+        const path = pathname.slice(pathname.indexOf('#') + 1)
+        return Object.keys(pages).find(page => path.indexOf(page.toLowerCase()) > -1) || 'Home'
     }
 
     onMenuToggle = () => {
@@ -80,11 +93,9 @@ export default class Layout extends React.PureComponent<any, any> {
                     const Icon = pageIcon[page]
                     return (
                         <Link to={page} key={page} >
-                            <ListItem
-                                selected={this.state.location.pathname.slice(this.state.location.pathname.lastIndexOf('/')).indexOf(page.toLowerCase()) > -1}
-                            >
-                                    <ListItemIcon><Icon/></ListItemIcon>
-                                    <ListItemText >{page}</ListItemText>
+                            <ListItem selected={this.getSelectedPageName() === page}>
+                                <ListItemIcon><Icon/></ListItemIcon>
+                                <ListItemText>{page}</ListItemText>
                             </ListItem>
                         </Link>
                     )
@@ -105,9 +116,7 @@ export default class Layout extends React.PureComponent<any, any> {
             </layout.TopMenu>
         )
 
-        const pathname = this.state.location.pathname.slice(this.state.location.pathname.lastIndexOf('/')+1)
-        const pageName = Object.keys(pages).find(page => pathname.indexOf(page.toLowerCase()) > -1) || 'Home'
-        const Page = pages[pageName]
+        const Page = pages[this.getSelectedPageName()]
 
         return (
             <layout.Layout

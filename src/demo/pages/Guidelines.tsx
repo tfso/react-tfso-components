@@ -32,13 +32,13 @@ const Section = styled.div`&&{
 }`
 
 const SubHeading = (props: TypographyProps) => <Typography variant='h4' paragraph {...props} />
-const Paragraph = (props: TypographyProps) => <Typography variant='body1' paragraph {...props} />
+const Paragraph = (props: TypographyProps) => <Typography variant='body1' paragraph {...props} component='div'/>
 const Tip = (props: { title: React.ReactNode, children: React.ReactNode }) => (<>
     <Typography variant='h5' paragraph>&#9679; {props.title}</Typography>
     <Card elevation={0}>
         <CardContent>
             <Typography variant='h6'>Why?</Typography>
-            <Typography variant='body1'>{props.children}</Typography>
+            <Typography variant='body1' component='div'>{props.children}</Typography>
         </CardContent>
     </Card>
     <br />
@@ -48,7 +48,7 @@ const Guideline = (props: { title: React.ReactNode, children: React.ReactNode })
     <Typography variant='h5' paragraph>&#9679; {props.title}</Typography>
     <Card elevation={0}>
         <CardContent>
-            <Typography variant='body1'>{props.children}</Typography>
+            <Typography variant='body1' component='div'>{props.children}</Typography>
         </CardContent>
     </Card>
 </>)

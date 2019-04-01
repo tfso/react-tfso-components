@@ -1,4 +1,7 @@
-import { createBrowserHistory } from 'history'
+import { createHashHistory } from 'history'
 
-const history = createBrowserHistory()
+const history = createHashHistory({
+    basename: '',
+    hashType: 'slash',
+})
 export default history

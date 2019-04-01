@@ -13,6 +13,7 @@ export default class Link extends React.PureComponent<LinkProps> {
             return
         }
         event.preventDefault()
+        
         history.push(this.props.to.toLowerCase())
     }
 
