@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextFieldEditor Renders dirty when property dirty is true 1`] = `
+<div
+  className="MuiFormControl-root-1"
+  onKeyDown={[Function]}
+>
+  <div
+    className="MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9 MuiInputBase-formControl-19 MuiInput-formControl-6"
+    onClick={[Function]}
+    style={
+      Object {
+        "fontStyle": "italic",
+      }
+    }
+  >
+    <input
+      aria-invalid={false}
+      className="MuiInputBase-input-28 MuiInput-input-13"
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+      value="foo"
+    />
+  </div>
+</div>
+`;
