@@ -15,20 +15,20 @@ export type BigNumberProps = {
      */
     size?: 'medium' | 'large'
     children: string | number
-} 
+}
 
 const fontSizeMap: {[P in Required<BigNumberProps>['size']]: number} = {
     medium: 32,
     large: 48
 }
 
-const defaultProps: Required<Pick<BigNumberProps,'color' | 'size'>> = {
+const defaultProps: Required<Pick<BigNumberProps, 'color' | 'size'>> = {
     color: 'light',
     size: 'large',
 }
 
 const wrapper = ({size, color, ...props}: Required<BigNumberProps>) => <div {...props} />
-// TODO: These should be on the BigNumber component instead.. 
+// TODO: These should be on the BigNumber component instead..
 wrapper.defaultProps = defaultProps
 wrapper.propTypes = {
     color: PropTypes.oneOf(['light', 'dark']),
@@ -43,7 +43,7 @@ const BigNumber = styled(wrapper)`&&{
     font-size: ${({theme, size = defaultProps.size}) => theme.mui.typography.pxToRem(fontSizeMap[size])};
     line-height: normal;
     letter-spacing: 0.08em;
-    color: ${({color = defaultProps.color}) => color === 'light' ? '#FFFFFF' : '#404040' };
+    color: ${({color = defaultProps.color}) => color === 'light' ? '#FFFFFF' : '#404040'};
     white-space: nowrap
 }`
 

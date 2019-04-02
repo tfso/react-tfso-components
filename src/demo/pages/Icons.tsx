@@ -1,11 +1,11 @@
 import React from 'react'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import TfsoLoading from '../../lib/icons/TfsoLoading'
-import Tfso, { TfsoIconProps } from '../../lib/icons/Tfso'
+import Tfso, {TfsoIconProps} from '../../lib/icons/Tfso'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-export default class Icons extends React.PureComponent {
+export default class Icons extends React.PureComponent{
     render(){
         return (
             <>
@@ -16,13 +16,13 @@ export default class Icons extends React.PureComponent {
     }
 }
 
-type TfsoLogoDemoState =  {
+type TfsoLogoDemoState = {
     color: TfsoIconProps['color']
     fontSize: TfsoIconProps['fontSize']
     nativeColor: TfsoIconProps['nativeColor']
 }
 
-class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
+class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
     state:TfsoLogoDemoState = {
         color: 'primary',
         fontSize: 'large',
@@ -34,7 +34,7 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
     }
 
     render(){
-        return(
+        return (
             <Demo>
                 <DemoTitle demoPath='Icons.tsx' srcPath='icons/Tfso.tsx'>Tfso</DemoTitle>
                 <DemoHelp>Tfso logo icon</DemoHelp>
@@ -42,17 +42,17 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
                     <DemoProp name='...' type='SvgIconProps' description='Any props will be spread to the material-ui SvgIcon'/>
                 </DemoProps>
                 <DemoContent>
-                    <Tfso 
-                        color={this.state.color} 
-                        fontSize={this.state.fontSize} 
+                    <Tfso
+                        color={this.state.color}
+                        fontSize={this.state.fontSize}
                         nativeColor={this.state.nativeColor}
                     />
-                    <TextField 
+                    <TextField
                         select
                         label='color'
                         value={this.state.color}
                         onChange={this.handleChange('color')}
-                        >
+                    >
                         <MenuItem value='inherit' >inherit</MenuItem>
                         <MenuItem value='primary' >primary</MenuItem>
                         <MenuItem value='secondary' >secondary</MenuItem>
@@ -66,7 +66,7 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
                         label='fontSize'
                         value={this.state.fontSize}
                         onChange={this.handleChange('fontSize')}
-                        >
+                    >
                         <MenuItem value='small'>small</MenuItem>
                         <MenuItem value='default'>default</MenuItem>
                         <MenuItem value='large'>large</MenuItem>
@@ -84,8 +84,7 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState> {
     }
 }
 
-
-class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
+class TfsoLoadingDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
     state:TfsoLogoDemoState = {
         color: 'primary',
         fontSize: 'large',
@@ -95,9 +94,9 @@ class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
     handleChange = (target: keyof TfsoLogoDemoState) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         this.setState({[target]: event.target.value} as TfsoLogoDemoState)
     }
-    
+
     render(){
-        return(
+        return (
             <Demo>
                 <DemoTitle demoPath='Icons.tsx' srcPath='icons/TfsoLoading.tsx'>Tfso Loading</DemoTitle>
                 <DemoHelp>Tfso logo loading icon</DemoHelp>
@@ -106,17 +105,17 @@ class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
                     <DemoProp name='...' type='SvgIconProps' description='Any props will be spread to the material-ui SvgIcon'/>
                 </DemoProps>
                 <DemoContent>
-                    <TfsoLoading 
-                        color={this.state.color} 
-                        fontSize={this.state.fontSize} 
+                    <TfsoLoading
+                        color={this.state.color}
+                        fontSize={this.state.fontSize}
                         nativeColor={this.state.nativeColor}
                     />
-                    <TextField 
+                    <TextField
                         select
                         label='color'
                         value={this.state.color}
                         onChange={this.handleChange('color')}
-                        >
+                    >
                         <MenuItem value='inherit' >inherit</MenuItem>
                         <MenuItem value='primary' >primary</MenuItem>
                         <MenuItem value='secondary' >secondary</MenuItem>
@@ -130,7 +129,7 @@ class TfsoLoadingDemo extends React.PureComponent<{},TfsoLogoDemoState> {
                         label='fontSize'
                         value={this.state.fontSize}
                         onChange={this.handleChange('fontSize')}
-                        >
+                    >
                         <MenuItem value='small'>small</MenuItem>
                         <MenuItem value='default'>default</MenuItem>
                         <MenuItem value='large'>large</MenuItem>

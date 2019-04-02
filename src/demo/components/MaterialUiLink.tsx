@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon'
+import SvgIcon, {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Link from '@material-ui/core/Link'
 
 export const MaterialUiIcon = React.memo((props: SvgIconProps) => (

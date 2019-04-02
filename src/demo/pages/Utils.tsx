@@ -1,5 +1,5 @@
 import React from 'react'
-import { Delay, Hoverable, Wizard } from '../../lib'
+import {Delay, Hoverable, Wizard} from '../../lib'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'

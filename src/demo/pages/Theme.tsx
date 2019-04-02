@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
-export default class Theme extends React.PureComponent {
+export default class Theme extends React.PureComponent{
     render(){
         return (
             <>

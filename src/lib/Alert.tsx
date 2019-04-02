@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import styled, {DefaultTheme} from 'styled-components'
 import PropTypes from 'prop-types'
 
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
@@ -19,20 +19,19 @@ const variantIcon = {
 
 const bgColor = (variant: AlertVariant, palette: DefaultTheme['tfso']['palette']) => {
     switch(variant){
-        case 'success': return palette.success
-        case 'error': return palette.alert 
-        case 'info': return palette.primaryLight
-        case 'warning': return palette.warning 
+    case 'success': return palette.success
+    case 'error': return palette.alert
+    case 'info': return palette.primaryLight
+    case 'warning': return palette.warning
     }
 }
 
 const SnackbarContent = ({variant, ...other}) => <MuiSnackbarContent {...other} />
 const StyledSnack = styled(SnackbarContent)`&&{
     background-color: ${({variant, theme}) => bgColor(variant, theme.tfso.palette)}
-}` 
+}`
 
 type AlertVariant = 'success' | 'warning' | 'error' | 'info'
-
 
 export type AlertProps = {
     message: React.ReactNode
@@ -41,7 +40,7 @@ export type AlertProps = {
 }
 
 const Alert = (props: AlertProps) => {
-    const { message, onClose, variant } = props
+    const {message, onClose, variant} = props
     const Icon = variantIcon[variant]
 
     return (

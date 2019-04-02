@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchField from '../../lib/SearchField'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 
 export default class SearchFieldDemo extends React.PureComponent{
     render(){

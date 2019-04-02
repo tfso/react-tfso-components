@@ -1,9 +1,9 @@
 import React from 'react'
-import { Demo, DemoTitle, DemoHelp, DemoContent, DemoProp, DemoProps } from '../components/demo';
-import DashBoard, { WidgetProps } from '../../lib/DashBoard'
-import { styledTheme } from '../../lib/theme';
-import { BigNumber, Trending } from '../../lib';
-import { Grid, Typography } from '@material-ui/core';
+import {Demo, DemoTitle, DemoHelp, DemoContent, DemoProp, DemoProps} from '../components/demo'
+import DashBoard, {WidgetProps} from '../../lib/DashBoard'
+import {styledTheme} from '../../lib/theme'
+import {BigNumber, Trending} from '../../lib'
+import Grid from '@material-ui/core/Grid'
 
 type State = {
     widgets: Array<WidgetProps>
@@ -24,7 +24,7 @@ const W1 = () => (
     </Grid>
 )
 
-export default class DashBoardDemo extends React.PureComponent<{}, State> {
+export default class DashBoardDemo extends React.PureComponent<{}, State>{
     state: State = {
         widgets: [
             {
@@ -80,7 +80,7 @@ export default class DashBoardDemo extends React.PureComponent<{}, State> {
     }
 
     render(){
-        return(
+        return (
             <Demo>
                 <DemoTitle demoPath='ComponentsDemo/DashBoardDemo.tsx' srcPath='DashBoard.Tsx'>DashBoard</DemoTitle>
                 <DemoHelp></DemoHelp>
@@ -89,13 +89,13 @@ export default class DashBoardDemo extends React.PureComponent<{}, State> {
                 </DemoProps>
                 <DemoContent>
                     <div style={{
-                        display: 'flex', 
+                        display: 'flex',
                         flexWrap: 'wrap',
                         justifyContent: 'space-around',
                         overflowX: 'auto',
                         padding: 10,
                         height: '400px',
-                        //backgroundColor: '#eee'
+                        // backgroundColor: '#eee'
                     }} >
                         <DashBoard
                             onChangeOrder={this.onOrder}

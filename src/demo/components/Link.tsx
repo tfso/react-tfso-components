@@ -2,7 +2,7 @@ import React from 'react'
 
 import history from '../history'
 
-import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link'
+import MuiLink, {LinkProps as MuiLinkProps} from '@material-ui/core/Link'
 import styled from 'styled-components/macro'
 
 export type LinkProps = {
@@ -10,7 +10,7 @@ export type LinkProps = {
     children: React.ReactNode
 } & MuiLinkProps
 
-export default class Link extends React.PureComponent<LinkProps> {
+export default class Link extends React.PureComponent<LinkProps>{
     onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         this.props.onClick && this.props.onClick(event)
 
@@ -18,13 +18,12 @@ export default class Link extends React.PureComponent<LinkProps> {
             return
         }
         event.preventDefault()
-        //history.location.
         history.push(this.props.to.toLowerCase())
     }
 
     render(){
-        const { to, href, underline, ...other } = this.props
-        return <MuiLink 
+        const {to, href, underline, ...other} = this.props
+        return <MuiLink
             {...other}
             href={to && to.toLowerCase() || href}
             underline={underline || 'none'}
@@ -44,7 +43,7 @@ const AnchorLink = styled(Link)`&&{
 const getPage = () => window.location.hash.split('/')[1]
 export const Anchor = (props: {id: string}) => {
     const id = `/${getPage()}/${props.id.toLowerCase()}`
-    return(
+    return (
         <AnchorLink id={id} to={id}>#</AnchorLink>
     )
 }

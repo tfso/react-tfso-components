@@ -1,16 +1,15 @@
 import React from 'react'
 
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon'
+import SvgIcon, {SvgIconProps} from '@material-ui/core/SvgIcon'
 
 // Original icon colors: TODO: Use these?
 // blue: #00B8F3
 // white: #fff
 
-
 export type TfsoIconProps = {} & SvgIconProps
 
-export default React.memo((props: TfsoIconProps) => (    
-    <SvgIcon 
+export default React.memo((props: TfsoIconProps) => (
+    <SvgIcon
         {...props}
         viewBox='0 0 50.59 30.35'
     >

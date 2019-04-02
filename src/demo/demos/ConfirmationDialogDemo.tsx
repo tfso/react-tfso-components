@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import ConfirmationDialog from '../../lib/ConfirmationDialog'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 
 export default class ConfirmationDialogDemo extends React.PureComponent{
     state = {

@@ -1,16 +1,17 @@
 import React from 'react'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-import BigNumber, { BigNumberProps } from '../../lib/BigNumber';
-import { Grid, Typography } from '@material-ui/core';
+import BigNumber, {BigNumberProps} from '../../lib/BigNumber'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 type BigNumberState = {
     color: BigNumberProps['color']
     size: BigNumberProps['size']
 }
 
-export default class BigNumberDemo extends React.PureComponent<{}, BigNumberState> {
+export default class BigNumberDemo extends React.PureComponent<{}, BigNumberState>{
     state: BigNumberState = {
         color: 'dark',
         size: 'large',

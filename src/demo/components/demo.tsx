@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react'
+import React, {ReactChild} from 'react'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -17,8 +17,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CodeIcon from '@material-ui/icons/Code'
 
 import GitHubLink from './GitHubLink'
-import { Code } from './code'
-import { Anchor } from './Link'
+import {Code} from './code'
+import {Anchor} from './Link'
 
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
 
@@ -42,12 +42,13 @@ export const DemoTitle = (props: DemoTitleProps) => {
                     {props.children} <Anchor id={props.children} />
                 </Typography>
             </Grid>
-            {props.srcPath || props.demoPath ? 
-            <Grid item xs={2} container spacing={16} justify='flex-end'>
-                {props.demoPath && <Grid item><GitHubLink fontSize='default' color='secondary' path={`blob/master/src/demo/demos/${props.demoPath}`} tooltip={`View demo source for ${props.children}`} /></Grid>}
-                {props.srcPath && <Grid item><GitHubLink fontSize='default' color='primary' path={`blob/master/src/lib/${props.srcPath}`} tooltip={`View source for ${props.children}`}/></Grid> }
-            </Grid>
-            : null}
+            {props.srcPath || props.demoPath
+                ? <Grid item xs={2} container spacing={16} justify='flex-end'>
+                    {props.demoPath && <Grid item><GitHubLink fontSize='default' color='secondary' path={`blob/master/src/demo/demos/${props.demoPath}`} tooltip={`View demo source for ${props.children}`} /></Grid>}
+                    {props.srcPath && <Grid item><GitHubLink fontSize='default' color='primary' path={`blob/master/src/lib/${props.srcPath}`} tooltip={`View source for ${props.children}`}/></Grid> }
+                </Grid>
+                : null
+            }
         </Grid>
     )
 }
@@ -58,7 +59,7 @@ export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) 
         <Divider />
         <br />
         <Grid container spacing={16} alignItems='center'>
-            {props.children && Array.isArray(props.children) 
+            {props.children && Array.isArray(props.children)
                 ? props.children.map((child, i) => (
                     <Grid item key={i} xs={i === 0 ? 12 : false}>
                         {child}

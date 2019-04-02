@@ -21,7 +21,7 @@ import Guidelines from './pages/Guidelines'
 import Theme from './pages/Theme'
 import Lab from './pages/Lab'
 
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
+import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import HomeIcon from '@material-ui/icons/Home'
 import CodeIcon from '@material-ui/icons/Code'
 import StyleIcon from '@material-ui/icons/Style'
@@ -29,9 +29,9 @@ import BuildIcon from '@material-ui/icons/Build'
 import StraightenIcon from '@material-ui/icons/Straighten'
 import ViewCompactIcon from '@material-ui/icons/ViewCompact'
 import FontDownloadIcon from '@material-ui/icons/FontDownload'
-import history from './history';
-import { Location, UnregisterCallback } from 'history';
-import Link from './components/Link';
+import history from './history'
+import {Location, UnregisterCallback} from 'history'
+import Link from './components/Link'
 
 const pages = {
     Home: Home,
@@ -58,7 +58,7 @@ type LayoutState = {
     location: Location<any>
 }
 
-export default class Layout extends React.PureComponent<{}, LayoutState> {
+export default class Layout extends React.PureComponent<{}, LayoutState>{
     _unsubHistory: UnregisterCallback | null = null
     componentDidMount(){
         this._unsubHistory = history.listen(this.onNavigation)
@@ -72,12 +72,12 @@ export default class Layout extends React.PureComponent<{}, LayoutState> {
         menuOpen: true,
     }
 
-    onNavigation = (location: Location<any> ) => {
+    onNavigation = (location: Location<any>) => {
         this.setState({location})
     }
 
     getSelectedPageName = () => {
-        const { location: { pathname } } = this.state
+        const {location: {pathname}} = this.state
         const path = pathname.slice(pathname.indexOf('#') + 1)
         return Object.keys(pages).find(page => path.indexOf(page.toLowerCase()) > -1) || 'Home'
     }

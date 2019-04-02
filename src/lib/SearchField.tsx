@@ -24,13 +24,13 @@ export default class SearchField extends React.PureComponent<SearchFieldProps, S
 
     onBlur = (e: React.EventHandler<any>) => {
         this.setState({editing: false})
-        const { onBlur } = this.props
+        const {onBlur} = this.props
         onBlur && onBlur(e)
     }
 
     onFocus = (e: React.EventHandler<any>) => {
         this.setState({editing: true})
-        const { onFocus } = this.props
+        const {onFocus} = this.props
         onFocus && onFocus(e)
     }
 
