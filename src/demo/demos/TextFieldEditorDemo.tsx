@@ -1,14 +1,14 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextFieldEditor from '../../lib/TextFieldEditor'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 
-export default class TextFieldEditorDemo extends React.PureComponent {
+export default class TextFieldEditorDemo extends React.PureComponent{
     state = {
         value: 'demo',
         dirty: false,
@@ -18,9 +18,9 @@ export default class TextFieldEditorDemo extends React.PureComponent {
     onReset = () => {
         this.setState({value: ''})
     }
-      
+
     render(){
-        return(
+        return (
             <Demo>
                 <DemoTitle demoPath='TextFieldEditorDemo.tsx' srcPath='TextFieldEditor.tsx' >TextFieldEditor</DemoTitle>
                 <DemoHelp>A wrapper around material-ui's TextField with some added features</DemoHelp>
@@ -31,23 +31,23 @@ export default class TextFieldEditorDemo extends React.PureComponent {
                     <DemoProp name='enableDirtyCheck' type='boolean (optional)' default='false' description='If true, the component will do internal dirty checking when editing' />
                     <DemoProp name='...' type='TextFieldProps' description='Any other prop is spread to the TextField' />
                 </DemoProps>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} >
-                            <Typography>Keybindings</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <code>
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} >
+                        <Typography>Keybindings</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <code>
                                 ctrl + s:&nbsp;&nbsp;&nbsp;&nbsp;commit changes (event is NOT handled!)<br/>
                                 ctrl + z:&nbsp;&nbsp;&nbsp;&nbsp;abort changes (event is handled)<br/>
                                 Enter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commit changes (event is handled)<br/>
                                 Escape:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abort changes (event is handled)<br/>
-                            </code>
-                            <br/>
-                            <i>When the event is handled `preventDefault()` and `stopPropagation()` is invoked on the `React.KeyboardEvent`</i><br/>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                        </code>
+                        <br/>
+                        <i>When the event is handled `preventDefault()` and `stopPropagation()` is invoked on the `React.KeyboardEvent`</i><br/>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
                 <DemoContent>
-                    <TextFieldEditor 
+                    <TextFieldEditor
                         value={this.state.value}
                         enableDirtyCheck={this.state.enableDirtyCheck}
                         dirty={this.state.dirty}

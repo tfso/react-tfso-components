@@ -6,7 +6,7 @@ import {withTheme, DefaultTheme, WithTheme} from 'styled-components'
 import TrendingUp from '@material-ui/icons/TrendingUp'
 import TrendingFlat from '@material-ui/icons/TrendingFlat'
 import TrendingDown from '@material-ui/icons/TrendingDown'
-import { SvgIconProps } from '@material-ui/core/SvgIcon'
+import {SvgIconProps} from '@material-ui/core/SvgIcon'
 
 export type TrendingProps = {
     variant: 'up' | 'down' | 'flat'
@@ -20,23 +20,23 @@ const iconMap: {[P in TrendingProps['variant']]: React.ComponentType<SvgIconProp
 
 const getColor = (variant: TrendingProps['variant'], theme: DefaultTheme) => {
     switch(variant){
-        case 'up': return theme.tfso.palette.success
-        case 'down': return theme.tfso.palette.warning
-        case 'flat': return theme.tfso.palette.alert
-        default:
-            return undefined
+    case 'up': return theme.tfso.palette.success
+    case 'down': return theme.tfso.palette.warning
+    case 'flat': return theme.tfso.palette.alert
+    default: return undefined
     }
 }
 
-const trending = ({variant, theme, ...iconProps}: TrendingProps & WithTheme) =>{ 
+const trending = ({variant, theme, ...iconProps}: TrendingProps & WithTheme) => {
     const Icon = iconMap[variant]
     const nativeColor = getColor(variant, theme)
     return (
-        <Icon 
+        <Icon
             nativeColor={nativeColor}
-            {...iconProps} 
+            {...iconProps}
         />
-)}
+    )
+}
 
 trending.propTypes = {
     variant: PropTypes.oneOf(['up', 'down', 'flat']).isRequired

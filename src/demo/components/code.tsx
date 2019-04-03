@@ -18,7 +18,7 @@ type CodeProps = {
     children: React.ReactNode
 }
 
-export class Code extends React.PureComponent<CodeProps> {
+export class Code extends React.PureComponent<CodeProps>{
     _ref: React.RefObject<HTMLPreElement> = React.createRef()
 
     componentDidMount(){
@@ -30,8 +30,7 @@ export class Code extends React.PureComponent<CodeProps> {
     }
 
     highlight = () => {
-        if(!this._ref.current)
-            return
+        if(!this._ref.current){ return }
         Prism.highlightElement(this._ref.current!)
     }
 

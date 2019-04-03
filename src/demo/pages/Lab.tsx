@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography'
 import DashBoardDemo from '../demos/DashBoardDemo'
 import Divider from '@material-ui/core/Divider'
 
-export default class Lab extends React.PureComponent {
+export default class Lab extends React.PureComponent{
     render(){
         return (
             <>

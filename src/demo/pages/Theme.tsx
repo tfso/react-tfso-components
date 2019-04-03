@@ -15,7 +15,7 @@ const ThemeColors = styled.div`
   }
 `
 
-export default class Theme extends React.PureComponent {
+export default class Theme extends React.PureComponent{
     render(){
         return (
             <>

@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import Typography, { TypographyProps } from '@material-ui/core/Typography'
+import Typography, {TypographyProps} from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Divider from '@material-ui/core/Divider'
 
-import { Code } from '../components/code'
-import Link, { Anchor } from '../components/Link'
+import {Code} from '../components/code'
+import Link, {Anchor} from '../components/Link'
 
 // https://www.w3schools.com/charsets/ref_emoji.asp
 const emojis = {
@@ -54,7 +54,7 @@ const Guideline = (props: { title: React.ReactNode, children: React.ReactNode })
     </Card>
 </>)
 
-export default class Guidelines extends React.PureComponent {
+export default class Guidelines extends React.PureComponent{
     render = () => (<>
         {this.renderHeading()}
         {this.renderGuidelines()}
@@ -77,7 +77,7 @@ export default class Guidelines extends React.PureComponent {
         <Section>
             <SubHeading>General <Anchor id={'general'}/></SubHeading>
             <Guideline title='Material Design'>
-                We strive to follow <Link underline='hover' href='https://material.io/design/' target='_blank'>Google's Material Design</Link> principles. <br /> 
+                We strive to follow <Link underline='hover' href='https://material.io/design/' target='_blank'>Google's Material Design</Link> principles. <br />
                 Use components and icons from the <Link underline='hover' href='https://material-ui.com/' target='_blank'>MaterialUi package</Link><br />
                 This package also provides a theme to be used with <code>material-ui</code>, <Link underline='hover' to='/theme'>get started using it here</Link>
             </Guideline>
@@ -91,31 +91,31 @@ export default class Guidelines extends React.PureComponent {
             </SubHeading>
             <Tip title={<>Specific imports</>}>
                 Reducing bundle size!<br />
-                <b>Bad:</b> 
+                <b>Bad:</b>
                 <Code language='js'>
                     {
-`import { Button } from '@material-ui/core' // All of material-ui/core will be included in the bundle!
+                        `import { Button } from '@material-ui/core' // All of material-ui/core will be included in the bundle!
 import { Alert } from 'react-tfso-components' // All of react-tfso-components will be included in the bundle!`
                     }
                 </Code>
                 <b>Good:</b>
                 <Code language='js'>
                     {
-`import Button from '@material-ui/core/Button'
+                        `import Button from '@material-ui/core/Button'
 import Alert from 'react-tfso-components/dist/Alert'`
                     }
                 </Code>
             </Tip>
 
-            <Tip title={<>{/*emojis.thumbsUp*/}Extend from <code>React.PureComponet</code> instead of <code>React.Component</code></>}>
+            <Tip title={<>{/* emojis.thumbsUp */}Extend from <code>React.PureComponet</code> instead of <code>React.Component</code></>}>
                 Your components should never mutate the state directly or have mutable properties.<br/>
                 Hence they are pure, and should extend React.PureComponent, which is more performant.
             </Tip>
-            <Tip title={<>{/*emojis.thumbsDown*/}Don't use <code>componentWillReceiveProps</code></>}>
+            <Tip title={<>{/* emojis.thumbsDown */}Don't use <code>componentWillReceiveProps</code></>}>
                 It's deprecated and going away in React 17 {emojis.brokenHeart}<br />
                 More information <Link underline='hover' href='https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops' target='_blank'>here</Link>
             </Tip>
-            <Tip title={<>{/*emojis.thumbsDown*/}Avoid copying props to state</>}>
+            <Tip title={<>{/* emojis.thumbsDown */}Avoid copying props to state</>}>
                 ...unless you absolutely need to, there are legit reasons, however there is most likely a better solution. <br />
                 Perhaps you should invoke a callback provided by props and let the parent component handle something?
             </Tip>
@@ -141,7 +141,7 @@ import Alert from 'react-tfso-components/dist/Alert'`
                         <li>Boolean props should <i>not</i> begin with 'is', (open instead of isOpen)</li>
                         <li>Boolean props should be optional, (eg. <code>open?: boolean</code>), <code>undefined</code> should be evaluated as <code>false</code></li>
                         <li><code>children</code> should always be explicitly typed (eg: <code>children: string</code>)</li>
-                        <li><code>children</code> should be defined as 
+                        <li><code>children</code> should be defined as
                             <ul>
                                 <li><code>React.ReactCild</code> for single child<br /></li>
                                 <li><code>React.ReactNode</code> for multiple children</li>

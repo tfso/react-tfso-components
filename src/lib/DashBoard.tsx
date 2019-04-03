@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
-import Paper, { PaperProps } from '@material-ui/core/Paper'
+import Paper, {PaperProps} from '@material-ui/core/Paper'
 
 const BackgroundPaper = ({background, ...props}: { background: string } & PaperProps) => (<Paper {...props} />)
 const WidgetContainer = styled(BackgroundPaper)`&&{
@@ -20,7 +20,7 @@ type WidgetBaseProps = {
     index: number
     background?: string
     onOrder: (index: number, sourceIndex: number) => void
-    children: React.ReactChild //allow only one child
+    children: React.ReactChild // allow only one child
 }
 
 type DragDropData = {
@@ -32,7 +32,7 @@ type WidgetState = {
     dragOver: boolean
 }
 
-class Widget extends React.PureComponent<WidgetBaseProps, WidgetState> {
+class Widget extends React.PureComponent<WidgetBaseProps, WidgetState>{
     static defaultProps = {
         background: 'inherit'
     }
@@ -54,8 +54,7 @@ class Widget extends React.PureComponent<WidgetBaseProps, WidgetState> {
 
         try{
             const data = JSON.parse(e.dataTransfer.getData('text')) as DragDropData
-            if(data.index !== this.props.index)
-                this.props.onOrder(this.props.index, data.index)
+            if(data.index !== this.props.index){ this.props.onOrder(this.props.index, data.index) }
         }catch(err){ }
         this.setState({dragOver: false})
     }
@@ -85,10 +84,10 @@ class Widget extends React.PureComponent<WidgetBaseProps, WidgetState> {
     }
 
     render(){
-        const { children, background } = this.props
+        const {children, background} = this.props
 
-        return(
-            <WidgetContainer 
+        return (
+            <WidgetContainer
                 background={background || 'inherit'}
                 elevation={0}
                 style={{
@@ -103,7 +102,7 @@ class Widget extends React.PureComponent<WidgetBaseProps, WidgetState> {
                 onDragLeave={this.onDragLeave}
                 onDrop={this.onDrop}
             >
-                {children}        
+                {children}
             </WidgetContainer>
         )
     }
@@ -115,20 +114,20 @@ const sizeMap: {[P in WidgetSize]: {cols: number, rows: number}} = {
     large: {cols: 4, rows: 2}
 }
 
-export type WidgetProps = { 
+export type WidgetProps = {
     size: WidgetSize
     minSize?: WidgetSize
-} &  Pick<WidgetBaseProps, 'background' | 'children'>
+} & Pick<WidgetBaseProps, 'background' | 'children'>
 
 export type DashBoardProps = {
     widgets: Array<WidgetProps>
     onChangeOrder: (widgets: Array<WidgetProps>) => void
     onRemove: (something) => void
-    spacing?: number //GridListProps['spacing']
+    spacing?: number // GridListProps['spacing']
     children?: undefined // don't allow any children
 }
 
-export default class DashBoard extends React.PureComponent<DashBoardProps> {
+export default class DashBoard extends React.PureComponent<DashBoardProps>{
     static defaultProps = {
         spacing: 16
     }
@@ -143,7 +142,7 @@ export default class DashBoard extends React.PureComponent<DashBoardProps> {
             minSize: PropTypes.oneOf(['small', 'medium', 'large']),
             size: PropTypes.oneOf(['small', 'medium', 'large']).isRequired
         })),
-        //children: PropTypes. //TODO: Check that children is undefined
+        // children: PropTypes. //TODO: Check that children is undefined
     }
 
     onOrderArray = (target: number, source: number) => {
@@ -153,8 +152,8 @@ export default class DashBoard extends React.PureComponent<DashBoardProps> {
     }
 
     render(){
-        return(
-            <GridList 
+        return (
+            <GridList
                 spacing={this.props.spacing}
                 cols={4}
                 cellHeight={250}

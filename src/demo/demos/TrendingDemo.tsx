@@ -1,6 +1,6 @@
 import React from 'react'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle } from '../components/demo'
-import Trending, { TrendingProps } from '../../lib/Trending'
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
+import Trending, {TrendingProps} from '../../lib/Trending'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 
@@ -8,7 +8,7 @@ type TrendingDemoState = {
     variant: TrendingProps['variant']
 }
 
-export default class TrendingDemo extends React.PureComponent<{}, TrendingDemoState> {
+export default class TrendingDemo extends React.PureComponent<{}, TrendingDemoState>{
     state: TrendingDemoState = {
         variant: 'up'
     }
@@ -18,7 +18,7 @@ export default class TrendingDemo extends React.PureComponent<{}, TrendingDemoSt
             <Demo>
                 <DemoTitle demoPath='TrendingDemo.tsx' srcPath='Trending.tsx' >Trending</DemoTitle>
                 <DemoHelp>
-                    A colored icon indicating a trending direction. <br/> 
+                    A colored icon indicating a trending direction. <br/>
                     Tip: You can use the <code>color</code> or <code>nativeColor</code> property to override the color of the icon.
                 </DemoHelp>
                 <DemoProps>

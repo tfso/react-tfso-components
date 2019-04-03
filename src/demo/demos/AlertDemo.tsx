@@ -1,8 +1,11 @@
 import React from 'react'
+
 import Button from '@material-ui/core/Button'
-import { Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle, DemoCode } from '../components/demo'
 import Snackbar from '@material-ui/core/Snackbar'
-import Alert, { AlertProps } from '../../lib/Alert'
+
+import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle, DemoCode} from '../components/demo'
+
+import Alert, {AlertProps} from '../../lib/Alert'
 
 const variantMessage: {[P in AlertProps['variant']]: string } = {
     success: 'GRATE SUCCÉSS!',
@@ -11,7 +14,7 @@ const variantMessage: {[P in AlertProps['variant']]: string } = {
     error: 'That failed horribly...',
 }
 
-export default class AlertDemo extends React.PureComponent<{}, {variant: AlertProps['variant'], message: string, open: boolean}> {
+export default class AlertDemo extends React.PureComponent<{}, {variant: AlertProps['variant'], message: string, open: boolean}>{
     state = {
         variant: 'success' as AlertProps['variant'],
         open: false,
@@ -20,13 +23,13 @@ export default class AlertDemo extends React.PureComponent<{}, {variant: AlertPr
 
     onClose = () => this.setState({open: false})
 
-    onPress = (variant: AlertProps['variant']) => { 
+    onPress = (variant: AlertProps['variant']) => {
         const message = variantMessage[variant]
-        return () => this.setState({ open: true, message, variant})
+        return () => this.setState({open: true, message, variant})
     }
 
     render(){
-        return(
+        return (
             <Demo>
                 <DemoTitle demoPath='AlertDemo.tsx' srcPath='Alert.tsx' >Alert</DemoTitle>
                 <DemoHelp>A dismissable alert-box that can be used in a SnackBar or as a standard component in a page</DemoHelp>

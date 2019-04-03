@@ -14,7 +14,7 @@ const CenterTop = styled.div`
 `
 
 const Home = () => {
-    return(
+    return (
         <CenterTop>
             <TfsoLoading once color='primary' fontSize='inherit' style={{fontSize: 400}} />
             <Typography variant='h4' color='primary'>
