@@ -33,6 +33,7 @@ const MenuButton = styled(IconButton)`
 
 const Title = styled(Typography)`
 &&{
+  margin-right: 20px;
   display: none;
   ${({theme}) => theme.mui.breakpoints.up('sm')}{
     display: block;
@@ -61,7 +62,7 @@ const SectionMobile = styled.div`
 
 export type TopBarProps = {
     title: string
-    onMenuToggle: Function | null
+    onMenuToggle: () => void | null
     mobileMenu?: React.ReactNode
 }
 
@@ -88,14 +89,14 @@ export default class TopBar extends React.PureComponent<TopBarProps, any>{
             <Root>
                 <StyledAppBar position="static" color="default">
                     <Toolbar>
-                        {this.props.onMenuToggle !== null &&
-                            <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle && this.props.onMenuToggle()}>
-                                <MenuIcon/>
-                            </MenuButton>
-                        }
                         <Title variant="h6" color="inherit" noWrap>
                             {this.props.title}
                         </Title>
+                        {this.props.onMenuToggle !== null &&
+                        <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle && this.props.onMenuToggle()}>
+                            <MenuIcon/>
+                        </MenuButton>
+                        }
                         <Grow/>
                         <SectionDesktop>
                             {this.props.children}
