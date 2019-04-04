@@ -13,15 +13,14 @@ export const GitHubIcon = React.memo((props: SvgIconProps) => (
 export type GitHubLinkProps = {
     path?: string
     tooltip?: string
-    color?: SvgIconProps['color']
-    fontSize?: SvgIconProps['fontSize']
+    iconProps?: SvgIconProps
 }
 
 const GitHubLink = (props: GitHubLinkProps) => {
     return (
         <Link href={`https://github.com/tfso/react-tfso-components${props.path ? `/${props.path}` : ''}`} target='_blank' rel='noreferrer' >
             <Tooltip title={props.tooltip ? props.tooltip : 'View on GitHub'}>
-                <GitHubIcon fontSize={props.fontSize || 'large'} color={props.color} />
+                <GitHubIcon fontSize={props.iconProps && props.iconProps.fontSize || 'large'} {...props.iconProps as any} />
             </Tooltip>
         </Link>
     )

@@ -13,6 +13,7 @@
   ],
   "rules": {
     "@typescript-eslint/no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": true }],
-    "semi": "error"
+    "semi": "error",
+    "no-mixed-operators": "off"
   }
 }

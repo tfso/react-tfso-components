@@ -12,9 +12,13 @@ export const MaterialUiIcon = React.memo((props: SvgIconProps) => (
     </SvgIcon>
 ))
 
-const MaterialUiLink = () => (
+export type MaterialUiLinkProps = {
+    iconProps?: SvgIconProps
+}
+
+const MaterialUiLink = (props: MaterialUiLinkProps) => (
     <Link href='https://material-ui.com/' target='_blank' rel='noreferrer'>
-        <MaterialUiIcon fontSize='large' />
+        <MaterialUiIcon fontSize='large' {...props.iconProps as any} />
     </Link>
 )
 

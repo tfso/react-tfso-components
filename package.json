@@ -3,7 +3,7 @@
   "version": "1.0.14",
   "description": "",
   "author": "tfso",
-  "license": "unlicensed",
+  "license": "MIT",
   "homepage": "https://tfso.github.io/react-tfso-components",
   "repository": "tfso/react-tfso-components",
   "main": "dist/",
