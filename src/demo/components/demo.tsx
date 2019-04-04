@@ -39,7 +39,7 @@ export const DemoTitle = (props: DemoTitleProps) => {
         <Grid container justify='space-between' alignItems='baseline' >
             <Grid item>
                 <Typography variant="h5">
-                    {props.children} <Anchor id={props.children} />
+                    {props.children}
                 </Typography>
             </Grid>
             {props.srcPath || props.demoPath

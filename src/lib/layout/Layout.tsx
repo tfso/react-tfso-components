@@ -39,9 +39,8 @@ type LayoutProps = {
     title: string
     docTitle: string
     menu: React.ReactNode
-    mobileMenu: React.ReactNode
     topMenu: React.ReactNode
-    onMenuToggle: Function
+    onMenuToggle: () => void
 }
 
 export default class Layout extends React.PureComponent<LayoutProps>{
@@ -53,7 +52,6 @@ export default class Layout extends React.PureComponent<LayoutProps>{
                     <TopBar
                         title={this.props.title}
                         onMenuToggle={this.props.onMenuToggle}
-                        mobileMenu={this.props.mobileMenu}
                     >
                         {this.props.topMenu}
                     </TopBar>
@@ -74,7 +72,6 @@ export default class Layout extends React.PureComponent<LayoutProps>{
 type LayoutNoMenuProps = {
     title: string
     docTitle: string
-    mobileMenu: React.ReactNode
     topMenu: React.ReactNode
 }
 
@@ -86,8 +83,6 @@ export class LayoutNoMenu extends React.PureComponent<LayoutNoMenuProps>{
                 <LayoutHeader>
                     <TopBar
                         title={this.props.title}
-                        onMenuToggle={null}
-                        mobileMenu={this.props.mobileMenu}
                     >
                         {this.props.topMenu}
                     </TopBar>
