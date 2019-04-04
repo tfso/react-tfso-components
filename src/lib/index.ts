@@ -10,6 +10,7 @@ import DashBoard from './DashBoard'
 import SearchField from './SearchField'
 import TextFieldEditor from './TextFieldEditor'
 import Trending from './Trending'
+import Emoji from './Emoji'
 
 // Utility components
 
@@ -27,6 +28,7 @@ export {DashBoard}
 export {SearchField}
 export {TextFieldEditor}
 export {Trending}
+export {Emoji}
 
 export {Delay}
 export {Hoverable}
