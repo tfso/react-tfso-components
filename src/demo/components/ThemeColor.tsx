@@ -22,7 +22,7 @@ const Box = styled.div`
 const Txt = styled.div`
   font-size: 2em;
   line-height: 2em;
-  color: ${({dark, theme}) => dark ? "#000" : theme.mui.palette.secondary.contrastText}
+  color: ${({dark, theme}) => dark ? '#000' : theme.mui.palette.secondary.contrastText}
 `
 
 const ThemeColor = (props: ThemeColorProps) => {

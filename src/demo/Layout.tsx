@@ -23,6 +23,7 @@ import AlertDemo from './demos/AlertDemo'
 import SearchFieldDemo from './demos/SearchFieldDemo'
 import TextFieldEditorDemo from './demos/TextFieldEditorDemo'
 import ConfirmationDialogDemo from './demos/ConfirmationDialogDemo'
+import ClientSwitcherDialogDemo from './demos/ClientSwitcherDialogDemo'
 import EmojiDemo from './demos/EmojiDemo'
 import DashBoardDemo from './demos/DashBoardDemo'
 import HoverableDemo from './demos/HoverableDemo'
@@ -62,6 +63,10 @@ const menuGroups = {
             confirmationdialog: {
                 label: 'ConfirmationDialog',
                 component: ConfirmationDialogDemo
+            },
+            clientswitcherdialog: {
+                label: 'ClientSwitcherDialog',
+                component: ClientSwitcherDialogDemo
             },
             searchfield: {
                 label: 'SearchField',
@@ -202,6 +207,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                     return (
                         <layout.MenuGroup
                             expanded={this.state.menuGroupsExpanded[groupName]}
+                            key={group.label}
                             label={group.label}
                             icon={group.icon}
                             subtitle={group.subtitle}
