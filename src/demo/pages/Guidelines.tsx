@@ -107,7 +107,7 @@ import Alert from 'react-tfso-components/dist/Alert'`
                 </Code>
             </Tip>
 
-            <Tip title={<>{/* emojis.thumbsUp */}Extend from <code>React.PureComponet</code> instead of <code>React.Component</code></>}>
+            <Tip title={<>{/* emojis.thumbsUp */}Extend from <code>React.PureComponent</code> instead of <code>React.Component</code></>}>
                 Your components should never mutate the state directly or have mutable properties.<br/>
                 Hence they are pure, and should extend React.PureComponent, which is more performant.
             </Tip>
