@@ -25,7 +25,7 @@ import TextFieldEditorDemo from './demos/TextFieldEditorDemo'
 import ConfirmationDialogDemo from './demos/ConfirmationDialogDemo'
 import ClientSwitcherDialogDemo from './demos/ClientSwitcherDialogDemo'
 import EmojiDemo from './demos/EmojiDemo'
-import DashBoardDemo from './demos/DashBoardDemo'
+import GridLayoutDemo from './demos/GridLayoutDemo'
 import HoverableDemo from './demos/HoverableDemo'
 import DelayDemo from './demos/DelayDemo'
 import WizardDemo from './demos/WizardDemo'
@@ -118,9 +118,9 @@ const menuGroups = {
         subtitle: 'Works in progress',
         icon: CodeIcon,
         items: {
-            dashboard: {
-                label: 'Dashboard',
-                component: DashBoardDemo
+            gridlayout: {
+                label: 'GridLayout',
+                component: GridLayoutDemo
             }
         }
     },
