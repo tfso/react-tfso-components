@@ -12,7 +12,7 @@ export default class ClientSwitcherDialogDemo extends React.PureComponent{
         }, {
             value: '353453',
             label: '24SevenOffice Norge'
-        },{
+        }, {
             value: '234234324',
             label: '24sevenOffice Labs'
         }, {

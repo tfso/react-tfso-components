@@ -18,7 +18,6 @@ import CodeIcon from '@material-ui/icons/Code'
 
 import GitHubLink from './GitHubLink'
 import {Code} from './code'
-import {Anchor} from './Link'
 
 export const Demo = (props) => <Paper style={{padding: 15, marginBottom: 30}}>{props.children}</Paper>
 

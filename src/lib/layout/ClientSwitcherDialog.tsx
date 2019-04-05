@@ -1,6 +1,6 @@
 
 import React from 'react'
-import PropTypes, {any, string} from 'prop-types'
+import PropTypes from 'prop-types'
 import Dialog, {DialogProps} from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'

@@ -4,7 +4,6 @@ import styled from 'styled-components/macro'
 import Typography, {TypographyProps} from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import Divider from '@material-ui/core/Divider'
 
 import {Code} from '../components/code'
 import Link, {Anchor} from '../components/Link'
