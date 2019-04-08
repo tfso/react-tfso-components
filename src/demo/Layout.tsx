@@ -23,7 +23,7 @@ import AlertDemo from './demos/AlertDemo'
 import SearchFieldDemo from './demos/SearchFieldDemo'
 import TextFieldEditorDemo from './demos/TextFieldEditorDemo'
 import ConfirmationDialogDemo from './demos/ConfirmationDialogDemo'
-import ClientSwitcherDemo from './demos/ClientSwitcherDemo'
+import ListPickerDemo from './demos/ListPickerDemo'
 import EmojiDemo from './demos/EmojiDemo'
 import GridLayoutDemo from './demos/GridLayoutDemo'
 import HoverableDemo from './demos/HoverableDemo'
@@ -64,9 +64,9 @@ const menuGroups = {
                 label: 'ConfirmationDialog',
                 component: ConfirmationDialogDemo
             },
-            clientswitcher: {
-                label: 'ClientSwitcher',
-                component: ClientSwitcherDemo
+            listpicker: {
+                label: 'ListPicker',
+                component: ListPickerDemo
             },
             searchfield: {
                 label: 'SearchField',

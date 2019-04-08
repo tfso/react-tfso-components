@@ -1,18 +1,24 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import ClientSwitcher from '../../lib/layout/ClientSwitcher'
+import ListPicker from '../../lib/ListPicker'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import styled from 'styled-components'
+import {MenuItem} from '@material-ui/core'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
 
 const DemoDisplay = styled.div`
   flex: 1;
 `
 
-export default class ClientSwitcherDemo extends React.PureComponent{
+export default class ListPickerDemo extends React.PureComponent{
     _anchorEl: React.RefObject<HTMLButtonElement> = React.createRef()
     state = {
-        selectedOption: null,
+        selectedOption: undefined,
+        selected: 'none',
+        buttonType: 'default',
         open: false,
+        color: 'default',
         options: [{
             value: '23324',
             label: 'Vrådal & Rypefjord AS'
@@ -35,11 +41,24 @@ export default class ClientSwitcherDemo extends React.PureComponent{
     }
 
     onClickOpenConfirmationDialog = () => {
-        this.setState({open: true})
+        this.setState({
+            open: true
+        })
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            selected: event.target.value
+        })
+    }
+
+    handleColor = (event) => {
+        this.setState({
+            color: event.target.value
+        })
     }
 
     onSwitch =(value) => {
-        console.log(`selected value ${value}`)
         this.setState({selectedOption: value})
         this.onCancel()
     }
@@ -51,7 +70,7 @@ export default class ClientSwitcherDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='ClientSwitcherDemo.tsx' srcPath='layout/ClientSwitcher.tsx' >ClientSwitcher</DemoTitle>
+                <DemoTitle demoPath='ListPickerDemo.tsx' srcPath='ListPicker.tsx' >ListPicker</DemoTitle>
                 <DemoHelp>Dialog(mobile) or Popover(desktop) showing list of options. Made with switching client's in mind</DemoHelp>
                 <DemoProps>
                     <DemoProp name="open" type="boolean" default="" description="Show list of options" />
@@ -61,18 +80,53 @@ export default class ClientSwitcherDemo extends React.PureComponent{
                     <DemoProp name="cancelButtonText" type="string" default="" description="Text for cancel button" />
                     <DemoProp name="onSwitch" type="function" default="" description="Returns value for selected option" />
                     <DemoProp name="onCancel" type="function" default="" description="Fires when list closes" />
+                    <DemoProp name="avatarColor" type="string" default="" description="Valid values are types of #f7f7f7 or green" />
                 </DemoProps>
                 <DemoContent>
-                    <ClientSwitcher
+                    <ListPicker
                         anchorEl={this._anchorEl.current}
                         open={this.state.open}
                         cancelButtonText='Cancel'
+                        searchLabel='Search list'
                         onCancel={this.onCancel}
                         onSwitch={this.onSwitch}
                         options={this.state.options}
                         disabled='234234324'
+                        selected={this.state.selected}
+                        avatarColor={this.state.color == 'default' ? '' : this.state.color}
                     />
-                    <Button variant='outlined' buttonRef={this._anchorEl} onClick={this.onClickOpenConfirmationDialog}>Click me</Button>
+                    <Button variant='outlined' buttonRef={this._anchorEl} onClick={this.onClickOpenConfirmationDialog}>Open list</Button>
+                    <InputLabel shrink htmlFor="age-label-placeholder">
+                        AvatarColor
+                    </InputLabel>
+                    <Select
+                        onChange={this.handleColor}
+                        value={this.state.color}
+                    >
+                        <MenuItem key='default' value='default'>Default</MenuItem>
+                        <MenuItem key='green' value='green' >Green</MenuItem>
+                        <MenuItem key='purple' value='purple' >Purple</MenuItem>
+                        <MenuItem key='orange' value='orange' >Orange</MenuItem>
+                    </Select>
+                    <InputLabel shrink htmlFor="age-label-placeholder">
+                        Set selected
+                    </InputLabel>
+                    <Select
+                        onChange={this.handleChange}
+                        value={this.state.selected}
+                    >
+                        <MenuItem value='none'>None</MenuItem>
+                        { this.state.options
+                            .map((option, i) => (
+                                <MenuItem
+                                    key={i}
+                                    value={option.value}
+                                >
+                                    {option.label}
+                                </MenuItem>
+                            ))
+                        }
+                    </Select>
                     {this.state && this.state.selectedOption
                         ? <DemoDisplay>You have selected: {this.state.selectedOption} {
                             this.state.options

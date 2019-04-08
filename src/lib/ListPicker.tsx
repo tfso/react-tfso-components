@@ -11,9 +11,10 @@ import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
-import SearchField from '../SearchField'
+import SearchField from './SearchField'
 import withWidth, {WithWidth} from '@material-ui/core/withWidth'
 import Popover from '@material-ui/core/Popover'
+import styled from 'styled-components'
 
 export type ClientSwitcherDialogProps = {
     open: boolean
@@ -22,15 +23,24 @@ export type ClientSwitcherDialogProps = {
     children?: undefined
     options: Array<{ value: string, label: string }>
     cancelButtonText: string
+    searchLabel?: string
     anchorEl?: null | HTMLElement
     disabled?: string
     selected?: string
+    avatarColor?: string
 }
 
 type State = {
     filterValue: string,
     focusValue: string
 }
+
+const AvatarColor = styled(Avatar)`
+  &&{
+    background-color: ${({theme, color}) => color || theme.mui.palette.primary.dark}
+    color: ${({theme}) => theme.mui.palette.primary.contrastText}
+  }
+`
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
@@ -39,15 +49,17 @@ const IsMobile = withWidth()((props: WithWidth & {children: (isMobile: boolean) 
     return props.children(isMobile)
 })
 
-export default class ClientSwitcher extends React.PureComponent<ClientSwitcherDialogProps, State>{
+export default class ListPicker extends React.PureComponent<ClientSwitcherDialogProps, State>{
     static propTypes = {
         open: PropTypes.bool.isRequired,
         onCancel: PropTypes.func.isRequired,
         onSwitch: PropTypes.func.isRequired,
         options: PropTypes.arrayOf(PropTypes.shape({value: PropTypes.string.isRequired, label: PropTypes.string.isRequired})).isRequired,
         cancelButtonText: PropTypes.string.isRequired,
+        searchLabel: PropTypes.string,
         disabled: PropTypes.string,
-        selected: PropTypes.string
+        selected: PropTypes.string,
+        avatarColor: PropTypes.string
     }
     _inputRef: React.RefObject<HTMLLIElement> = React.createRef()
     _listRef: React.RefObject<HTMLInputElement> = React.createRef()
@@ -86,6 +98,7 @@ export default class ClientSwitcher extends React.PureComponent<ClientSwitcherDi
         const renderItems = (
             <>
                 <SearchField
+                    placeholder={this.props.searchLabel}
                     inputRef={this._inputRef}
                     onChange={this.onFilter}
                     value={this.state.filterValue}
@@ -103,8 +116,8 @@ export default class ClientSwitcher extends React.PureComponent<ClientSwitcherDi
                                 key={i}
                                 onClick={() => { this.onSwitch(option.value) }}
                             >
-                                <Avatar>
-                                    <Typography variant='caption'>
+                                <AvatarColor color={this.props.avatarColor}>
+                                    <Typography variant='caption' color='inherit'>
                                         {option.label.split(' ')
                                             .slice(0, 3)
                                             .map((words) => (
@@ -112,7 +125,7 @@ export default class ClientSwitcher extends React.PureComponent<ClientSwitcherDi
                                             ))
                                         }
                                     </Typography>
-                                </Avatar>
+                                </AvatarColor>
                                 <ListItemText primary={option.label} />
                             </MenuItem>
                         ))
