@@ -64,8 +64,8 @@ const menuGroups = {
                 label: 'ConfirmationDialog',
                 component: ConfirmationDialogDemo
             },
-            clientswitcherdialog: {
-                label: 'ClientSwitcherDialog',
+            clientswitcher: {
+                label: 'ClientSwitcher',
                 component: ClientSwitcherDemo
             },
             searchfield: {
