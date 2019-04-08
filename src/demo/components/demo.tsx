@@ -70,10 +70,15 @@ export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) 
     </div>
 )
 
-export const DemoProps = (props) => (
+export type DemoPropsProps = {
+    title?: string
+    children: React.ReactNode
+}
+
+export const DemoProps = (props: DemoPropsProps) => (
     <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant='h6'>Props</Typography>
+            <Typography variant='h6'>{props.title || 'Props'}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <Table>
@@ -98,11 +103,12 @@ export type DemoPropProps = {
     type: string
     default?: string
     description?: string
+    required?: boolean
 }
 
 export const DemoProp = (props: DemoPropProps) => (
     <TableRow>
-        <TableCell><code>{props.name}</code></TableCell>
+        <TableCell><code>{`${props.required ? '* ' : ''}${props.name}`}</code></TableCell>
         <TableCell><code>{props.type}</code></TableCell>
         <TableCell><code>{props.default}</code></TableCell>
         <TableCell><Typography>{props.description}</Typography></TableCell>
