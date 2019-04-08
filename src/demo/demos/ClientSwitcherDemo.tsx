@@ -2,10 +2,16 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import ClientSwitcher from '../../lib/layout/ClientSwitcher'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
+import styled from 'styled-components'
+
+const DemoDisplay = styled.div`
+  flex: 1;
+`
 
 export default class ClientSwitcherDemo extends React.PureComponent{
     _anchorEl: React.RefObject<HTMLButtonElement> = React.createRef()
     state = {
+        selectedOption: null,
         open: false,
         options: [{
             value: '23324',
@@ -34,6 +40,7 @@ export default class ClientSwitcherDemo extends React.PureComponent{
 
     onSwitch =(value) => {
         console.log(`selected value ${value}`)
+        this.setState({selectedOption: value})
         this.onCancel()
     }
 
@@ -56,7 +63,6 @@ export default class ClientSwitcherDemo extends React.PureComponent{
                     <DemoProp name="onCancel" type="function" default="" description="Fires when list closes" />
                 </DemoProps>
                 <DemoContent>
-                    <Button variant='outlined' buttonRef={this._anchorEl} onClick={this.onClickOpenConfirmationDialog}>Click me</Button>
                     <ClientSwitcher
                         anchorEl={this._anchorEl.current}
                         open={this.state.open}
@@ -66,6 +72,17 @@ export default class ClientSwitcherDemo extends React.PureComponent{
                         options={this.state.options}
                         disabled='234234324'
                     />
+                    <Button variant='outlined' buttonRef={this._anchorEl} onClick={this.onClickOpenConfirmationDialog}>Click me</Button>
+                    {this.state && this.state.selectedOption
+                        ? <DemoDisplay>You have selected: {this.state.selectedOption} {
+                            this.state.options
+                                .map((option) => {
+                                    if(option.value == this.state.selectedOption){
+                                        return '(' + option.label + ')'
+                                    }
+                                })}</DemoDisplay>
+                        : ''
+                    }
                 </DemoContent>
             </Demo>
         )
