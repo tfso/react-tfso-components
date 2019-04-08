@@ -51,7 +51,7 @@ export default class ClientSwitcherDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='ClientSwitcherDemo.tsx' srcPath='ClientSwitcher.tsx' >ClientSwitcher</DemoTitle>
+                <DemoTitle demoPath='ClientSwitcherDemo.tsx' srcPath='layout/ClientSwitcher.tsx' >ClientSwitcher</DemoTitle>
                 <DemoHelp>Dialog(mobile) or Popover(desktop) showing list of options. Made with switching client's in mind</DemoHelp>
                 <DemoProps>
                     <DemoProp name="open" type="boolean" default="" description="Show list of options" />
