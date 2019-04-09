@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {styledTheme} from '../../lib/theme/index'
 
@@ -13,7 +13,7 @@ export type ThemeColorProps = {
 }
 
 const Box = styled.div`
-    background-color: ${({color, theme}) => theme.tfso.colors[color] };
+    background-color: ${({color, theme}) => theme.tfso.colors[color]};
     width: 230px;
     height: 230px;
     text-align: center;
@@ -22,11 +22,11 @@ const Box = styled.div`
 const Txt = styled.div`
   font-size: 2em;
   line-height: 2em;
-  color: ${({dark, theme}) => dark ? "#000" : theme.mui.palette.secondary.contrastText}
+  color: ${({dark, theme}) => dark ? '#000' : theme.mui.palette.secondary.contrastText}
 `
 
 const ThemeColor = (props: ThemeColorProps) => {
-    const { color } = props
+    const {color} = props
     return (
         <Box color={color}>
             theme.tfso.colors.{color}<br/><br/>

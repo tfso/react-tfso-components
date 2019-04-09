@@ -7,8 +7,8 @@ import Zoom from '@material-ui/core/Zoom'
 import Link from '@material-ui/core/Link'
 
 import TfsoLoading from '../../lib/icons/TfsoLoading'
-import { MaterialUiIcon } from '../components/MaterialUiLink'
-import { GitHubIcon } from '../components/GitHubLink'
+import {MaterialUiIcon} from '../components/MaterialUiLink'
+import {GitHubIcon} from '../components/GitHubLink'
 
 // TODO: this could be a Util HOC component
 const CenterTop = styled.div`

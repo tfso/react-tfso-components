@@ -4,7 +4,6 @@ import styled from 'styled-components/macro'
 import Typography, {TypographyProps} from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import Divider from '@material-ui/core/Divider'
 
 import {Code} from '../components/code'
 import Link, {Anchor} from '../components/Link'
@@ -107,7 +106,7 @@ import Alert from 'react-tfso-components/dist/Alert'`
                 </Code>
             </Tip>
 
-            <Tip title={<>{/* emojis.thumbsUp */}Extend from <code>React.PureComponet</code> instead of <code>React.Component</code></>}>
+            <Tip title={<>{/* emojis.thumbsUp */}Extend from <code>React.PureComponent</code> instead of <code>React.Component</code></>}>
                 Your components should never mutate the state directly or have mutable properties.<br/>
                 Hence they are pure, and should extend React.PureComponent, which is more performant.
             </Tip>
