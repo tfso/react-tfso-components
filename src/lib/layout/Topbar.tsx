@@ -24,8 +24,12 @@ const Left = styled.div`&&{
   background-color: ${({theme}) => theme.tfso.colors.tfso};
   color: #fff;
   padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   align-items: center;
+}`
+const LeftMobile = styled(Left)`&&{
+  flex: 0;
 }`
 const Right = styled.div`&&{
   flex: 1;
@@ -46,11 +50,16 @@ const ToolbarRight = styled.div`&&{
 export type TopBarProps = {
     title: string
     onMenuToggle?: () => void
+    mobile: boolean
+    children?: React.ReactNode
 }
 
-export default class TopBar extends React.PureComponent<TopBarProps, any>{
+export default class TopBar extends React.PureComponent<TopBarProps>{
     static propTypes = {
-        title: PropTypes.string.isRequired
+        title: PropTypes.string.isRequired,
+        onMenuToggle: PropTypes.func,
+        mobile: PropTypes.bool.isRequired,
+        children: PropTypes.node
     }
 
     render(){
@@ -58,12 +67,21 @@ export default class TopBar extends React.PureComponent<TopBarProps, any>{
             <Root>
                 <StyledAppBar position="static" color="default" elevation={1}>
                     <Wrapper>
-                        <Left>
-                            <TfsoIcon color="inherit" fontSize="large" />
-                            <Typography variant="h6" color="inherit" style={{paddingLeft: 7}}>
-                                {this.props.title}
-                            </Typography>
-                        </Left>
+                        {this.props.mobile
+                            ? (
+                                <LeftMobile>
+                                    <TfsoIcon color="inherit" fontSize="large" />
+                                </LeftMobile>
+                            )
+                            : (
+                                <Left>
+                                    <TfsoIcon color="inherit" fontSize="large" />
+                                    <Typography variant="h6" color="inherit" style={{paddingLeft: 7}}>
+                                        {this.props.title}
+                                    </Typography>
+                                </Left>
+                            )
+                        }
                         <Right>
                             <Toolbar variant="dense">
                                 {this.props.onMenuToggle &&
@@ -79,6 +97,24 @@ export default class TopBar extends React.PureComponent<TopBarProps, any>{
                     </Wrapper>
                 </StyledAppBar>
             </Root>
+        )
+    }
+}
+
+export type TopMenuContentProps = {
+    children: React.ReactNode
+}
+
+export class TopMenuContent extends React.PureComponent<TopMenuContentProps>{
+    static propTypes = {
+        children: PropTypes.node.isRequired
+    }
+
+    render(){
+        return (
+            <React.Fragment>
+                {this.props.children}
+            </React.Fragment>
         )
     }
 }

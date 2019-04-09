@@ -1,7 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 import TopBar from './Topbar'
 import DocumentTitle from './DocumentTitle'
+import Menu from './Menu'
+import {withScreenSize, ScreenSizeData} from '../utils/ScreenSize'
 
 // Wrap everything
 export const LayoutWrapper = styled.div`
@@ -38,12 +41,42 @@ export const LayoutBodyRight = styled.div`
 type LayoutProps = {
     title: string
     docTitle: string
-    menu: React.ReactNode
-    topMenu: React.ReactNode
-    onMenuToggle: () => void
+    menuContent?: React.ReactNode
+    topMenuContent?: React.ReactNode
+} & {
+    screenSize: ScreenSizeData
 }
 
-export default class Layout extends React.PureComponent<LayoutProps>{
+type LayoutState = {
+    menuOpen: boolean | null
+}
+
+export default withScreenSize(class Layout extends React.PureComponent<LayoutProps, LayoutState>{
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        docTitle: PropTypes.string.isRequired,
+        menuContent: PropTypes.node,
+        topMenuContent: PropTypes.node
+    }
+
+    state: LayoutState = {
+        menuOpen: null
+    }
+
+    onCloseMenu = () => this.setState({menuOpen: false})
+    onMenuToggle = () => this.setState(state => ({menuOpen: !this.menuIsOpen()}))
+    menuIsOpen(){
+        if(this.state.menuOpen === null){
+            return !this.props.screenSize.mobile
+        }
+        return this.state.menuOpen
+    }
+    onClickContent = () => {
+        if(this.props.screenSize.mobile && this.menuIsOpen()){
+            this.onCloseMenu()
+        }
+    }
+
     render(){
         return (
             <LayoutWrapper>
@@ -51,14 +84,17 @@ export default class Layout extends React.PureComponent<LayoutProps>{
                 <LayoutHeader>
                     <TopBar
                         title={this.props.title}
-                        onMenuToggle={this.props.onMenuToggle}
+                        onMenuToggle={this.onMenuToggle}
+                        mobile={this.props.screenSize.mobile}
                     >
-                        {this.props.topMenu}
+                        {this.props.topMenuContent}
                     </TopBar>
                 </LayoutHeader>
                 <LayoutBody>
-                    <LayoutBodyLeft>
-                        {this.props.menu}
+                    <LayoutBodyLeft onClick={this.onClickContent}>
+                        <Menu mobile={this.props.screenSize.mobile} open={this.menuIsOpen()} onClose={this.onCloseMenu}>
+                            {this.props.menuContent}
+                        </Menu>
                     </LayoutBodyLeft>
                     <LayoutBodyRight>
                         {this.props.children}
@@ -67,32 +103,4 @@ export default class Layout extends React.PureComponent<LayoutProps>{
             </LayoutWrapper>
         )
     }
-}
-
-type LayoutNoMenuProps = {
-    title: string
-    docTitle: string
-    topMenu: React.ReactNode
-}
-
-export class LayoutNoMenu extends React.PureComponent<LayoutNoMenuProps>{
-    render(){
-        return (
-            <LayoutWrapper>
-                <DocumentTitle text={this.props.docTitle} />
-                <LayoutHeader>
-                    <TopBar
-                        title={this.props.title}
-                    >
-                        {this.props.topMenu}
-                    </TopBar>
-                </LayoutHeader>
-                <LayoutBody>
-                    <LayoutBodyRight>
-                        {this.props.children}
-                    </LayoutBodyRight>
-                </LayoutBody>
-            </LayoutWrapper>
-        )
-    }
-}
+})

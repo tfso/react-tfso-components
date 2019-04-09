@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import Dialog from '@material-ui/core/Dialog'
@@ -15,6 +14,7 @@ import Popover from '@material-ui/core/Popover'
 import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import ScreenSize from './utils/ScreenSize'
 
 export type ClientSwitcherDialogProps = {
     open: boolean
@@ -49,11 +49,6 @@ const CustomDialogTitle = styled.div`
 `
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
-
-const IsMobile = withWidth()((props: WithWidth & {children: (isMobile: boolean) => JSX.Element}) => {
-    const isMobile = ['xs', 'sm'].includes(props.width)
-    return props.children(isMobile)
-})
 
 export default class ListPicker extends React.PureComponent<ClientSwitcherDialogProps, State>{
     static propTypes = {
@@ -182,14 +177,9 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
         )
 
         return (
-
-            <IsMobile >
-                {(isMobile) => {
-                    return isMobile
-                        ? mobileDialog
-                        : desktopDialog
-                }}
-            </IsMobile>
+            <ScreenSize>
+                {({mobile}) => mobile ? mobileDialog : desktopDialog}
+            </ScreenSize>
         )
     }
 }

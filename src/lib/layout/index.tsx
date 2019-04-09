@@ -1,11 +1,7 @@
-import Menu, {MenuGroup, MenuItem, MenuRootItem} from './Menu'
-import MobileMenu from './MobileMenu'
-import TopMenu from './TopMenu'
-import TopBar from './Topbar'
-import Layout, {LayoutNoMenu, LayoutWrapper, LayoutHeader, LayoutBody, LayoutBodyLeft, LayoutBodyRight} from './Layout'
+import {MenuContent, MenuGroup, MenuItem, MenuRootItem} from './Menu'
+import {TopMenuContent} from './Topbar'
+import Layout from './Layout'
 
-export {Menu, MenuGroup, MenuItem, MenuRootItem}
-export {MobileMenu}
-export {TopMenu}
-export {TopBar}
-export {Layout, LayoutNoMenu, LayoutWrapper, LayoutHeader, LayoutBody, LayoutBodyLeft, LayoutBodyRight}
+export {MenuContent, MenuGroup, MenuItem, MenuRootItem}
+export {TopMenuContent}
+export {Layout}

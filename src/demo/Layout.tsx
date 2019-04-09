@@ -127,7 +127,6 @@ const menuGroups = {
 }
 
 type LayoutState = {
-    menuOpen: boolean,
     location: Location<any>
     menuGroupsExpanded: any
 }
@@ -144,7 +143,6 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
 
     state: LayoutState = {
         location: history.location,
-        menuOpen: true,
         menuGroupsExpanded: {}
     }
 
@@ -165,12 +163,6 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
         this.onToggleGroupExpanded(group)
     }
 
-    onMenuToggle = () => {
-        this.setState(state => ({menuOpen: !state.menuOpen}))
-    }
-
-    onCloseMenu = () => this.setState({menuOpen: false})
-
     onToggleGroupExpanded = (name) => {
         this.setState(state => ({
             menuGroupsExpanded: {
@@ -181,8 +173,8 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
     }
 
     render(){
-        const menu = (
-            <layout.Menu open={this.state.menuOpen} onClose={this.onCloseMenu}>
+        const menuContent = (
+            <layout.MenuContent>
                 {Object.keys(menuGroups).map(groupName => {
                     const group = menuGroups[groupName]
                     if(group.component){
@@ -206,7 +198,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
 
                     return (
                         <layout.MenuGroup
-                            expanded={this.state.menuGroupsExpanded[groupName]}
+                            expanded={!!this.state.menuGroupsExpanded[groupName]}
                             key={group.label}
                             label={group.label}
                             icon={group.icon}
@@ -235,15 +227,15 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                         </layout.MenuGroup>
                     )
                 })}
-            </layout.Menu>
+            </layout.MenuContent>
         )
-        const topMenu = (
-            <layout.TopMenu>
+        const topMenuContent = (
+            <layout.TopMenuContent>
                 <Grid container spacing={16}>
                     <Grid item><MaterialUiLink /></Grid>
                     <Grid item><GitHubLink /></Grid>
                 </Grid>
-            </layout.TopMenu>
+            </layout.TopMenuContent>
         )
 
         const selected = this.getSelected()
@@ -260,11 +252,10 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
 
         return (
             <layout.Layout
-                menu={menu}
-                topMenu={topMenu}
+                menuContent={menuContent}
+                topMenuContent={topMenuContent}
                 title="Tfso Components"
                 docTitle="Tfso Components"
-                onMenuToggle={this.onMenuToggle}
             >
                 {content}
             </layout.Layout>
