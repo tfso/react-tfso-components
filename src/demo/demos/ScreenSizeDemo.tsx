@@ -6,7 +6,7 @@ export default class ScreenSizeDemo extends React.PureComponent{
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='ScreenSize.tsx' srcPath='ScreenSize.tsx'>Delay</DemoTitle>
+                <DemoTitle demoPath='ScreenSize.tsx' srcPath='ScreenSize.tsx'>ScreenSize</DemoTitle>
                 <DemoHelp>Gives you current screen size (mobile, tablet, desktop). Comes in hoc, render prop, and hook variants</DemoHelp>
                 <DemoContent>
                     Drag screen to different sizes to test. Note that there is some overlap.

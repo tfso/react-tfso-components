@@ -107,7 +107,7 @@ const menuGroups = {
                 component: WizardDemo
             },
             screensize: {
-                label: 'Screen Size',
+                label: 'ScreenSize',
                 component: ScreenSizeDemo
             }
         }
