@@ -15,6 +15,9 @@ import SearchField from './SearchField'
 import withWidth, {WithWidth} from '@material-ui/core/withWidth'
 import Popover from '@material-ui/core/Popover'
 import styled from 'styled-components'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 export type ClientSwitcherDialogProps = {
     open: boolean
@@ -40,6 +43,12 @@ const AvatarColor = styled(Avatar)`
     background-color: ${({theme, color}) => color || theme.mui.palette.primary.dark}
     color: ${({theme}) => theme.mui.palette.primary.contrastText}
   }
+`
+
+const CustomDialogTitle = styled.div`
+  display: flex;
+  flex-flow: row-reverse;
+  padding: 5px;
 `
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
@@ -164,12 +173,14 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
                 fullWidth
                 maxWidth='sm'
             >
+                <CustomDialogTitle>
+                    <IconButton onClick={this.props.onCancel} aria-label="Close">
+                        <CloseIcon />
+                    </IconButton>
+                </CustomDialogTitle>
                 <DialogContent>
                     {renderItems}
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.props.onCancel}>{this.props.cancelButtonText}</Button>
-                </DialogActions>
             </Dialog>
         )
 
