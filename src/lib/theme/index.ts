@@ -1,5 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import 'styled-components'
+import './index.css'
 
 const colorScheme = {
     fiord: '#445566',
