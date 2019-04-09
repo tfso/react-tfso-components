@@ -1,0 +1,1 @@
+{"version":3,"file":"BigNumber.d.ts","sourceRoot":"","sources":["../src/lib/BigNumber.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAA;AAKzB,oBAAY,cAAc,GAAG;IACzB;;;OAGG;IACH,KAAK,CAAC,EAAE,OAAO,GAAG,MAAM,CAAA;IAExB;;OAEG;IACH,IAAI,CAAC,EAAE,QAAQ,GAAG,OAAO,CAAA;IACzB,QAAQ,EAAE,MAAM,GAAG,MAAM,CAAA;CAC5B,CAAA;;AAgCD,wBAA+D"}
