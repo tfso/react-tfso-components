@@ -3,8 +3,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogActions from '@material-ui/core/DialogActions'
-import Button from '@material-ui/core/Button'
 import Slide from '@material-ui/core/Slide'
 import Typography from '@material-ui/core/Typography'
 import MenuList from '@material-ui/core/MenuList'
@@ -17,7 +15,6 @@ import Popover from '@material-ui/core/Popover'
 import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import DialogTitle from '@material-ui/core/DialogTitle'
 
 export type ClientSwitcherDialogProps = {
     open: boolean
