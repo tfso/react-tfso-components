@@ -9,12 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
 import SearchField from './SearchField'
-import withWidth, {WithWidth} from '@material-ui/core/withWidth'
 import Popover from '@material-ui/core/Popover'
 import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import ScreenSize from './utils/ScreenSize'
+import ScreenSize from './ScreenSize'
 
 export type ClientSwitcherDialogProps = {
     open: boolean

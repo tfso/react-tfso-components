@@ -29,6 +29,7 @@ import GridLayoutDemo from './demos/GridLayoutDemo'
 import HoverableDemo from './demos/HoverableDemo'
 import DelayDemo from './demos/DelayDemo'
 import WizardDemo from './demos/WizardDemo'
+import ScreenSizeDemo from './demos/ScreenSizeDemo'
 
 const menuGroups = {
     home: {
@@ -104,6 +105,10 @@ const menuGroups = {
             wizard: {
                 label: 'Wizard',
                 component: WizardDemo
+            },
+            screensize: {
+                label: 'Screen Size',
+                component: ScreenSizeDemo
             }
         }
     },

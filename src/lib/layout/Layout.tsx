@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import TopBar from './Topbar'
 import DocumentTitle from './DocumentTitle'
 import Menu from './Menu'
-import {withScreenSize, ScreenSizeData} from '../utils/ScreenSize'
+import {withScreenSize, ScreenSizeData} from '../ScreenSize'
 
 // Wrap everything
 export const LayoutWrapper = styled.div`

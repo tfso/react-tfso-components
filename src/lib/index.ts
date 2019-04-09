@@ -16,6 +16,7 @@ import Emoji from './Emoji'
 import Delay from './Delay'
 import Hoverable from './Hoverable'
 import Wizard from './Wizard'
+import ScreenSize from './ScreenSize'
 
 export {theme}
 export {layout}
@@ -31,3 +32,4 @@ export {Emoji}
 export {Delay}
 export {Hoverable}
 export {Wizard}
+export {ScreenSize}
