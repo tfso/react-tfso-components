@@ -19,9 +19,8 @@ const GridItemContainer = styled(BackgroundPaper)`&&{
 }`
 
 type GridItemWidth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'
-type GridItemHeight = 1 | 2 | 3 | 4 | 5 | 6
+type GridItemHeight = number
 const gridItemWidths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'onequarter', 'onethird', 'half', 'twothirds', 'threequarters', 'full']
-const gridItemHeights = [1, 2, 3, 4, 5, 6]
 const gridItemWidthNumberMap: {[P in GridItemWidth]: number} = {
     1: 1,
     2: 2,
@@ -169,11 +168,11 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
             col: PropTypes.number.isRequired,
             row: PropTypes.number.isRequired,
             width: PropTypes.oneOf(gridItemWidths).isRequired,
-            height: PropTypes.oneOf(gridItemHeights).isRequired,
+            height: PropTypes.number.isRequired,
             minWidth: PropTypes.oneOf(gridItemWidths),
-            minHeight: PropTypes.oneOf(gridItemHeights),
+            minHeight: PropTypes.number,
             maxWidth: PropTypes.oneOf(gridItemWidths),
-            maxHeight: PropTypes.oneOf(gridItemHeights),
+            maxHeight: PropTypes.number,
             draggable: PropTypes.bool,
             resizable: PropTypes.bool,
             static: PropTypes.bool,
@@ -213,15 +212,7 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
         })
     }
 
-    onResize = (layout: Layout[], oldItem: Layout, newItem: Layout, placeHolder: Layout) => {
-        newItem.h = placeHolder.h = Math.min(6, newItem.h)
-    }
-
-    onDragStop = (layout: Layout[], oldItem: Layout, newItem: Layout, placeHolder: Layout) => {
-        this._layoutWasChangedWorkaround = !isEqual(oldItem, newItem)
-    }
-
-    onResizeStop = (layout: Layout[], oldItem: Layout, newItem: Layout, placeHolder: Layout) => {
+    onDragResizeStop = (layout: Layout[], oldItem: Layout, newItem: Layout) => {
         this._layoutWasChangedWorkaround = !isEqual(oldItem, newItem)
     }
 
@@ -239,9 +230,8 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
                 rowHeight={90}
                 width={styledTheme.mui.breakpoints.values.lg}
                 onLayoutChange={this.onLayoutChange}
-                onResize={this.onResize}
-                onResizeStop={this.onResizeStop}
-                onDragStop={this.onDragStop}
+                onResizeStop={this.onDragResizeStop}
+                onDragStop={this.onDragResizeStop}
             >
                 {items.map(({id, backgroundColor, children}) => (
                     <GridItemContainer
@@ -249,7 +239,8 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
                         backgroundColor={backgroundColor || 'inherit'}
                     >
                         {children}
-                    </GridItemContainer>))}
+                    </GridItemContainer>))
+                }
             </ReactGridLayout>
         )
     }
