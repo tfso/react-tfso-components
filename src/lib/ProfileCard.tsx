@@ -24,25 +24,26 @@ import PowerOffIcon from '@material-ui/icons/PowerSettingsNew';
 const CustomCard = styled(Card)`
   &&{
    // box-shadow: none;
-  }`
+  }
+` as typeof Card
 
 const CustomCardContent = styled(CardContent)`
   &&{
     padding: 0;
     box-shadow: none;
   }
-`
+` as typeof CardContent
 
 const ProfileAvatar = styled(Avatar)`
   backgroundColor: red
-`
+` as typeof Avatar
 
 const Right = styled.div`
   text-align: right;
   flex: 1;
 `
 
-export default class ProfileCard extends React.PureComponent<{}, State>{
+export default class ProfileCard extends React.PureComponent<any>{
     render() {
         const { open, onClose, anchorEl } = this.props;
 
@@ -74,7 +75,7 @@ export default class ProfileCard extends React.PureComponent<{}, State>{
                         <List>
                             <ListItem><ListItemText primary="Account"/></ListItem>
                             <ListItem><ListItemText primary="Requests"/></ListItem>
-                            <Divider component="li" />
+                            <Divider component="hr" />
                             <ListItem>
                                 <ListItemText primary="Stavsholt Web og Design" secondary="Administration" />
                             </ListItem>
