@@ -56,13 +56,13 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
         this.setState({
             anchorEl: event.currentTarget
         })
-    };
+    }
 
     handleClose = () => {
         this.setState({
             anchorEl: null,
         })
-    };
+    }
 
     render(){
         const {anchorEl} = this.state
