@@ -54,7 +54,7 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
 
     handleClick = event => {
         this.setState({
-            anchorEl: event.currentTarget,
+            anchorEl: event.currentTarget
         })
     };
 
@@ -65,9 +65,8 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
     };
 
     render(){
-        const { anchorEl } = this.state
+        const {anchorEl} = this.state
         const open = Boolean(anchorEl)
-
         return (
             <Demo>
                 <DemoTitle srcPath='ProfileCard.tsx' demoPath='ProfileCardDemo.tsx'>Profile Card</DemoTitle>

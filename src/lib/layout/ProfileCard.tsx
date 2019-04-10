@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import classnames from 'classnames'
 import styled from 'styled-components/macro'
 import Typography from '@material-ui/core/Typography'
 import Popover from '@material-ui/core/Popover'
@@ -10,20 +8,17 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import PowerOffIcon from '@material-ui/icons/PowerSettingsNew'
 import CloseIcon from '@material-ui/icons/Close'
-import DialogContent from '@material-ui/core/DialogContent'
 import Dialog from '@material-ui/core/Dialog'
 import Slide from '@material-ui/core/Slide'
 import ScreenSize from '../ScreenSize'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import Tooltip from '@material-ui/core/Tooltip'
-
 
 export type ProfileCardProps = {
     open: boolean
@@ -48,12 +43,6 @@ const CustomCardContent = styled(CardContent)`
     box-shadow: none;
   }
 ` as typeof CardContent
-
-const CustomDialogTitle = styled.div`
-  display: flex;
-  flex-flow: row-reverse;
-  padding: 5px;
-`
 
 const ProfileCardContent = styled(CardContent)`
   display: flex;
@@ -101,7 +90,7 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
     static propTypes = {
         open: PropTypes.bool.isRequired,
         onClose: PropTypes.func.isRequired,
-        //identity: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+        // identity: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
         closeButtonText: PropTypes.string.isRequired
     }
 
