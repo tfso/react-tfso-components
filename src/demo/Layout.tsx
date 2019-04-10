@@ -30,6 +30,7 @@ import HoverableDemo from './demos/HoverableDemo'
 import DelayDemo from './demos/DelayDemo'
 import WizardDemo from './demos/WizardDemo'
 import ScreenSizeDemo from './demos/ScreenSizeDemo'
+import ProfileCardDemo from './demos/ProfileCardDemo'
 
 const menuGroups = {
     home: {
@@ -126,6 +127,10 @@ const menuGroups = {
             gridlayout: {
                 label: 'GridLayout',
                 component: GridLayoutDemo
+            },
+            profilecard: {
+                label: 'ProfileCard',
+                component: ProfileCardDemo
             }
         }
     },
