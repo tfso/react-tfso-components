@@ -14,7 +14,7 @@ const Root = styled.div`
 const StyledAppBar = styled(AppBar)`&&{
   background: white;
   z-index: ${props => props.theme.mui.zIndex.drawer + 1};  
-}`
+}` as typeof AppBar
 const Wrapper = styled.div`
   display: flex;
   align-items: stretch;
@@ -38,7 +38,7 @@ const Right = styled.div`&&{
 const MenuButton = styled(IconButton)`&&{
   margin-left: -12px;
   margin-right: 20px;
-}`
+}` as typeof IconButton
 
 const ToolbarRight = styled.div`&&{
   width: 100%;

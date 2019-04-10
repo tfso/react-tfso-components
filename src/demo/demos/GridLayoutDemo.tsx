@@ -1,17 +1,181 @@
 import React from 'react'
-import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
-import GridLayout from '../../lib/GridLayout'
-import Link from '@material-ui/core/Link'
+import styled from 'styled-components'
 
-export default class GridLayoutDemo extends React.PureComponent{
+import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
+import GridLayout, {GridLayoutProps, GridItemPosition} from '../../lib/GridLayout'
+import Link from '../components/Link'
+import TextField from '@material-ui/core/TextField'
+import Switch from '@material-ui/core/Switch'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Button from '@material-ui/core/Button'
+
+const ItemWrapper = ({backgroundColor, ...props}: React.HTMLAttributes<HTMLDivElement> & {backgroundColor: string}) => <div {...props} />
+const Item = styled(ItemWrapper)`&&{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({theme, backgroundColor}) => theme.mui.palette.getContrastText(backgroundColor)};
+    font-size: ${({theme}) => theme.mui.typography.h5.fontSize};
+    font-weight: ${({theme}) => theme.mui.typography.h5.fontWeight};
+    font-family: ${({theme}) => theme.mui.typography.h5.fontFamily};
+}`
+
+type State = {
+    items: GridLayoutProps['items']
+    layout: GridLayoutProps['layout']
+    addItemId: number
+    addResizable: boolean
+    addDraggable: boolean
+    addStatic: boolean
+    addColor: string
+    addWidth: number
+    addHeight: number
+    addCol: number,
+    addRow: number,
+}
+
+export default class GridLayoutDemo extends React.PureComponent<{}, State>{
+    state: State = {
+        items: [
+            {
+                id: 'a',
+                backgroundColor: '#f0f',
+                children: <Item backgroundColor={'#f0f'}>a</Item>
+            },
+            {
+                id: 'b',
+                backgroundColor: '#0ff',
+                children: <Item backgroundColor={'#0ff'}>b (Static object)</Item>
+            },
+            {
+                id: 'c',
+                backgroundColor: '#ff0',
+                children: <Item backgroundColor={'#ff0'}>c (Fixed size)</Item>
+            },
+            {
+                id: 'd',
+                backgroundColor: '#f8f',
+                children: <Item backgroundColor={'#f8f'}>d</Item>
+            },
+        ],
+        layout: [
+            {
+                id: 'a',
+                width: 'onequarter',
+                height: 1,
+                col: 0,
+                row: 0,
+                draggable: true,
+                resizable: true
+            },
+            {
+                id: 'b',
+                width: 'onequarter',
+                height: 1,
+                col: 3,
+                row: 0,
+                static: true
+            },
+            {
+                id: 'c',
+                width: 'onequarter',
+                height: 1,
+                col: 6,
+                row: 0,
+                draggable: true,
+            },
+            {
+                id: 'd',
+                width: 'full',
+                height: 2,
+                col: 0,
+                row: 1,
+                resizable: true,
+                draggable: true,
+            },
+        ],
+        addItemId: 1,
+        addColor: '#ccc',
+        addDraggable: true,
+        addResizable: true,
+        addStatic: false,
+        addHeight: 2,
+        addWidth: 6,
+        addCol: 0,
+        addRow: 2
+    }
+
+    onAddItem = () => {
+        const {
+            addItemId: id,
+            addColor: backgroundColor,
+            addDraggable: draggable,
+            addResizable: resizable,
+            addStatic,
+            addWidth: width,
+            addHeight: height,
+            addCol: col,
+            addRow: row,
+            items,
+            layout
+        } = this.state
+
+        const content = JSON.stringify({draggable, resizable, static: addStatic}, undefined, 2).replace(/"([^(")"]+)":/g, '$1:')
+        const item = {
+            id: id.toString(),
+            backgroundColor,
+            children: <Item backgroundColor={backgroundColor}>{`${id} (${content})`}</Item>
+        }
+
+        const itemLayout = {
+            id: id.toString(),
+            width: Number(width),
+            height: Number(height),
+            draggable,
+            resizable,
+            static: addStatic,
+            col,
+            row: col + width > 12 ? row + 1 : row
+        } as GridItemPosition
+
+        const addCol = col + width
+        this.setState({
+            items: [...items, item],
+            layout: [...layout, itemLayout],
+            addItemId: this.state.addItemId + 1,
+            addCol: addCol >= 12 ? 0 : addCol,
+            addRow: addCol === 0 ? row + height : col + width > 12 ? row + 1 : row
+        })
+    }
+
+    handleChange = (key: keyof State) => (event: React.ChangeEvent<HTMLInputElement>, checked?: boolean) => {
+        let value: string | number | boolean | undefined
+        switch(key){
+        case 'addStatic':
+        case 'addResizable':
+        case 'addDraggable':
+            value = !!checked
+            break
+        case 'addWidth':
+        case 'addHeight':
+            value = Number(event.target.value)
+            break
+        default:
+            value = event.target.value
+            break
+        }
+        this.setState({[key]: value} as any)
+    }
+
     render(){
         return (
             <Demo>
                 <DemoTitle srcPath='GridLayout.tsx' demoPath='GridLayoutDemo.tsx'>GridLayout</DemoTitle>
-                <DemoHelp>A draggable and movable grid layout based on <Link href='https://github.com/STRML/react-grid-layout' target='_blank' rel='noreferrer'>react-grid-layout</Link></DemoHelp>
+                <DemoHelp>A draggable and movable grid layout based on <Link href='https://github.com/STRML/react-grid-layout' target='_blank'>react-grid-layout</Link></DemoHelp>
                 <DemoProps title='GridLayoutProps' >
                     <DemoProp name='margin' type='number' default='16' description='The margin between each item' />
-                    <DemoProp name='compactType' type='vertical | horizontal' default='vertical' description='' />
                     <DemoProp required name='onLayoutChange' type='(layout: GridItemPosition[]) => void' default='' description='' />
                     <DemoProp required name='items' type='GridItem[]' default='' description='' />
                     <DemoProp required name='layout' type='GridItemPosition[]' default='' description='' />
@@ -26,75 +190,27 @@ export default class GridLayoutDemo extends React.PureComponent{
                     <DemoProp required name='col' type='number' default='' description='Column in which the item is positioned' />
                     <DemoProp required name='row' type='number' default='' description='Row in which the item is positioned' />
                     <DemoProp required name='width' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
-                    <DemoProp required name='height' type='1 | 2 | 3 | 4 | 5 | 6' default='' description='Height in number of rows' />
+                    <DemoProp required name='height' type='number' default='' description='Height in number of rows' />
                     <DemoProp name='draggable' type='boolean' default='false' description='If true, the item can be repositioned by dragging' />
                     <DemoProp name='resizable' type='boolean' default='false' description='If true, the item can be resized' />
                     <DemoProp name='static' type='boolean' default='false' description='If true, the item is locked in place (draggable and resizable is overriden to false)' />
                     <DemoProp name='minWidth' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
-                    <DemoProp name='minHeight' type='1 | 2 | 3 | 4 | 5 | 6' default='' description='Height in number of rows' />
+                    <DemoProp name='minHeight' type='number' default='' description='Height in number of rows' />
                     <DemoProp name='maxWidth' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
-                    <DemoProp name='maxHeight' type='1 | 2 | 3 | 4 | 5 | 6' default='' description='Height in number of rows' />
+                    <DemoProp name='maxHeight' type='number' default='' description='Height in number of rows' />
                 </DemoProps>
                 <DemoContent>
                     <GridLayout
-                        items={[
-                            {
-                                id: 'a',
-                                backgroundColor: '#f0f',
-                                children: <div>a (I'm resizable)</div>
-                            },
-                            {
-                                id: 'b',
-                                backgroundColor: '#0ff',
-                                children: <div>b (I'm locked in place)</div>
-                            },
-                            {
-                                id: 'c',
-                                backgroundColor: '#ff0',
-                                children: <div>c</div>
-                            },
-                            {
-                                id: 'd',
-                                backgroundColor: '#f8f',
-                                children: <div>d</div>
-                            },
-                        ]}
-                        layout={[
-                            {
-                                id: 'a',
-                                width: 'onequarter',
-                                height: 1,
-                                col: 0,
-                                row: 0,
-                                draggable: true,
-                                resizable: true
-                            },
-                            {
-                                id: 'b',
-                                width: 'onequarter',
-                                height: 1,
-                                col: 3,
-                                row: 0,
-                                static: true
-                            },
-                            {
-                                id: 'c',
-                                width: 'onequarter',
-                                height: 1,
-                                col: 6,
-                                row: 0,
-                                draggable: true,
-                            },
-                            {
-                                id: 'd',
-                                width: 'full',
-                                height: 2,
-                                col: 0,
-                                row: 1,
-                                draggable: true,
-                            },
-                        ]}
+                        items={this.state.items}
+                        layout={this.state.layout}
                     />
+                    <FormControlLabel label='static' control={<Switch checked={this.state.addStatic} onChange={this.handleChange('addStatic')}/>}/>
+                    <FormControlLabel label='resizable' control={<Switch checked={this.state.addResizable} onChange={this.handleChange('addResizable')}/>}/>
+                    <FormControlLabel label='draggable' control={<Switch checked={this.state.addDraggable} onChange={this.handleChange('addDraggable')}/>}/>
+                    <TextField label='width' value={this.state.addWidth} onChange={this.handleChange('addWidth')} type='number' inputProps={{max: 12, min: 1}} />
+                    <TextField label='height' value={this.state.addHeight} onChange={this.handleChange('addHeight')} type='number' inputProps={{max: 6, min: 1}} />
+                    <TextField label='backgroundColor' value={this.state.addColor} onChange={this.handleChange('addColor')} />
+                    <Button onClick={this.onAddItem} color='primary' variant='contained'>Add item</Button>
                 </DemoContent>
             </Demo>
         )

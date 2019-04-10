@@ -80,8 +80,8 @@ export const DemoProps = (props: DemoPropsProps) => (
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant='h6'>{props.title || 'Props'}</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-            <Table>
+        <ExpansionPanelDetails style={{overflowX: 'auto'}}>
+            <Table >
                 <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>

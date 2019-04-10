@@ -39,7 +39,7 @@ const AvatarColor = styled(Avatar)`
     background-color: ${({theme, color}) => color || theme.mui.palette.primary.dark}
     color: ${({theme}) => theme.mui.palette.primary.contrastText}
   }
-`
+` as typeof Avatar
 
 const CustomDialogTitle = styled.div`
   display: flex;
@@ -104,9 +104,7 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
                 />
-                <MenuList
-                    ref={this._listRef}
-                >
+                <MenuList>
                     { this.props.options
                         .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue) > -1 || option.value.indexOf(this.state.filterValue) > -1)
                         .map((option, i) => (

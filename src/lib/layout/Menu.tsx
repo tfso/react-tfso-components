@@ -26,7 +26,7 @@ const StyledDrawer = styled(Drawer).attrs({
     .MuiPaperStyle{
       position: static;
     }
-`
+` as typeof Drawer
 
 export type MenuProps = {
     open: boolean
@@ -168,7 +168,7 @@ export type MenuItemProps = {
 
 const NestedListItem = styled(ListItem)`&&{
     padding-left: 52px;
-}`
+}` as typeof ListItem
 
 export class MenuItem extends React.PureComponent<MenuItemProps>{
     static propTypes = {
