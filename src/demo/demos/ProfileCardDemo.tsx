@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem'
 import SettingsIcon from '@material-ui/icons/Settings'
 import HelpIcon from '@material-ui/icons/Help'
 import List from '@material-ui/core/List'
+import ScreenSize from '../../lib/ScreenSize'
 
 type State = {
     // variant
@@ -123,39 +124,42 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                         View profile
                     </Button>
                     <ProfileCard identity={this.state.identity} signOutText="Sign out" open={open} onClose={this.onClose} onSignOut={this.onSignOut} anchorEl={anchorEl}>
-
-                        <List dense>
-                            <ListItem dense button onClick={this.onProfile}>
-                                <ListItemText inset primary="Profile"/>
-                            </ListItem>
-                            <ListItem button onClick={this.onRequests}>
-                                <ListItemText inset primary="Forespørsler"/>
-                            </ListItem>
-                            <ListItem button dense divider onClick={this.onSettings}>
-                                <Tooltip title='Profile settings'>
-                                    <ListItemIcon>
-                                        <SettingsIcon fontSize='small'/>
-                                    </ListItemIcon>
-                                </Tooltip>
-                                <ListItemText inset primary="Settings"/>
-                            </ListItem>
-                            <ListItem divider button dense >
-                                <Tooltip title='Switch client'>
-                                    <ListItemIcon onClick={this.onSwitch}>
-                                        <SwapHorizIcon />
-                                    </ListItemIcon>
-                                </Tooltip>
-                                <ListItemText onClick={this.onClient} inset primary={this.state.identity.client.name} secondary='Administrer'/>
-                            </ListItem>
-                            <ListItem button divider dense onClick={this.onHelp}>
-                                <Tooltip title='Help me'>
-                                    <ListItemIcon>
-                                        <HelpIcon fontSize='small'/>
-                                    </ListItemIcon>
-                                </Tooltip>
-                                <ListItemText primary="Help"/>
-                            </ListItem>
-                        </List>
+                        <ScreenSize>
+                            {({mobile}) => (
+                                <List dense={!mobile}>
+                                    <ListItem button onClick={this.onProfile}>
+                                        <ListItemText inset primary="Profile"/>
+                                    </ListItem>
+                                    <ListItem button onClick={this.onRequests}>
+                                        <ListItemText inset primary="Forespørsler"/>
+                                    </ListItem>
+                                    <ListItem button divider onClick={this.onSettings}>
+                                        <Tooltip title='Profile settings'>
+                                            <ListItemIcon>
+                                                <SettingsIcon fontSize='small'/>
+                                            </ListItemIcon>
+                                        </Tooltip>
+                                        <ListItemText inset primary="Settings"/>
+                                    </ListItem>
+                                    {mobile && <ListItem divider button>
+                                        <Tooltip title='Switch client'>
+                                            <ListItemIcon onClick={this.onSwitch}>
+                                                <SwapHorizIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+                                        <ListItemText onClick={this.onClient} inset primary={this.state.identity.client.name} secondary='Administrer'/>
+                                    </ListItem>}
+                                    <ListItem button divider onClick={this.onHelp}>
+                                        <Tooltip title='Help me'>
+                                            <ListItemIcon>
+                                                <HelpIcon fontSize='small'/>
+                                            </ListItemIcon>
+                                        </Tooltip>
+                                        <ListItemText primary="Help"/>
+                                    </ListItem>
+                                </List>
+                            )}
+                        </ScreenSize>
                     </ProfileCard>
                 </DemoContent>
             </Demo>

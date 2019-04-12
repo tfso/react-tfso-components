@@ -13,7 +13,7 @@ import Popover from '@material-ui/core/Popover'
 import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import ScreenSize from './ScreenSize'
+import ScreenSize, {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 
 export type ClientSwitcherDialogProps = {
     open: boolean
@@ -49,7 +49,7 @@ const CustomDialogTitle = styled.div`
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
-export default class ListPicker extends React.PureComponent<ClientSwitcherDialogProps, State>{
+export default withScreenSize(class ListPicker extends React.PureComponent<ClientSwitcherDialogProps & InjectedScreenSizeProps, State>{
     static propTypes = {
         open: PropTypes.bool.isRequired,
         onCancel: PropTypes.func.isRequired,
@@ -69,7 +69,7 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
     }
 
     componentDidUpdate(prevProps){
-        if(!prevProps.open && this.props.open){
+        if(!prevProps.open && this.props.open && !this.props.screenSize.mobile){
             setTimeout(() => {
                 this._inputRef.current && this._inputRef.current.focus()
             }, 1)
@@ -175,10 +175,7 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
             </Dialog>
         )
 
-        return (
-            <ScreenSize>
-                {({mobile}) => mobile ? mobileDialog : desktopDialog}
-            </ScreenSize>
-        )
+        const {mobile} = this.props.screenSize
+        return mobile ? mobileDialog : desktopDialog
     }
-}
+})

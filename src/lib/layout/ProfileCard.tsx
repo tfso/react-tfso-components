@@ -99,30 +99,30 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
         this.props.onSignOut()
     }
 
-    render(){
-        const renderContent = (
-            <CustomCard>
-                <ProfileCardContent>
-                    <ProfileAvatar src={this.props.identity.profile.thumb.data} aria-label="{this.props.identity.profile.firstName}"/>
-                    <RightPanel>
-                        <ProfileTypography variant='h6'>{this.props.identity.profile.firstName + ' ' + this.props.identity.profile.lastName}</ProfileTypography>
-                        <ProfileTypography variant='body2'>{this.props.identity.profile.identifier}</ProfileTypography>
-                    </RightPanel>
-                </ProfileCardContent>
-                <Divider />
-                <CustomCardContent>
-                    {this.props.children}
-                </CustomCardContent>
-                <CardActions>
-                    <Right>
-                        <Button variant="outlined" size="small" color="secondary" onClick={this.onSignOut}>
-                            {this.props.signOutText}
-                        </Button>
-                    </Right>
-                </CardActions>
-            </CustomCard>
-        )
+    renderContent = () => (
+        <CustomCard>
+            <ProfileCardContent>
+                <ProfileAvatar src={this.props.identity.profile.thumb.data} aria-label="{this.props.identity.profile.firstName}"/>
+                <RightPanel>
+                    <ProfileTypography variant='h6'>{this.props.identity.profile.firstName + ' ' + this.props.identity.profile.lastName}</ProfileTypography>
+                    <ProfileTypography variant='body2'>{this.props.identity.profile.identifier}</ProfileTypography>
+                </RightPanel>
+            </ProfileCardContent>
+            <Divider />
+            <CustomCardContent>
+                {this.props.children}
+            </CustomCardContent>
+            <CardActions>
+                <Right>
+                    <Button variant="outlined" size="small" color="secondary" onClick={this.onSignOut}>
+                        {this.props.signOutText}
+                    </Button>
+                </Right>
+            </CardActions>
+        </CustomCard>
+    )
 
+    render(){
         const desktopDialog = (
             <Popover
                 anchorEl={this.props.anchorEl}
@@ -137,7 +137,7 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
                 open={this.props.open}
                 onClose={this.onClose}
             >
-                {renderContent}
+                {this.renderContent()}
             </Popover>
         )
 
@@ -154,7 +154,7 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
                 <CustomCloseIconButton onClick={this.props.onClose} aria-label="Close">
                     <CloseIcon />
                 </CustomCloseIconButton>
-                {renderContent}
+                {this.renderContent()}
             </Dialog>
         )
 
