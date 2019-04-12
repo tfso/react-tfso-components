@@ -13,7 +13,7 @@ import Popover from '@material-ui/core/Popover'
 import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import ScreenSize, {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
+import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 
 export type ClientSwitcherDialogProps = {
     open: boolean
