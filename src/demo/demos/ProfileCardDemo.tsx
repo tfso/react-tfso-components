@@ -4,6 +4,14 @@ import {Demo, DemoTitle, DemoHelp, DemoContent, DemoProp, DemoProps} from '../co
 import ProfileCard from '../../lib/layout/ProfileCard'
 
 import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItem from '@material-ui/core/ListItem'
+import SettingsIcon from '@material-ui/icons/Settings'
+import HelpIcon from '@material-ui/icons/Help'
+import List from '@material-ui/core/List'
 
 type State = {
     // variant
@@ -58,10 +66,36 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
         })
     }
 
-    handleClose = () => {
+    onSignOut = () => {
+        console.log('sign out')
+    }
+
+    onSwitch = () => {
+        console.log('switch ')
+    }
+
+    onClient = () => {
+        console.log('client click')
+    }
+
+    onClose = () => {
         this.setState({
             anchorEl: null,
         })
+    }
+
+    onProfile = () => {
+        console.log('onProffil')
+    }
+    onSettings = () => {
+        console.log('on setting')
+    }
+    onRequests = () => {
+        console.log('on request')
+    }
+
+    onHelp = () => {
+        console.log('on help')
     }
 
     render(){
@@ -74,7 +108,10 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                 <DemoProps>
                     <DemoProp name='open' type='boolean' default='' description=''/>
                     <DemoProp name='onClose' type='function' default='' description=''/>
-                    <DemoProp name='anchorEl' type='HTMLElement' default='' description=''/>
+                    <DemoProp name='onSignOut' type='function' default='' description=''/>
+                    <DemoProp name='signOutText' type='string' description='Text for sign out button'/>
+                    <DemoProp name='anchorEl' type='HTMLElement' default='' description='Element to anchors the pop up'/>
+                    <DemoProp name='children' type='React.ReactNode' default='' description='ListItems to add to the menu below settings'/>
                 </DemoProps>
                 <DemoContent>
                     <Button
@@ -85,7 +122,41 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                     >
                         View profile
                     </Button>
-                    <ProfileCard identity={this.state.identity} closeButtonText="Close" open={open} onClose={this.handleClose} anchorEl={anchorEl}/>
+                    <ProfileCard identity={this.state.identity} signOutText="Sign out" open={open} onClose={this.onClose} onSignOut={this.onSignOut} anchorEl={anchorEl}>
+
+                        <List dense>
+                            <ListItem dense button onClick={this.onProfile}>
+                                <ListItemText inset primary="Profile"/>
+                            </ListItem>
+                            <ListItem button onClick={this.onRequests}>
+                                <ListItemText inset primary="Forespørsler"/>
+                            </ListItem>
+                            <ListItem button dense divider onClick={this.onSettings}>
+                                <Tooltip title='Profile settings'>
+                                    <ListItemIcon>
+                                        <SettingsIcon fontSize='small'/>
+                                    </ListItemIcon>
+                                </Tooltip>
+                                <ListItemText inset primary="Settings"/>
+                            </ListItem>
+                            <ListItem divider button dense >
+                                <Tooltip title='Switch client'>
+                                    <ListItemIcon onClick={this.onSwitch}>
+                                        <SwapHorizIcon />
+                                    </ListItemIcon>
+                                </Tooltip>
+                                <ListItemText onClick={this.onClient} inset primary={this.state.identity.client.name} secondary='Administrer'/>
+                            </ListItem>
+                            <ListItem button divider dense onClick={this.onHelp}>
+                                <Tooltip title='Help me'>
+                                    <ListItemIcon>
+                                        <HelpIcon fontSize='small'/>
+                                    </ListItemIcon>
+                                </Tooltip>
+                                <ListItemText primary="Help"/>
+                            </ListItem>
+                        </List>
+                    </ProfileCard>
                 </DemoContent>
             </Demo>
         )

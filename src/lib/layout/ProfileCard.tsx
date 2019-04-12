@@ -4,28 +4,25 @@ import styled from 'styled-components/macro'
 import Typography from '@material-ui/core/Typography'
 import Popover from '@material-ui/core/Popover'
 import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
-import PowerOffIcon from '@material-ui/icons/PowerSettingsNew'
+import Button from '@material-ui/core/Button'
 import CloseIcon from '@material-ui/icons/Close'
 import Dialog from '@material-ui/core/Dialog'
 import Slide from '@material-ui/core/Slide'
 import ScreenSize from '../ScreenSize'
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
-import Tooltip from '@material-ui/core/Tooltip'
 
 export type ProfileCardProps = {
     open: boolean
     onClose: () => void
-    children?: undefined
+    onSignOut: () => void
+
+    children?: React.ReactNode
     identity: Array<{}>
-    closeButtonText: string
+    signOutText: string
     anchorEl?: null | HTMLElement
 }
 
@@ -91,11 +88,15 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
         open: PropTypes.bool.isRequired,
         onClose: PropTypes.func.isRequired,
         // identity: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-        closeButtonText: PropTypes.string.isRequired
+        signOutText: PropTypes.string.isRequired
     }
 
     onClose = () => {
         this.props.onClose()
+    }
+
+    onSignOut = () => {
+        this.props.onSignOut()
     }
 
     render(){
@@ -110,26 +111,13 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
                 </ProfileCardContent>
                 <Divider />
                 <CustomCardContent>
-                    <List>
-                        <ListItem><ListItemText primary="Account"/></ListItem>
-                        <ListItem><ListItemText primary="Requests"/></ListItem>
-                        <Divider component='li' />
-                        <ListItem>
-                            <Tooltip title='Switch client'>
-                                <IconButton>
-                                    <SwapHorizIcon />
-                                </IconButton>
-                            </Tooltip>
-                            <ListItemText primary={this.props.identity.client.name} secondary='Administration' />
-                        </ListItem>
-                    </List>
+                    {this.props.children}
                 </CustomCardContent>
-                <Divider />
                 <CardActions>
                     <Right>
-                        <IconButton>
-                            <PowerOffIcon />
-                        </IconButton>
+                        <Button variant="outlined" size="small" color="secondary" onClick={this.onSignOut}>
+                            {this.props.signOutText}
+                        </Button>
                     </Right>
                 </CardActions>
             </CustomCard>

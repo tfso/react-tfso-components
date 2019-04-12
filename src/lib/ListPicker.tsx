@@ -104,7 +104,9 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
                 />
-                <MenuList>
+                <MenuList
+                    ref={this._listRef}
+                >
                     { this.props.options
                         .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue) > -1 || option.value.indexOf(this.state.filterValue) > -1)
                         .map((option, i) => (
@@ -163,7 +165,7 @@ export default class ListPicker extends React.PureComponent<ClientSwitcherDialog
                 maxWidth='sm'
             >
                 <CustomDialogTitle>
-                    <IconButton onClick={this.props.onCancel} aria-label="Close">
+                    <IconButton onClick={this.onClose} aria-label="Close">
                         <CloseIcon />
                     </IconButton>
                 </CustomDialogTitle>
