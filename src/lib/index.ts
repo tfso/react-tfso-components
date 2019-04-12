@@ -10,6 +10,7 @@ import SearchField from './SearchField'
 import TextFieldEditor from './TextFieldEditor'
 import Trending from './Trending'
 import Emoji from './Emoji'
+import ListPicker from './ListPicker'
 
 // Utility components
 
@@ -28,6 +29,7 @@ export {SearchField}
 export {TextFieldEditor}
 export {Trending}
 export {Emoji}
+export {ListPicker}
 
 export {Delay}
 export {Hoverable}

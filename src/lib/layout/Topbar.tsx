@@ -90,7 +90,7 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
                                 </MenuButton>
                                 }
                                 <ToolbarRight>
-                                    <div>{this.props.children}</div>
+                                    {this.props.children}
                                 </ToolbarRight>
                             </Toolbar>
                         </Right>

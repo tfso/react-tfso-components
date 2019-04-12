@@ -16,7 +16,7 @@ export type InjectedScreenSizeProps = {
 }
 
 export type ScreenSizeProps = {
-    children: (screenSize: ScreenSizeData) => React.ReactElement
+    children: (screenSize: ScreenSizeData) => any
 } & WithWidth
 
 const mobile = ['xs', 'sm']
