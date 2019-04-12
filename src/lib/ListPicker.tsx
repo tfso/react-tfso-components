@@ -20,7 +20,7 @@ export type ClientSwitcherDialogProps = {
     onCancel: () => void
     onSwitch: (value: string) => void
     children?: undefined
-    options: Array<{ value: string, label: string }>
+    options: {value: string, label: string}[]
     cancelButtonText: string
     searchLabel?: string
     anchorEl?: null | HTMLElement
@@ -49,6 +49,7 @@ const CustomDialogTitle = styled.div`
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
+// @ts-ignore
 export default withScreenSize(class ListPicker extends React.PureComponent<ClientSwitcherDialogProps & InjectedScreenSizeProps, State>{
     static propTypes = {
         open: PropTypes.bool.isRequired,
@@ -104,10 +105,10 @@ export default withScreenSize(class ListPicker extends React.PureComponent<Clien
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
                 />
-                <MenuList
-                    ref={this._listRef}
-                >
-                    { this.props.options
+                <
+                    // @ts-ignore
+                    MenuList ref={this._listRef}>
+                    {this.props.options
                         .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue) > -1 || option.value.indexOf(this.state.filterValue) > -1)
                         .map((option, i) => (
                             <MenuItem

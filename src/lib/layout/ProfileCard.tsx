@@ -21,7 +21,7 @@ export type ProfileCardProps = {
     onSignOut: () => void
 
     children?: React.ReactNode
-    identity: Array<{}>
+    identity: any
     signOutText: string
     anchorEl?: null | HTMLElement
 }
@@ -56,7 +56,6 @@ const ProfileTypography = styled(Typography)`
 
 const ProfileAvatar = styled(Avatar)`
     &&{
-     margin: 10px;
      width: 60px;
      height: 60px;
      margin: ${({theme}) => theme.mui.spacing.unit}px;  
