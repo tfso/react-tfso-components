@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 `
 const Left = styled.div`&&{
   flex: 0 0 240px;
-  background-color: ${({theme}) => theme.tfso.colors.tfso};
+  background-color: ${({theme}) => theme.tfso.colors.menu};
   color: #fff;
   padding-left: 10px;
   padding-right: 10px;
@@ -75,8 +75,8 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
                             )
                             : (
                                 <Left>
-                                    <TfsoIcon color="inherit" fontSize="large" />
-                                    <Typography variant="h6" color="inherit" style={{paddingLeft: 7}}>
+                                    <TfsoIcon color="primary" fontSize="large" />
+                                    <Typography component="h1" variant="h6" color="inherit" style={{paddingLeft: 7}}>
                                         {this.props.title}
                                     </Typography>
                                 </Left>

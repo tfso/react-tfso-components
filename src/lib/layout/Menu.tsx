@@ -25,6 +25,8 @@ const StyledDrawer = styled(Drawer).attrs({
     
     .MuiPaperStyle{
       position: static;
+      background-color: ${({theme})=> theme.tfso.colors.menu};
+      color: ${({theme})=> theme.tfso.colors.menuItemText};
     }
 ` as typeof Drawer
 
@@ -46,7 +48,7 @@ export default class Menu extends React.PureComponent<MenuProps>{
     render(){
         return (
             <StyledDrawer variant={this.props.mobile ? 'temporary' : 'persistent'} elevation={0} open={this.props.open} onClose={this.props.onClose}>
-                <List disablePadding>
+                <List color="inherit" disablePadding>
                     {this.props.children}
                 </List>
             </StyledDrawer>
@@ -64,6 +66,27 @@ export type MenuGroupProps = {
     expanded: boolean
     children: React.ReactNode
 }
+
+const MenuGroupListItem = styled(ListItem)`&&{
+    background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
+    border-bottom: 0.5px solid ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpandedDivider : 'inherit'};
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+}` as typeof ListItem
+
+const MenuGroupExpandLess = styled(ExpandLess)`&&{
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+}` as typeof ExpandLess
+
+const MenuGroupExpandMore = styled(ExpandMore)`&&{
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+}` as typeof ExpandMore
+
+const MenuGroupCollapse = styled(Collapse)`&&{
+    background-color: ${({theme}) => theme.tfso.colors.menuExpandedDivider};
+}` as typeof Collapse
 
 export class MenuGroup extends React.PureComponent<MenuGroupProps>{
     static propTypes = {
@@ -83,31 +106,29 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
 
     render(){
         const Icon = this.props.icon
-        const backgroundColor = this.props.expanded ? '#fafaf9' : 'inherit'
-
         return (
             <>
-                <ListItem divider={!this.props.expanded} style={{backgroundColor}} button onClick={this.onToggleExpanded}>
-                    <ListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color='secondary'/></ListItemIcon>
+                <MenuGroupListItem divider expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
+                    <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
                     <ListItemText
                         secondary={this.props.subtitle}
-                        primaryTypographyProps={{color: 'secondary'}}
-                        secondaryTypographyProps={{variant: 'caption'}}
+                        primaryTypographyProps={{color: 'inherit'}}
+                        secondaryTypographyProps={{variant: 'caption', color: 'inherit'}}
                     >
                         {this.props.label}
                     </ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton onClick={this.onToggleExpanded}>
-                            {this.props.expanded ? <ExpandLess /> : <ExpandMore />}
+                            {this.props.expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
                         </IconButton>
                     </ListItemSecondaryAction>
-                </ListItem>
-                <Collapse in={this.props.expanded} timeout="auto" style={{backgroundColor}}>
+                </MenuGroupListItem>
+                <MenuGroupCollapse in={this.props.expanded} timeout="auto">
                     <List dense disablePadding>
                         {this.props.children}
                     </List>
                     <Divider />
-                </Collapse>
+                </MenuGroupCollapse>
             </>
         )
     }
@@ -120,6 +141,17 @@ export type MenuRootItemProps = {
     selected: boolean
     href?: string | ((content: React.ReactChild) => React.ReactChild)
 }
+
+const RootListItem = styled(ListItem)`&&{
+    background-color: ${({theme}) => theme.tfso.colors.menu};
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+}` as typeof ListItem
+
+const RootListItemIcon = styled(ListItemIcon)`&&{
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+}` as typeof ListItemIcon
 
 export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
     static propTypes = {
@@ -134,16 +166,16 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         const Icon = this.props.icon
 
         const LinkContent = (
-            <ListItem divider>
-                <ListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'secondary'}/></ListItemIcon>
+            <RootListItem divider>
+                <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></RootListItemIcon>
                 <ListItemText
                     secondary={this.props.subtitle}
-                    primaryTypographyProps={{color: this.props.selected ? 'primary' : 'secondary'}}
-                    secondaryTypographyProps={{variant: 'caption'}}
+                    primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}
+                    secondaryTypographyProps={{variant: 'caption', color: 'inherit'}}
                 >
                     {this.props.label}
                 </ListItemText>
-            </ListItem>
+            </RootListItem>
         )
 
         return (
@@ -168,7 +200,14 @@ export type MenuItemProps = {
 
 const NestedListItem = styled(ListItem)`&&{
     padding-left: 52px;
+    background-color: ${({theme}) => theme.tfso.colors.menuExpanded};
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
 }` as typeof ListItem
+
+const NestedListItemIcon = styled(ListItemIcon)`&&{
+      color: ${({theme}) => theme.tfso.colors.menuItemText};
+}` as typeof ListItemIcon
 
 export class MenuItem extends React.PureComponent<MenuItemProps>{
     static propTypes = {
@@ -183,9 +222,9 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
         const LinkContent = (
             <NestedListItem>
                 {Icon &&
-                <ListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'secondary'}/></ListItemIcon>
+                <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
                 }
-                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'secondary'}}>{this.props.label}</ListItemText>
+                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}>{this.props.label} </ListItemText>
             </NestedListItem>
         )
 

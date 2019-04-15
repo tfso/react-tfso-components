@@ -80,7 +80,7 @@ const menuGroups = {
             },
             listpicker: {
                 label: 'ListPicker',
-                component: ListPickerDemo
+                component: ListPickerDemo,
             },
             searchfield: {
                 label: 'SearchField',

@@ -58,9 +58,10 @@ const colors = {
     listOverBackground: '#E6E6E6',
     border: '#C4C4C4',
     tabBar: colorScheme.white,
-    menu: '#637b94',
+    menu: '#637B94',
     menuExpanded: colorScheme.fiord,
-    menuItem: '#637b94',
+    menuExpandedDivider: colorScheme.texasRose,
+    menuItem: '#637B94',
     menuItemText: colorScheme.white,
     menuItemSelectedText: colorScheme.texasRose
 }
