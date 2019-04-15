@@ -101,7 +101,7 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
     renderContent = () => (
         <CustomCard>
             <ProfileCardContent>
-                <ProfileAvatar src={this.props.identity.profile.thumb.data} aria-label="{this.props.identity.profile.firstName}"/>
+                <ProfileAvatar src={this.props.identity.profile.thumb.data} aria-label={this.props.identity.profile.firstName} />
                 <RightPanel>
                     <ProfileTypography variant='h6'>{this.props.identity.profile.firstName + ' ' + this.props.identity.profile.lastName}</ProfileTypography>
                     <ProfileTypography variant='body2'>{this.props.identity.profile.identifier}</ProfileTypography>

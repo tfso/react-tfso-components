@@ -89,7 +89,7 @@ export default class ListPickerDemo extends React.PureComponent{
                         cancelButtonText='Cancel'
                         searchLabel='Search list'
                         onCancel={this.onCancel}
-                        onSwitch={this.onSwitch}
+                        onSelect={this.onSwitch}
                         options={this.state.options}
                         disabled='234234324'
                         selected={this.state.selected}

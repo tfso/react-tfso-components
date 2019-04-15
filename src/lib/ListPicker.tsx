@@ -15,10 +15,10 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 
-export type ClientSwitcherDialogProps = {
+export type ListPickerProps = {
     open: boolean
     onCancel: () => void
-    onSwitch: (value: string) => void
+    onSelect: (value: string) => void
     children?: undefined
     options: {value: string, label: string}[]
     cancelButtonText: string
@@ -34,12 +34,10 @@ type State = {
     focusValue: string
 }
 
-const AvatarColor = styled(Avatar)`
-  &&{
-    background-color: ${({theme, color}) => color || theme.mui.palette.primary.dark}
-    color: ${({theme}) => theme.mui.palette.primary.contrastText}
-  }
-` as typeof Avatar
+const AvatarColor = styled(Avatar)`&&{
+    background-color: ${({theme, color}) => color || theme.mui.palette.primary.dark};
+    color: ${({theme}) => theme.mui.palette.primary.contrastText};
+}` as typeof Avatar
 
 const CustomDialogTitle = styled.div`
   display: flex;
@@ -50,11 +48,11 @@ const CustomDialogTitle = styled.div`
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
 // @ts-ignore
-export default withScreenSize(class ListPicker extends React.PureComponent<ClientSwitcherDialogProps & InjectedScreenSizeProps, State>{
+export default withScreenSize(class ListPicker extends React.PureComponent<ListPickerProps & InjectedScreenSizeProps, State>{
     static propTypes = {
         open: PropTypes.bool.isRequired,
         onCancel: PropTypes.func.isRequired,
-        onSwitch: PropTypes.func.isRequired,
+        onSelect: PropTypes.func.isRequired,
         options: PropTypes.arrayOf(PropTypes.shape({value: PropTypes.string.isRequired, label: PropTypes.string.isRequired})).isRequired,
         cancelButtonText: PropTypes.string.isRequired,
         searchLabel: PropTypes.string,
@@ -87,8 +85,8 @@ export default withScreenSize(class ListPicker extends React.PureComponent<Clien
         this._listRef.current && this._listRef.current.focus()
     }
 
-    onSwitch = (value) => {
-        this.props.onSwitch(value)
+    onSelect = (value) => {
+        this.props.onSelect(value)
     }
 
     onClose = () => {
@@ -105,9 +103,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<Clien
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
                 />
-                <
-                    // @ts-ignore
-                    MenuList ref={this._listRef}>
+                <MenuList ref={this._listRef}>
                     {this.props.options
                         .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue) > -1 || option.value.indexOf(this.state.filterValue) > -1)
                         .map((option, i) => (
@@ -115,7 +111,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<Clien
                                 disabled={option.value == this.props.disabled}
                                 selected={option.value == this.props.selected}
                                 key={i}
-                                onClick={() => { this.onSwitch(option.value) }}
+                                onClick={() => { this.onSelect(option.value) }}
                             >
                                 <AvatarColor color={this.props.avatarColor}>
                                     <Typography variant='caption' color='inherit'>
