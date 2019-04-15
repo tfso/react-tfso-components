@@ -132,59 +132,6 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
     }
 }
 
-export type MenuModuleItemProps = {
-    // icon: React.ComponentType<SvgIconProps>
-    subtitle: string
-    label: string
-    selected: boolean
-    // href?: string | ((content: React.ReactChild) => React.ReactChild)
-}
-
-const MenuModuleRootListItem = styled(ListItem)`&&{
-    background-color: ${({theme}) => theme.tfso.colors.menuModule};
-    color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
-}` as typeof ListItem
-
-export class MenuModuleItem extends React.PureComponent<MenuModuleItemProps>{
-    static propTypes = {
-        // icon: PropTypes.elementType.isRequired,
-        subtitle: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        selected: PropTypes.bool.isRequired,
-        // href: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-    }
-
-    render(){
-        // const Icon = this.props.icon
-
-        const LinkContent = (
-            <MenuModuleRootListItem divider>
-                <Tooltip title={this.props.subtitle}>
-                    <ListItemText
-                        noWrap
-                        primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}
-                    >
-                        {this.props.label}
-                        <Typography noWrap={true} variant='caption' color='inherit'>{this.props.subtitle}</Typography>
-                    </ListItemText>
-                </Tooltip>
-            </MenuModuleRootListItem>
-        )
-
-        return (
-            <>
-                {typeof this.props.href === 'string'
-                    ? <Link href={this.props.href}>{LinkContent}</Link>
-                    : this.props.href
-                        ? this.props.href(LinkContent)
-                        : LinkContent
-                }
-            </>
-        )
-    }
-}
-
 export type MenuRootItemProps = {
     icon: React.ComponentType<SvgIconProps>
     subtitle: string

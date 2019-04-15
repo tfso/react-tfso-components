@@ -44,13 +44,8 @@ import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 
 const menuGroups = {
-    component: {
-        label: 'Tfso-Components',
-        subtitle: 'Example components created for 24SevenOffice. Use at your own free will',
-        module: Home
-    },
     home: {
-        label: 'Home',
+        label: 'Tfso-Components',
         subtitle: 'Where magic happens',
         icon: HomeIcon,
         component: Home
@@ -242,16 +237,6 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
             <layout.MenuContent>
                 {Object.keys(menuGroups).map(groupName => {
                     const group = menuGroups[groupName]
-                    if(group.module){
-                        return (
-                            <layout.MenuModuleItem
-                                key={group.label}
-                                label={group.label}
-                                selected={this.getSelected().group === groupName}
-                                subtitle={group.subtitle}
-                            />
-                        )
-                    }
                     if(group.component){
                         return (
                             <layout.MenuRootItem
