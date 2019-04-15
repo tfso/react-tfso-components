@@ -59,6 +59,7 @@ const colors = {
     border: '#C4C4C4',
     tabBar: colorScheme.white,
     menu: '#637B94',
+    menuModule: colorScheme.fiord,
     menuExpanded: colorScheme.fiord,
     menuExpandedDivider: colorScheme.texasRose,
     menuItem: '#637B94',

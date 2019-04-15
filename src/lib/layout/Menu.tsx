@@ -10,10 +10,12 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 import styled from 'styled-components/macro'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import ListItem from '@material-ui/core/ListItem'
+import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
@@ -67,11 +69,12 @@ export type MenuGroupProps = {
     children: React.ReactNode
 }
 
-const MenuGroupListItem = styled(ListItem)`&&{
-    background-color: ${({theme, divider}) => divider ? theme.tfso.colors.menu : theme.tfso.colors.menuExpanded};
+const ListItemWrapper = ({expanded, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props} />
+const MenuGroupListItem = styled(ListItemWrapper)`&&{
+    background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
+    // border-bottom: 0.5px solid ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpandedDivider : 'inherit'};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
-}` as typeof ListItem
+}` as typeof ListItemWrapper
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
@@ -82,10 +85,6 @@ const MenuGroupExpandMore = styled(ExpandMore)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
     
 }` as typeof ExpandMore
-
-const MenuGroupCollapse = styled(Collapse)`&&{
-    background-color: ${({theme}) => theme.tfso.colors.menuExpandedDivider};
-}` as typeof Collapse
 
 export class MenuGroup extends React.PureComponent<MenuGroupProps>{
     static propTypes = {
@@ -107,7 +106,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         const Icon = this.props.icon
         return (
             <>
-                <MenuGroupListItem divider={!this.props.expanded} button onClick={this.onToggleExpanded}>
+                <MenuGroupListItem divider expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
                     <ListItemText
                         secondary={this.props.subtitle}
@@ -122,12 +121,65 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                         </IconButton>
                     </ListItemSecondaryAction>
                 </MenuGroupListItem>
-                <MenuGroupCollapse in={this.props.expanded} timeout="auto">
+                <Collapse in={this.props.expanded} timeout="auto">
                     <List dense disablePadding>
                         {this.props.children}
                     </List>
                     <Divider />
-                </MenuGroupCollapse>
+                </Collapse>
+            </>
+        )
+    }
+}
+
+export type MenuModuleItemProps = {
+    // icon: React.ComponentType<SvgIconProps>
+    subtitle: string
+    label: string
+    selected: boolean
+    // href?: string | ((content: React.ReactChild) => React.ReactChild)
+}
+
+const MenuModuleRootListItem = styled(ListItem)`&&{
+    background-color: ${({theme}) => theme.tfso.colors.menuModule};
+    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+}` as typeof ListItem
+
+export class MenuModuleItem extends React.PureComponent<MenuModuleItemProps>{
+    static propTypes = {
+        // icon: PropTypes.elementType.isRequired,
+        subtitle: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        selected: PropTypes.bool.isRequired,
+        // href: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    }
+
+    render(){
+        // const Icon = this.props.icon
+
+        const LinkContent = (
+            <MenuModuleRootListItem divider>
+                <Tooltip title={this.props.subtitle}>
+                    <ListItemText
+                        noWrap
+                        primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}
+                    >
+                        {this.props.label}
+                        <Typography noWrap={true} variant='caption' color='inherit'>{this.props.subtitle}</Typography>
+                    </ListItemText>
+                </Tooltip>
+            </MenuModuleRootListItem>
+        )
+
+        return (
+            <>
+                {typeof this.props.href === 'string'
+                    ? <Link href={this.props.href}>{LinkContent}</Link>
+                    : this.props.href
+                        ? this.props.href(LinkContent)
+                        : LinkContent
+                }
             </>
         )
     }
@@ -166,7 +218,7 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
 
         const LinkContent = (
             <RootListItem divider>
-                <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></RootListItemIcon>
+                <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'inherit' : 'inherit'}/></RootListItemIcon>
                 <ListItemText
                     secondary={this.props.subtitle}
                     primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}

@@ -27,7 +27,7 @@ export default class Theme extends React.PureComponent{
                 </Typography>
                 <ThemeColors>
                     {Object.keys(styledTheme['tfso']['colors']).map(color => (
-                        <ThemeColor color={color}/>
+                        <ThemeColor key={color} color={color}/>
                     ))}
                 </ThemeColors>
             </>

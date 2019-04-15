@@ -70,7 +70,7 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
                         {this.props.mobile
                             ? (
                                 <LeftMobile>
-                                    <TfsoIcon color="inherit" fontSize="large" />
+                                    <TfsoIcon color="primary" fontSize="large" />
                                 </LeftMobile>
                             )
                             : (

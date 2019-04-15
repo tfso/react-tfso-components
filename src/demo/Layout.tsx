@@ -44,6 +44,11 @@ import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 
 const menuGroups = {
+    component: {
+        label: 'Tfso-Components',
+        subtitle: 'Example components created for 24SevenOffice. Use at your own free will',
+        module: Home
+    },
     home: {
         label: 'Home',
         subtitle: 'Where magic happens',
@@ -237,6 +242,16 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
             <layout.MenuContent>
                 {Object.keys(menuGroups).map(groupName => {
                     const group = menuGroups[groupName]
+                    if(group.module){
+                        return (
+                            <layout.MenuModuleItem
+                                key={group.label}
+                                label={group.label}
+                                selected={this.getSelected().group === groupName}
+                                subtitle={group.subtitle}
+                            />
+                        )
+                    }
                     if(group.component){
                         return (
                             <layout.MenuRootItem
@@ -320,7 +335,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
             <layout.Layout
                 menuContent={menuContent}
                 topMenuContent={topMenuContent}
-                title="Tfso Components"
+                title="24SevenOffice"
                 docTitle="Tfso Components"
             >
                 {content}
