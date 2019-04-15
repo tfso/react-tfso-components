@@ -68,8 +68,7 @@ export type MenuGroupProps = {
 }
 
 const MenuGroupListItem = styled(ListItem)`&&{
-    background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
-    border-bottom: 0.5px solid ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpandedDivider : 'inherit'};
+    background-color: ${({theme, divider}) => divider ? theme.tfso.colors.menu : theme.tfso.colors.menuExpanded};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
     
 }` as typeof ListItem
@@ -108,7 +107,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         const Icon = this.props.icon
         return (
             <>
-                <MenuGroupListItem divider expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
+                <MenuGroupListItem divider={!this.props.expanded} button onClick={this.onToggleExpanded}>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
                     <ListItemText
                         secondary={this.props.subtitle}
