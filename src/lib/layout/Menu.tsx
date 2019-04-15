@@ -25,8 +25,8 @@ const StyledDrawer = styled(Drawer).attrs({
     
     .MuiPaperStyle{
       position: static;
-      background-color: ${({theme})=> theme.tfso.colors.menu};
-      color: ${({theme})=> theme.tfso.colors.menuItemText};
+      background-color: ${({theme}) => theme.tfso.colors.menu};
+      color: ${({theme}) => theme.tfso.colors.menuItemText};
     }
 ` as typeof Drawer
 

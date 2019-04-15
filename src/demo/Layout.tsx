@@ -1,5 +1,4 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
 import {layout} from '../lib'
 import Home from './pages/Home'
 import Icons from './pages/Icons'
