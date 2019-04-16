@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import ListPicker from '../../lib/ListPicker'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import styled from 'styled-components'
-import {MenuItem} from '@material-ui/core'
+import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 

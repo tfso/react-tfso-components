@@ -14,8 +14,6 @@ import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
-import Tooltip from '@material-ui/core/Tooltip'
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
@@ -72,7 +70,6 @@ export type MenuGroupProps = {
 const ListItemWrapper = ({expanded, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props} />
 const MenuGroupListItem = styled(ListItemWrapper)`&&{
     background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
-    // border-bottom: 0.5px solid ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpandedDivider : 'inherit'};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
 }` as typeof ListItemWrapper
 
@@ -164,7 +161,7 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         const Icon = this.props.icon
 
         const LinkContent = (
-            <RootListItem divider>
+            <RootListItem divider button>
                 <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'inherit' : 'inherit'}/></RootListItemIcon>
                 <ListItemText
                     secondary={this.props.subtitle}
@@ -200,6 +197,9 @@ const NestedListItem = styled(ListItem)`&&{
     padding-left: 52px;
     background-color: ${({theme}) => theme.tfso.colors.menuExpanded};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
+    :hover{
+      background-color: ${({theme}) => theme.tfso.colors.menu}; 
+    }
     
 }` as typeof ListItem
 
@@ -218,11 +218,11 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
     render(){
         const Icon = this.props.icon
         const LinkContent = (
-            <NestedListItem>
+            <NestedListItem >
                 {Icon &&
                 <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
                 }
-                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}>{this.props.label} </ListItemText>
+                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}>{this.props.label}</ListItemText>
             </NestedListItem>
         )
 
