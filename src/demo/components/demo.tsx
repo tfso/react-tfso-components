@@ -42,7 +42,7 @@ export const DemoTitle = (props: DemoTitleProps) => {
                 </Typography>
             </Grid>
             {props.srcPath || props.demoPath
-                ? <Grid item xs={2} container spacing={16} justify='flex-end'>
+                ? <Grid item xs container spacing={16} justify='flex-end' wrap='nowrap'>
                     {props.demoPath && <Grid item><GitHubLink iconProps={{fontSize: 'default', color: 'secondary'}} path={`blob/master/src/demo/demos/${props.demoPath}`} tooltip={`View demo source for ${props.children}`} /></Grid>}
                     {props.srcPath && <Grid item><GitHubLink iconProps={{fontSize: 'default', color: 'primary'}} path={`blob/master/src/lib/${props.srcPath}`} tooltip={`View source for ${props.children}`}/></Grid> }
                 </Grid>

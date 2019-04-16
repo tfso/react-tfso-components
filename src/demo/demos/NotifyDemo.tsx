@@ -1,9 +1,10 @@
 import React from 'react'
 
 import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
-import Notifier, {NotificationItem, NotificationItemProps} from '../../lib/Notify'
+import Notifier, {NotificationItem, NotificationItemProps} from '../../lib/layout/Notify'
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
 
 import MailIcon from '@material-ui/icons/Email'
 import ChatIcon from '@material-ui/icons/Chat'
@@ -11,39 +12,56 @@ import KeyIcon from '@material-ui/icons/VpnKey'
 import SecurityIcon from '@material-ui/icons/Security'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 
-const generateNotifications = (newCount: number) => {
-    let key = 0
-    const makeItem = (children: React.ReactChild, avatar: React.ReactChild): NotificationItemProps => {
-        let date = new Date()
-        date.setHours(date.getHours() - key * 12 * Math.random())
-        const read = key >= newCount
-        return {
-            read,
-            id: `${read ? 'p' : 'n'}-${key++}`,
-            date,
-            children,
-            avatar,
-            onClick: () => {}
-        }
-    }
-    return [
-        makeItem(<Typography>New mail from <b>verk@stag.no</b></Typography>, <MailIcon />),
-        makeItem(<Typography><b>Fru Hansen</b> sendt you a message</Typography>, <ChatIcon />),
-        makeItem(<Typography>Access to <b>Sagene Verk &amp; Byll</b> was granted by <b>Oslolosen</b></Typography>, <KeyIcon />),
-        makeItem(<Typography><b>Kari</b> requested access to <b>Stagrapport</b></Typography>, <SecurityIcon />),
-        makeItem(<Typography>You where notified of something that happened</Typography>, <SupervisorAccountIcon />),
-        makeItem(<Typography>Sometime something happened</Typography>, <Avatar>Foo</Avatar>),
-        makeItem(<Typography>Something may or may not have happened</Typography>, <Avatar>Bar</Avatar>),
-    ]
-}
-
 type State = {
     notifications: NotificationItemProps[],
 }
 
 export default class NotifyDemo extends React.PureComponent<{}, State>{
-    state: State = {
-        notifications: generateNotifications(3)
+    constructor(props){
+        super(props)
+
+        this.state = {
+            notifications: this.generateNotifications()
+        }
+    }
+
+    generateNotifications = () => {
+        let key = 0
+        const readCount = 3 + Math.random() * 2
+        const makeItem = (children: React.ReactChild, avatar?: React.ReactElement): NotificationItemProps => {
+            let date = new Date()
+            date.setHours(date.getHours() - key * 12 * Math.random())
+            const read = key >= readCount
+            const seen = key >= 2
+            const id = `${read ? 'p' : 'n'}-${key++}`
+            return {
+                read,
+                seen: seen,
+                id,
+                date,
+                children,
+                avatar,
+                onClick: () => console.log('Clicked notification', id),
+                onToggleMarkRead: this.onRead(id),
+                toggleMarkReadTitle: 'Mark as read',
+                toggleMarkUnreadTitle: 'Mark as unread'
+            }
+        }
+        return [
+            // makeItem(<Typography>New mail from <b>verk@stag.no</b></Typography>, <MailIcon />),
+            makeItem(<Typography><b>Fru Hansen</b> sendt you a message</Typography>, <ChatIcon />),
+            makeItem(<Typography>Access to <b>Sagene Verk &amp; Byll</b> was granted by <b>Søstrene Hansonsen</b></Typography>, <KeyIcon />),
+            makeItem(<Typography>Something may or may not have happened</Typography>, <Avatar>42</Avatar>),
+            makeItem(<Typography>Acces was denied to <b>Loff på tverrstaget</b></Typography>, <SecurityIcon />),
+            makeItem(<Typography><b>Kari</b> requested access to <b>Stagrapport</b></Typography>, <SecurityIcon />),
+            makeItem(<Typography>Notification without avatar notifying <b>something</b></Typography>),
+            makeItem(<Typography>You where notified of something that happened</Typography>, <SupervisorAccountIcon />),
+            makeItem(<Typography>Sometime something happened</Typography>, <Avatar>Foo</Avatar>),
+            makeItem(<Typography>Access to <b>Hostekrampefabrikken</b> was granted by <b>Kols</b></Typography>, <KeyIcon />),
+            makeItem(<Typography>Something definitely have happened</Typography>, <Avatar>42</Avatar>),
+            makeItem(<Typography><b>Kjell Aronsen</b> requested access to <b>Tettstedet</b></Typography>, <SecurityIcon />),
+            makeItem(<Typography>The watchdog service <b>los på mongotraller</b> is out of order</Typography>),
+        ]
     }
 
     renderNotifications(){
@@ -52,10 +70,24 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
             .map(n => <NotificationItem key={n.id} {...n} />)
     }
 
-    setNotificationsRead = () => {
+    onSeen = () => {
+        this.setState(state => ({
+            notifications: state.notifications.map(n => ({...n, seen: true}))
+        }))
+    }
+
+    onRead = (id: string) => () => this.setState(state => ({
+        notifications: state.notifications.map(n => n.id === id ? {...n, read: !n.read} : n)
+    }))
+
+    onReadAll = () => {
         this.setState(state => ({
             notifications: state.notifications.map(n => ({...n, read: true}))
         }))
+    }
+
+    reset = () => {
+        this.setState({notifications: this.generateNotifications()})
     }
 
     render(){
@@ -68,11 +100,16 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                 </DemoProps>
                 <DemoContent>
                     <Notifier
-                        count={this.state.notifications.filter(n => !n.read).length}
-                        onRead={this.setNotificationsRead}
+                        readAllButtonText='Mark all as read'
+                        count={this.state.notifications.filter(n => !n.seen).length}
+                        onOpen={() => {}}
+                        onLoadMore={() => {}}
+                        onSeen={this.onSeen}
+                        onReadAll={this.onReadAll}
                     >
                         {this.renderNotifications()}
                     </Notifier>
+                    <Button onClick={this.reset}>Reset</Button>
                 </DemoContent>
             </Demo>
         )
