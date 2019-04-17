@@ -14,6 +14,8 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 
 type State = {
     notifications: NotificationItemProps[],
+    loading: boolean
+    loadingMore: boolean
 }
 
 export default class NotifyDemo extends React.PureComponent<{}, State>{
@@ -21,7 +23,9 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         super(props)
 
         this.state = {
-            notifications: this.generateNotifications()
+            notifications: this.generateNotifications(),
+            loading: false,
+            loadingMore: false
         }
     }
 
@@ -48,7 +52,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
             }
         }
         return [
-            // makeItem(<Typography>New mail from <b>verk@stag.no</b></Typography>, <MailIcon />),
+            makeItem(<Typography>New mail from <b>verk@stag.no</b></Typography>, <MailIcon />),
             makeItem(<Typography><b>Fru Hansen</b> sendt you a message</Typography>, <ChatIcon />),
             makeItem(<Typography>Access to <b>Sagene Verk &amp; Byll</b> was granted by <b>Søstrene Hansonsen</b></Typography>, <KeyIcon />),
             makeItem(<Typography>Something may or may not have happened</Typography>, <Avatar>42</Avatar>),
@@ -70,6 +74,11 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
             .map(n => <NotificationItem key={n.id} {...n} />)
     }
 
+    onOpen = () => {
+        this.setState({loading: true})
+        setTimeout(() => this.setState({loading: false}), 3000)
+    }
+
     onSeen = () => {
         this.setState(state => ({
             notifications: state.notifications.map(n => ({...n, seen: true}))
@@ -86,6 +95,15 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         }))
     }
 
+    onLoadMore = async (startIndex: number, stopIndex: number) => {
+        this.setState({loadingMore: true})
+        setTimeout(() => this.setState({loadingMore: false}), 3000)
+    }
+
+    isItemLoaded = (index: number) => {
+        return index < this.state.notifications.length
+    }
+
     reset = () => {
         this.setState({notifications: this.generateNotifications()})
     }
@@ -95,17 +113,23 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
             <Demo>
                 <DemoTitle demoPath='NotifyDemo.tsx' srcPath='Notify.tsx'>Notify</DemoTitle>
                 <DemoHelp>A Notification icon with a dropdown list of notifications</DemoHelp>
-                <DemoProps>
+                <DemoProps title='Notifier'>
+                    <DemoProp required name='' type='' default='' description=''/>
+                </DemoProps>
+                <DemoProps title='NotificationItem'>
                     <DemoProp required name='' type='' default='' description=''/>
                 </DemoProps>
                 <DemoContent>
                     <Notifier
                         readAllButtonText='Mark all as read'
                         count={this.state.notifications.filter(n => !n.seen).length}
-                        onOpen={() => {}}
-                        onLoadMore={() => {}}
+                        onOpen={this.onOpen}
+                        onLoadMore={this.onLoadMore}
                         onSeen={this.onSeen}
                         onReadAll={this.onReadAll}
+                        loading={this.state.loading}
+                        loadingMore={this.state.loadingMore}
+                        isItemLoaded={this.isItemLoaded}
                     >
                         {this.renderNotifications()}
                     </Notifier>

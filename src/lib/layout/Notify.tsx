@@ -8,9 +8,11 @@ import CloseIcon from '@material-ui/icons/Close'
 import MoreIcon from '@material-ui/icons/MoreVert'
 
 import Avatar from '@material-ui/core/Avatar'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import Popover from '@material-ui/core/Popover'
 import Badge from '@material-ui/core/Badge'
-import List from '@material-ui/core/List'
+// import List from '@material-ui/core/List'
 import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
 import ListItemAvatar, { ListItemAvatarProps } from '@material-ui/core/ListItemAvatar'
 import ListItemIcon, { ListItemIconProps } from '@material-ui/core/ListItemIcon'
@@ -28,8 +30,14 @@ import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import {SvgIconProps} from '@material-ui/core/SvgIcon'
+
+// import {VariableSizeList as List} from 'react-window'
+// import InfiniteLoader from 'react-window-infinite-loader'
 
 import ScreenSize from '../ScreenSize'
+import Delay from '../Delay'
+import InfiniteList from '../../demo/demos/InfiniteList'
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
@@ -41,9 +49,9 @@ const CloseIconButton = styled(IconButton)`&&{
 
 const ListItemWrapper = ({read, ...props}: ListItemProps & {read?: boolean}) => <ListItem {...props} />
 const ReadListItem = styled(ListItemWrapper)`&&{
-    background-color: ${({read, theme}) => read ? 'inherit' : theme.tfso.colors.grayLight};
+    background-color: ${({read, theme}) => read ? 'inherit' : theme.tfso.colors.notification};
     :hover {
-        background-color: ${({read, theme}) => read ? theme.mui.palette.action.hover : theme.tfso.colors.grayLighter};
+        background-color: ${({read, theme}) => read ? theme.mui.palette.action.hover : theme.tfso.colors.notificationHover};
     };
 }`
 
@@ -142,7 +150,7 @@ const NotificationItem = (props: NotificationItemProps) => {
             read={props.read}
         >
             {props.avatar && <ListItemIcon>{props.avatar}</ListItemIcon>}
-            <ListItemText secondary={secondaryText} inset>
+            <ListItemText secondary={secondaryText}>
                 {props.children}
             </ListItemText>
             <Menu
@@ -235,7 +243,9 @@ export type NotifierProps = {
     /**
      * Invoked if `more` is `true` and the user scrolled to the end of the list
      */
-    onLoadMore: Callback
+    onLoadMore: (startIndex: number, stopIndex: number) => Promise<void>
+
+    isItemLoaded: (index: number) => boolean
 
     /**
      * Invoked when the list is closed.
@@ -248,6 +258,11 @@ export type NotifierProps = {
      * Typically a `NotificationItem`, but anything goes.
      */
     children: React.ReactNode
+
+    /**
+     * Properties for the Notification Bell icon
+     */
+    IconProps?: SvgIconProps
 }
 
 type State = {
@@ -266,7 +281,8 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
         onReadAll: PropTypes.func.isRequired,
         onLoadMore: PropTypes.func.isRequired,
         onClose: PropTypes.func,
-        children: PropTypes.node.isRequired
+        children: PropTypes.node.isRequired,
+        IconProps: PropTypes.object,
     }
 
     _anchorEl: React.RefObject<HTMLButtonElement> = React.createRef()
@@ -290,8 +306,8 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
     renderNotifyer = () => (
         <IconButton buttonRef={this._anchorEl} onClick={this.onOpen} >
             {this.props.count > 0
-                ? <Badge color='error' badgeContent={this.props.count} max={9}><NotificationsActiveIcon /></Badge>
-                : <NotificationsNoneIcon />
+                ? <Badge color='error' badgeContent={this.props.count} max={9}><NotificationsActiveIcon {...this.props.IconProps} /></Badge>
+                : <NotificationsNoneIcon {...this.props.IconProps} />
             }
         </IconButton>
     )
@@ -311,8 +327,45 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
                 </Grid>
             </Toolbar>
             <Divider />
+            {this.renderLoading()}
         </>
     )
+
+    renderContent(mobile: boolean){
+        return (<InfiniteList dense disablePadding={!mobile}>{this.props.children}</InfiniteList>)
+        // class ItemRenderer extends React.PureComponent<any>{
+        //     render(){
+        //         const item = this.props.data[this.props.index]
+        //         return <div style={this.props.style}>{item}</div>
+        //     }
+        // }
+
+        // const itemCount = React.Children.count(this.props.children) +1
+        // console.log(itemCount)
+        // return (
+        //     <InfiniteLoader
+        //         threshold={3}
+        //         itemCount={itemCount} // arbitrary large number, actual is unknown
+        //         loadMoreItems={this.props.onLoadMore}
+        //         isItemLoaded={this.props.isItemLoaded}
+        //     >
+        //         {({onItemsRendered, ref}) => (
+        //             /* <List ref={ref} dense disablePadding={!mobile}>{this.props.children}</List> */
+        //             <List
+        //                 height={500}
+        //                 width='100%'
+        //                 itemCount={itemCount}
+        //                 ref={ref}
+        //                 onItemsRendered={onItemsRendered}
+        //                 itemSize={() => 80}
+        //                 itemData={this.props.children}
+        //             >
+        //                 {ItemRenderer}
+        //             </List>
+        //         )}
+        //     </InfiniteLoader>
+        // )
+    }
 
     renderDesktop(){
         return (
@@ -324,7 +377,8 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
                 transformOrigin={{vertical: 'top', horizontal: 'right'}}
             >
                 {this.renderToolbar(false)}
-                <List dense disablePadding>{this.props.children}</List>
+                {this.renderContent(false)}
+                {this.renderLoadingMore()}
             </Popover>
         )
     }
@@ -343,11 +397,28 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
                     <CloseIconButton onClick={this.onClose}><CloseIcon /></CloseIconButton>
                 </DialogTitle>
                 <DialogContent>
-                    <List disablePadding>{this.props.children}</List>
+                    {this.renderContent(true)}
+                    {this.renderLoadingMore()}
                 </DialogContent>
             </Dialog>
         )
     }
+
+    renderLoading = () => (
+        this.props.loading ? (
+            <Delay delayMs={200}>
+                <LinearProgress color='secondary' />
+            </Delay>
+        ) : null
+    )
+
+    renderLoadingMore = () => (
+        this.props.loadingMore ? (
+            <Delay delayMs={200}>
+                <CircularProgress color='secondary' />
+            </Delay>
+        ) : null
+    )
 
     render(){
         return (
