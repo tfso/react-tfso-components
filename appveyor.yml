@@ -30,5 +30,6 @@ before_build:
   - git config user.name tfso
 
 build: sh
+build_script:
   - npm run deploy
   - npm run publish
