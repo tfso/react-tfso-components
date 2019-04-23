@@ -22,7 +22,8 @@ install:
   - node --version
   - npm --version
   - npm ci
-  - npm version $version
+  - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
+  - version $APPVEYOR_BUILD_VERSION
   - npm run deploy
   - npm run publish
 
