@@ -22,9 +22,13 @@ install:
   - node --version
   - npm --version
   - npm ci
+
+before_build:
   - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
   - echo version $APPVEYOR_BUILD_VERSION
+  - git config user.email appveyor@24sevenoffice.com
+  - git config user.name tfso
+
+build: sh
   - npm run deploy
   - npm run publish
-
-build: off
