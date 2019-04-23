@@ -26,6 +26,6 @@ install:
 before_build:
   - npm version "{version}"
 
-deploy:
+build:
   - npm run deploy
   - npm run publish
