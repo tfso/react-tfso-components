@@ -171,6 +171,7 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
                 containerPadding={[0, 0]}
                 autoSize
                 measureBeforeMount
+                // width= // TODO: set this one such that width is fixed, should be someting large, but not too large... hmm. 
                 useCSSTransforms
                 preventCollision={false}
                 onLayoutChange={this.onLayoutChange}

@@ -2,6 +2,8 @@ import {createMuiTheme} from '@material-ui/core/styles'
 import 'styled-components'
 import './index.css'
 
+import blueGrey from '@material-ui/core/colors/blueGrey'
+
 const colorScheme = {
     fiord: '#445566',
     lynch: '#637b94',
@@ -63,7 +65,9 @@ const colors = {
     menuExpandedDivider: colorScheme.texasRose,
     menuItem: '#526578',
     menuItemText: colorScheme.white,
-    menuItemSelectedText: colorScheme.texasRose
+    menuItemSelectedText: colorScheme.texasRose,
+    notification: blueGrey['50'],
+    notificationHover: blueGrey['100'],
 }
 
 const palette = {

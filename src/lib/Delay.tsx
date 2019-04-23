@@ -1,9 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-type Props = {
-    beforeShow?: any
+export type DelayProps = {
+    beforeShow?: React.ReactNode
+    /**
+     * @default 1000
+     */
     delayMs?: number
+    /**
+     * @deprecated ??
+     */
     show?: boolean
     children: React.ReactNode
 }
@@ -12,24 +18,22 @@ type State = {
     show: boolean
 }
 
-export default class Delay extends React.PureComponent<Props, State>{
+export default class Delay extends React.PureComponent<DelayProps, State>{
     static propTypes = {
         beforeShow: PropTypes.node,
         delayMs: PropTypes.number,
         show: PropTypes.bool,
         children: PropTypes.node.isRequired
     }
+    static defaultProps = {
+        delayMs: 1000
+    }
 
     _timer: any = null
-
-    constructor(props){
-        super(props)
-        this.state = {
-            show: false
-        }
+    state = {
+        show: false
     }
     componentDidMount(){
-        this.setState({show: false})
         this._timer = setTimeout(() => {
             this.setState({show: true})
         }, this.props.delayMs || 1000)

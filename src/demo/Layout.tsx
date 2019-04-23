@@ -42,6 +42,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import SettingsIcon from '@material-ui/core/SvgIcon/SvgIcon'
 import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
+import NotifyDemo from './demos/NotifyDemo'
 
 const menuGroups = {
     home: {
@@ -142,6 +143,10 @@ const menuGroups = {
             profilecard: {
                 label: 'ProfileCard',
                 component: ProfileCardDemo
+            },
+            notify: {
+                label: 'Notify',
+                component: NotifyDemo
             }
         }
     },
@@ -354,7 +359,7 @@ class ClientSwitcher extends React.PureComponent<any>{
                     cancelButtonText='Cancel'
                     searchLabel='Search list'
                     onCancel={this.onClose}
-                    onSwitch={this.onClose}
+                    onSelect={this.onClose}
                     options={options}
                     avatarColor={'default'}
                 />

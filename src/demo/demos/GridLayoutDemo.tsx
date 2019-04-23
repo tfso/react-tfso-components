@@ -52,7 +52,10 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
             {
                 id: 'c',
                 backgroundColor: '#ff0',
-                children: <Item backgroundColor={'#ff0'}>c (Fixed size)</Item>
+                children: <Item backgroundColor={'#ff0'}>
+                    c (Fixed size)
+                    <Button onMouseDown={(e) => e.stopPropagation()} onClick={(e) => console.log('buttonclick')}>Button</Button>
+                </Item>
             },
             {
                 id: 'd',
@@ -199,6 +202,10 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                     <DemoProp name='maxWidth' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
                     <DemoProp name='maxHeight' type='number' default='' description='Height in number of rows' />
                 </DemoProps>
+                <DemoHelp>
+                    To prevent dragging when clicking and holding buttons within gridItems, you must stop the event propagation of the onMouseDown event on the button.<br />
+                    <code>{`onMouseDown={(e) => e.stopPropagation()}`}</code>
+                </DemoHelp>
                 <DemoContent>
                     <GridLayout
                         items={this.state.items}
