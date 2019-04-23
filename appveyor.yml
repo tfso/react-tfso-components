@@ -26,8 +26,8 @@ install:
 before_build:
   - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
   - echo version $APPVEYOR_BUILD_VERSION
-  - git config user.email appveyor@24sevenoffice.com
-  - git config user.name tfso
+  - git config --global user.email appveyor@24sevenoffice.com
+  - git config --global user.name tfso
 
 build: sh
 build_script:
