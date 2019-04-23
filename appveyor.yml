@@ -13,7 +13,7 @@ branches:
 skip_commits: 
   message: /#[Nn][Oo][Bb][Uu][Ii][Ll][Dd]/
 
-version: 1.0.{build}
+version: 1.1.{build}
 
 cache: 
   - node_modules
