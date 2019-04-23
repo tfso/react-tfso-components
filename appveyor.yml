@@ -22,7 +22,7 @@ install:
   - node --version
   - npm --version
   - npm ci
-  - npm version "{version}"
+  - npm version $version
   - npm run deploy
   - npm run publish
 
