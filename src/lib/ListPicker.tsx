@@ -103,7 +103,9 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
                 />
-                <MenuList ref={this._listRef}>
+                <
+                    // @ts-ignore
+                    MenuList ref={this._listRef}>
                     {this.props.options
                         .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue) > -1 || option.value.indexOf(this.state.filterValue) > -1)
                         .map((option, i) => (
