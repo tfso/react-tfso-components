@@ -1,0 +1,31 @@
+image: Ubuntu1804
+
+stack: node 10
+
+skip_tags: true
+
+branches: 
+  only: 
+    - master
+  except: 
+    - gh-pages
+
+skip_commits: 
+  message: /#[Nn][Oo][Bb][Uu][Ii][Ll][Dd]/
+
+version: 1.0.{build}
+
+cache: 
+  - node_modules
+
+install:
+  - node --version
+  - npm --version
+  - npm ci
+
+before_build:
+  - npm version "{version}"
+
+deploy:
+  - npm run deploy
+  - npm run publish
