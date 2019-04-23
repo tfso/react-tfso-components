@@ -7,15 +7,13 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
 import CloseIcon from '@material-ui/icons/Close'
 import MoreIcon from '@material-ui/icons/MoreVert'
 
-import Avatar from '@material-ui/core/Avatar'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Popover from '@material-ui/core/Popover'
 import Badge from '@material-ui/core/Badge'
-// import List from '@material-ui/core/List'
+import List from '@material-ui/core/List'
 import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
-import ListItemAvatar, { ListItemAvatarProps } from '@material-ui/core/ListItemAvatar'
-import ListItemIcon, { ListItemIconProps } from '@material-ui/core/ListItemIcon'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import IconButton from '@material-ui/core/IconButton'
@@ -32,12 +30,9 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 
-// import {VariableSizeList as List} from 'react-window'
-// import InfiniteLoader from 'react-window-infinite-loader'
-
 import ScreenSize from '../ScreenSize'
 import Delay from '../Delay'
-import InfiniteList from '../../demo/demos/InfiniteList'
+import InfiniteScroll from '../InfiniteScroll'
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
@@ -332,39 +327,13 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
     )
 
     renderContent(mobile: boolean){
-        return (<InfiniteList dense disablePadding={!mobile}>{this.props.children}</InfiniteList>)
-        // class ItemRenderer extends React.PureComponent<any>{
-        //     render(){
-        //         const item = this.props.data[this.props.index]
-        //         return <div style={this.props.style}>{item}</div>
-        //     }
-        // }
-
-        // const itemCount = React.Children.count(this.props.children) +1
-        // console.log(itemCount)
-        // return (
-        //     <InfiniteLoader
-        //         threshold={3}
-        //         itemCount={itemCount} // arbitrary large number, actual is unknown
-        //         loadMoreItems={this.props.onLoadMore}
-        //         isItemLoaded={this.props.isItemLoaded}
-        //     >
-        //         {({onItemsRendered, ref}) => (
-        //             /* <List ref={ref} dense disablePadding={!mobile}>{this.props.children}</List> */
-        //             <List
-        //                 height={500}
-        //                 width='100%'
-        //                 itemCount={itemCount}
-        //                 ref={ref}
-        //                 onItemsRendered={onItemsRendered}
-        //                 itemSize={() => 80}
-        //                 itemData={this.props.children}
-        //             >
-        //                 {ItemRenderer}
-        //             </List>
-        //         )}
-        //     </InfiniteLoader>
-        // )
+        return (
+            <InfiniteScroll height={mobile ? undefined : 500} threshold={0.2}>
+                <List dense disablePadding={!mobile}>
+                    {this.props.children}
+                </List>
+            </InfiniteScroll>
+        )
     }
 
     renderDesktop(){
