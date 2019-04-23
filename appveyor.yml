@@ -22,10 +22,8 @@ install:
   - node --version
   - npm --version
   - npm ci
-
-before_build:
   - npm version "{version}"
-
-build:
   - npm run deploy
   - npm run publish
+
+build: off
