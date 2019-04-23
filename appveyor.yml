@@ -27,7 +27,7 @@ before_build:
   - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
   - echo version $APPVEYOR_BUILD_VERSION
   - git config --global credential.helper store
-  - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | sudo tee "${USERPROFILE}/.git-credentials" >> /dev/null
+  - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | sudo tee "~/.git-credentials" >> /dev/null
   - git config --global user.email appveyor@24sevenoffice.com
   - git config --global user.name tfso
 
