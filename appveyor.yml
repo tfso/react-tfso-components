@@ -1,8 +1,9 @@
 image: Visual Studio 2017
 
-stack: node 10
+version: 1.1.{build}
 
-skip_tags: true
+environment:
+  nodejs_version: "10"
 
 branches: 
   only: 
@@ -10,22 +11,23 @@ branches:
   except: 
     - gh-pages
 
+skip_tags: true
+
 skip_commits: 
   message: /#[Nn][Oo][Bb][Uu][Ii][Ll][Dd]/
-
-version: 1.1.{build}
 
 cache: 
   - node_modules
 
 init:
-  - node --version
-  - npm --version
   - git config --global credential.helper store --file=".git-credentials"
   - git config --global user.email appveyor@24sevenoffice.com
   - git config --global user.name tfso
 
 install:
+  - ps: Install-Product node $env:nodejs_version
+  - node --version
+  - npm --version
   - npm ci
   # - touch ".git-credentials"
   - ps: Add-Content ".git-credentials" "https://${GITHUB_API_KEY}:x-oauth-basic@github.com`n"
