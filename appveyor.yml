@@ -34,8 +34,8 @@ install:
   # - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | tee ".git-credentials" >> /dev/null
 
 before_build:
-  - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
   - echo version $APPVEYOR_BUILD_VERSION
+  - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
 
 build: sh
 build_script:
