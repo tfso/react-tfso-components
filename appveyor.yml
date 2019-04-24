@@ -40,6 +40,6 @@ before_build:
 build: sh
 build_script:
   - npm run build
-  - publish-to-git --force --remote https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
+  - node_modules\.bin\publish-to-git --force --remote https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
   - npm run build:demo
-  - gh-pages -d build -r https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
+  - node_modules\.bin\gh-pages -d build -r https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
