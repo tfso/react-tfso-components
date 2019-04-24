@@ -43,6 +43,7 @@ import SettingsIcon from '@material-ui/core/SvgIcon/SvgIcon'
 import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
+import InfiniteScrollDemo from './demos/InfiniteScrollDemo'
 
 const menuGroups = {
     home: {
@@ -114,6 +115,10 @@ const menuGroups = {
             hoverable: {
                 label: 'Hoverable',
                 component: HoverableDemo
+            },
+            infinitescroll: {
+                label: 'InfiniteScroll',
+                component: InfiniteScrollDemo
             },
             wizard: {
                 label: 'Wizard',

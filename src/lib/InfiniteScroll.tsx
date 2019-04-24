@@ -18,13 +18,15 @@ const throttle = (fn: (...args: any[]) => void) => {
 export type InfiniteScrollProps = {
     /**
      * Invoked when the bottom of the scrollcontainer is reached
+     * Must be async, to prevent choppy scrolling
      */
-    onReachEnd?: () => void
+    onReachEnd?: () => Promise<void>
 
     /**
      * Invoked when the treshold distance to the bottom of the scrollcontainer is reached
+     * Must be async, to prevent choppy scrolling
      */
-    onReachTreshold?: () => void
+    onReachThreshold?: () => Promise<void>
 
     /**
      * A number >= 0 and < 1
@@ -78,22 +80,32 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
     // Also, keeping this 'state' as regular ol class members, since we don't actually want a re-render after mutating these
     _reachedTreshold = true
     _lastScrollTop = 0
+    _mounted = false
 
     _ref: React.RefObject<HTMLDivElement> = React.createRef()
 
+    componentDidMount(){
+        const node = this._ref.current
+        if(!node){ return }
+        node.scrollTo({top: 0}) // Dunno why, but for some reason the node is scrolled to bottom when mounting
+
+        this._mounted = true
+    }
+
     onScroll = throttle(() => {
+        if(!this._mounted){ return }
+
         const node = this._ref.current
         if(!node){ return }
 
         const {clientHeight, scrollTop, scrollHeight} = node
         if(clientHeight >= scrollHeight){ return }
 
-        const {threshold = 0.1, onReachEnd, onReachTreshold} = this.props
-        const thresholdPoint = scrollHeight - clientHeight * threshold
+        const {threshold = 0.1, onReachEnd, onReachThreshold} = this.props
+        const thresholdPoint = scrollHeight - clientHeight - clientHeight * threshold
         const thresholdReachable = clientHeight < thresholdPoint
-        const end = clientHeight + scrollTop
-        const reachedTreshold = end >= thresholdPoint
-        const reachedEnd = end === scrollHeight
+        const reachedTreshold = scrollTop >= thresholdPoint
+        const reachedEnd = scrollTop + clientHeight === scrollHeight
 
         if(scrollTop <= this._lastScrollTop){
             // Scrolling up
@@ -106,8 +118,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
         // Reaching the treshold can occur multiple times, handle differently
         if(reachedTreshold){
             if(!this._reachedTreshold || !thresholdReachable && reachedEnd){
-                onReachTreshold && onReachTreshold()
-                console.log('onReachThreshold')
+                onReachThreshold && onReachThreshold()
             }
             this._reachedTreshold = true
         }else if(this._reachedTreshold){
@@ -117,7 +128,6 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
         // Reaching the end can only occur once
         if(reachedEnd){
             onReachEnd && onReachEnd()
-            console.log('onReachEnd')
         }
     })
 

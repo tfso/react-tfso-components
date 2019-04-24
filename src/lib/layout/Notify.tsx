@@ -50,6 +50,12 @@ const ReadListItem = styled(ListItemWrapper)`&&{
     };
 }`
 
+const MobileToolbarWrapper = styled.div`&&{
+    margin: 0;
+    padding: 24px 24px 0 24px;
+    flex: 0 0 auto;
+}`
+
 const getNotificateSecondaryText = (date: Date) => {
     const hours = Math.floor(Math.abs(date.getTime() - Date.now()) / 3600000)
     return hours >= 24
@@ -197,22 +203,17 @@ export type NotifierProps = {
     count: number
 
     /**
-     * Display a loading indicator for the entire list of notifications
+     * Display a loading indicator
      */
     loading?: boolean
 
-    /**
-     * Display a loading indicator at the bottom of the list of notifications, indicating loading of additional notifications
-     */
-    loadingMore?: boolean
+    // /**
+    //  * Set to `true` if there are more notifications that could be fetched.
+    //  */
+    // more?: boolean
 
     /**
-     * Set to `true` if there are more notifications that could be fetched.
-     */
-    more?: boolean
-
-    /**
-     * Provided your translated value of e.g `Mark all as read`
+     * Provide your translated value of e.g `Mark all as read`
      */
     readAllButtonText: string
 
@@ -236,11 +237,9 @@ export type NotifierProps = {
     onReadAll: Callback
 
     /**
-     * Invoked if `more` is `true` and the user scrolled to the end of the list
+     * Invoked when the user scrolled to the end of the list
      */
-    onLoadMore: (startIndex: number, stopIndex: number) => Promise<void>
-
-    isItemLoaded: (index: number) => boolean
+    onLoadMore: () => Promise<void>
 
     /**
      * Invoked when the list is closed.
@@ -268,8 +267,7 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
     static propTypes = {
         count: PropTypes.number.isRequired,
         loading: PropTypes.bool,
-        loadingMore: PropTypes.bool,
-        more: PropTypes.bool,
+        // more: PropTypes.bool,
         readAllButtonText: PropTypes.string.isRequired,
         onOpen: PropTypes.func.isRequired,
         onSeen: PropTypes.func.isRequired,
@@ -309,7 +307,7 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
 
     renderToolbar = (mobile: boolean) => (
         <>
-            <Toolbar variant={'dense'} style={{marginRight: mobile ? 32 : 0}}>
+            <Toolbar variant='dense' disableGutters={mobile} style={{marginRight: mobile ? 32 : 0}}>
                 <Grid container justify='space-between' alignItems='baseline' spacing={8} wrap='nowrap'>
                     <Grid item xs>
                         <Typography variant={mobile ? 'subtitle1' : 'subtitle2'} >Notifications</Typography>
@@ -321,15 +319,15 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
                     </Grid>
                 </Grid>
             </Toolbar>
-            <Divider />
             {this.renderLoading()}
+            <Divider />
         </>
     )
 
     renderContent(mobile: boolean){
         return (
-            <InfiniteScroll height={mobile ? undefined : 500} threshold={0.2}>
-                <List dense disablePadding={!mobile}>
+            <InfiniteScroll height={mobile ? undefined : 500} threshold={0.2} onReachThreshold={this.props.onLoadMore}>
+                <List dense disablePadding>
                     {this.props.children}
                 </List>
             </InfiniteScroll>
@@ -347,7 +345,6 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
             >
                 {this.renderToolbar(false)}
                 {this.renderContent(false)}
-                {this.renderLoadingMore()}
             </Popover>
         )
     }
@@ -359,35 +356,28 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
                 open={this.state.open}
                 onClose={this.onClose}
                 fullScreen
-                scroll={'paper'}
             >
-                <DialogTitle disableTypography>
+                <MobileToolbarWrapper>
                     {this.renderToolbar(true)}
                     <CloseIconButton onClick={this.onClose}><CloseIcon /></CloseIconButton>
-                </DialogTitle>
+                </MobileToolbarWrapper>
                 <DialogContent>
                     {this.renderContent(true)}
-                    {this.renderLoadingMore()}
                 </DialogContent>
             </Dialog>
         )
     }
 
-    renderLoading = () => (
-        this.props.loading ? (
-            <Delay delayMs={200}>
-                <LinearProgress color='secondary' />
-            </Delay>
-        ) : null
-    )
-
-    renderLoadingMore = () => (
-        this.props.loadingMore ? (
-            <Delay delayMs={200}>
-                <CircularProgress color='secondary' />
-            </Delay>
-        ) : null
-    )
+    renderLoading = () => {
+        const Spacer = <div style={{height: 4}} />
+        return (
+            this.props.loading ? (
+                <Delay delayMs={200} beforeShow={Spacer}>
+                    <LinearProgress color='secondary' />
+                </Delay>
+            ) : Spacer
+        )
+    }
 
     render(){
         return (

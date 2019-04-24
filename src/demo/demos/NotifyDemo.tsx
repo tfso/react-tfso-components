@@ -15,7 +15,6 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 type State = {
     notifications: NotificationItemProps[],
     loading: boolean
-    loadingMore: boolean
 }
 
 export default class NotifyDemo extends React.PureComponent<{}, State>{
@@ -25,7 +24,6 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         this.state = {
             notifications: this.generateNotifications(),
             loading: false,
-            loadingMore: false
         }
     }
 
@@ -95,13 +93,9 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         }))
     }
 
-    onLoadMore = async (startIndex: number, stopIndex: number) => {
-        this.setState({loadingMore: true})
-        setTimeout(() => this.setState({loadingMore: false}), 3000)
-    }
-
-    isItemLoaded = (index: number) => {
-        return index < this.state.notifications.length
+    onLoadMore = async () => {
+        this.setState({loading: true})
+        setTimeout(() => this.setState({loading: false}), 3000)
     }
 
     reset = () => {
@@ -114,10 +108,29 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                 <DemoTitle demoPath='NotifyDemo.tsx' srcPath='Notify.tsx'>Notify</DemoTitle>
                 <DemoHelp>A Notification icon with a dropdown list of notifications</DemoHelp>
                 <DemoProps title='Notifier'>
-                    <DemoProp required name='' type='' default='' description=''/>
+                    <DemoProp required name='count' type='number' default='' description='Number of unseen notifications'/>
+                    <DemoProp name='loading' type='boolean' default='false' description='Display a loading indicator'/>
+                    <DemoProp required name='readAllButtonText' type='' default='' description='Your translated value of e.g `Mark all as read`'/>
+                    <DemoProp required name='onOpen' type='() => void' default='' description='Callback invoked when the list of notifications is opened, refresh/fetch notifications here'/>
+                    <DemoProp required name='onSeen' type='() => void' default='' description='Callback invoked after onOpen if the list is still open. Mark all notifications as seen here'/>
+                    <DemoProp required name='onReadAll' type='() => void' default='' description='Callback invoked when the user marks all notifications as read'/>
+                    <DemoProp required name='onLoadMore' type='() => Promise<void>' default='' description='Callback invoked when the user scrolled to near the end of the list'/>
+                    <DemoProp name='onClose' type='() => void' default='' description='Callback invoked when the list is closed'/>
+                    <DemoProp name='IconProps' type='SvgIconProps' default='' description='Spread to the Notification Bell icon'/>
+                    <DemoProp required name='children' type='React.ReactNode' default='' description='Render your NotificationItems here. The children will be wrappen in a <List>'/>
                 </DemoProps>
                 <DemoProps title='NotificationItem'>
-                    <DemoProp required name='' type='' default='' description=''/>
+                    <DemoProp required name='id' type='string' description='Unique identifier of the Notification'/>
+                    <DemoProp required name='date' type='Date' description='Date when the notification was created'/>
+                    <DemoProp name='seen' type='boolean' default='false' description='Whether the notification has been displayed to the user'/>
+                    <DemoProp name='read' type='boolean' default='false' description='Whether the notification has been read by the user'/>
+                    <DemoProp required name='onClick' type='() => void' description='Callback invoked when the user clicks the notification'/>
+                    <DemoProp required name='onToggleMarkRead' type='() => void' description='Callback invoked when the user marks the notification as read'/>
+                    <DemoProp required name='toggleMarkReadTitle' type='string' description='Text on the ToggleMarkRead button when the notification is not read'/>
+                    <DemoProp required name='toggleMarkUnreadTitle' type='string' description='Text on the ToggleMarkRead button when the notification is read'/>
+                    <DemoProp name='avatar' type='React.ReactElement' description='Should be either an <Avatar>, <SvgIcon> or undefined'/>
+                    <DemoProp name='actions' type='{action: () => void, title: string}[]' description='Custom actions displayed in a menu when clicking the three vertical dots on the Notification'/>
+                    <DemoProp required name='children' type='React.ReactChild' description='String or HTML formatted text'/>
                 </DemoProps>
                 <DemoContent>
                     <Notifier
@@ -128,8 +141,6 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                         onSeen={this.onSeen}
                         onReadAll={this.onReadAll}
                         loading={this.state.loading}
-                        loadingMore={this.state.loadingMore}
-                        isItemLoaded={this.isItemLoaded}
                     >
                         {this.renderNotifications()}
                     </Notifier>

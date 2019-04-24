@@ -20,7 +20,6 @@ cache:
   - node_modules
 
 init:
-  # - git config --global credential.helper store
   - git config --global user.email appveyor@24sevenoffice.com
   - git config --global user.name tfsobob
 
@@ -29,7 +28,6 @@ install:
   - node --version
   - npm --version
   - npm ci
-  # - ps: Add-Content "$HOME\.git-credentials" "https://$($GITHUB_API_KEY):x-oauth-basic@github.com`n"
 
 before_build:
   - echo version %APPVEYOR_BUILD_VERSION%
