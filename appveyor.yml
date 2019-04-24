@@ -21,15 +21,15 @@ cache:
 init:
   - node --version
   - npm --version
-  # - touch ".git-credentials"
   - git config --global credential.helper store --file=".git-credentials"
-  - ps: Add-Content ".git-credentials" "https://${GITHUB_API_KEY}:x-oauth-basic@github.com`n"
-  # - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | tee ".git-credentials" >> /dev/null
   - git config --global user.email appveyor@24sevenoffice.com
   - git config --global user.name tfso
 
 install:
   - npm ci
+  # - touch ".git-credentials"
+  - ps: Add-Content ".git-credentials" "https://${GITHUB_API_KEY}:x-oauth-basic@github.com`n"
+  # - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | tee ".git-credentials" >> /dev/null
 
 before_build:
   - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
