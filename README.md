@@ -10,7 +10,7 @@
 
 See examples live at: https://tfso.github.io/react-tfso-components/
 
-Notes about build :
+Notes about build:
 
 - The demo and npm start uses regular create-react-app with typescript.
 - The build uses babel with the babel-preset-react-app. It will separately use tsc to generate typescript declarations.
