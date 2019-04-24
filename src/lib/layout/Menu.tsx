@@ -14,6 +14,7 @@ import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
@@ -57,6 +58,10 @@ export default class Menu extends React.PureComponent<MenuProps>{
 }
 
 export const MenuContent = props => <>{props.children}</>
+
+const ListItemSecondaryText = styled(Typography)`&&{
+    color: ${({theme}) => theme.tfso.colors.grayLight};
+}` as typeof Typography
 
 export type MenuGroupProps = {
     icon: React.ComponentType<SvgIconProps>
@@ -106,12 +111,13 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
             <>
                 <MenuGroupListItem divider expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
-                    <ListItemText
-                        secondary={this.props.subtitle}
-                        primaryTypographyProps={{color: 'inherit'}}
-                        secondaryTypographyProps={{variant: 'caption', color: 'inherit'}}
-                    >
+                    <ListItemText primaryTypographyProps={{color: 'inherit'}}>
                         {this.props.label}
+                        <Collapse in={!this.props.expanded} timeout='auto'>
+                            <ListItemSecondaryText variant='caption' noWrap>
+                                {this.props.subtitle}
+                            </ListItemSecondaryText>
+                        </Collapse> 
                     </ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton onClick={this.onToggleExpanded}>
@@ -162,12 +168,11 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         const LinkContent = (
             <RootListItem divider>
                 <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'inherit' : 'inherit'}/></RootListItemIcon>
-                <ListItemText
-                    secondary={this.props.subtitle}
-                    primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}
-                    secondaryTypographyProps={{variant: 'caption', color: 'inherit'}}
-                >
+                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}>
                     {this.props.label}
+                    <ListItemSecondaryText variant='caption' noWrap>
+                        {this.props.subtitle}
+                    </ListItemSecondaryText>
                 </ListItemText>
             </RootListItem>
         )
