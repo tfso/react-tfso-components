@@ -20,18 +20,16 @@ cache:
   - node_modules
 
 init:
-  - git config --global credential.helper store
+  # - git config --global credential.helper store
   - git config --global user.email appveyor@24sevenoffice.com
-  - git config --global user.name tfso
+  - git config --global user.name tfsobob
 
 install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
   - npm ci
-  # - touch ".git-credentials"
-  - ps: Add-Content "$HOME\.git-credentials" "https://$($GITHUB_API_KEY):x-oauth-basic@github.com`n"
-  # - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | tee ".git-credentials" >> /dev/null
+  # - ps: Add-Content "$HOME\.git-credentials" "https://$($GITHUB_API_KEY):x-oauth-basic@github.com`n"
 
 before_build:
   - echo version %APPVEYOR_BUILD_VERSION%
@@ -40,6 +38,6 @@ before_build:
 build: sh
 build_script:
   - npm run build
-  - node_modules\.bin\publish-to-git --force --remote https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
+  - node_modules\.bin\publish-to-git --force --tag %APPVEYOR_BUILD_VERSION% --remote https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
   - npm run build:demo
   - node_modules\.bin\gh-pages -d build -r https://%GITHUB_API_KEY%:x-oauth-basic@github.com/%APPVEYOR_REPO_NAME%
