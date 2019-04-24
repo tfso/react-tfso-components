@@ -117,7 +117,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                             <ListItemSecondaryText variant='caption' noWrap>
                                 {this.props.subtitle}
                             </ListItemSecondaryText>
-                        </Collapse> 
+                        </Collapse>
                     </ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton onClick={this.onToggleExpanded}>
