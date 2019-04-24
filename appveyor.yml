@@ -20,7 +20,7 @@ cache:
   - node_modules
 
 init:
-  - git config --global credential.helper store --file=".git-credentials"
+  - git config --global credential.helper store
   - git config --global user.email appveyor@24sevenoffice.com
   - git config --global user.name tfso
 
@@ -30,7 +30,7 @@ install:
   - npm --version
   - npm ci
   # - touch ".git-credentials"
-  - ps: Add-Content ".git-credentials" "https://$($GITHUB_API_KEY):x-oauth-basic@github.com`n"
+  - ps: Add-Content "$HOME\.git-credentials" "https://$($GITHUB_API_KEY):x-oauth-basic@github.com`n"
   # - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | tee ".git-credentials" >> /dev/null
 
 before_build:
