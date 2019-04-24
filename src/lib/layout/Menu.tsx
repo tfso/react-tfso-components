@@ -71,16 +71,17 @@ const ListItemWrapper = ({expanded, ...props}: ListItemProps & {expanded: boolea
 const MenuGroupListItem = styled(ListItemWrapper)`&&{
     background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
+    :focus {
+        background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
+    };
 }` as typeof ListItemWrapper
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
 }` as typeof ExpandLess
 
 const MenuGroupExpandMore = styled(ExpandMore)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
 }` as typeof ExpandMore
 
 export class MenuGroup extends React.PureComponent<MenuGroupProps>{
@@ -140,12 +141,10 @@ export type MenuRootItemProps = {
 const RootListItem = styled(ListItem)`&&{
     background-color: ${({theme}) => theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
 }` as typeof ListItem
 
 const RootListItemIcon = styled(ListItemIcon)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
 }` as typeof ListItemIcon
 
 export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
@@ -161,7 +160,7 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         const Icon = this.props.icon
 
         const LinkContent = (
-            <RootListItem divider button>
+            <RootListItem divider>
                 <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'inherit' : 'inherit'}/></RootListItemIcon>
                 <ListItemText
                     secondary={this.props.subtitle}
@@ -199,8 +198,7 @@ const NestedListItem = styled(ListItem)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
     :hover{
       background-color: ${({theme}) => theme.tfso.colors.menu}; 
-    }
-    
+    };
 }` as typeof ListItem
 
 const NestedListItemIcon = styled(ListItemIcon)`&&{
@@ -218,7 +216,7 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
     render(){
         const Icon = this.props.icon
         const LinkContent = (
-            <NestedListItem >
+            <NestedListItem>
                 {Icon &&
                 <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
                 }
