@@ -1,4 +1,4 @@
-image: Ubuntu1804
+image: Visual Studio 2017
 
 stack: node 10
 
@@ -18,19 +18,22 @@ version: 1.1.{build}
 cache: 
   - node_modules
 
-install:
+init:
   - node --version
   - npm --version
+  # - touch ".git-credentials"
+  - git config --global credential.helper store --file=".git-credentials"
+  - ps: Add-Content ".git-credentials" "https://${GITHUB_API_KEY}:x-oauth-basic@github.com`n"
+  # - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | tee ".git-credentials" >> /dev/null
+  - git config --global user.email appveyor@24sevenoffice.com
+  - git config --global user.name tfso
+
+install:
   - npm ci
 
 before_build:
   - npm version $APPVEYOR_BUILD_VERSION --no-git-tag-version
   - echo version $APPVEYOR_BUILD_VERSION
-  - sudo touch ".git-credentials"
-  - git config --global credential.helper store --file=".git-credentials"
-  - echo "https://${GITHUB_API_KEY}:x-oauth-basic@github.com" | sudo tee ".git-credentials" >> /dev/null
-  - git config --global user.email appveyor@24sevenoffice.com
-  - git config --global user.name tfso
 
 build: sh
 build_script:
