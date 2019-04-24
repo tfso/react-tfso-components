@@ -1,0 +1,168 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
+export declare type NotificationItemProps = {
+    /**
+     * Unique identifier of the Notification.
+     * Spread to the `ListItem` component.
+     */
+    id: string;
+    /**
+     * Date when the notification was created.
+     */
+    date: Date;
+    /**
+     * `true` when the notification has been displayed to the user.
+     */
+    seen?: boolean;
+    /**
+     * `true` when the user has marked the notification as read either by:
+     * - marking all notifications as read.
+     * - clicking on the notification.
+     */
+    read?: boolean;
+    /**
+     * Invoked when the user clicks `Mark as read` or `Mark as unread`.
+     * You should persist the changes on the notification.
+     * (The notification is not changed by this component)
+     */
+    onToggleMarkRead: () => void;
+    /**
+     * Text to the displayed on the ToggleMarkRead button when the notification is _not_ read
+     */
+    toggleMarkReadTitle: string;
+    /**
+     * Text to the displayed on the ToggleMarkRead button when the notification _is_ read
+     */
+    toggleMarkUnreadTitle: string;
+    /**
+     * Callback when the user clicks the notification.
+     * you should set `read` to `true` in this callback before anything else.
+     */
+    onClick: () => void;
+    /**
+     * Should be either an `<Avatar>`, `<SvgIcon>` or `undefined`
+     */
+    avatar?: React.ReactElement;
+    /**
+     * <Typography> formatted text, or string
+     */
+    children: React.ReactChild;
+    /**
+     * Custom actions displayed in a menu when clicking the three vertical dots on the Notification
+     */
+    actions?: Array<{
+        action: () => void;
+        title: string;
+    }>;
+};
+declare const NotificationItem: {
+    (props: NotificationItemProps): JSX.Element;
+    propTypes: {
+        id: PropTypes.Validator<string>;
+        date: PropTypes.Validator<object>;
+        seen: PropTypes.Requireable<boolean>;
+        read: PropTypes.Requireable<boolean>;
+        onClick: PropTypes.Validator<(...args: any[]) => any>;
+        avatar: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        onToggleMarkRead: PropTypes.Validator<(...args: any[]) => any>;
+        toggleMarkReadTitle: PropTypes.Validator<string>;
+        toggleMarkUnreadTitle: PropTypes.Validator<string>;
+        children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        actions: PropTypes.Requireable<(PropTypes.InferProps<{
+            title: PropTypes.Validator<string>;
+            action: PropTypes.Validator<(...args: any[]) => any>;
+        }> | null)[]>;
+    };
+};
+export { NotificationItem };
+declare type Callback = (() => void) | (() => Promise<void>);
+export declare type NotifierProps = {
+    /**
+     * Number of new notifications
+     */
+    count: number;
+    /**
+     * Display a loading indicator for the entire list of notifications
+     */
+    loading?: boolean;
+    /**
+     * Display a loading indicator at the bottom of the list of notifications, indicating loading of additional notifications
+     */
+    loadingMore?: boolean;
+    /**
+     * Set to `true` if there are more notifications that could be fetched.
+     */
+    more?: boolean;
+    /**
+     * Provided your translated value of e.g `Mark all as read`
+     */
+    readAllButtonText: string;
+    /**
+     * Callback when the user clicked the bell and opens the list of notifications.
+     * You may want to fetch new notifications here.
+     * When the callback returns, the `onSeen` callback will be invoked
+     */
+    onOpen: Callback;
+    /**
+     * Invoked after `onOpen` returns and the list is still open.
+     * You should mark all notifications as seen here.
+     */
+    onSeen: Callback;
+    /**
+     * Invoked when the user clicks the `Mark all as read` button
+     * You should set the notifications as read here.
+     */
+    onReadAll: Callback;
+    /**
+     * Invoked if `more` is `true` and the user scrolled to the end of the list
+     */
+    onLoadMore: (startIndex: number, stopIndex: number) => Promise<void>;
+    isItemLoaded: (index: number) => boolean;
+    /**
+     * Invoked when the list is closed.
+     */
+    onClose?: Callback;
+    /**
+     * Render your notifications here.
+     * The children will be wrapped in a `List`component.
+     * Typically a `NotificationItem`, but anything goes.
+     */
+    children: React.ReactNode;
+    /**
+     * Properties for the Notification Bell icon
+     */
+    IconProps?: SvgIconProps;
+};
+declare type State = {
+    open: boolean;
+};
+export default class Notifier extends React.PureComponent<NotifierProps, State> {
+    static propTypes: {
+        count: PropTypes.Validator<number>;
+        loading: PropTypes.Requireable<boolean>;
+        loadingMore: PropTypes.Requireable<boolean>;
+        more: PropTypes.Requireable<boolean>;
+        readAllButtonText: PropTypes.Validator<string>;
+        onOpen: PropTypes.Validator<(...args: any[]) => any>;
+        onSeen: PropTypes.Validator<(...args: any[]) => any>;
+        onReadAll: PropTypes.Validator<(...args: any[]) => any>;
+        onLoadMore: PropTypes.Validator<(...args: any[]) => any>;
+        onClose: PropTypes.Requireable<(...args: any[]) => any>;
+        children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        IconProps: PropTypes.Requireable<object>;
+    };
+    _anchorEl: React.RefObject<HTMLButtonElement>;
+    state: State;
+    onOpen: () => Promise<void>;
+    onClose: () => void;
+    renderNotifyer: () => JSX.Element;
+    renderToolbar: (mobile: boolean) => JSX.Element;
+    renderContent(mobile: boolean): JSX.Element;
+    renderDesktop(): JSX.Element;
+    renderMobile(): JSX.Element;
+    renderLoading: () => JSX.Element | null;
+    renderLoadingMore: () => JSX.Element | null;
+    render(): JSX.Element;
+}
+//# sourceMappingURL=Notify.d.ts.map
