@@ -39,7 +39,6 @@ export const LayoutBodyRight = styled.div`
 `
 
 type LayoutProps = {
-    title: string
     docTitle: string
     menuContent?: React.ReactNode
     topMenuContent?: React.ReactNode
@@ -53,7 +52,6 @@ type LayoutState = {
 
 export default withScreenSize(class Layout extends React.PureComponent<LayoutProps, LayoutState>{
     static propTypes = {
-        title: PropTypes.string.isRequired,
         docTitle: PropTypes.string.isRequired,
         menuContent: PropTypes.node,
         topMenuContent: PropTypes.node
@@ -80,10 +78,9 @@ export default withScreenSize(class Layout extends React.PureComponent<LayoutPro
     render(){
         return (
             <LayoutWrapper>
-                <DocumentTitle text={this.props.docTitle} />
+                <DocumentTitle text={'24SevenOffice - ' + this.props.docTitle} />
                 <LayoutHeader>
                     <TopBar
-                        title={this.props.title}
                         onMenuToggle={this.onMenuToggle}
                         mobile={this.props.screenSize.mobile}
                     >

@@ -330,7 +330,6 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
             <layout.Layout
                 menuContent={menuContent}
                 topMenuContent={topMenuContent}
-                title="24SevenOffice"
                 docTitle="Tfso Components"
             >
                 {content}

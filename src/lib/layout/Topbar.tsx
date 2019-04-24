@@ -48,7 +48,6 @@ const ToolbarRight = styled.div`&&{
 }`
 
 export type TopBarProps = {
-    title: string
     onMenuToggle?: () => void
     mobile: boolean
     children?: React.ReactNode
@@ -56,7 +55,6 @@ export type TopBarProps = {
 
 export default class TopBar extends React.PureComponent<TopBarProps>{
     static propTypes = {
-        title: PropTypes.string.isRequired,
         onMenuToggle: PropTypes.func,
         mobile: PropTypes.bool.isRequired,
         children: PropTypes.node
@@ -77,7 +75,7 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
                                 <Left>
                                     <TfsoIcon color="primary" fontSize="large" />
                                     <Typography component="h1" variant="h6" color="inherit" style={{paddingLeft: 7}}>
-                                        {this.props.title}
+                                        24SevenOffice
                                     </Typography>
                                 </Left>
                             )
