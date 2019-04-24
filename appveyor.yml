@@ -16,9 +16,6 @@ skip_tags: true
 skip_commits: 
   message: /#[Nn][Oo][Bb][Uu][Ii][Ll][Dd]/
 
-cache: 
-  - node_modules
-
 init:
   - git config --global user.email appveyor@24sevenoffice.com
   - git config --global user.name tfsobob
