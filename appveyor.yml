@@ -29,12 +29,10 @@ install:
   - npm --version
   - npm ci
 
-test_script:
-  - npm run lint
-
 before_build:
   - echo version %APPVEYOR_BUILD_VERSION%
   - npm version %APPVEYOR_BUILD_VERSION% --no-git-tag-version
+  - npm run lint
 
 build: off
 build_script:
