@@ -109,7 +109,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         const Icon = this.props.icon
         return (
             <>
-                <MenuGroupListItem divider expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
+                <MenuGroupListItem divider={!this.props.expanded} expanded={this.props.expanded} button onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
                     <ListItemText primaryTypographyProps={{color: 'inherit'}}>
                         {this.props.label}
@@ -120,7 +120,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                         </Collapse>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                        <IconButton onClick={this.onToggleExpanded}>
+                        <IconButton onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                             {this.props.expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
                         </IconButton>
                     </ListItemSecondaryAction>
@@ -129,7 +129,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                     <List dense disablePadding>
                         {this.props.children}
                     </List>
-                    <Divider />
+                    {this.props.expanded && <Divider />}
                 </Collapse>
             </>
         )
