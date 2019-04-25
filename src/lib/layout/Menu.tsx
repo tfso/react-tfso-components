@@ -79,6 +79,9 @@ const MenuGroupListItem = styled(ListItemWrapper)`&&{
     :focus {
         background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
     };
+    :focus :hover, :hover {
+        background-color: ${({theme}) => theme.mui.palette.action.hover};
+    };
 }` as typeof ListItemWrapper
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
@@ -147,6 +150,9 @@ export type MenuRootItemProps = {
 const RootListItem = styled(ListItem)`&&{
     background-color: ${({theme}) => theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
+    :focus :hover, :hover {
+        background-color: ${({theme}) => theme.mui.palette.action.hover};
+    };
 }` as typeof ListItem
 
 const RootListItemIcon = styled(ListItemIcon)`&&{
@@ -201,8 +207,8 @@ const NestedListItem = styled(ListItem)`&&{
     padding-left: 52px;
     background-color: ${({theme}) => theme.tfso.colors.menuExpanded};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    :hover{
-      background-color: ${({theme}) => theme.tfso.colors.menu}; 
+    :hover {
+        background-color: ${({theme}) => theme.mui.palette.action.hover};
     };
 }` as typeof ListItem
 
