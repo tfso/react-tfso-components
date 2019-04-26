@@ -13,6 +13,7 @@ import SecurityIcon from '@material-ui/icons/Security'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 
 type State = {
+    open: boolean
     notifications: NotificationItemProps[],
     loading: boolean
 }
@@ -22,6 +23,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         super(props)
 
         this.state = {
+            open: false,
             notifications: this.generateNotifications(),
             loading: false,
         }
@@ -73,14 +75,22 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
     }
 
     onOpen = () => {
-        this.setState({loading: true})
-        setTimeout(() => this.setState({loading: false}), 3000)
+        this.setState({loading: true, open: true})
+        setTimeout(() => this.setState({loading: false}, this.onSeen), 3000)
     }
 
     onSeen = () => {
+        if(!this.state.open){
+            return
+        }
+
         this.setState(state => ({
             notifications: state.notifications.map(n => ({...n, seen: true}))
         }))
+    }
+
+    onClose = () => {
+        this.setState({open: false})
     }
 
     onRead = (id: string) => () => this.setState(state => ({
@@ -95,7 +105,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
 
     onLoadMore = async () => {
         this.setState({loading: true})
-        setTimeout(() => this.setState({loading: false}), 3000)
+        setTimeout(() => this.setState({loading: false}, this.onSeen), 3000)
     }
 
     reset = () => {
@@ -110,12 +120,12 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                 <DemoProps title='Notifier'>
                     <DemoProp required name='count' type='number' default='' description='Number of unseen notifications'/>
                     <DemoProp name='loading' type='boolean' default='false' description='Display a loading indicator'/>
+                    <DemoProp required name='open' type='boolean' default='' description='Whether the notifications list is open'/>
                     <DemoProp required name='readAllButtonText' type='' default='' description='Your translated value of e.g `Mark all as read`'/>
                     <DemoProp required name='onOpen' type='() => void' default='' description='Callback invoked when the list of notifications is opened, refresh/fetch notifications here'/>
-                    <DemoProp required name='onSeen' type='() => void' default='' description='Callback invoked after onOpen if the list is still open. Mark all notifications as seen here'/>
                     <DemoProp required name='onReadAll' type='() => void' default='' description='Callback invoked when the user marks all notifications as read'/>
                     <DemoProp required name='onLoadMore' type='() => Promise<void>' default='' description='Callback invoked when the user scrolled to near the end of the list'/>
-                    <DemoProp name='onClose' type='() => void' default='' description='Callback invoked when the list is closed'/>
+                    <DemoProp required name='onClose' type='() => void' default='' description='Callback invoked when the list is closed. Set open to false here to close the list'/>
                     <DemoProp name='IconProps' type='SvgIconProps' default='' description='Spread to the Notification Bell icon'/>
                     <DemoProp required name='children' type='React.ReactNode' default='' description='Render your NotificationItems here. The children will be wrappen in a <List>'/>
                 </DemoProps>
@@ -134,11 +144,12 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                 </DemoProps>
                 <DemoContent>
                     <Notifier
+                        open={this.state.open}
                         readAllButtonText='Mark all as read'
                         count={this.state.notifications.filter(n => !n.seen).length}
                         onOpen={this.onOpen}
+                        onClose={this.onClose}
                         onLoadMore={this.onLoadMore}
-                        onSeen={this.onSeen}
                         onReadAll={this.onReadAll}
                         loading={this.state.loading}
                     >

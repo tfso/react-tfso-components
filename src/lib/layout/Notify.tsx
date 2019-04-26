@@ -135,11 +135,7 @@ const NotificationItem = (props: NotificationItemProps) => {
     const onClickAction = React.useCallback((action: () => void) => onMenu(false, action), [onMenu])
 
     const secondaryText = React.useMemo(() => getNotificateSecondaryText(props.date), [props.date])
-    // const AvatarWrapper = React.useMemo(() => ({children, ...innerProps}) => {
-    //     return props.avatar && props.avatar!.type === 'Avatar'
-    //         ? <ListItemAvatar {...innerProps}>{children}</ListItemAvatar>
-    //         : <ListItemIcon {...innerProps}>{React.cloneElement(children, {style: {fontSize: 40}})}</ListItemIcon>
-    // }, [props.avatar])
+
     return (
         <ReadListItem
             id={props.id}
@@ -192,8 +188,6 @@ NotificationItem.propTypes = {
 
 export {NotificationItem}
 
-type Callback = (() => void) | (() => Promise<void>)
-
 export type NotifierProps = {
     /**
      * Number of new notifications
@@ -205,10 +199,7 @@ export type NotifierProps = {
      */
     loading?: boolean
 
-    // /**
-    //  * Set to `true` if there are more notifications that could be fetched.
-    //  */
-    // more?: boolean
+    open: boolean
 
     /**
      * Provide your translated value of e.g `Mark all as read`
@@ -218,21 +209,15 @@ export type NotifierProps = {
     /**
      * Callback when the user clicked the bell and opens the list of notifications.
      * You may want to fetch new notifications here.
-     * When the callback returns, the `onSeen` callback will be invoked
+     * When you're done fetching data, it is your responsibility to mark all notifications as read if the notifications is still open.
      */
-    onOpen: Callback
-
-    /**
-     * Invoked after `onOpen` returns and the list is still open.
-     * You should mark all notifications as seen here.
-     */
-    onSeen: Callback
+    onOpen: () => void
 
     /**
      * Invoked when the user clicks the `Mark all as read` button
      * You should set the notifications as read here.
      */
-    onReadAll: Callback
+    onReadAll: () => void
 
     /**
      * Invoked when the user scrolled to the end of the list
@@ -242,7 +227,7 @@ export type NotifierProps = {
     /**
      * Invoked when the list is closed.
      */
-    onClose?: Callback
+    onClose: () => void
 
     /**
      * Render your notifications here.
@@ -257,41 +242,28 @@ export type NotifierProps = {
     IconProps?: SvgIconProps
 }
 
-type State = {
-    open: boolean
-}
-
-export default class Notifier extends React.PureComponent<NotifierProps, State>{
+export default class Notifier extends React.PureComponent<NotifierProps>{
     static propTypes = {
         count: PropTypes.number.isRequired,
         loading: PropTypes.bool,
-        // more: PropTypes.bool,
+        open: PropTypes.bool.isRequired,
         readAllButtonText: PropTypes.string.isRequired,
         onOpen: PropTypes.func.isRequired,
-        onSeen: PropTypes.func.isRequired,
         onReadAll: PropTypes.func.isRequired,
         onLoadMore: PropTypes.func.isRequired,
-        onClose: PropTypes.func,
+        onClose: PropTypes.func.isRequired,
         children: PropTypes.node.isRequired,
         IconProps: PropTypes.object,
     }
 
     _anchorEl: React.RefObject<HTMLButtonElement> = React.createRef()
 
-    state: State = {
-        open: false
-    }
-
-    onOpen = async () => {
-        const {onOpen, onSeen} = this.props
-        this.setState({open: true})
-        await onOpen()
-        // If the user closed the list while fetching data in the onOpen callback, the list has not been shown yet.
-        this.state.open && onSeen()
+    onOpen = () => {
+        this.props.onOpen()
     }
 
     onClose = () => {
-        this.setState({open: false}, this.props.onClose)
+        this.props.onClose()
     }
 
     renderNotifyer = () => (
@@ -335,7 +307,7 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
     renderDesktop(){
         return (
             <Popover
-                open={this.state.open}
+                open={this.props.open}
                 onClose={this.onClose}
                 anchorEl={this._anchorEl.current}
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
@@ -351,7 +323,7 @@ export default class Notifier extends React.PureComponent<NotifierProps, State>{
         return (
             <Dialog
                 TransitionComponent={TransitionComponent}
-                open={this.state.open}
+                open={this.props.open}
                 onClose={this.onClose}
                 fullScreen
             >
