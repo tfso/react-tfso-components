@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
 import MenuIcon from '@material-ui/icons/Menu'
 import styled from 'styled-components/macro'
 import TfsoIcon from '../icons/Tfso'
@@ -13,13 +14,15 @@ const Root = styled.div`
 `
 const StyledAppBar = styled(AppBar)`&&{
   background: white;
-  z-index: ${props => props.theme.mui.zIndex.drawer + 1};  
+  z-index: ${props => props.theme.mui.zIndex.drawer + 1};
 }` as typeof AppBar
+
 const Wrapper = styled.div`
   display: flex;
   align-items: stretch;
 `
 const Left = styled.div`&&{
+  max-width: 240px; // IE hack
   flex: 0 0 240px;
   background-color: ${({theme}) => theme.tfso.colors.menu};
   color: #fff;
@@ -29,10 +32,10 @@ const Left = styled.div`&&{
   align-items: center;
 }`
 const LeftMobile = styled(Left)`&&{
-  flex: 0;
+  flex: 0 1 auto;
 }`
 const Right = styled.div`&&{
-  flex: 1;
+  flex: 1 1 auto;
 }`
 
 const MenuButton = styled(IconButton)`&&{
@@ -68,14 +71,18 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
                         {this.props.mobile
                             ? (
                                 <LeftMobile>
-                                    <TfsoIcon color="primary" fontSize="large" />
+                                    <Link href='/' underline='none'>
+                                        <TfsoIcon color="primary" fontSize="large" />
+                                    </Link>
                                 </LeftMobile>
                             )
                             : (
                                 <Left>
-                                    <TfsoIcon color="primary" fontSize="large" />
+                                    <Link href='/' underline='none'>
+                                        <TfsoIcon color="primary" fontSize="large" />
+                                    </Link>
                                     <Typography component="h1" variant="h6" color="inherit" style={{paddingLeft: 7}}>
-                                        24SevenOffice
+                                        <Link href='/' underline='none' color='inherit'>24SevenOffice</Link>
                                     </Typography>
                                 </Left>
                             )

@@ -18,7 +18,7 @@ export type MaterialUiLinkProps = {
 
 const MaterialUiLink = (props: MaterialUiLinkProps) => (
     <Link href='https://material-ui.com/' target='_blank' rel='noreferrer'>
-        <MaterialUiIcon fontSize='large' {...props.iconProps as any} style={{height: '100%'}} />
+        <MaterialUiIcon fontSize='large' {...props.iconProps as any} />
     </Link>
 )
 
