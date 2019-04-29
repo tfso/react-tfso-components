@@ -29,7 +29,8 @@ const colorScheme = {
 const colors = {
     tfso: '#00c7f5',
     base: colorScheme.fiord,
-    baseLight: '#637b94',
+    baseLight: '#586E85',
+    baseLight1: '#637b94',
     baseLight2: '#8fa1b4',
     baseLight3: '#bdc8d3',
     baseLight4: '#ebeef1',
@@ -60,8 +61,8 @@ const colors = {
     listOverBackground: '#E6E6E6',
     border: '#C4C4C4',
     tabBar: colorScheme.white,
-    menu: '#526578',
-    menuExpanded: colorScheme.fiord,
+    menu: colorScheme.fiord,
+    menuExpanded: '#3A4857',
     menuExpandedDivider: colorScheme.texasRose,
     menuItem: '#526578',
     menuItemText: colorScheme.white,
@@ -77,6 +78,7 @@ const palette = {
     warning: colors.orange,
     alert: colors.red,
     delete: colors.red,
+    loudInfo: colors.blue
 }
 
 const layout = {

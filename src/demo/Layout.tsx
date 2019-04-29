@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components/macro'
 import {layout} from '../lib'
 import Home from './pages/Home'
 import Icons from './pages/Icons'
@@ -44,6 +45,23 @@ import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
 import InfiniteScrollDemo from './demos/InfiniteScrollDemo'
+import Badge from '@material-ui/core/Badge'
+
+const StyledBadge = styled(Badge).attrs({
+    classes: {badge: 'MuiBadgeStyle'}
+})`
+    .MuiBadgeStyle{
+      top: 50%;
+      right: -7px;
+      background-color: ${({theme}) => theme.tfso.colors.baseLight1};
+      color: ${({theme}) => theme.tfso.colors.menuItemText};
+      padding: 0 7px;
+    }
+` as typeof Badge
+
+const NewBadge = ({children}) => (
+    <StyledBadge badgeContent="New">{children}</StyledBadge>
+)
 
 const menuGroups = {
     home: {
@@ -65,7 +83,9 @@ const menuGroups = {
         items: {
             emoji: {
                 label: 'Emoji',
-                component: EmojiDemo
+                component: EmojiDemo,
+                accessDenied: true,
+                badge: NewBadge
             },
             alert: {
                 label: 'Alert',
@@ -73,7 +93,8 @@ const menuGroups = {
             },
             bignumber: {
                 label: 'BigNumber',
-                component: BigNumberDemo
+                component: BigNumberDemo,
+                badge: NewBadge
             },
             confirmationdialog: {
                 label: 'ConfirmationDialog',
@@ -101,7 +122,8 @@ const menuGroups = {
         label: 'Theme',
         subtitle: 'Much Dashing',
         icon: StyleIcon,
-        component: Theme
+        component: Theme,
+        accessDenied: true
     },
     utils: {
         label: 'Utils',
@@ -140,6 +162,7 @@ const menuGroups = {
         label: 'Labs',
         subtitle: 'Works in progress',
         icon: CodeIcon,
+        accessDenied: true,
         items: {
             gridlayout: {
                 label: 'GridLayout',
@@ -262,6 +285,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                                         </Link>
                                     )
                                 }}
+                                accessDenied={group.accessDenied}
                             />
                         )
                     }
@@ -274,6 +298,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                             icon={group.icon}
                             subtitle={group.subtitle}
                             onToggleExpanded={() => this.onToggleGroupExpanded(groupName)}
+                            accessDenied={group.accessDenied}
                         >
                             {Object.keys(group.items).map(itemName => {
                                 const item = group.items[itemName]
@@ -291,6 +316,8 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                                                 </Link>
                                             )
                                         }}
+                                        accessDenied={item.accessDenied}
+                                        badge={item.badge}
                                     />
                                 )
                             })}

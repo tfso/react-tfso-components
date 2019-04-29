@@ -7,6 +7,7 @@ import Collapse from '@material-ui/core/Collapse'
 import IconButton from '@material-ui/core/IconButton'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
+import LockIcon from '@material-ui/icons/Lock'
 import styled from 'styled-components/macro'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -14,7 +15,7 @@ import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
+import Typography, {TypographyProps} from '@material-ui/core/Typography'
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
@@ -72,13 +73,18 @@ export type MenuGroupProps = {
     children: React.ReactNode
 }
 
-const ListItemWrapper = ({expanded, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props} />
+const ListItemWrapper = ({expanded, disabled, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props} />
+
 const MenuGroupListItem = styled(ListItemWrapper)`&&{
     background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
     :focus {
         background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
     };
+    
+    > a{
+      text-decoration: none;
+    }
 }` as typeof ListItemWrapper
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
@@ -89,6 +95,11 @@ const MenuGroupExpandMore = styled(ExpandMore)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
 }` as typeof ExpandMore
 
+const ListItemTextWrapper = ({selected, ...props}: TypographyProps & {selected?: boolean}) => <Typography {...props}/>
+const StyledListItemTextTypography = styled(ListItemTextWrapper)`&&{
+      color: ${(props) => props.selected ? props.theme.tfso.colors.menuItemSelectedText : 'inherit'};
+}` as typeof ListItemTextWrapper
+
 export class MenuGroup extends React.PureComponent<MenuGroupProps>{
     static propTypes = {
         icon: PropTypes.elementType.isRequired,
@@ -96,7 +107,8 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         label: PropTypes.string.isRequired,
         onToggleExpanded: PropTypes.func.isRequired,
         expanded: PropTypes.bool.isRequired,
-        children: PropTypes.node.isRequired
+        children: PropTypes.node.isRequired,
+        accessDenied: PropTypes.bool
     }
 
     onToggleExpanded = e => {
@@ -109,16 +121,17 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         const Icon = this.props.icon
         return (
             <>
-                <MenuGroupListItem divider expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
+                <MenuGroupListItem divider={!this.props.expanded} expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
-                    <ListItemText primaryTypographyProps={{color: 'inherit'}}>
-                        {this.props.label}
-                        <Collapse in={!this.props.expanded} timeout='auto'>
-                            <ListItemSecondaryText variant='caption' noWrap>
-                                {this.props.subtitle}
-                            </ListItemSecondaryText>
-                        </Collapse>
-                    </ListItemText>
+                    <ListItemText
+                        disableTypography
+                        primary={<StyledListItemTextTypography variant="body1">{this.props.label}
+                            <Collapse in={!this.props.expanded} timeout='auto'>
+                                <ListItemSecondaryText variant='caption' noWrap>
+                                    {this.props.subtitle}
+                                </ListItemSecondaryText>
+                            </Collapse></StyledListItemTextTypography>}
+                    />
                     <ListItemSecondaryAction>
                         <IconButton onClick={this.onToggleExpanded}>
                             {this.props.expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
@@ -142,11 +155,17 @@ export type MenuRootItemProps = {
     label: string
     selected: boolean
     href?: string | ((content: React.ReactChild) => React.ReactChild)
+    accessDenied?: boolean
 }
 
 const RootListItem = styled(ListItem)`&&{
     background-color: ${({theme}) => theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
+    
+    > a{
+      text-decoration: none;
+    }
+    
 }` as typeof ListItem
 
 const RootListItemIcon = styled(ListItemIcon)`&&{
@@ -159,6 +178,7 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         subtitle: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         selected: PropTypes.bool.isRequired,
+        accessDenied: PropTypes.bool,
         href: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
     }
 
@@ -168,23 +188,29 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         const LinkContent = (
             <RootListItem divider>
                 <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'inherit' : 'inherit'}/></RootListItemIcon>
-                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}>
-                    {this.props.label}
-                    <ListItemSecondaryText variant='caption' noWrap>
-                        {this.props.subtitle}
-                    </ListItemSecondaryText>
-                </ListItemText>
+
+                <ListItemText
+                    disableTypography
+                    primary={<StyledListItemTextTypography selected={this.props.selected} variant="body1">{this.props.label}
+                        <ListItemSecondaryText variant='caption' noWrap>
+                            {this.props.subtitle}
+                        </ListItemSecondaryText></StyledListItemTextTypography>}
+                />
+
+                {this.props.accessDenied &&
+                    <LockIcon fontSize="small"/>
+                }
             </RootListItem>
         )
 
         return (
             <>
-                {typeof this.props.href === 'string'
-                    ? <Link href={this.props.href}>{LinkContent}</Link>
-                    : this.props.href
-                        ? this.props.href(LinkContent)
-                        : LinkContent
-                }
+            {typeof this.props.href === 'string'
+                ? <Link href={this.props.href}>{LinkContent}</Link>
+                : this.props.href
+                    ? this.props.href(LinkContent)
+                    : LinkContent
+            }
             </>
         )
     }
@@ -195,6 +221,8 @@ export type MenuItemProps = {
     label: string
     selected: boolean
     href: string | ((content: React.ReactChild) => React.ReactChild)
+    accessDenied: boolean
+    badge?: React.SFC // any
 }
 
 const NestedListItem = styled(ListItem)`&&{
@@ -202,33 +230,63 @@ const NestedListItem = styled(ListItem)`&&{
     background-color: ${({theme}) => theme.tfso.colors.menuExpanded};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
     :hover{
+    
       background-color: ${({theme}) => theme.tfso.colors.menu}; 
     };
+    
+    > a{
+      text-decoration: none;
+    }
 }` as typeof ListItem
 
 const NestedListItemIcon = styled(ListItemIcon)`&&{
       color: ${({theme}) => theme.tfso.colors.menuItemText};
 }` as typeof ListItemIcon
 
+const Text = styled.div`
+   flex: 1;
+`
+
 export class MenuItem extends React.PureComponent<MenuItemProps>{
     static propTypes = {
         icon: PropTypes.elementType,
         label: PropTypes.string.isRequired,
         selected: PropTypes.bool.isRequired,
-        href: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+        accessDenied: PropTypes.bool,
+        href: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+        badge: PropTypes.func
     }
 
     render(){
         const Icon = this.props.icon
+        const Badge = this.props.badge
+
         const LinkContent = (
             <NestedListItem>
-                {Icon &&
-                <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
+                <Text>
+                    {Icon &&
+                        <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
+                    }
+                    {!Badge
+                        ? <ListItemText
+                            disableTypography
+                            primary={<StyledListItemTextTypography
+                                selected={this.props.selected}
+                                variant="caption">{this.props.label}</StyledListItemTextTypography>}
+                        />
+                        : <Badge>
+                            <ListItemText
+                                disableTypography
+                                primary={<StyledListItemTextTypography selected={this.props.selected} variant="caption">{this.props.label}</StyledListItemTextTypography>}
+                            />
+                        </Badge>
+                    }
+                </Text>
+                {this.props.accessDenied &&
+                    <LockIcon fontSize="small"/>
                 }
-                <ListItemText primaryTypographyProps={{color: this.props.selected ? 'primary' : 'inherit'}}>{this.props.label}</ListItemText>
             </NestedListItem>
         )
-
         return (
             <>
                 {typeof this.props.href === 'string'
