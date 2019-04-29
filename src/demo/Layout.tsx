@@ -118,12 +118,38 @@ const menuGroups = {
             }
         }
     },
-    theme: {
-        label: 'Theme',
+    style: {
+        label: 'Style',
         subtitle: 'Much Dashing',
         icon: StyleIcon,
         component: Theme,
-        accessDenied: true
+        accessDenied: true,
+        items: {
+            layout: {
+                label: 'Layout',
+                component: () => <div>TODO<br />This page uses the Layout</div>
+            },
+            menu: {
+                label: 'Menu',
+                component: () => <div>TODO<br />The menu to the left</div>
+            },
+            notify: {
+                label: 'Notify',
+                component: NotifyDemo
+            },
+            profilecard: {
+                label: 'ProfileCard',
+                component: ProfileCardDemo
+            },
+            theme: {
+                label: 'Theme',
+                component: Theme
+            },
+            topbar: {
+                label: 'Topbar',
+                component: () => <div>TODO<br />The topbar above</div>
+            }
+        }
     },
     utils: {
         label: 'Utils',
@@ -167,10 +193,6 @@ const menuGroups = {
             gridlayout: {
                 label: 'GridLayout',
                 component: GridLayoutDemo
-            },
-            profilecard: {
-                label: 'ProfileCard',
-                component: ProfileCardDemo
             },
             notify: {
                 label: 'Notify',
@@ -300,7 +322,7 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                             onToggleExpanded={() => this.onToggleGroupExpanded(groupName)}
                             accessDenied={group.accessDenied}
                         >
-                            {Object.keys(group.items).map(itemName => {
+                            {Object.keys(group.items).sort((a, b) => a > b ? 1 : -1).map(itemName => {
                                 const item = group.items[itemName]
                                 const selected = this.getSelected()
                                 return (

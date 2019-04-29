@@ -78,13 +78,12 @@ const ListItemWrapper = ({expanded, disabled, ...props}: ListItemProps & {expand
 const MenuGroupListItem = styled(ListItemWrapper)`&&{
     background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    :focus {
-        background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
-    };
-    
     > a{
       text-decoration: none;
     }
+    :focus :hover, :hover {
+        background-color: ${({theme}) => theme.mui.palette.action.hover};
+    };
 }` as typeof ListItemWrapper
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
@@ -121,7 +120,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         const Icon = this.props.icon
         return (
             <>
-                <MenuGroupListItem divider={!this.props.expanded} expanded={this.props.expanded} button onClick={this.onToggleExpanded}>
+                <MenuGroupListItem divider={!this.props.expanded} expanded={this.props.expanded} button onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
                     <ListItemText
                         disableTypography
@@ -133,7 +132,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                             </Collapse></StyledListItemTextTypography>}
                     />
                     <ListItemSecondaryAction>
-                        <IconButton onClick={this.onToggleExpanded}>
+                        <IconButton onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                             {this.props.expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
                         </IconButton>
                     </ListItemSecondaryAction>
@@ -142,7 +141,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                     <List dense disablePadding>
                         {this.props.children}
                     </List>
-                    <Divider />
+                    {this.props.expanded && <Divider />}
                 </Collapse>
             </>
         )
@@ -160,12 +159,13 @@ export type MenuRootItemProps = {
 
 const RootListItem = styled(ListItem)`&&{
     background-color: ${({theme}) => theme.tfso.colors.menu};
-    color: ${({theme}) => theme.tfso.colors.menuItemText};
-    
+    color: ${({theme}) => theme.tfso.colors.menuItemText};    
     > a{
       text-decoration: none;
     }
-    
+    :focus :hover, :hover {
+        background-color: ${({theme}) => theme.mui.palette.action.hover};
+    };
 }` as typeof ListItem
 
 const RootListItemIcon = styled(ListItemIcon)`&&{
@@ -230,8 +230,7 @@ const NestedListItem = styled(ListItem)`&&{
     background-color: ${({theme}) => theme.tfso.colors.menuExpanded};
     color: ${({theme}) => theme.tfso.colors.menuItemText};
     :hover{
-    
-      background-color: ${({theme}) => theme.tfso.colors.menu}; 
+      background-color: ${({theme}) => theme.tfso.colors.menu}; // ${({theme}) => theme.mui.palette.action.hover};
     };
     
     > a{
