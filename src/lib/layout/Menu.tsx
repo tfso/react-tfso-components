@@ -14,8 +14,8 @@ import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
-import Typography, {TypographyProps} from '@material-ui/core/Typography'
-import Chip, {ChipProps} from '@material-ui/core/Chip'
+import Typography from '@material-ui/core/Typography'
+import Chip from '@material-ui/core/Chip'
 import {DefaultTheme} from 'styled-components'
 
 const StyledDrawer = styled(Drawer).attrs({
@@ -44,10 +44,10 @@ const StyledDrawer = styled(Drawer).attrs({
 type ChipColor = 'success' | 'error' | 'info' | 'warning'
 const getColor = (color: ChipColor, palette: DefaultTheme['tfso']['palette']) => {
     switch(color){
-        case 'success': return palette.success
-        case 'error': return palette.alert
-        case 'info': return palette.loudInfo
-        case 'warning': return palette.warning
+    case 'success': return palette.success
+    case 'error': return palette.alert
+    case 'info': return palette.loudInfo
+    case 'warning': return palette.warning
     }
 }
 
@@ -98,6 +98,7 @@ export type MenuGroupProps = {
     onToggleExpanded: () => void
     expanded: boolean
     children: React.ReactNode
+    selected: boolean
 }
 
 const ListItemWrapper = ({expanded, disabled, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props} />
@@ -109,8 +110,6 @@ const MenuGroupListItem = styled(ListItemWrapper)`&&{
         background-color: ${({theme}) => theme.mui.palette.action.hover};
     };
 }` as typeof ListItemWrapper
-
-
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
@@ -127,7 +126,8 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         label: PropTypes.string.isRequired,
         onToggleExpanded: PropTypes.func.isRequired,
         expanded: PropTypes.bool.isRequired,
-        children: PropTypes.node.isRequired
+        children: PropTypes.node.isRequired,
+        selected: PropTypes.bool
     }
 
     onToggleExpanded = e => {
@@ -257,10 +257,6 @@ const NestedListItemIcon = styled(ListItemIcon)`&&{
       color: ${({theme}) => theme.tfso.colors.menuItemText};
 }` as typeof ListItemIcon
 
-const Text = styled.div`
-   flex: 1;
-`
-
 export class MenuItem extends React.PureComponent<MenuItemProps>{
     static propTypes = {
         icon: PropTypes.elementType,
@@ -280,7 +276,7 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
                     <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
                 }
                 <ListItemText primaryTypographyProps={{color: 'inherit', noWrap: true}}>
-                   {this.props.label}
+                    {this.props.label}
                 </ListItemText>
                 {this.props.chipLabel &&
                     <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>

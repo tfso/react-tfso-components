@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components/macro'
 import {layout} from '../lib'
 import Home from './pages/Home'
 import Icons from './pages/Icons'
