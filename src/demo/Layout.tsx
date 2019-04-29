@@ -56,6 +56,7 @@ const StyledBadge = styled(Badge).attrs({
       background-color: ${({theme}) => theme.tfso.colors.baseLight1};
       color: ${({theme}) => theme.tfso.colors.menuItemText};
       padding: 0 7px;
+      font-size: 0.62rem
     }
 ` as typeof Badge
 

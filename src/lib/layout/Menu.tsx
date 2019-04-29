@@ -271,12 +271,12 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
                             disableTypography
                             primary={<StyledListItemTextTypography
                                 selected={this.props.selected}
-                                variant="caption">{this.props.label}</StyledListItemTextTypography>}
+                                variant="body2">{this.props.label}</StyledListItemTextTypography>}
                         />
                         : <Badge>
                             <ListItemText
                                 disableTypography
-                                primary={<StyledListItemTextTypography selected={this.props.selected} variant="caption">{this.props.label}</StyledListItemTextTypography>}
+                                primary={<StyledListItemTextTypography selected={this.props.selected} variant="body2">{this.props.label}</StyledListItemTextTypography>}
                             />
                         </Badge>
                     }
