@@ -30,7 +30,8 @@ type State = {}
 
 const CustomCard = styled(Card)`
   &&{
-   box-shadow: none;
+    box-shadow: none;
+    min-width: 200px;
   } 
 ` as typeof Card
 
