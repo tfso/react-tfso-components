@@ -45,24 +45,6 @@ import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
 import InfiniteScrollDemo from './demos/InfiniteScrollDemo'
-import Badge from '@material-ui/core/Badge'
-
-const StyledBadge = styled(Badge).attrs({
-    classes: {badge: 'MuiBadgeStyle'}
-})`
-    .MuiBadgeStyle{
-      top: 50%;
-      right: -7px;
-      background-color: ${({theme}) => theme.tfso.colors.baseLight1};
-      color: ${({theme}) => theme.tfso.colors.menuItemText};
-      padding: 0 7px;
-      font-size: 0.62rem
-    }
-` as typeof Badge
-
-const NewBadge = ({children}) => (
-    <StyledBadge badgeContent="New">{children}</StyledBadge>
-)
 
 const menuGroups = {
     home: {
@@ -85,8 +67,8 @@ const menuGroups = {
             emoji: {
                 label: 'Emoji',
                 component: EmojiDemo,
-                accessDenied: true,
-                badge: NewBadge
+                chipLabel: 'New',
+                chipColor: 'success'
             },
             alert: {
                 label: 'Alert',
@@ -94,12 +76,13 @@ const menuGroups = {
             },
             bignumber: {
                 label: 'BigNumber',
-                component: BigNumberDemo,
-                badge: NewBadge
+                component: BigNumberDemo
             },
             confirmationdialog: {
-                label: 'ConfirmationDialog',
-                component: ConfirmationDialogDemo
+                label: 'ConfirmationDialog 123123213',
+                component: ConfirmationDialogDemo,
+                chipLabel: 'NEW',
+                chipColor: 'success'
             },
             listpicker: {
                 label: 'ListPicker',
@@ -124,7 +107,8 @@ const menuGroups = {
         subtitle: 'Much Dashing',
         icon: StyleIcon,
         component: Theme,
-        accessDenied: true,
+        chipLabel: 'New',
+        chipColor: 'info',
         items: {
             layout: {
                 label: 'Layout',
@@ -301,6 +285,8 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                                 selected={this.getSelected().group === groupName}
                                 icon={group.icon}
                                 subtitle={group.subtitle}
+                                chipLabel= {group.chipLabel}
+                                chipColor= {group.chipColor}
                                 href={(content) => {
                                     return (
                                         <Link to={`/${groupName}`} key={groupName}>
@@ -308,7 +294,6 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                                         </Link>
                                     )
                                 }}
-                                accessDenied={group.accessDenied}
                             />
                         )
                     }
@@ -321,7 +306,6 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                             icon={group.icon}
                             subtitle={group.subtitle}
                             onToggleExpanded={() => this.onToggleGroupExpanded(groupName)}
-                            accessDenied={group.accessDenied}
                         >
                             {Object.keys(group.items).sort((a, b) => a > b ? 1 : -1).map(itemName => {
                                 const item = group.items[itemName]
@@ -332,15 +316,15 @@ export default class Layout extends React.PureComponent<{}, LayoutState>{
                                         label={item.label}
                                         selected={selected.item === itemName && selected.group === groupName}
                                         icon={item.icon}
+                                        chipLabel= {item.chipLabel}
+                                        chipColor= {item.chipColor}
                                         href={(content) => {
                                             return (
-                                                <Link to={`/${groupName}/${itemName}`} key={itemName}>
+                                                <Link to={`/${groupName}/${itemName}`} key={itemName} underline={'hover'}>
                                                     {content}
                                                 </Link>
                                             )
                                         }}
-                                        accessDenied={item.accessDenied}
-                                        badge={item.badge}
                                     />
                                 )
                             })}

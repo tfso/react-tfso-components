@@ -7,7 +7,6 @@ import Collapse from '@material-ui/core/Collapse'
 import IconButton from '@material-ui/core/IconButton'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
-import LockIcon from '@material-ui/icons/Lock'
 import styled from 'styled-components/macro'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -16,6 +15,8 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
 import Typography, {TypographyProps} from '@material-ui/core/Typography'
+import Chip, {ChipProps} from '@material-ui/core/Chip'
+import {DefaultTheme} from 'styled-components'
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
@@ -25,12 +26,38 @@ const StyledDrawer = styled(Drawer).attrs({
       height: 100%;
     }
     
+    a, a:hover{
+        text-decoration: none
+    };
+    
+    li:focus{
+     outline: none;
+    }
+    
     .MuiPaperStyle{
       position: static;
       background-color: ${({theme}) => theme.tfso.colors.menu};
       color: ${({theme}) => theme.tfso.colors.menuItemText};
     }
 ` as typeof Drawer
+
+type ChipColor = 'success' | 'error' | 'info' | 'warning'
+const getColor = (color: ChipColor, palette: DefaultTheme['tfso']['palette']) => {
+    switch(color){
+        case 'success': return palette.success
+        case 'error': return palette.alert
+        case 'info': return palette.loudInfo
+        case 'warning': return palette.warning
+    }
+}
+
+const ChipWrapper = ({color: ChipColor, ...props}) => <Chip {...props} />
+const StyledChip = styled(ChipWrapper)`&&{
+    background-color: ${({color, theme}) => getColor(color, theme.tfso.palette)};
+    color: ${({color, theme}) => theme.tfso.colors.white};
+    font-size: ${({theme}) => theme.mui.typography.pxToRem(10)}; 
+    height: 22px;
+}`
 
 export type MenuProps = {
     open: boolean
@@ -77,14 +104,13 @@ const ListItemWrapper = ({expanded, disabled, ...props}: ListItemProps & {expand
 
 const MenuGroupListItem = styled(ListItemWrapper)`&&{
     background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
-    color: ${({theme}) => theme.tfso.colors.menuItemText};
-    > a{
-      text-decoration: none;
-    }
+    color: ${({selected, theme}) => selected ? theme.tfso.colors.menuItemSelectedText : theme.tfso.colors.menuItemText};
     :focus :hover, :hover {
         background-color: ${({theme}) => theme.mui.palette.action.hover};
     };
 }` as typeof ListItemWrapper
+
+
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
@@ -94,11 +120,6 @@ const MenuGroupExpandMore = styled(ExpandMore)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
 }` as typeof ExpandMore
 
-const ListItemTextWrapper = ({selected, ...props}: TypographyProps & {selected?: boolean}) => <Typography {...props}/>
-const StyledListItemTextTypography = styled(ListItemTextWrapper)`&&{
-      color: ${(props) => props.selected ? props.theme.tfso.colors.menuItemSelectedText : 'inherit'};
-}` as typeof ListItemTextWrapper
-
 export class MenuGroup extends React.PureComponent<MenuGroupProps>{
     static propTypes = {
         icon: PropTypes.elementType.isRequired,
@@ -106,8 +127,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         label: PropTypes.string.isRequired,
         onToggleExpanded: PropTypes.func.isRequired,
         expanded: PropTypes.bool.isRequired,
-        children: PropTypes.node.isRequired,
-        accessDenied: PropTypes.bool
+        children: PropTypes.node.isRequired
     }
 
     onToggleExpanded = e => {
@@ -120,17 +140,16 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
         const Icon = this.props.icon
         return (
             <>
-                <MenuGroupListItem divider={!this.props.expanded} expanded={this.props.expanded} button onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
+                <MenuGroupListItem divider={!this.props.expanded} selected={this.props.selected} expanded={this.props.expanded} button onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                     <ListItemIcon style={{marginRight: 0, color: 'inherit'}}><Icon fontSize="small"/></ListItemIcon>
-                    <ListItemText
-                        disableTypography
-                        primary={<StyledListItemTextTypography variant="body1">{this.props.label}
-                            <Collapse in={!this.props.expanded} timeout='auto'>
-                                <ListItemSecondaryText variant='caption' noWrap>
-                                    {this.props.subtitle}
-                                </ListItemSecondaryText>
-                            </Collapse></StyledListItemTextTypography>}
-                    />
+                    <ListItemText primaryTypographyProps={{color: 'inherit'}}>
+                        {this.props.label}
+                        <Collapse in={!this.props.expanded} timeout='auto'>
+                            <ListItemSecondaryText variant='caption' noWrap>
+                                {this.props.subtitle}
+                            </ListItemSecondaryText>
+                        </Collapse>
+                    </ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                             {this.props.expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
@@ -152,17 +171,19 @@ export type MenuRootItemProps = {
     icon: React.ComponentType<SvgIconProps>
     subtitle: string
     label: string
+    chipLabel?: string
+    chipColor?: ChipColor
     selected: boolean
     href?: string | ((content: React.ReactChild) => React.ReactChild)
-    accessDenied?: boolean
 }
 
-const RootListItem = styled(ListItem)`&&{
+const RootListItem = styled(ListItem).attrs({classes: {selected: 'styled-selected'}})`&&{
     background-color: ${({theme}) => theme.tfso.colors.menu};
     color: ${({theme}) => theme.tfso.colors.menuItemText};    
-    > a{
-      text-decoration: none;
-    }
+    &&.styled-selected {
+        background-color: ${({theme}) => theme.tfso.colors.menu};
+        color: ${({theme}) => theme.tfso.colors.menuItemSelectedText};
+    };
     :focus :hover, :hover {
         background-color: ${({theme}) => theme.mui.palette.action.hover};
     };
@@ -178,27 +199,25 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
         subtitle: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         selected: PropTypes.bool.isRequired,
-        accessDenied: PropTypes.bool,
-        href: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+        href: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+        chipLabel: PropTypes.string,
+        chipColor: PropTypes.oneOf(['success', 'info', 'warning', 'error']),
     }
 
     render(){
         const Icon = this.props.icon
 
         const LinkContent = (
-            <RootListItem divider>
-                <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'inherit' : 'inherit'}/></RootListItemIcon>
-
-                <ListItemText
-                    disableTypography
-                    primary={<StyledListItemTextTypography selected={this.props.selected} variant="body1">{this.props.label}
-                        <ListItemSecondaryText variant='caption' noWrap>
-                            {this.props.subtitle}
-                        </ListItemSecondaryText></StyledListItemTextTypography>}
-                />
-
-                {this.props.accessDenied &&
-                    <LockIcon fontSize="small"/>
+            <RootListItem divider selected={this.props.selected} >
+                <RootListItemIcon style={{marginRight: 0}}><Icon fontSize="small" color='inherit'/></RootListItemIcon>
+                <ListItemText primaryTypographyProps={{color: 'inherit'}}>
+                    {this.props.label}
+                    <ListItemSecondaryText variant='caption' noWrap>
+                        {this.props.subtitle}
+                    </ListItemSecondaryText>
+                </ListItemText>
+                {this.props.chipLabel &&
+                    <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
                 }
             </RootListItem>
         )
@@ -221,21 +240,17 @@ export type MenuItemProps = {
     label: string
     selected: boolean
     href: string | ((content: React.ReactChild) => React.ReactChild)
-    accessDenied: boolean
-    badge?: React.SFC // any
+    chipLabel?: string
+    chipColor?: 'warning' | 'information'
 }
 
 const NestedListItem = styled(ListItem)`&&{
     padding-left: 52px;
     background-color: ${({theme}) => theme.tfso.colors.menuExpanded};
-    color: ${({theme}) => theme.tfso.colors.menuItemText};
+    color: ${({selected, theme}) => selected ? theme.tfso.colors.menuItemSelectedText : theme.tfso.colors.menuItemText};
     :hover{
       background-color: ${({theme}) => theme.tfso.colors.menu}; // ${({theme}) => theme.mui.palette.action.hover};
     };
-    
-    > a{
-      text-decoration: none;
-    }
 }` as typeof ListItem
 
 const NestedListItemIcon = styled(ListItemIcon)`&&{
@@ -251,38 +266,24 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
         icon: PropTypes.elementType,
         label: PropTypes.string.isRequired,
         selected: PropTypes.bool.isRequired,
-        accessDenied: PropTypes.bool,
         href: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-        badge: PropTypes.func
+        chipLabel: PropTypes.string,
+        chipColor: PropTypes.oneOf(['success', 'info', 'warning', 'error']),
     }
 
     render(){
         const Icon = this.props.icon
-        const Badge = this.props.badge
 
         const LinkContent = (
-            <NestedListItem>
-                <Text>
-                    {Icon &&
-                        <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
-                    }
-                    {!Badge
-                        ? <ListItemText
-                            disableTypography
-                            primary={<StyledListItemTextTypography
-                                selected={this.props.selected}
-                                variant="body2">{this.props.label}</StyledListItemTextTypography>}
-                        />
-                        : <Badge>
-                            <ListItemText
-                                disableTypography
-                                primary={<StyledListItemTextTypography selected={this.props.selected} variant="body2">{this.props.label}</StyledListItemTextTypography>}
-                            />
-                        </Badge>
-                    }
-                </Text>
-                {this.props.accessDenied &&
-                    <LockIcon fontSize="small"/>
+            <NestedListItem selected={this.props.selected}>
+                {Icon &&
+                    <NestedListItemIcon color="inherit" style={{marginRight: 0}}><Icon fontSize="small" color={this.props.selected ? 'primary' : 'inherit'}/></NestedListItemIcon>
+                }
+                <ListItemText primaryTypographyProps={{color: 'inherit', noWrap: true}}>
+                   {this.props.label}
+                </ListItemText>
+                {this.props.chipLabel &&
+                    <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
                 }
             </NestedListItem>
         )
