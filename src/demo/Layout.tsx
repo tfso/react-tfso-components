@@ -105,9 +105,6 @@ const menuGroups = {
         label: 'Style',
         subtitle: 'Much Dashing',
         icon: StyleIcon,
-        component: Theme,
-        chipLabel: 'New',
-        chipColor: 'info',
         items: {
             layout: {
                 label: 'Layout',
@@ -119,7 +116,9 @@ const menuGroups = {
             },
             notify: {
                 label: 'Notify',
-                component: NotifyDemo
+                component: NotifyDemo,
+                chipLabel: 'New',
+                chipColor: 'info',
             },
             profilecard: {
                 label: 'ProfileCard',
@@ -166,7 +165,9 @@ const menuGroups = {
         label: 'Icons',
         subtitle: 'Well duh',
         component: Icons,
-        icon: FontDownloadIcon
+        icon: FontDownloadIcon,
+        chipLabel: 'New',
+        chipColor: 'info',
     },
     labs: {
         label: 'Labs',
