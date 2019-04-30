@@ -77,7 +77,7 @@ export default class Menu extends React.PureComponent<MenuProps>{
     render(){
         return (
             <StyledDrawer variant={this.props.mobile ? 'temporary' : 'persistent'} elevation={0} open={this.props.open} onClose={this.props.onClose}>
-                <List color="inherit" disablePadding>
+                <List color="inherit" disablePadding style={{paddingBottom: 100}}>
                     {this.props.children}
                 </List>
             </StyledDrawer>
