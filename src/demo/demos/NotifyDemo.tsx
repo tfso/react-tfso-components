@@ -52,18 +52,18 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
             }
         }
         return [
-            makeItem(<Typography>New mail from <b>verk@stag.no</b></Typography>, <MailIcon />),
-            makeItem(<Typography><b>Fru Hansen</b> sendt you a message</Typography>, <ChatIcon />),
-            makeItem(<Typography>Access to <b>Sagene Verk &amp; Byll</b> was granted by <b>Søstrene Hansonsen</b></Typography>, <KeyIcon />),
+            makeItem(<Typography>New mail from <b>verk@stag.no</b></Typography>, <Avatar style={{backgroundColor: 'magenta'}}><MailIcon /></Avatar>),
+            makeItem(<Typography><b>Fru Hansen</b> sendt you a message</Typography>, <Avatar style={{backgroundColor: 'green'}}><ChatIcon /></Avatar>),
+            makeItem(<Typography>Access to <b>Sagene Verk &amp; Byll</b> was granted by <b>Søstrene Hansonsen</b></Typography>, <Avatar style={{backgroundColor: 'blue'}}><KeyIcon /></Avatar>),
             makeItem(<Typography>Something may or may not have happened</Typography>, <Avatar>42</Avatar>),
-            makeItem(<Typography>Acces was denied to <b>Loff på tverrstaget</b></Typography>, <SecurityIcon />),
-            makeItem(<Typography><b>Kari</b> requested access to <b>Stagrapport</b></Typography>, <SecurityIcon />),
+            makeItem(<Typography>Acces was denied to <b>Loff på tverrstaget</b></Typography>, <Avatar style={{backgroundColor: 'purple'}}><SecurityIcon /></Avatar>),
+            makeItem(<Typography><b>Kari</b> requested access to <b>Stagrapport</b></Typography>, <Avatar style={{backgroundColor: 'purple'}}><SecurityIcon /></Avatar>),
             makeItem(<Typography>Notification without avatar notifying <b>something</b></Typography>),
-            makeItem(<Typography>You where notified of something that happened</Typography>, <SupervisorAccountIcon />),
+            makeItem(<Typography>You where notified of something that happened</Typography>, <Avatar><SupervisorAccountIcon /></Avatar>),
             makeItem(<Typography>Sometime something happened</Typography>, <Avatar>Foo</Avatar>),
-            makeItem(<Typography>Access to <b>Hostekrampefabrikken</b> was granted by <b>Kols</b></Typography>, <KeyIcon />),
+            makeItem(<Typography>Access to <b>Hostekrampefabrikken</b> was granted by <b>Kols</b></Typography>, <Avatar style={{backgroundColor: 'blue'}}><KeyIcon /></Avatar>),
             makeItem(<Typography>Something definitely have happened</Typography>, <Avatar>42</Avatar>),
-            makeItem(<Typography><b>Kjell Aronsen</b> requested access to <b>Tettstedet</b></Typography>, <SecurityIcon />),
+            makeItem(<Typography><b>Kjell Aronsen</b> requested access to <b>Tettstedet</b></Typography>, <Avatar style={{backgroundColor: 'purple'}}><SecurityIcon /></Avatar>),
             makeItem(<Typography>The watchdog service <b>los på mongotraller</b> is out of order</Typography>),
         ]
     }

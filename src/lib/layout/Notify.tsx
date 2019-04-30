@@ -12,7 +12,7 @@ import Popover from '@material-ui/core/Popover'
 import Badge from '@material-ui/core/Badge'
 import List from '@material-ui/core/List'
 import ListItem, {ListItemProps} from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import IconButton from '@material-ui/core/IconButton'
@@ -30,7 +30,7 @@ import {SvgIconProps} from '@material-ui/core/SvgIcon'
 
 import ScreenSize from '../ScreenSize'
 import Delay from '../Delay'
-import InfiniteScroll, {InfiniteScrollProps} from '../InfiniteScroll'
+import InfiniteScroll from '../InfiniteScroll'
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 
@@ -108,7 +108,7 @@ export type NotificationItemProps = {
     onClick: () => void
 
     /**
-     * Should be either an `<Avatar>`, `<SvgIcon>` or `undefined`
+     * Should be either an `<Avatar>`, `<SvgIcon>` or `undefined`. Wrapped in a ListItemAvatar
      */
     avatar?: React.ReactElement
 
@@ -144,7 +144,7 @@ const NotificationItem = (props: NotificationItemProps) => {
             divider
             read={props.read}
         >
-            {props.avatar && <ListItemIcon>{props.avatar}</ListItemIcon>}
+            {props.avatar && <ListItemAvatar>{props.avatar}</ListItemAvatar>}
             <ListItemText secondary={secondaryText}>
                 {props.children}
             </ListItemText>
@@ -312,6 +312,7 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
                 anchorEl={this._anchorEl.current}
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                 transformOrigin={{vertical: 'top', horizontal: 'right'}}
+                PaperProps={{style: {width: 500}}}
             >
                 {this.renderToolbar(false)}
                 {this.renderContent(false)}
