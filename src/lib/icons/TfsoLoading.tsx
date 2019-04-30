@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SvgIcon, {SvgIconProps} from '@material-ui/core/SvgIcon'
-import Styled, {css} from 'styled-components/macro'
+import styled, {css} from 'styled-components/macro'
 
 export type TfsoLoadingIconProps = {
     /**
@@ -16,7 +16,7 @@ const path = css`
     opacity: 1;
     animation-delay: 1.5s;
 `
-const StyledSvgIcon: React.ComponentType<SvgIconProps> = Styled(TfsoLoadingIconWrapper)`&&{
+const StyledSvgIcon = styled(TfsoLoadingIconWrapper)`&&{
     #path1{
         ${path}
         animation: fade-in1 1.5s ${({once}) => once ? 1 : 'infinite'}
@@ -77,9 +77,9 @@ const StyledSvgIcon: React.ComponentType<SvgIconProps> = Styled(TfsoLoadingIconW
         80% { opacity: 1; }
         100% {opactiy: 1}
     }
-}` as any // seems like returntype of styled-components adds string as a type of _ref.. dunnp why
+}` as typeof SvgIcon
 
-export default React.memo((props: TfsoLoadingIconProps) => (
+const TfsoLoading = React.memo((props: TfsoLoadingIconProps) => (
     <StyledSvgIcon
         {...props}
         viewBox="0 0 37 23"
@@ -93,3 +93,6 @@ export default React.memo((props: TfsoLoadingIconProps) => (
         <path d="m18.47 15.1c-2.031097 0.0055-3.673671 1.655547-3.669994 3.686649 0.0037 2.031101 1.652215 3.675171 3.683318 3.673336C20.514428 22.45815 22.159993 20.811104 22.16 18.78 22.162665 17.800536 21.774754 16.860421 21.082167 16.167833 20.389579 15.475246 19.449463 15.087335 18.47 15.09l0 0.01 0 0z" id="path1"/>
     </StyledSvgIcon>
 ))
+
+TfsoLoading.displayName = 'TfsoLoadingIcon'
+export default TfsoLoading as typeof SvgIcon

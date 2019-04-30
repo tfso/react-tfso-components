@@ -30,7 +30,7 @@ import {SvgIconProps} from '@material-ui/core/SvgIcon'
 
 import ScreenSize from '../ScreenSize'
 import Delay from '../Delay'
-import InfiniteScroll from '../InfiniteScroll'
+import InfiniteScroll, {InfiniteScrollProps} from '../InfiniteScroll'
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
 

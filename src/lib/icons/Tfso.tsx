@@ -7,8 +7,7 @@ import SvgIcon, {SvgIconProps} from '@material-ui/core/SvgIcon'
 // white: #fff
 
 export type TfsoIconProps = {} & SvgIconProps
-
-export default React.memo((props: TfsoIconProps) => (
+const Tfso = React.memo((props: TfsoIconProps) => (
     <SvgIcon
         {...props}
         viewBox='0 0 50.59 30.35'
@@ -18,3 +17,6 @@ export default React.memo((props: TfsoIconProps) => (
         />
     </SvgIcon>
 ))
+
+Tfso.displayName = 'TfsoIcon'
+export default Tfso as typeof SvgIcon
