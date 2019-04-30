@@ -78,7 +78,7 @@ export default withScreenSize(class Layout extends React.PureComponent<LayoutPro
     render(){
         return (
             <LayoutWrapper>
-                <DocumentTitle text={'24SevenOffice - ' + this.props.docTitle} />
+                <DocumentTitle text={this.props.docTitle + ' - 24SevenOffice'} />
                 <LayoutHeader>
                     <TopBar
                         onMenuToggle={this.onMenuToggle}
