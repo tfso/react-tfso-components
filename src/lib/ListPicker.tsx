@@ -35,7 +35,7 @@ type State = {
 }
 
 const AvatarColor = styled(Avatar)`&&{
-    background-color: ${({theme, color}) => color || theme.mui.palette.primary.dark};
+    background-color: ${({theme, color}) => color || theme.tfso.colors.menu};
     color: ${({theme}) => theme.mui.palette.primary.contrastText};
 }` as typeof Avatar
 
@@ -107,7 +107,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                     // @ts-ignore
                     MenuList ref={this._listRef}>
                     {this.props.options
-                        .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue) > -1 || option.value.indexOf(this.state.filterValue) > -1)
+                        .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue.toLocaleLowerCase()) > -1 || option.value.indexOf(this.state.filterValue.toLocaleLowerCase()) > -1)
                         .map((option, i) => (
                             <MenuItem
                                 disabled={option.value == this.props.disabled}

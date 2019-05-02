@@ -45,7 +45,7 @@ const CustomCardContent = styled(CardContent)`
 const ProfileCardContent = styled(CardContent)`
   display: flex;
   align-items: center;
-  background-color: ${({theme, color}) => color || theme.tfso.palette.primaryLight};
+  background-color: ${({theme, color}) => color || theme.tfso.colors.menu};
    //theme.mui.palette.secondary.dark
 ` as typeof CardContent
 
