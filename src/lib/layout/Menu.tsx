@@ -81,7 +81,7 @@ const StyledChip = styled(ChipWrapper)`&&{
 
 const StyledListItemText = styled(ListItemText)`&&{
   flex: 1; //Ie fix
-}`
+}` as typeof ListItemText
 
 export type MenuProps = {
     open: boolean
@@ -325,8 +325,6 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
                 {this.props.chipLabel &&
                     <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
                 }
-
-
             </NestedListItem>
         )
         return (
