@@ -79,6 +79,10 @@ const StyledChip = styled(ChipWrapper)`&&{
     height: 22px;
 }`
 
+const StyledListItemText = styled(ListItemText)`&&{
+  flex: 1; //Ie fix
+}`
+
 export type MenuProps = {
     open: boolean
     onClose: () => void
@@ -182,14 +186,14 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                     disableTouchRipple
                 >
                     <MenuIcon><Icon fontSize='small' /></MenuIcon>
-                    <ListItemText primaryTypographyProps={{color: 'inherit'}}>
+                    <StyledListItemText primaryTypographyProps={{color: 'inherit'}}>
                         {label}
                         <Collapse in={!expanded} timeout='auto'>
                             <ListItemSecondaryText variant='caption' noWrap>
                                 {subtitle}
                             </ListItemSecondaryText>
                         </Collapse>
-                    </ListItemText>
+                    </StyledListItemText>
                     <ListItemSecondaryAction>
                         <IconButton onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
                             {expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
@@ -256,12 +260,12 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
                 selected={this.props.selected}
             >
                 <MenuIcon><Icon fontSize='small' /></MenuIcon>
-                <ListItemText primaryTypographyProps={{color: 'inherit'}}>
+                <StyledListItemText primaryTypographyProps={{color: 'inherit'}}>
                     {this.props.label}
                     <ListItemSecondaryText variant='caption' noWrap>
                         {this.props.subtitle}
                     </ListItemSecondaryText>
-                </ListItemText>
+                </StyledListItemText>
                 {this.props.chipLabel &&
                     <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
                 }
@@ -315,12 +319,14 @@ export class MenuItem extends React.PureComponent<MenuItemProps>{
         const LinkContent = (
             <NestedListItem selected={this.props.selected}>
                 {Icon && <MenuIcon><Icon fontSize='small' /></MenuIcon>}
-                <ListItemText primaryTypographyProps={{color: 'inherit', noWrap: true}}>
+                <StyledListItemText primaryTypographyProps={{color: 'inherit', noWrap: true}}>
                     {this.props.label}
-                </ListItemText>
+                </StyledListItemText>
                 {this.props.chipLabel &&
                     <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
                 }
+
+
             </NestedListItem>
         )
         return (
