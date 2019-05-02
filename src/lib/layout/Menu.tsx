@@ -39,6 +39,26 @@ const StyledDrawer = styled(Drawer).attrs({
       background-color: ${({theme}) => theme.tfso.colors.menu};
       color: ${({theme}) => theme.tfso.colors.menuItemText};
     }
+    
+    .MuiPaperStyle ::-webkit-scrollbar {
+        width: 7px;
+        background-color: transparent;
+    }
+    
+    .MuiPaperStyle ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: rgba(255,255,255, 0.2);
+    }
+    
+    .MuiPaperStyle ::-webkit-scrollbar-thumb:hover{
+        background-color: rgba(255,255,255, 0.5);
+    }
+    
+    .MuiPaperStyle ::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: transparent;
+    }
+    
 ` as typeof Drawer
 
 type ChipColor = 'success' | 'error' | 'info' | 'warning'
