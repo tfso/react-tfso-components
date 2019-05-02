@@ -46,7 +46,6 @@ const ProfileCardContent = styled(CardContent)`
   display: flex;
   align-items: center;
   background-color: ${({theme, color}) => color || theme.tfso.colors.menu};
-   //theme.mui.palette.secondary.dark
 ` as typeof CardContent
 
 const ProfileTypography = styled(Typography)`
@@ -72,13 +71,13 @@ const CustomCloseIconButton = styled(IconButton)`
 ` as typeof IconButton
 
 const RightPanel = styled.div`
-  flex: 1;
+  flex: 1 0 auto;
   padding: ${({theme}) => theme.mui.spacing.unit}px;;
 `
 
 const Right = styled.div`
   text-align: right;
-  flex: 1;
+  flex: 1 0 auto;
 `
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
