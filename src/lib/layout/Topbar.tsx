@@ -15,6 +15,7 @@ const Root = styled.div`
 const StyledAppBar = styled(AppBar)`&&{
   background: white;
   z-index: ${props => props.theme.mui.zIndex.drawer + 1};
+  position: relative;
 }` as typeof AppBar
 
 const Wrapper = styled.div`
