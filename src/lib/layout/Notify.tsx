@@ -121,6 +121,8 @@ export type NotificationItemProps = {
      * Custom actions displayed in a menu when clicking the three vertical dots on the Notification
      */
     actions?: Array<{action: () => void, title: string}>
+
+    ContainerComponent: ListItemProps['ContainerComponent']
 }
 
 const NotificationItem = (props: NotificationItemProps) => {
@@ -143,6 +145,7 @@ const NotificationItem = (props: NotificationItemProps) => {
             onClick={props.onClick}
             divider
             read={props.read}
+            ContainerComponent={props.ContainerComponent}
         >
             {props.avatar && <ListItemAvatar>{props.avatar}</ListItemAvatar>}
             <ListItemText secondary={secondaryText}>
