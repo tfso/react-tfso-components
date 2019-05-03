@@ -14,8 +14,8 @@ const Root = styled.div`
 `
 const StyledAppBar = styled(AppBar)`&&{
   background: white;
-  z-index: ${props => props.theme.mui.zIndex.drawer + 1};
-  position: relative;
+  z-index: ${props => props.theme.mui.zIndex.drawer + 1}; // Higher than other drawers
+  position: relative; // Needed for z-index and shadow
 }` as typeof AppBar
 
 const Wrapper = styled.div`
@@ -67,7 +67,7 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
     render(){
         return (
             <Root>
-                <StyledAppBar position="static" color="default" elevation={1}>
+                <StyledAppBar position="relative" color="default" elevation={1}>
                     <Wrapper>
                         {this.props.mobile
                             ? (
