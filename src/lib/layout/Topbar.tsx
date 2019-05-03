@@ -62,24 +62,26 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
     }
 
     render(){
+        const homeUrl = '/modules/dashboard/'
+
         return (
             <StyledAppBar position="relative" color="default" elevation={1}>
                 <Wrapper>
                     {this.props.mobile
                         ? (
                             <LeftMobile>
-                                <Link href='/' underline='none'>
+                                <Link href={homeUrl} underline='none'>
                                     <TfsoIcon color="primary" fontSize="large" />
                                 </Link>
                             </LeftMobile>
                         )
                         : (
                             <Left>
-                                <Link href='/' underline='none'>
+                                <Link href={homeUrl} underline='none'>
                                     <TfsoIcon color="primary" fontSize="large" />
                                 </Link>
                                 <Typography component="h1" variant="h6" color="inherit" style={{paddingLeft: 7}}>
-                                    <Link href='/' underline='none' color='inherit'>24SevenOffice</Link>
+                                    <Link href={homeUrl} underline='none' color='inherit'>24SevenOffice</Link>
                                 </Typography>
                             </Left>
                         )
