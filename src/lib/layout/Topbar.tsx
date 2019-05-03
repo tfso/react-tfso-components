@@ -9,9 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu'
 import styled from 'styled-components/macro'
 import TfsoIcon from '../icons/Tfso'
 
-const Root = styled.div`
-  width: 100%;
-`
 const StyledAppBar = styled(AppBar)`&&{
   background: white;
   z-index: ${props => props.theme.mui.zIndex.drawer + 1}; // Higher than other drawers
@@ -66,43 +63,41 @@ export default class TopBar extends React.PureComponent<TopBarProps>{
 
     render(){
         return (
-            <Root>
-                <StyledAppBar position="relative" color="default" elevation={1}>
-                    <Wrapper>
-                        {this.props.mobile
-                            ? (
-                                <LeftMobile>
-                                    <Link href='/' underline='none'>
-                                        <TfsoIcon color="primary" fontSize="large" />
-                                    </Link>
-                                </LeftMobile>
-                            )
-                            : (
-                                <Left>
-                                    <Link href='/' underline='none'>
-                                        <TfsoIcon color="primary" fontSize="large" />
-                                    </Link>
-                                    <Typography component="h1" variant="h6" color="inherit" style={{paddingLeft: 7}}>
-                                        <Link href='/' underline='none' color='inherit'>24SevenOffice</Link>
-                                    </Typography>
-                                </Left>
-                            )
-                        }
-                        <Right>
-                            <Toolbar variant="dense">
-                                {this.props.onMenuToggle &&
-                                <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle && this.props.onMenuToggle()}>
-                                    <MenuIcon/>
-                                </MenuButton>
-                                }
-                                <ToolbarRight>
-                                    {this.props.children}
-                                </ToolbarRight>
-                            </Toolbar>
-                        </Right>
-                    </Wrapper>
-                </StyledAppBar>
-            </Root>
+            <StyledAppBar position="relative" color="default" elevation={1}>
+                <Wrapper>
+                    {this.props.mobile
+                        ? (
+                            <LeftMobile>
+                                <Link href='/' underline='none'>
+                                    <TfsoIcon color="primary" fontSize="large" />
+                                </Link>
+                            </LeftMobile>
+                        )
+                        : (
+                            <Left>
+                                <Link href='/' underline='none'>
+                                    <TfsoIcon color="primary" fontSize="large" />
+                                </Link>
+                                <Typography component="h1" variant="h6" color="inherit" style={{paddingLeft: 7}}>
+                                    <Link href='/' underline='none' color='inherit'>24SevenOffice</Link>
+                                </Typography>
+                            </Left>
+                        )
+                    }
+                    <Right>
+                        <Toolbar variant="dense">
+                            {this.props.onMenuToggle &&
+                            <MenuButton color="inherit" aria-label="Open drawer" onClick={e => this.props.onMenuToggle && this.props.onMenuToggle()}>
+                                <MenuIcon/>
+                            </MenuButton>
+                            }
+                            <ToolbarRight>
+                                {this.props.children}
+                            </ToolbarRight>
+                        </Toolbar>
+                    </Right>
+                </Wrapper>
+            </StyledAppBar>
         )
     }
 }
