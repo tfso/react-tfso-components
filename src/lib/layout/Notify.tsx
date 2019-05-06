@@ -103,7 +103,6 @@ export type NotificationItemProps = {
 }
 
 const NotificationItem = (props: NotificationItemProps) => {
-
     const secondaryText = React.useMemo(() => getNotificateSecondaryText(props.date), [props.date])
 
     return (
