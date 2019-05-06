@@ -7,8 +7,6 @@
       "dom"
     ],
     "allowJs": false,
-    "outDir": "./dist",
-    "rootDir": "./src",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -20,20 +18,13 @@
     "noEmit": true,
     "jsx": "preserve",
     "noImplicitAny": false,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
+    "isolatedModules": true,
+    "downlevelIteration": true,
     "typeRoots": [
       "./node_modules/@types"
     ]
   },
   "include": [
-    "src",
-    "index.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.js",
-    "**/*.test.ts"
+    "src"
   ]
 }
