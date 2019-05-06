@@ -23,10 +23,9 @@ const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
 })`
     &&{
-      width: ${({open}) => open ? 240 : 0}px;
-      height: 100%;
-      position: relative; /* Needed for z-index */
-      z-index: ${props => props.theme.mui.zIndex.drawer};
+        width: ${({open}) => open ? 240 : 0}px;
+        height: 100%;
+        z-index: ${props => props.theme.mui.zIndex.drawer};
     }
     
     a, a:hover{
@@ -34,13 +33,13 @@ const StyledDrawer = styled(Drawer).attrs({
     };
     
     li:focus{
-     outline: none;
+        outline: none;
     }
     
     .MuiPaperStyle{
-      position: static;
-      background-color: ${({theme}) => theme.tfso.colors.menu};
-      color: ${({theme}) => theme.tfso.colors.menuItemText};
+        position: relative;
+        background-color: ${({theme}) => theme.tfso.colors.menu};
+        color: ${({theme}) => theme.tfso.colors.menuItemText};
     }
     
     .MuiPaperStyle ::-webkit-scrollbar {
@@ -77,7 +76,7 @@ const getColor = (color: ChipColor, palette: DefaultTheme['tfso']['palette']) =>
 const ChipWrapper = ({color: ChipColor, ...props}) => <Chip {...props} />
 const StyledChip = styled(ChipWrapper)`&&{
     background-color: ${({color, theme}) => getColor(color, theme.tfso.palette)};
-    color: ${({color, theme}) => theme.tfso.colors.white};
+    color: ${({theme}) => theme.tfso.colors.white};
     font-size: ${({theme}) => theme.mui.typography.pxToRem(10)}; 
     height: 22px;
 }`
@@ -103,7 +102,7 @@ export default class Menu extends React.PureComponent<MenuProps>{
 
     render(){
         return (
-            <StyledDrawer variant={this.props.mobile ? 'temporary' : 'persistent'} elevation={0} open={this.props.open} onClose={this.props.onClose}>
+            <StyledDrawer variant={this.props.mobile ? 'temporary' : 'persistent'} elevation={0} open={this.props.open} onClose={this.props.onClose} transitionDuration={0}>
                 <List color="inherit" disablePadding style={{paddingBottom: 100}}>
                     {this.props.children}
                 </List>
