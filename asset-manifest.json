@@ -1,15 +1,17 @@
 {
-  "main.css": "/react-tfso-components/static/css/main.3f4026ee.chunk.css",
-  "main.js": "/react-tfso-components/static/js/main.6633ca4a.chunk.js",
-  "main.js.map": "/react-tfso-components/static/js/main.6633ca4a.chunk.js.map",
-  "runtime~main.js": "/react-tfso-components/static/js/runtime~main.9fcd8f8c.js",
-  "runtime~main.js.map": "/react-tfso-components/static/js/runtime~main.9fcd8f8c.js.map",
-  "static/css/2.34ed137a.chunk.css": "/react-tfso-components/static/css/2.34ed137a.chunk.css",
-  "static/js/2.0a51e619.chunk.js": "/react-tfso-components/static/js/2.0a51e619.chunk.js",
-  "static/js/2.0a51e619.chunk.js.map": "/react-tfso-components/static/js/2.0a51e619.chunk.js.map",
-  "index.html": "/react-tfso-components/index.html",
-  "precache-manifest.8cc705af9c06f30009e3c2a12eaeb5c9.js": "/react-tfso-components/precache-manifest.8cc705af9c06f30009e3c2a12eaeb5c9.js",
-  "service-worker.js": "/react-tfso-components/service-worker.js",
-  "static/css/2.34ed137a.chunk.css.map": "/react-tfso-components/static/css/2.34ed137a.chunk.css.map",
-  "static/css/main.3f4026ee.chunk.css.map": "/react-tfso-components/static/css/main.3f4026ee.chunk.css.map"
+  "files": {
+    "main.css": "/react-tfso-components/static/css/main.60b458d2.chunk.css",
+    "main.js": "/react-tfso-components/static/js/main.f89845a5.chunk.js",
+    "main.js.map": "/react-tfso-components/static/js/main.f89845a5.chunk.js.map",
+    "runtime~main.js": "/react-tfso-components/static/js/runtime~main.9fcd8f8c.js",
+    "runtime~main.js.map": "/react-tfso-components/static/js/runtime~main.9fcd8f8c.js.map",
+    "static/css/2.431f08a9.chunk.css": "/react-tfso-components/static/css/2.431f08a9.chunk.css",
+    "static/js/2.c5bc92a3.chunk.js": "/react-tfso-components/static/js/2.c5bc92a3.chunk.js",
+    "static/js/2.c5bc92a3.chunk.js.map": "/react-tfso-components/static/js/2.c5bc92a3.chunk.js.map",
+    "index.html": "/react-tfso-components/index.html",
+    "precache-manifest.79689f73278fa78d1f990286cfa78a04.js": "/react-tfso-components/precache-manifest.79689f73278fa78d1f990286cfa78a04.js",
+    "service-worker.js": "/react-tfso-components/service-worker.js",
+    "static/css/2.431f08a9.chunk.css.map": "/react-tfso-components/static/css/2.431f08a9.chunk.css.map",
+    "static/css/main.60b458d2.chunk.css.map": "/react-tfso-components/static/css/main.60b458d2.chunk.css.map"
+  }
 }
