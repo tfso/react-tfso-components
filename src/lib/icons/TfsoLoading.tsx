@@ -95,4 +95,4 @@ const TfsoLoading = React.memo((props: TfsoLoadingIconProps) => (
 ))
 
 TfsoLoading.displayName = 'TfsoLoadingIcon'
-export default TfsoLoading as typeof SvgIcon
+export default TfsoLoading
