@@ -47,7 +47,7 @@ export default class ListPickerDemo extends React.PureComponent{
             loading: true
         })
 
-        setTimeout((t)=>{
+        setTimeout((t) => {
             this.setState({
                 loading: false
             })
