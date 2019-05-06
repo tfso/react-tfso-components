@@ -87,7 +87,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
     componentDidMount(){
         const node = this._ref.current
         if(!node){ return }
-        node.scrollTo({top: 0}) // Dunno why, but for some reason the node is scrolled to bottom when mounting
+        node.scrollTo && node.scrollTo({top: 0}) // Dunno why, but for some reason the node is scrolled to bottom when mounting
 
         this._mounted = true
     }
