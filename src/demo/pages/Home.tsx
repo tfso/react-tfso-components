@@ -22,7 +22,7 @@ const CenterTop = styled.div`
 const Home = () => {
     return (
         <CenterTop>
-            <TfsoLoading once color='primary' fontSize='inherit' style={{fontSize: 400}} />
+            <TfsoLoading color='primary' fontSize='inherit' style={{fontSize: 400}} />
             <Typography variant='h3' color='primary' paragraph>
                 REACT-TFSO-COMPONENTS
             </Typography>

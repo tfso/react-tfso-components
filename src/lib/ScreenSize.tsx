@@ -42,6 +42,10 @@ export function withScreenSize<P extends InjectedScreenSizeProps>(Component: Rea
 }
 
 export const useScreenSize = () => {
+    throw new Error('ScreenSize hook is not finished yet. Sorry')
+
+    // Below breaks hook rules (even though it actually works)
+    /*
     const theme = useTheme()
 
     const width = [...theme.breakpoints.keys]
@@ -52,6 +56,7 @@ export const useScreenSize = () => {
         }, null) || 'xs'
 
     return getScreenSize(width)
+    */
 }
 
 export default ScreenSize
