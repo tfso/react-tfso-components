@@ -101,7 +101,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
         const renderLinearProgress = (
             <>
             { this.props.loading &&
-                    <LinearProgress/>
+                    <LinearProgress color='secondary'/>
             }
             </>
         )
