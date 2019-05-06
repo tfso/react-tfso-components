@@ -16,6 +16,7 @@ import {SvgIconProps} from '@material-ui/core/SvgIcon'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 import Chip from '@material-ui/core/Chip'
+import Tooltip from '@material-ui/core/Tooltip'
 import {DefaultTheme} from 'styled-components'
 
 const StyledDrawer = styled(Drawer).attrs({
@@ -191,9 +192,11 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                     <StyledListItemText primaryTypographyProps={{color: 'inherit'}}>
                         {label}
                         <Collapse in={!expanded} timeout='auto'>
-                            <ListItemSecondaryText variant='caption' noWrap>
-                                {subtitle}
-                            </ListItemSecondaryText>
+                            <Tooltip title={subtitle} enterDelay={500}>
+                                <ListItemSecondaryText variant='caption' noWrap>
+                                    {subtitle}
+                                </ListItemSecondaryText>
+                            </Tooltip>
                         </Collapse>
                     </StyledListItemText>
                     <ListItemSecondaryAction>
