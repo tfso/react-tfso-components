@@ -19,6 +19,7 @@ export default class ListPickerDemo extends React.PureComponent{
         buttonType: 'default',
         open: false,
         color: 'default',
+        loading: false,
         options: [{
             value: '23324',
             label: 'Vrådal & Rypefjord AS'
@@ -42,8 +43,15 @@ export default class ListPickerDemo extends React.PureComponent{
 
     onClickOpenConfirmationDialog = () => {
         this.setState({
-            open: true
+            open: true,
+            loading: true
         })
+
+        setTimeout((t)=>{
+            this.setState({
+                loading: false
+            })
+        }, 2000)
     }
 
     handleChange = (event) => {
@@ -81,6 +89,7 @@ export default class ListPickerDemo extends React.PureComponent{
                     <DemoProp name="onSwitch" type="function" default="" description="Returns value for selected option" />
                     <DemoProp name="onCancel" type="function" default="" description="Fires when list closes" />
                     <DemoProp name="avatarColor" type="string" default="" description="Valid values are types of #f7f7f7 or green" />
+                    <DemoProp name="loading" type="bool" default="" description="Shows a loading indicator as long as loading = true" />
                 </DemoProps>
                 <DemoContent>
                     <ListPicker
@@ -94,6 +103,7 @@ export default class ListPickerDemo extends React.PureComponent{
                         disabled='234234324'
                         selected={this.state.selected}
                         avatarColor={this.state.color == 'default' ? '' : this.state.color}
+                        loading={this.state.loading}
                     />
                     <Button variant='outlined' buttonRef={this._anchorEl} onClick={this.onClickOpenConfirmationDialog}>Open list</Button>
                     <InputLabel shrink htmlFor="age-label-placeholder">

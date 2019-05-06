@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 export type ListPickerProps = {
     open: boolean
@@ -27,11 +28,13 @@ export type ListPickerProps = {
     disabled?: string
     selected?: string
     avatarColor?: string
+    loading?: boolean
 }
 
 type State = {
     filterValue: string,
     focusValue: string
+
 }
 
 const AvatarColor = styled(Avatar)`&&{
@@ -58,7 +61,8 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
         searchLabel: PropTypes.string,
         disabled: PropTypes.string,
         selected: PropTypes.string,
-        avatarColor: PropTypes.string
+        avatarColor: PropTypes.string,
+        loading: PropTypes.bool
     }
     _inputRef: React.RefObject<HTMLLIElement> = React.createRef()
     _listRef: React.RefObject<HTMLInputElement> = React.createRef()
@@ -94,8 +98,17 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
     }
 
     render(){
+        const renderLinearProgress = (
+            <>
+            { this.props.loading &&
+                    <LinearProgress/>
+            }
+            </>
+        )
+
         const renderItems = (
             <>
+
                 <SearchField
                     placeholder={this.props.searchLabel}
                     inputRef={this._inputRef}
@@ -103,6 +116,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
                 />
+
                 <
                     // @ts-ignore
                     MenuList ref={this._listRef}>
@@ -147,6 +161,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                 open={this.props.open}
                 onClose={this.onClose}
             >
+                {renderLinearProgress}
                 <DialogContent>
                     {renderItems}
                 </DialogContent>
@@ -163,6 +178,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                 fullWidth
                 maxWidth='sm'
             >
+                {renderLinearProgress}
                 <CustomDialogTitle>
                     <IconButton onClick={this.onClose} aria-label="Close">
                         <CloseIcon />
