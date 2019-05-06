@@ -124,12 +124,12 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                         .filter(option => option.label.toLowerCase().indexOf(this.state.filterValue.toLocaleLowerCase()) > -1 || option.value.indexOf(this.state.filterValue.toLocaleLowerCase()) > -1)
                         .map((option, i) => (
                             <MenuItem
-                                disabled={option.value == this.props.disabled}
-                                selected={option.value == this.props.selected}
+                                disabled={option.value === this.props.disabled}
+                                selected={option.value === this.props.selected}
                                 key={i}
                                 onClick={() => { this.onSelect(option.value) }}
                             >
-                                <AvatarColor color={this.props.avatarColor == 'default' ? '' : this.props.avatarColor}>
+                                <AvatarColor color={this.props.avatarColor === 'default' ? '' : this.props.avatarColor}>
                                     <Typography variant='caption' color='inherit'>
                                         {option.label.split(' ')
                                             .slice(0, 3)

@@ -102,7 +102,7 @@ export default class ListPickerDemo extends React.PureComponent{
                         options={this.state.options}
                         disabled='234234324'
                         selected={this.state.selected}
-                        avatarColor={this.state.color == 'default' ? '' : this.state.color}
+                        avatarColor={this.state.color === 'default' ? '' : this.state.color}
                         loading={this.state.loading}
                     />
                     <Button variant='outlined' buttonRef={this._anchorEl} onClick={this.onClickOpenConfirmationDialog}>Open list</Button>
@@ -138,13 +138,16 @@ export default class ListPickerDemo extends React.PureComponent{
                         }
                     </Select>
                     {this.state && this.state.selectedOption
-                        ? <DemoDisplay>You have selected: {this.state.selectedOption} {
-                            this.state.options
-                                .map((option) => {
-                                    if(option.value == this.state.selectedOption){
+                        ? (
+                            <DemoDisplay>You have selected: {this.state.selectedOption} {
+                                this.state.options.map((option) => {
+                                    if(option.value === this.state.selectedOption){
                                         return '(' + option.label + ')'
                                     }
-                                })}</DemoDisplay>
+                                    return ''
+                                })}
+                            </DemoDisplay>
+                        )
                         : ''
                     }
                 </DemoContent>

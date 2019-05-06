@@ -25,7 +25,7 @@ export default class Link extends React.PureComponent<LinkProps>{
         const {to, href, underline, ...other} = this.props
         return <MuiLink
             {...other}
-            href={to && to.toLowerCase() || href}
+            href={to && (to.toLowerCase() || href)}
             underline={underline || 'none'}
             rel={this.props.target === '_blank' ? 'noreferrer' : undefined}
             onClick={this.onClick}

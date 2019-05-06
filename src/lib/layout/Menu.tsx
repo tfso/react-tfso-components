@@ -70,6 +70,7 @@ const getColor = (color: ChipColor, palette: DefaultTheme['tfso']['palette']) =>
     case 'error': return palette.alert
     case 'info': return palette.loudInfo
     case 'warning': return palette.warning
+    default: return palette.loudInfo
     }
 }
 

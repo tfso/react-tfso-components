@@ -117,7 +117,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
         // Reaching the treshold can occur multiple times, handle differently
         if(reachedTreshold){
-            if(!this._reachedTreshold || !thresholdReachable && reachedEnd){
+            if(!this._reachedTreshold || (!thresholdReachable && reachedEnd)){
                 onReachThreshold && onReachThreshold()
             }
             this._reachedTreshold = true

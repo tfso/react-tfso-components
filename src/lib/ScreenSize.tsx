@@ -1,7 +1,7 @@
 import React from 'react'
 import withWidth, {WithWidth} from '@material-ui/core/withWidth'
-import useTheme from '@material-ui/styles/useTheme'
-import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery'
+// import useTheme from '@material-ui/styles/useTheme'
+// import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery'
 
 type Omit<T, K extends string> = Pick<T, Exclude<keyof T, K>>
 

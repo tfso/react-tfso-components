@@ -20,7 +20,7 @@ const GitHubLink = (props: GitHubLinkProps) => {
     return (
         <Link href={`https://github.com/tfso/react-tfso-components${props.path ? `/${props.path}` : ''}`} target='_blank' rel='noreferrer' >
             <Tooltip title={props.tooltip ? props.tooltip : 'View on GitHub'}>
-                <GitHubIcon fontSize={props.iconProps && props.iconProps.fontSize || 'large'} {...props.iconProps as any} />
+                <GitHubIcon fontSize={props.iconProps && (props.iconProps.fontSize || 'large')} {...props.iconProps as any} />
             </Tooltip>
         </Link>
     )

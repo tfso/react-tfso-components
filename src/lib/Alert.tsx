@@ -23,6 +23,7 @@ const bgColor = (variant: AlertVariant, palette: DefaultTheme['tfso']['palette']
     case 'error': return palette.alert
     case 'info': return palette.primaryLight
     case 'warning': return palette.warning
+    default: return palette.primaryLight
     }
 }
 
