@@ -129,7 +129,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                                 key={i}
                                 onClick={() => { this.onSelect(option.value) }}
                             >
-                                <AvatarColor color={this.props.avatarColor}>
+                                <AvatarColor color={this.props.avatarColor == 'default' ? '' : this.props.avatarColor}>
                                     <Typography variant='caption' color='inherit'>
                                         {option.label.split(' ')
                                             .slice(0, 3)
