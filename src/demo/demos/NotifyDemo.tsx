@@ -5,7 +5,11 @@ import Notifier, {NotificationItem, NotificationItemProps} from '../../lib/layou
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
+import MoreIcon from '@material-ui/icons/MoreVert'
 import MailIcon from '@material-ui/icons/Email'
 import ChatIcon from '@material-ui/icons/Chat'
 import KeyIcon from '@material-ui/icons/VpnKey'
@@ -14,8 +18,10 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 
 type State = {
     open: boolean
-    notifications: NotificationItemProps[],
+    notifications: NotificationItemProps[]
     loading: boolean
+    currentTarget?: any
+    currentTargetNotification?: NotificationItemProps
 }
 
 export default class NotifyDemo extends React.PureComponent<{}, State>{
@@ -25,7 +31,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         this.state = {
             open: false,
             notifications: this.generateNotifications(),
-            loading: false,
+            loading: false
         }
     }
 
@@ -45,10 +51,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                 date,
                 children,
                 avatar,
-                onClick: () => console.log('Clicked notification', id),
-                onToggleMarkRead: this.onRead(id),
-                toggleMarkReadTitle: 'Mark as read',
-                toggleMarkUnreadTitle: 'Mark as unread'
+                onClick: () => console.log('Clicked notification', id)
             }
         }
         return [
@@ -71,7 +74,11 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
     renderNotifications(){
         return this.state.notifications
             .sort((a, b) => b.date.getTime() - a.date.getTime())
-            .map(n => <NotificationItem key={n.id} {...n} />)
+            .map(n => <NotificationItem key={n.id} {...n} action={
+                <IconButton onClick={this.onMenu(true, n)}>
+                    <MoreIcon fontSize='small'/>
+                </IconButton>
+            } />)
     }
 
     onOpen = () => {
@@ -93,7 +100,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         this.setState({open: false})
     }
 
-    onRead = (id: string) => () => this.setState(state => ({
+    onRead = (id: string) => this.setState(state => ({
         notifications: state.notifications.map(n => n.id === id ? {...n, read: !n.read} : n)
     }))
 
@@ -113,6 +120,8 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
     }
 
     render(){
+        const {currentTarget, currentTargetNotification} = this.state
+
         return (
             <Demo>
                 <DemoTitle demoPath='NotifyDemo.tsx' srcPath='Notify.tsx'>Notify</DemoTitle>
@@ -135,11 +144,8 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                     <DemoProp name='seen' type='boolean' default='false' description='Whether the notification has been displayed to the user'/>
                     <DemoProp name='read' type='boolean' default='false' description='Whether the notification has been read by the user'/>
                     <DemoProp required name='onClick' type='() => void' description='Callback invoked when the user clicks the notification'/>
-                    <DemoProp required name='onToggleMarkRead' type='() => void' description='Callback invoked when the user marks the notification as read'/>
-                    <DemoProp required name='toggleMarkReadTitle' type='string' description='Text on the ToggleMarkRead button when the notification is not read'/>
-                    <DemoProp required name='toggleMarkUnreadTitle' type='string' description='Text on the ToggleMarkRead button when the notification is read'/>
                     <DemoProp name='avatar' type='React.ReactElement' description='Should be either an <Avatar>, <SvgIcon> or undefined'/>
-                    <DemoProp name='actions' type='{action: () => void, title: string}[]' description='Custom actions displayed in a menu when clicking the three vertical dots on the Notification'/>
+                    <DemoProp name='action' type='React.ReactChild' description='Custom action'/>
                     <DemoProp required name='children' type='React.ReactChild' description='String or HTML formatted text'/>
                 </DemoProps>
                 <DemoContent>
@@ -156,8 +162,32 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                         {this.renderNotifications()}
                     </Notifier>
                     <Button onClick={this.reset}>Reset</Button>
+                    <Menu
+                        disableAutoFocusItem
+                        MenuListProps={{disablePadding: true}}
+                        open={!!currentTarget}
+                        anchorEl={currentTarget}
+                        onClose={this.onMenu(false)}
+                    >
+                        <MenuItem onClick={
+                            this.onMenuAction(() => {
+                                console.log(currentTargetNotification)
+                                currentTargetNotification && this.onRead(currentTargetNotification.id)
+                            })
+                        }>
+                            {currentTargetNotification && currentTargetNotification.read ? 'Mark as unread' : 'Mark as read'}
+                        </MenuItem>
+                    </Menu>
                 </DemoContent>
             </Demo>
         )
     }
+
+    onMenu = (menuOpen: boolean, notification?: NotificationItemProps, callback?: () => void) => (event: React.SyntheticEvent) => {
+        event.stopPropagation()
+        callback && callback()
+        this.setState({currentTarget: menuOpen ? event.currentTarget : undefined, currentTargetNotification: notification})
+    }
+
+    onMenuAction = (callback: () => void) => this.onMenu(false, undefined, callback)
 }

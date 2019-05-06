@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive'
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
 import CloseIcon from '@material-ui/icons/Close'
-import MoreIcon from '@material-ui/icons/MoreVert'
 
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Popover from '@material-ui/core/Popover'
@@ -24,8 +23,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
 
 import ScreenSize from '../ScreenSize'
@@ -85,23 +82,6 @@ export type NotificationItemProps = {
     read?: boolean
 
     /**
-     * Invoked when the user clicks `Mark as read` or `Mark as unread`.
-     * You should persist the changes on the notification.
-     * (The notification is not changed by this component)
-     */
-    onToggleMarkRead: () => void
-
-    /**
-     * Text to the displayed on the ToggleMarkRead button when the notification is _not_ read
-     */
-    toggleMarkReadTitle: string
-
-    /**
-     * Text to the displayed on the ToggleMarkRead button when the notification _is_ read
-     */
-    toggleMarkUnreadTitle: string
-
-    /**
      * Callback when the user clicks the notification.
      * you should set `read` to `true` in this callback before anything else.
      */
@@ -117,24 +97,12 @@ export type NotificationItemProps = {
      */
     children: React.ReactChild
 
-    /**
-     * Custom actions displayed in a menu when clicking the three vertical dots on the Notification
-     */
-    actions?: Array<{action: () => void, title: string}>
+    action?: React.ReactChild
 
-    ContainerComponent: ListItemProps['ContainerComponent']
+    ContainerComponent?: ListItemProps['ContainerComponent']
 }
 
 const NotificationItem = (props: NotificationItemProps) => {
-    const anchor = React.useRef()
-    const [state, setState] = React.useState({menuOpen: false})
-
-    const onMenu = React.useCallback((menuOpen: boolean, callback?: () => void) => (event: React.SyntheticEvent) => {
-        event.stopPropagation()
-        setState({menuOpen})
-        callback && callback()
-    }, [])
-    const onClickAction = React.useCallback((action: () => void) => onMenu(false, action), [onMenu])
 
     const secondaryText = React.useMemo(() => getNotificateSecondaryText(props.date), [props.date])
 
@@ -151,23 +119,9 @@ const NotificationItem = (props: NotificationItemProps) => {
             <ListItemText secondary={secondaryText}>
                 {props.children}
             </ListItemText>
-            <Menu
-                disableAutoFocusItem
-                MenuListProps={{disablePadding: true}}
-                open={state.menuOpen}
-                anchorEl={anchor.current}
-                onClose={onMenu(false)}
-            >
-                <MenuItem onClick={onClickAction(props.onToggleMarkRead)}>{props.read ? props.toggleMarkUnreadTitle : props.toggleMarkReadTitle}</MenuItem>
-                {props.actions && props.actions
-                    .map((action, i) => <MenuItem key={i} onClick={onClickAction(action.action)}>{action.title}</MenuItem>)
-                }
-            </Menu>
-            <ListItemSecondaryAction>
-                <IconButton onClick={onMenu(true)} buttonRef={anchor}>
-                    <MoreIcon fontSize='small'/>
-                </IconButton>
-            </ListItemSecondaryAction>
+            {props.action && <ListItemSecondaryAction>
+                {props.action}
+            </ListItemSecondaryAction>}
         </ReadListItem>
     )
 }
@@ -179,15 +133,9 @@ NotificationItem.propTypes = {
     read: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
     avatar: PropTypes.node,
-    onToggleMarkRead: PropTypes.func.isRequired,
-    toggleMarkReadTitle: PropTypes.string.isRequired,
-    toggleMarkUnreadTitle: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-    actions: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        action: PropTypes.func.isRequired
-    })),
-    ContainerComponent: ListItem.propTypes!.ContainerComponent
+    action: PropTypes.node,
+    ContainerComponent: PropTypes.any
 }
 
 export {NotificationItem}
