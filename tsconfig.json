@@ -25,8 +25,7 @@
     "sourceMap": true,
     "typeRoots": [
       "./node_modules/@types"
-    ],
-    "isolatedModules": true
+    ]
   },
   "include": [
     "src",
