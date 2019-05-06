@@ -186,7 +186,8 @@ NotificationItem.propTypes = {
     actions: PropTypes.arrayOf(PropTypes.shape({
         title: PropTypes.string.isRequired,
         action: PropTypes.func.isRequired
-    }))
+    })),
+    ContainerComponent: ListItem.propTypes!.ContainerComponent
 }
 
 export {NotificationItem}

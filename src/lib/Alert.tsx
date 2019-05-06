@@ -60,8 +60,8 @@ const Alert = (props: AlertProps) => {
                     color="inherit"
                     onClick={onClose}
                 >
-                    <CloseIcon style={{fontSize: 20}} />
-                </IconButton>,
+                    <CloseIcon fontSize='small' />
+                </IconButton>
             ]}
         />
     )

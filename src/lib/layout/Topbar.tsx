@@ -11,8 +11,7 @@ import TfsoIcon from '../icons/Tfso'
 
 const StyledAppBar = styled(AppBar)`&&{
   background: white;
-  z-index: ${props => props.theme.mui.zIndex.drawer + 1}; // Higher than other drawers
-  position: relative; // Needed for z-index and shadow
+  position: relative; /* Needed for z-index and shadow */
 }` as typeof AppBar
 
 const Wrapper = styled.div`

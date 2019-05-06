@@ -25,8 +25,8 @@ const StyledDrawer = styled(Drawer).attrs({
     &&{
       width: ${({open}) => open ? 240 : 0}px;
       height: 100%;
-      position: relative; // Needed for z-index
-      z-index: ${props => props.theme.mui.zIndex.drawer + 2}; // One higher than the topbar, to cover the shadow
+      position: relative; /* Needed for z-index */
+      z-index: ${props => props.theme.mui.zIndex.drawer};
     }
     
     a, a:hover{
