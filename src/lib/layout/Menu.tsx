@@ -19,7 +19,6 @@ import Chip from '@material-ui/core/Chip'
 import Tooltip from '@material-ui/core/Tooltip'
 import {DefaultTheme} from 'styled-components'
 import {InjectedScreenSizeProps, withScreenSize} from '../ScreenSize'
-import {ListPickerProps} from "../ListPicker";
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
