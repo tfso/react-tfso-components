@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography'
 import Chip from '@material-ui/core/Chip'
 import Tooltip from '@material-ui/core/Tooltip'
 import {DefaultTheme} from 'styled-components'
+import {InjectedScreenSizeProps, withScreenSize} from '../ScreenSize'
+import {ListPickerProps} from "../ListPicker";
 
 const StyledDrawer = styled(Drawer).attrs({
     classes: {paper: 'MuiPaperStyle'}
@@ -128,7 +130,7 @@ export type MenuGroupProps = {
     subtitle: string
     label: string
     onToggleExpanded: () => void
-    expanded: boolean
+    expanded: boolean,
     children: React.ReactNode
 }
 
@@ -153,14 +155,15 @@ const MenuGroupExpandMore = styled(ExpandMore)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
 }` as typeof ExpandMore
 
-export class MenuGroup extends React.PureComponent<MenuGroupProps>{
+// @ts-ignore
+export const MenuGroup = withScreenSize(class MenuGroup extends React.PureComponent<MenuGroupProps & InjectedScreenSizeProps>{
     static propTypes = {
         icon: PropTypes.elementType.isRequired,
         subtitle: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         onToggleExpanded: PropTypes.func.isRequired,
         expanded: PropTypes.bool.isRequired,
-        children: PropTypes.node.isRequired,
+        children: PropTypes.node.isRequired
     }
 
     onToggleExpanded = e => {
@@ -171,6 +174,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
 
     render(){
         const {expanded, subtitle, label, children, icon: Icon} = this.props
+        const mobile = this.props.screenSize.mobile
         return (
             <>
                 <MenuGroupListItem
@@ -206,7 +210,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
                     </ListItemSecondaryAction>
                 </MenuGroupListItem>
                 <Collapse in={expanded} timeout="auto">
-                    <List dense disablePadding>
+                    <List dense={!mobile} disablePadding>
                         {children}
                     </List>
                     {expanded && <Divider />}
@@ -214,7 +218,7 @@ export class MenuGroup extends React.PureComponent<MenuGroupProps>{
             </>
         )
     }
-}
+})
 
 export type MenuRootItemProps = {
     icon: React.ComponentType<SvgIconProps>
