@@ -5,12 +5,12 @@ const throttle = (fn: (...args: any[]) => void) => {
     let running = false
     return (...args: any[]) => {
         if(!running){
+            running = true
             // TODO: Use timeout if RAF is unavailable
             window.requestAnimationFrame(() => {
                 fn(args)
                 running = false
             })
-            running = true
         }
     }
 }
@@ -105,7 +105,6 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
         const thresholdPoint = scrollHeight - clientHeight - clientHeight * threshold
         const thresholdReachable = clientHeight < thresholdPoint
         const reachedTreshold = scrollTop >= thresholdPoint
-        const reachedEnd = scrollTop + clientHeight === scrollHeight
 
         if(scrollTop <= this._lastScrollTop){
             // Scrolling up
@@ -114,6 +113,8 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
             return
         }
         this._lastScrollTop = scrollTop
+        
+        const reachedEnd = scrollTop + clientHeight === scrollHeight
 
         // Reaching the treshold can occur multiple times, handle differently
         if(reachedTreshold){
