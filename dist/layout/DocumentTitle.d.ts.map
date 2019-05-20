@@ -1,0 +1,1 @@
+{"version":3,"file":"DocumentTitle.d.ts","sourceRoot":"","sources":["../../src/lib/layout/DocumentTitle.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAA;AAMzB,aAAK,KAAK,GAAG;IACT,IAAI,EAAE,MAAM,CAAA;CACf,CAAA;AAED,MAAM,CAAC,OAAO,OAAO,aAAc,SAAQ,KAAK,CAAC,aAAa,CAAC,KAAK,CAAC;gBACrD,KAAK,KAAA;IAIjB,yBAAyB,CAAC,SAAS,KAAA;IAKnC,MAAM;CAGT"}
