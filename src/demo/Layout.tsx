@@ -178,10 +178,6 @@ const menuGroups = {
             gridlayout: {
                 label: 'GridLayout',
                 component: GridLayoutDemo
-            },
-            notify: {
-                label: 'Notify',
-                component: NotifyDemo
             }
         }
     },

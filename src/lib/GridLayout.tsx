@@ -2,15 +2,10 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
-import isEqual from 'lodash/isEqual'
 
 import Paper, {PaperProps} from '@material-ui/core/Paper'
-
-import RGL, {Layout, WidthProvider} from 'react-grid-layout/'
-import 'react-grid-layout/css/styles.css'
-import 'react-resizable/css/styles.css'
-
-const ReactGridLayout = WidthProvider(RGL)
+import GL from './GridLayout/GridLayout'
+import { LayoutItem, Layout } from './GridLayout/utils'
 
 const BackgroundPaper = ({backgroundColor, ...props}: { backgroundColor: string } & PaperProps) => (<Paper {...props} />)
 const GridItemContainer = styled(BackgroundPaper)`&&{
@@ -25,37 +20,24 @@ const gridItemWidths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'onequarter', 'on
 const gridItemWidthNumberMap: {[P in GridItemWidth]: number} = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11, 12: 12, 'onequarter': 3, 'onethird': 4, 'half': 6, 'twothirds': 8, 'threequarters': 9, 'full': 12}
 const numberGridItemWithMap: {[n: number]: GridItemWidth} = {1: 1, 2: 2, 3: 'onequarter', 4: 'onethird', 5: 5, 6: 'half', 7: 7, 8: 'twothirds', 9: 'threequarters', 10: 10, 11: 11, 12: 'full'}
 
-const toGridItemWidth = (w?: number): GridItemWidth | undefined => w === undefined ? undefined : numberGridItemWithMap[Math.min(6, Math.trunc(w))]
+const toGridItemWidth = (w?: number): GridItemWidth | undefined => w === undefined ? undefined : numberGridItemWithMap[Math.min(12, Math.trunc(w))]
 const toGridItemHeight = (w?: number): GridItemHeight | undefined => w === undefined ? undefined : Math.min(12, Math.trunc(w)) as GridItemHeight
 
-const gridItemPositionToLayout = (position: GridItemPosition): Layout => ({
-    i: position.id,
-    x: position.col,
-    y: position.row,
-    h: position.height,
-    w: gridItemWidthNumberMap[position.width],
-    minH: position.minHeight,
-    minW: (position.minWidth && gridItemWidthNumberMap[position.minWidth]) || undefined,
-    maxH: position.maxHeight,
-    maxW: (position.maxWidth && gridItemWidthNumberMap[position.maxWidth]) || undefined,
-    isDraggable: position.draggable !== undefined ? position.draggable : false,
-    isResizable: position.resizable !== undefined ? position.resizable : false,
-    static: position.static,
+const gridItemPositionToLayout = (position: GridItemPosition): LayoutItem => ({
+    id: position.id,
+    col: position.col,
+    row: position.row,
+    height: position.height,
+    width: gridItemWidthNumberMap[position.width],
+    draggable: true
 })
 
-const layoutToGridItemPosition = (layout: Layout): GridItemPosition => ({
-    id: layout.i!,
-    col: layout.x,
-    row: layout.y,
-    width: toGridItemWidth(layout.w)!,
-    height: toGridItemHeight(layout.h)!,
-    minHeight: toGridItemHeight(layout.minH),
-    minWidth: toGridItemWidth(layout.minW),
-    maxHeight: toGridItemHeight(layout.maxH),
-    maxWidth: toGridItemWidth(layout.maxW),
-    draggable: layout.isDraggable,
-    resizable: layout.isResizable,
-    static: layout.static,
+const layoutToGridItemPosition = (layout: LayoutItem): GridItemPosition => ({
+    id: layout.id!,
+    col: layout.col,
+    row: layout.row,
+    width: toGridItemWidth(layout.width)!,
+    height: toGridItemHeight(layout.height)!
 })
 
 export type GridItem = {
@@ -70,17 +52,11 @@ export type GridItemPosition = {
     row: number
     width: GridItemWidth
     height: GridItemHeight
-    minWidth?: GridItemWidth
-    minHeight?: GridItemHeight
-    maxWidth?: GridItemWidth
-    maxHeight?: GridItemHeight
-    draggable?: boolean
-    resizable?: boolean
-    static?: boolean
 }
 
 export type GridLayoutProps = {
     items: Array<GridItem>
+    draggable?: boolean
     layout: Array<GridItemPosition>
     /**
      * @default 16
@@ -97,6 +73,7 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
 
     static propTypes = {
         margin: PropTypes.number,
+        draggable: PropTypes.bool,
         onLayoutChange: PropTypes.func,
         items: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -109,28 +86,16 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
             row: PropTypes.number.isRequired,
             width: PropTypes.oneOf(gridItemWidths).isRequired,
             height: PropTypes.number.isRequired,
-            minWidth: PropTypes.oneOf(gridItemWidths),
-            minHeight: PropTypes.number,
-            maxWidth: PropTypes.oneOf(gridItemWidths),
-            maxHeight: PropTypes.number,
-            draggable: PropTypes.bool,
-            resizable: PropTypes.bool,
-            static: PropTypes.bool,
         })).isRequired
     }
-
-    _layoutWasChangedWorkaround = false
 
     componentDidMount(){
         this.validateItemLayout()
     }
 
-    onLayoutChange = (layouts: Array<Layout>) => {
+    onLayoutChange = (layouts: Layout) => {
         const {onLayoutChange} = this.props
-        onLayoutChange &&
-            this._layoutWasChangedWorkaround &&
-            onLayoutChange(layouts.map(layoutToGridItemPosition))
-        this._layoutWasChangedWorkaround = false
+        onLayoutChange && onLayoutChange(Object.values(layouts).map(layoutToGridItemPosition))
     }
 
     validateItemLayout = () => {
@@ -152,31 +117,25 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
         })
     }
 
-    onDragResizeStop = (layout: Layout[], oldItem: Layout, newItem: Layout) => {
-        this._layoutWasChangedWorkaround = !isEqual(oldItem, newItem)
-    }
-
     render(){
-        const {items, layout, margin = 16} = this.props
-        const rglLayout = Object.values(layout).map(gridItemPositionToLayout)
+        const {items, layout, margin = 16, draggable} = this.props
+        const rglLayout = layout
+            .map(gridItemPositionToLayout)
+            .reduce((l, item) => {
+                l[item.id] = item
+                return l
+            }, {})
 
         return (
-            <ReactGridLayout
+            <GL
                 className='layout'
                 cols={12}
                 rowHeight={90}
                 layout={rglLayout}
-                compactType={'vertical'}
                 margin={[margin, margin]}
                 containerPadding={[0, 0]}
-                autoSize
-                measureBeforeMount
-                // width= // TODO: set this one such that width is fixed, should be someting large, but not too large... hmm.
-                useCSSTransforms
-                preventCollision={false}
                 onLayoutChange={this.onLayoutChange}
-                onResizeStop={this.onDragResizeStop}
-                onDragStop={this.onDragResizeStop}
+                draggable={draggable}
             >
                 {items.map(({id, backgroundColor, children}) => (
                     <GridItemContainer
@@ -186,7 +145,7 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
                         {children}
                     </GridItemContainer>))
                 }
-            </ReactGridLayout>
+            </GL>
         )
     }
 }

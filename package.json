@@ -32,8 +32,11 @@
     "@material-ui/styles": "^3.0.0-alpha.10",
     "styled-components": "^4.2.0",
     "react": "^16.0.0 || ^17.0.0",
-    "react-dom": "^16.0.0 || ^17.0.0",
-    "react-grid-layout": "^0.16.6"
+    "react-dom": "^16.0.0 || ^17.0.0"
+  },
+  "optionalPeerDependencies": {
+    "classnames": "^2.2.6",
+    "react-draggable": "^3.3.0"
   },
   "dependencies": {
     "lodash": "^4.17.11"
@@ -44,27 +47,30 @@
     "@material-ui/core": "3.9.2",
     "@material-ui/icons": "3.0.2",
     "@material-ui/styles": "3.0.0-alpha.10",
+    "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
+    "@types/jest": "^24.0.0",
     "@types/lodash": "^4.14.123",
     "@types/prismjs": "^1.16.0",
     "@types/react": "^16.8.16",
     "@types/react-dom": "^16.8.4",
-    "@types/react-grid-layout": "^0.16.7",
     "@types/styled-components": "^4.1.14",
     "@typescript-eslint/eslint-plugin": "1.7.0",
     "@typescript-eslint/parser": "1.7.0",
     "babel-preset-react-app": "8.0.0",
+    "classnames": "^2.2.6",
     "cross-env": "^5.1.4",
     "eslint": "5.16.0",
     "eslint-config": "github:tfso/eslint-config",
     "eslint-config-standard-react": "^7.0.2",
     "gh-pages": "^2.0.1",
     "history": "^4.9.0",
+    "jest": "24.7.1",
     "prismjs": "^1.16.0",
     "publish-to-git": "github:tfso/publish-to-git",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-grid-layout": "^0.16.6",
+    "react-draggable": "^3.3.0",
     "react-scripts": "3.0.0",
     "styled-components": "4.2.0",
     "typescript": "^3.4.5"

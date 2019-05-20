@@ -113,7 +113,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
             return
         }
         this._lastScrollTop = scrollTop
-        
+
         const reachedEnd = scrollTop + clientHeight === scrollHeight
 
         // Reaching the treshold can occur multiple times, handle differently

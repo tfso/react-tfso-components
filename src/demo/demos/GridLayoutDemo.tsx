@@ -16,6 +16,7 @@ const Item = styled(ItemWrapper)`&&{
     display: flex;
     justify-content: center;
     align-items: center;
+    background: ${({backgroundColor}) => backgroundColor};
     color: ${({theme, backgroundColor}) => theme.mui.palette.getContrastText(backgroundColor)};
     font-size: ${({theme}) => theme.mui.typography.h5.fontSize};
     font-weight: ${({theme}) => theme.mui.typography.h5.fontWeight};
@@ -26,9 +27,6 @@ type State = {
     items: GridLayoutProps['items']
     layout: GridLayoutProps['layout']
     addItemId: number
-    addResizable: boolean
-    addDraggable: boolean
-    addStatic: boolean
     addColor: string
     addWidth: number
     addHeight: number
@@ -47,13 +45,13 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
             {
                 id: 'b',
                 backgroundColor: '#0ff',
-                children: <Item backgroundColor={'#0ff'}>b (Static object)</Item>
+                children: <Item backgroundColor={'#0ff'}>b</Item>
             },
             {
                 id: 'c',
                 backgroundColor: '#ff0',
                 children: <Item backgroundColor={'#ff0'}>
-                    c (Fixed size)
+                    c
                     <Button onMouseDown={(e) => e.stopPropagation()} onClick={(e) => console.log('buttonclick')}>Button</Button>
                 </Item>
             },
@@ -69,9 +67,7 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                 width: 'onequarter',
                 height: 1,
                 col: 0,
-                row: 0,
-                draggable: true,
-                resizable: true
+                row: 0
             },
             {
                 id: 'b',
@@ -79,15 +75,13 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                 height: 1,
                 col: 3,
                 row: 0,
-                static: true
             },
             {
                 id: 'c',
                 width: 'onequarter',
                 height: 1,
                 col: 6,
-                row: 0,
-                draggable: true,
+                row: 0
             },
             {
                 id: 'd',
@@ -95,15 +89,10 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                 height: 2,
                 col: 0,
                 row: 1,
-                resizable: true,
-                draggable: true,
             },
         ],
         addItemId: 1,
         addColor: '#ccc',
-        addDraggable: true,
-        addResizable: true,
-        addStatic: false,
         addHeight: 2,
         addWidth: 6,
         addCol: 0,
@@ -114,9 +103,6 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
         const {
             addItemId: id,
             addColor: backgroundColor,
-            addDraggable: draggable,
-            addResizable: resizable,
-            addStatic,
             addWidth: width,
             addHeight: height,
             addCol: col,
@@ -125,20 +111,16 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
             layout
         } = this.state
 
-        const content = JSON.stringify({draggable, resizable, static: addStatic}, undefined, 2).replace(/"([^(")"]+)":/g, '$1:')
         const item = {
             id: id.toString(),
             backgroundColor,
-            children: <Item backgroundColor={backgroundColor}>{`${id} (${content})`}</Item>
+            children: <Item backgroundColor={backgroundColor}>{`${id}`}</Item>
         }
 
         const itemLayout = {
             id: id.toString(),
             width: Number(width),
             height: Number(height),
-            draggable,
-            resizable,
-            static: addStatic,
             col,
             row: col + width > 12 ? row + 1 : row
         } as GridItemPosition
@@ -156,11 +138,6 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
     handleChange = (key: keyof State) => (event: React.ChangeEvent<HTMLInputElement>, checked?: boolean) => {
         let value: string | number | boolean | undefined
         switch(key){
-        case 'addStatic':
-        case 'addResizable':
-        case 'addDraggable':
-            value = !!checked
-            break
         case 'addWidth':
         case 'addHeight':
             value = Number(event.target.value)
@@ -172,11 +149,15 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
         this.setState({[key]: value} as any)
     }
 
+    onLayoutChange = (layout: GridLayoutProps['layout']) => {
+        this.setState({layout})
+    }
+
     render(){
         return (
             <Demo>
                 <DemoTitle srcPath='GridLayout.tsx' demoPath='GridLayoutDemo.tsx'>GridLayout</DemoTitle>
-                <DemoHelp>A draggable and movable grid layout based on <Link href='https://github.com/STRML/react-grid-layout' target='_blank'>react-grid-layout</Link></DemoHelp>
+                <DemoHelp>A draggable grid layout</DemoHelp>
                 <DemoProps title='GridLayoutProps' >
                     <DemoProp name='margin' type='number' default='16' description='The margin between each item' />
                     <DemoProp required name='onLayoutChange' type='(layout: GridItemPosition[]) => void' default='' description='' />
@@ -208,12 +189,11 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                 </DemoHelp>
                 <DemoContent>
                     <GridLayout
+                        draggable
                         items={this.state.items}
                         layout={this.state.layout}
+                        onLayoutChange={this.onLayoutChange}
                     />
-                    <FormControlLabel label='static' control={<Switch checked={this.state.addStatic} onChange={this.handleChange('addStatic')}/>}/>
-                    <FormControlLabel label='resizable' control={<Switch checked={this.state.addResizable} onChange={this.handleChange('addResizable')}/>}/>
-                    <FormControlLabel label='draggable' control={<Switch checked={this.state.addDraggable} onChange={this.handleChange('addDraggable')}/>}/>
                     <TextField label='width' value={this.state.addWidth} onChange={this.handleChange('addWidth')} type='number' inputProps={{max: 12, min: 1}} />
                     <TextField label='height' value={this.state.addHeight} onChange={this.handleChange('addHeight')} type='number' inputProps={{max: 6, min: 1}} />
                     <TextField label='backgroundColor' value={this.state.addColor} onChange={this.handleChange('addColor')} />
