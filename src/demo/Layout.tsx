@@ -20,6 +20,7 @@ import {Location, UnregisterCallback} from 'history'
 import Link from './components/Link'
 import TrendingDemo from './demos/TrendingDemo'
 import BigNumberDemo from './demos/BigNumberDemo'
+import ProgressBarDemo from './demos/ProgressBarDemo'
 import AlertDemo from './demos/AlertDemo'
 import SearchFieldDemo from './demos/SearchFieldDemo'
 import TextFieldEditorDemo from './demos/TextFieldEditorDemo'
@@ -76,6 +77,12 @@ const menuGroups = {
             bignumber: {
                 label: 'BigNumber',
                 component: BigNumberDemo
+            },
+            progressbar: {
+                label: 'ProgressBar',
+                component: ProgressBarDemo,
+                chipLabel: 'NEW',
+                chipColor: 'success'
             },
             confirmationdialog: {
                 label: 'ConfirmationDialog 123123213',
