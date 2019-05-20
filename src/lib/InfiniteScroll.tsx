@@ -134,7 +134,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
     render(){
         return (
-            <div style={{height: this.props.height || 'calc(100%)', overflowY: 'auto'}} ref={this._ref} onScroll={this.onScroll}>
+            <div style={{maxHeight: this.props.height || 'calc(100%)', overflowY: 'auto'}} ref={this._ref} onScroll={this.onScroll}>
                 {this.props.children}
             </div>
         )
