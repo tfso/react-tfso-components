@@ -2,14 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
-import GridLayout, {GridLayoutProps, GridItemPosition} from '../../lib/GridLayout'
-import Link from '../components/Link'
+import GridLayout, {GridLayoutProps, GridItemPosition, GridItem} from '../../lib/GridLayout'
 import TextField from '@material-ui/core/TextField'
-import Switch from '@material-ui/core/Switch'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Button from '@material-ui/core/Button'
+import Paper, {PaperProps} from '@material-ui/core/Paper'
 
-const ItemWrapper = ({backgroundColor, ...props}: React.HTMLAttributes<HTMLDivElement> & {backgroundColor: string}) => <div {...props} />
+const ItemWrapper = ({backgroundColor, ...props}: PaperProps & {backgroundColor: string}) => <Paper {...props} />
 const Item = styled(ItemWrapper)`&&{
     width: 100%;
     height: 100%;
@@ -24,7 +22,7 @@ const Item = styled(ItemWrapper)`&&{
 }`
 
 type State = {
-    items: GridLayoutProps['items']
+    items: Array<GridItem & {backgroundColor: string}> // GridLayoutProps['items']
     layout: GridLayoutProps['layout']
     addItemId: number
     addColor: string
@@ -166,7 +164,6 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                 </DemoProps>
                 <DemoProps title='GridItem' >
                     <DemoProp required name='id' type='string' default='' description='Id of the item. A corresponding GridItemPosition must be supplied to the layout' />
-                    <DemoProp name='backgroundColor' type='string' default='inherit' description='The backgroundcolor of the item' />
                     <DemoProp required name='children' type='React.ReactNode' default='' description='' />
                 </DemoProps>
                 <DemoProps title='GridItemPosition' >
@@ -175,13 +172,6 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                     <DemoProp required name='row' type='number' default='' description='Row in which the item is positioned' />
                     <DemoProp required name='width' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
                     <DemoProp required name='height' type='number' default='' description='Height in number of rows' />
-                    <DemoProp name='draggable' type='boolean' default='false' description='If true, the item can be repositioned by dragging' />
-                    <DemoProp name='resizable' type='boolean' default='false' description='If true, the item can be resized' />
-                    <DemoProp name='static' type='boolean' default='false' description='If true, the item is locked in place (draggable and resizable is overriden to false)' />
-                    <DemoProp name='minWidth' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
-                    <DemoProp name='minHeight' type='number' default='' description='Height in number of rows' />
-                    <DemoProp name='maxWidth' type={`1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'`} default='' description='Width in number of columns' />
-                    <DemoProp name='maxHeight' type='number' default='' description='Height in number of rows' />
                 </DemoProps>
                 <DemoHelp>
                     To prevent dragging when clicking and holding buttons within gridItems, you must stop the event propagation of the onMouseDown event on the button.<br />

@@ -1,18 +1,9 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
-import styled from 'styled-components/macro'
 
-import Paper, {PaperProps} from '@material-ui/core/Paper'
 import GL from './GridLayout/GridLayout'
 import { LayoutItem, Layout } from './GridLayout/utils'
-
-const BackgroundPaper = ({backgroundColor, ...props}: { backgroundColor: string } & PaperProps) => (<Paper {...props} />)
-const GridItemContainer = styled(BackgroundPaper)`&&{
-    background-color: ${({backgroundColor}) => backgroundColor};
-    width: 100%;
-    height: 100%;
-}`
 
 type GridItemWidth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'onequarter' | 'onethird' | 'half' | 'twothirds' | 'threequarters' | 'full'
 type GridItemHeight = number
@@ -42,7 +33,6 @@ const layoutToGridItemPosition = (layout: LayoutItem): GridItemPosition => ({
 
 export type GridItem = {
     id: string
-    backgroundColor?: string
     children: React.ReactNode
 }
 
@@ -137,13 +127,11 @@ export default class GridLayout extends React.PureComponent<GridLayoutProps>{
                 onLayoutChange={this.onLayoutChange}
                 draggable={draggable}
             >
-                {items.map(({id, backgroundColor, children}) => (
-                    <GridItemContainer
-                        key={id}
-                        backgroundColor={backgroundColor || 'inherit'}
-                    >
-                        {children}
-                    </GridItemContainer>))
+                {// TODO: Perhaps cloning items and adding key is better, or, requiring key ? hmm
+                    items.map(({id, children}) => (
+                        <div key={id}>
+                            {children}
+                        </div>))
                 }
             </GL>
         )
