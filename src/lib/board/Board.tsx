@@ -1,12 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import BoardContainer from './BoardContainer'
-import {BoardItems, ScreenType} from './types'
-import {calculateBoardHeight, calculateBoardRows, calculateItemDimensions, calculateItemLayout} from './utils'
+import {BoardItems, ScreenType, BoardItem} from './types'
+import {calculateBoardHeight, calculateBoardRows, calculateItemDimensions, calculateItemLayout, compact, moveItem} from './utils'
 import BoardItemContainer, {BoardItemContainerProps} from './BoardItemContainer'
 import {useWidth} from './useWidth'
 import useScreenType from './useScreenType'
 import {DraggableCore, DraggableData, DraggableEvent} from 'react-draggable'
 import BoardItemPlaceholder, {BoardItemPlaceholdProps} from './BoardItemPlaceholder'
+import isEqual from 'lodash/isEqual'
 
 export type BoardProps = {
     locked?: boolean
@@ -34,7 +36,8 @@ const Board = (props: BoardProps) => {
 
     // State
     const [items, setItems] = React.useState(props.items)
-    const [activeDrag, setActiveDrag] = React.useState<BoardItemContainerProps & {key: React.Key} | null>(null)
+    const [activeDrag, setActiveDragItem] = React.useState<BoardItemContainerProps & {key: React.Key} | null>(null)
+    const [oldDragItem, setOldDragItem] = React.useState<BoardItem | null>(null)
     const [placeholder, setPlaceholder] = React.useState<BoardItemPlaceholdProps | null>(null)
     const [width, setWidth] = React.useState(1920)
 
@@ -49,7 +52,8 @@ const Board = (props: BoardProps) => {
     const onDragStart = React.useCallback((key: React.Key) => {
         const item = {...items[key]}
         const dimensions = calculateItemDimensions(item[screenType]!, boardDimensions)
-        setActiveDrag({...dimensions, key, dragging: true})
+        setActiveDragItem({...dimensions, key, dragging: true})
+        setOldDragItem(item)
     }, [items, screenType, boardDimensions])
 
     const onDrag = React.useCallback((_: DraggableEvent, {deltaX, deltaY}: DraggableData) => {
@@ -60,11 +64,14 @@ const Board = (props: BoardProps) => {
         const left = Math.min(Math.max(activeDrag.left + deltaX, 0), width - activeDrag.width)
 
         const item = {...items[activeDrag.key]}
-        const placeholderLayout = calculateItemLayout(item[screenType]!, {top, left}, boardDimensions)
+        const itemLayout = calculateItemLayout(item[screenType]!, {top, left}, boardDimensions)
 
         // TODO: Move items out of collisions.
-        setActiveDrag({...activeDrag, top, left})
-        setPlaceholder(calculateItemDimensions(placeholderLayout, boardDimensions))
+        const newDragItem = {...activeDrag, top, left}
+        const newItems = compact(moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, columns, screenType), screenType)
+        setItems(newItems)
+        setActiveDragItem({...activeDrag, top, left})
+        setPlaceholder(calculateItemDimensions(itemLayout, boardDimensions))
     }, [activeDrag, items, screenType, boardDimensions, width])
 
     const onDragStop = React.useCallback(() => {
@@ -75,13 +82,14 @@ const Board = (props: BoardProps) => {
         const item = {...items[key], [screenType]: calculateItemLayout(items[key][screenType]!, activeDrag, boardDimensions)}
         const newItems = {...items, [activeDrag.key]: item}
         setItems(newItems)
-        setActiveDrag(null)
+
+        if(onChange && !isEqual(item, oldDragItem)){
+            onChange(newItems)
+        }
+        
+        setActiveDragItem(null)
         setPlaceholder(null)
-        // TODO: Check that the newItem was in fact moved to a new position.
-        // If not, the layout should not have changed, and we should not invoke the onChange callback.
-        // Might need a new state variable for this.
-        onChange && onChange(newItems)
-    }, [activeDrag, items, screenType, boardDimensions, onChange])
+    }, [activeDrag, oldDragItem, items, screenType, boardDimensions, onChange])
 
     return (
         <div ref={rootRef}>
@@ -120,7 +128,11 @@ const Board = (props: BoardProps) => {
 }
 
 Board.propTypes = {
-    // TODO
+    items: PropTypes.object.isRequired,
+    locked: PropTypes.bool,
+    onChange: PropTypes.func,
+    rowHeight: PropTypes.number.isRequired,
+    spacing: PropTypes.number,
 }
 
 export default Board

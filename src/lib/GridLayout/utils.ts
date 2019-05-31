@@ -189,16 +189,6 @@ function moveCollidingItem(
 ){
     movedItems.add(collidesWith.id)
 
-    // const collissionMovedUp = {
-    // ...collidesWith,
-    // row: Math.max(source.row - collidesWith.height, 0)
-    // }
-
-    // // Can switch places (move collision above source)
-    // if(!getFirstCollision(Object.values(layout), collissionMovedUp)){
-    // return {...layout, [collissionMovedUp.id]: collissionMovedUp}
-    // }
-
     const collissionMovedDown = {
         ...collidesWith,
         row: source.row + source.height
