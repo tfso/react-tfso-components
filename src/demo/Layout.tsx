@@ -28,6 +28,7 @@ import ConfirmationDialogDemo from './demos/ConfirmationDialogDemo'
 import ListPickerDemo from './demos/ListPickerDemo'
 import EmojiDemo from './demos/EmojiDemo'
 import GridLayoutDemo from './demos/GridLayoutDemo'
+import BoardDemo from './demos/BoardDemo'
 import HoverableDemo from './demos/HoverableDemo'
 import DelayDemo from './demos/DelayDemo'
 import WizardDemo from './demos/WizardDemo'
@@ -182,13 +183,13 @@ const menuGroups = {
         icon: CodeIcon,
         accessDenied: true,
         items: {
-            gridlayout: {
-                label: 'GridLayout',
-                component: GridLayoutDemo
-            },
-            notify: {
-                label: 'Notify',
-                component: NotifyDemo
+            // gridlayout: {
+            //     label: 'GridLayout',
+            //     component: GridLayoutDemo
+            // },
+            board: {
+                label: 'Board',
+                component: BoardDemo
             }
         }
     },
