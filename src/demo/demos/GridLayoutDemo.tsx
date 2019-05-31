@@ -2,10 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
-import GridLayout, {GridLayoutProps, GridItemPosition, GridItem} from '../../lib/GridLayout'
+import GridLayout, {GridLayoutProps, GridItem} from '../../lib/GridLayout'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Paper, {PaperProps} from '@material-ui/core/Paper'
+import {ResponsiveLayout} from '../../lib/GridLayout/responsiveUtils'
+import {Breakpoint} from '@material-ui/core/styles/createBreakpoints'
+import {Layout} from '../../lib/GridLayout/utils'
 
 const ItemWrapper = ({backgroundColor, ...props}: PaperProps & {backgroundColor: string}) => <Paper {...props} />
 const Item = styled(ItemWrapper)`&&{
@@ -23,7 +26,7 @@ const Item = styled(ItemWrapper)`&&{
 
 type State = {
     items: Array<GridItem & {backgroundColor: string}> // GridLayoutProps['items']
-    layout: GridLayoutProps['layout']
+    layout: ResponsiveLayout
     addItemId: number
     addColor: string
     addWidth: number
@@ -59,36 +62,38 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
                 children: <Item backgroundColor={'#f8f'}>d</Item>
             },
         ],
-        layout: [
-            {
-                id: 'a',
-                width: 'onequarter',
-                height: 1,
-                col: 0,
-                row: 0
-            },
-            {
-                id: 'b',
-                width: 'onequarter',
-                height: 1,
-                col: 3,
-                row: 0,
-            },
-            {
-                id: 'c',
-                width: 'onequarter',
-                height: 1,
-                col: 6,
-                row: 0
-            },
-            {
-                id: 'd',
-                width: 'full',
-                height: 2,
-                col: 0,
-                row: 1,
-            },
-        ],
+        layout: {
+            xl: {
+                a: {
+                    id: 'a',
+                    width: 3, // 'onequarter',
+                    height: 1,
+                    col: 0,
+                    row: 0
+                },
+                b: {
+                    id: 'b',
+                    width: 3, // 'onequarter',
+                    height: 1,
+                    col: 3,
+                    row: 0,
+                },
+                c: {
+                    id: 'c',
+                    width: 3, // 'onequarter',
+                    height: 1,
+                    col: 6,
+                    row: 0
+                },
+                d: {
+                    id: 'd',
+                    width: 12, // 'full',
+                    height: 2,
+                    col: 0,
+                    row: 1,
+                },
+            }
+        },
         addItemId: 1,
         addColor: '#ccc',
         addHeight: 2,
@@ -121,12 +126,12 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
             height: Number(height),
             col,
             row: col + width > 12 ? row + 1 : row
-        } as GridItemPosition
-
+        }
+        console.log(itemLayout)
         const addCol = col + width
         this.setState({
             items: [...items, item],
-            layout: [...layout, itemLayout],
+            layout: {...layout, xl: {...layout.xl, [itemLayout.id]: itemLayout}},
             addItemId: this.state.addItemId + 1,
             addCol: addCol >= 12 ? 0 : addCol,
             addRow: addCol === 0 ? row + height : col + width > 12 ? row + 1 : row
@@ -147,8 +152,9 @@ export default class GridLayoutDemo extends React.PureComponent<{}, State>{
         this.setState({[key]: value} as any)
     }
 
-    onLayoutChange = (layout: GridLayoutProps['layout']) => {
-        this.setState({layout})
+    onLayoutChange = (newLayout: Layout, breakpoint: Breakpoint) => {
+        console.log(newLayout, breakpoint)
+        this.setState(({layout}) => ({layout: {...layout, [breakpoint]: newLayout}}))
     }
 
     render(){

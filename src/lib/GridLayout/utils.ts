@@ -7,7 +7,7 @@ export type LayoutItem = Readonly<{
     col: number
     row: number
     id: string
-    draggable?: boolean
+    // draggable?: boolean
 }>
 export type Layout = Readonly<{[key: string]: LayoutItem}>
 export type Position = Readonly<{
