@@ -42,7 +42,7 @@ const Board = (props: BoardProps) => {
     useWidth(rootRef, (width) => setWidth(width))
     const screenType = useScreenType(width)
     const height = useHeight(props, screenType)
-    const colWidth = React.useMemo(() => Math.round(width / columns) - spacing, [spacing, width])
+    const colWidth = React.useMemo(() => Math.round((width + spacing) / (columns)) - spacing, [spacing, width])
     const boardDimensions = React.useMemo(() => ({rowHeight, colWidth, spacing}), [rowHeight, colWidth, spacing])
 
     // Callbacks
@@ -55,9 +55,9 @@ const Board = (props: BoardProps) => {
     const onDrag = React.useCallback((_: DraggableEvent, {deltaX, deltaY}: DraggableData) => {
         if(!activeDrag) return
 
-        // TODO: constrain movement to within the width of the container
-        const top = activeDrag.top + deltaY
-        const left = activeDrag.left + deltaX
+        // Constraining movement to within the container bounds
+        const top = Math.max(activeDrag.top + deltaY, 0)
+        const left = Math.min(Math.max(activeDrag.left + deltaX, 0), width - activeDrag.width)
 
         const item = {...items[activeDrag.key]}
         const placeholderLayout = calculateItemLayout(item[screenType]!, {top, left}, boardDimensions)
@@ -65,7 +65,7 @@ const Board = (props: BoardProps) => {
         // TODO: Move items out of collisions.
         setActiveDrag({...activeDrag, top, left})
         setPlaceholder(calculateItemDimensions(placeholderLayout, boardDimensions))
-    }, [activeDrag, items, screenType, boardDimensions])
+    }, [activeDrag, items, screenType, boardDimensions, width])
 
     const onDragStop = React.useCallback(() => {
         if(!activeDrag){
