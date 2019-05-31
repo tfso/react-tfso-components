@@ -60,12 +60,11 @@ export function sortBreakpoints(breakpoints: BreakpointValues): Array<Breakpoint
 }
 
 export function collides(bil1?: BoardItemLayout, bil2?: BoardItemLayout){
-    if(!bil1 || !bil2)
-        return false
-    if (bil1.col + bil1.colSpan <= bil2.col) return false
-    if (bil1.col >= bil2.col + bil2.colSpan) return false
-    if (bil1.row + bil1.rowSpan <= bil2.row) return false
-    if (bil1.row >= bil2.row + bil2.rowSpan) return false
+    if(!bil1 || !bil2) return false
+    if(bil1.col + bil1.colSpan <= bil2.col) return false
+    if(bil1.col >= bil2.col + bil2.colSpan) return false
+    if(bil1.row + bil1.rowSpan <= bil2.row) return false
+    if(bil1.row >= bil2.row + bil2.rowSpan) return false
     return true
 }
 
@@ -89,10 +88,10 @@ export function compact(items: BoardItems, screenType: ScreenType): BoardItems{
         }
         newLayout[itemLayout.key] = itemWasChanged
             ? {...items[itemLayout.key], [screenType]: itemLayout}
-            : items[itemLayout.key] // don't want to duplicated items. 
+            : items[itemLayout.key] // don't want to duplicated items.
     }
 
-    return layoutWasChanged 
+    return layoutWasChanged
         ? newLayout
         : items
 }
@@ -106,22 +105,11 @@ export function compareBoardItemLayout(a: BoardItemLayout, b: BoardItemLayout){
     return -1
 }
 
-export function constrainCol(targetCol: number, colSpan: number, columns: number){
-    if(colSpan > columns || targetCol < 0){
-        return 0
-    }
-    if(targetCol + colSpan > columns){
-        return columns - colSpan
-    }
-    return targetCol
-}
-
 export function moveItem(
     key: string | number,
     items: BoardItems,
     col: number,
     row: number,
-    cols: number,
     screenType: ScreenType
 ){
     if(!items.hasOwnProperty(key)){
@@ -130,7 +118,7 @@ export function moveItem(
 
     const sourceItem = items[key]
     const sourceItemLayout = sourceItem[screenType]!
-    const targetItemLayout = {...sourceItemLayout, col: constrainCol(col, sourceItemLayout.colSpan, cols), row}
+    const targetItemLayout = {...sourceItemLayout, col, row}
     const targetItem = {...sourceItem, [screenType]: targetItemLayout}
 
     let newItems = {...items, [sourceItem.key]: targetItem}
@@ -148,7 +136,7 @@ export function moveItem(
             [screenType]: {
                 ...collisionLayout,
                 row: Math.max(targetItemLayout.row - collisionLayout.rowSpan, 0)
-            }            
+            }
         }
 
         // Can switch places (move collision above target)

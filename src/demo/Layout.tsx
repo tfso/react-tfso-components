@@ -176,10 +176,10 @@ const menuGroups = {
         icon: CodeIcon,
         accessDenied: true,
         items: {
-            gridlayout: {
-                label: 'GridLayout',
-                component: GridLayoutDemo
-            },
+            // gridlayout: {
+            //     label: 'GridLayout',
+            //     component: GridLayoutDemo
+            // },
             board: {
                 label: 'Board',
                 component: BoardDemo

@@ -224,9 +224,9 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
                 <DemoProps title='BoardItem' >
                     <DemoProp required name='key' type='React.Key' default='' description='' />
                     <DemoProp required name='component' type='React.ElementType<{screenType: ScreenType}>' default='' description='' />
-                    <DemoProp name='mobile' type='BoardItemLayout | hidden'/>
-                    <DemoProp name='tablet' type='BoardItemLayout | hidden'/>
-                    <DemoProp name='desktop' type='BoardItemLayout | hidden'/>
+                    <DemoProp name='mobile' type='BoardItemLayout' description='If not defined, the item is hidden' />
+                    <DemoProp name='tablet' type='BoardItemLayout' description='If not defined, the item is hidden' />
+                    <DemoProp required name='desktop' type='BoardItemLayout' description='' />
                 </DemoProps>
                 <DemoProps title='BoardItemLayout' >
                     <DemoProp required name='col' type='number' default='' description='Column in which the item is positioned' />
