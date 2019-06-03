@@ -14,5 +14,8 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": true }],
     "semi": "error"
+  },
+  "env": {
+    "jest": true
   }
 }
