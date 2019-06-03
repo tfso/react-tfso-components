@@ -159,19 +159,20 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
     onAddItem = () => {
         const {
             addItemId: id,
-            addColor: backgroundColor,
+            // addColor: backgroundColor,
             addWidth: width,
             addHeight: height,
             addCol: col,
             addRow: row,
-            items,
+            // items,
         } = this.state
-
+        /*
         const item = {
             id: id.toString(),
             backgroundColor,
             children: <Item backgroundColor={backgroundColor}>{`${id}`}</Item>
         }
+        */
 
         const itemLayout = {
             id: id.toString(),
@@ -181,7 +182,7 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
             row: col + width > 12 ? row + 1 : row
         }
         console.log(itemLayout)
-        const addCol = col + width
+        // const addCol = col + width
         // this.setState({
         //     items: [...items, item],
         //     items: {...layout, xl: {...layout.xl, [itemLayout.id]: itemLayout}},

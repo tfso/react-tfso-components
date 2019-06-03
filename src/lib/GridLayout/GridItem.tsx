@@ -146,7 +146,7 @@ export default class GridItem extends React.Component<Props, State>{
         x = Math.max(Math.min(x, cols - w), 0)
         y = Math.max(y, 0)
 
-        return { x, y }
+        return {x, y}
     }
 
     mixinDraggable(child: React.ReactElement){
@@ -168,7 +168,7 @@ export default class GridItem extends React.Component<Props, State>{
             const handler = this.props[handlerName]
             if(!handler) return
 
-            const newPosition: PartialPosition = { top: 0, left: 0 }
+            const newPosition: PartialPosition = {top: 0, left: 0}
 
             // Get new XY
             switch(handlerName){
@@ -182,7 +182,7 @@ export default class GridItem extends React.Component<Props, State>{
                     clientRect.left - parentRect.left + offsetParent.scrollLeft
                 newPosition.top =
                     clientRect.top - parentRect.top + offsetParent.scrollTop
-                this.setState({ dragging: newPosition })
+                this.setState({dragging: newPosition})
                 break
             }
             case 'onDrag':
@@ -191,7 +191,7 @@ export default class GridItem extends React.Component<Props, State>{
                 }
                 newPosition.left = this.state.dragging.left + deltaX
                 newPosition.top = this.state.dragging.top + deltaY
-                this.setState({ dragging: newPosition })
+                this.setState({dragging: newPosition})
                 break
             case 'onDragStop':
                 if(!this.state.dragging){
@@ -199,7 +199,7 @@ export default class GridItem extends React.Component<Props, State>{
                 }
                 newPosition.left = this.state.dragging.left
                 newPosition.top = this.state.dragging.top
-                this.setState({ dragging: null })
+                this.setState({dragging: null})
                 break
             default:
                 throw new Error(
@@ -207,9 +207,9 @@ export default class GridItem extends React.Component<Props, State>{
                 )
             }
 
-            const { x, y } = this.calcXY(newPosition.top, newPosition.left)
+            const {x, y} = this.calcXY(newPosition.top, newPosition.left)
 
-            return handler.call(this, this.props.id, x, y, { e, node, newPosition })
+            return handler.call(this, this.props.id, x, y, {e, node, newPosition})
         }
     }
 

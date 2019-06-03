@@ -73,13 +73,13 @@ export function childrenEqual(a: Array<React.ReactElement>, b: Array<React.React
  * Given two layoutitems, check if they collide.
  */
 export function collides(l1: LayoutItem, l2: LayoutItem): boolean{
-    if (l1.id === l2.id) return false // same element
+    if(l1.id === l2.id) return false // same element
 
-    if (l1.col + l1.width <= l2.col) return false // l1 is left of l2
-    if (l1.col >= l2.col + l2.width) return false // l1 is right of l2
+    if(l1.col + l1.width <= l2.col) return false // l1 is left of l2
+    if(l1.col >= l2.col + l2.width) return false // l1 is right of l2
 
-    if (l1.row + l1.height <= l2.row) return false // l1 is above l2
-    if (l1.row >= l2.row + l2.height) return false // l1 is below l2
+    if(l1.row + l1.height <= l2.row) return false // l1 is above l2
+    if(l1.row >= l2.row + l2.height) return false // l1 is below l2
 
     return true // boxes overlap
 }
@@ -116,7 +116,7 @@ export function constrainCol(targetCol: number, width: number, columns: number){
  * Given a layout, make sure all elements fit within its bounds.
  *
  * @param  {Array} layout Layout array.
- * @param  {Number} bounds Number of columns.
+ * @param  {Number} cols Number of columns.
  */
 export function correctBounds(layout: Layout, cols: number): Layout{
     return Object.values(layout)
@@ -209,7 +209,7 @@ function moveCollidingItem(
     return newLayout
 }
 
-export function setTransform({ top, left, width, height }: Position): React.CSSProperties{
+export function setTransform({top, left, width, height}: Position): React.CSSProperties{
     // Replace unitless items with px
     const translate = `translate(${left}px,${top}px)`
     return {

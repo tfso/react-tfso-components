@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
-import GridLayout, {GridLayoutProps, GridItem} from '../../lib/GridLayout'
+import GridLayout, {GridItem} from '../../lib/GridLayout'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Paper, {PaperProps} from '@material-ui/core/Paper'
