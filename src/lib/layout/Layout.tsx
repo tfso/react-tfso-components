@@ -76,23 +76,26 @@ export default withScreenSize(class Layout extends React.PureComponent<LayoutPro
     }
 
     render(){
+        const hasMenu = !!this.props.menuContent
         return (
             <LayoutWrapper>
                 <DocumentTitle text={this.props.docTitle + ' - 24SevenOffice'} />
                 <LayoutHeader>
                     <TopBar
-                        onMenuToggle={this.onMenuToggle}
+                        onMenuToggle={hasMenu ? this.onMenuToggle : undefined}
                         mobile={this.props.screenSize.mobile}
                     >
                         {this.props.topMenuContent}
                     </TopBar>
                 </LayoutHeader>
                 <LayoutBody>
-                    <LayoutBodyLeft onClick={this.onClickContent}>
-                        <Menu mobile={this.props.screenSize.mobile} open={this.menuIsOpen()} onClose={this.onCloseMenu}>
-                            {this.props.menuContent}
-                        </Menu>
-                    </LayoutBodyLeft>
+                    {hasMenu &&
+                        <LayoutBodyLeft onClick={this.onClickContent}>
+                            <Menu mobile={this.props.screenSize.mobile} open={this.menuIsOpen()} onClose={this.onCloseMenu}>
+                                {this.props.menuContent}
+                            </Menu>
+                        </LayoutBodyLeft>
+                    }
                     <LayoutBodyRight>
                         {this.props.children}
                     </LayoutBodyRight>
