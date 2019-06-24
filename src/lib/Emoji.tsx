@@ -18,6 +18,8 @@ const emojis = {
     crap: <>&#128169;</>,
     thinking: <>&#129300;</>,
     rocket: <>&#128640;</>,
+    warning: <>&#128683;</>,
+    stopp: <>&#128721;</>,
 }
 
 export type EmojiProps = {
