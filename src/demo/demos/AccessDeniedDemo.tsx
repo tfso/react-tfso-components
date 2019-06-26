@@ -1,10 +1,7 @@
 import React from 'react'
 import AccessDenied from '../../lib/AccessDenied'
-import {Button} from '@material-ui/core'
 import {Demo, DemoTitle, DemoHelp, DemoContent, DemoProp, DemoProps} from '../components/demo'
-type State = {
-    showButton: boolean
-}
+
 const data = {
     title: 'Access Denied',
     description: 'A list of no access',
@@ -12,15 +9,11 @@ const data = {
     modules: [{id: 1, name: 'bank'}, {id: 2, name: 'status'}]
 }
 
-export default class AccessDeniedDemo extends React.PureComponent<{}, State>{
-    state:
-        State = {showButton: false}
+export default class AccessDeniedDemo extends React.PureComponent<{}>{
     handleIncrement = () => {
         console.log('Click happened')
     }
-    onDemoBtnClick = () => {
-        this.setState({showButton: !this.state.showButton})
-    }
+    goBack = () =>{}
     render(){
         return (
             <Demo>
@@ -32,8 +25,7 @@ export default class AccessDeniedDemo extends React.PureComponent<{}, State>{
                     <DemoProp name='title' type='string' default='' description=''/>
                 </DemoProps>
                 <DemoContent>
-                    <AccessDenied data={data} onButtonClick={this.handleIncrement} showButton={this.state.showButton}/>
-                    <Button value='Show button' onClick={this.onDemoBtnClick}>Show</Button>
+                    <AccessDenied data={data} goBack={this.goBack} onButtonClick={this.handleIncrement}/>
                 </DemoContent>
             </Demo>
         )
