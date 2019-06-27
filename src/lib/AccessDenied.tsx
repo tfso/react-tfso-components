@@ -17,6 +17,7 @@ const CustomDiv = styled.div`
     `
 const CustomPaper = styled(Paper)`
 &&{
+    height: 100%;
     padding: 50px;
     display: flex;
     align-items: center;
@@ -43,7 +44,7 @@ export default withScreenSize(class AccessDenied extends React.PureComponent<Acc
     }
 
     goBack = () => {
-        window.history.back()
+        this.props.goBack()
     }
     render(){
         return (
@@ -52,10 +53,10 @@ export default withScreenSize(class AccessDenied extends React.PureComponent<Acc
                 <CustomDiv>
                     <Typography variant='h3'>Access Denied</Typography> <br/>
                     <Typography variant='body1'>Ops! Ser ut som du ikke har tilgang her. Trykk på knappen under, så gir vi beskjed til en administrator at du øsnker tilgang til følgene:</Typography>
-                    <ul style={{listStyle: 'none', padding: 0}}>
+                    <ul style={{listStyle: 'none', padding: 0, fontWeight: 'bold'}}>
                         {this.props.data.modules.map((module) => <li key={module.id}>{module.name} </li>) }
                     </ul>
-                    <Button style={styleButton} onClick={this.onButtonClick}>Click here</Button><br/>
+                    <Button size='large' color='primary' style={styleButton} onClick={this.onButtonClick}>Click here</Button><br/>
                     <Link onClick={this.goBack}>Go back</Link>
                 </CustomDiv>
             </CustomPaper>

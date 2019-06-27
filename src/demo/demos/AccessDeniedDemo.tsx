@@ -13,7 +13,9 @@ export default class AccessDeniedDemo extends React.PureComponent<{}>{
     handleIncrement = () => {
         console.log('Click happened')
     }
-    goBack = () =>{}
+    goBack = () =>{
+        window.history.back()
+    }
     render(){
         return (
             <Demo>
