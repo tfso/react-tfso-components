@@ -1,0 +1,48 @@
+import React from 'react'
+import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
+import OpenInNew from '@material-ui/core/SvgIcon/SvgIcon'
+import CardContent from '@material-ui/core/CardContent'
+import {Grid} from '@material-ui/core'
+import Card from '@material-ui/core/es/Card'
+import CardMedia from '@material-ui/core/CardMedia'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import styled from 'styled-components/macro'
+import Typography from '@material-ui/core/Typography'
+import {Translate} from '../types'
+import ReportsAction, {ReportModel} from '../reports'
+import IconButton from '@material-ui/core/IconButton'
+
+export type ReportsProps = {
+    translate: Translate
+    reportsAction: ReportsAction
+    quickList: any
+    reportList: any
+    tags: any
+    location: string,
+    country: string
+    children?: undefined
+}
+
+const TitleContainer = styled.div`
+  display: flex;
+  flex-grow: 1;
+`
+
+const CustomHeader = styled(Typography)` && {
+  flex: 1;
+  font-weight: 500;
+  font-size: 13px;
+  }
+`
+
+const CustomDescription = styled(Typography)` && {
+  font-size: 12px;
+}
+`
+
+const CustomIconButton = styled(IconButton)` &&{
+  padding: 2px;
+  }
+`
+export default class CardReport extends React.PureComponent<{}>{
+}
