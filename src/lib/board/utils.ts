@@ -88,7 +88,7 @@ export function compact(items: BoardItems, screenType: ScreenType): BoardItems{
         }
         newLayout[itemLayout.key] = itemWasChanged
             ? {...items[itemLayout.key], [screenType]: itemLayout}
-            : items[itemLayout.key] // don't want to duplicated items.
+            : items[itemLayout.key] // don't want to duplicate items.
     }
 
     return layoutWasChanged
@@ -122,9 +122,9 @@ export function moveItem(
     const targetItem = {...sourceItem, [screenType]: targetItemLayout}
 
     let newItems = {...items, [sourceItem.key]: targetItem}
-    const collisions = Object.values(newItems).filter(otherItem => collides(otherItem[screenType], targetItemLayout))
+    const collisions = Object.values(newItems).filter(otherItem => targetItem.key !== otherItem.key && collides(otherItem[screenType], targetItemLayout))
 
-    if(!collisions){
+    if(!collisions.length){
         return newItems
     }
 

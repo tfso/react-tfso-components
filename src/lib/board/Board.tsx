@@ -68,10 +68,12 @@ const Board = (props: BoardProps) => {
 
         // TODO: Move items out of collisions.
         const newDragItem = {...activeDrag, top, left}
-        const newItems = compact(moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType), screenType)
+        const newItems = compact(
+            moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType),
+            screenType)
         setItems(newItems)
         setActiveDragItem({...activeDrag, top, left})
-        setPlaceholder(calculateItemDimensions(itemLayout, boardDimensions))
+        setPlaceholder(calculateItemDimensions(newItems[activeDrag.key][screenType]!, boardDimensions))
     }, [activeDrag, items, screenType, boardDimensions, width])
 
     const onDragStop = React.useCallback(() => {
@@ -80,7 +82,7 @@ const Board = (props: BoardProps) => {
         }
         const {key} = activeDrag
         const item = {...items[key], [screenType]: calculateItemLayout(items[key][screenType]!, activeDrag, boardDimensions)}
-        const newItems = {...items, [activeDrag.key]: item}
+        const newItems = compact({...items, [activeDrag.key]: item}, screenType)
         setItems(newItems)
 
         if(onChange && !isEqual(item, oldDragItem)){
@@ -89,7 +91,7 @@ const Board = (props: BoardProps) => {
 
         setActiveDragItem(null)
         setPlaceholder(null)
-    }, [activeDrag, oldDragItem, items, screenType, boardDimensions, onChange])
+    }, [activeDrag, oldDragItem, items, screenType, boardDimensions, onChange, screenType])
 
     return (
         <div ref={rootRef}>
