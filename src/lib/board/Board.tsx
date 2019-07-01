@@ -68,7 +68,9 @@ const Board = (props: BoardProps) => {
 
         // TODO: Move items out of collisions.
         const newDragItem = {...activeDrag, top, left}
-        const newItems = compact(moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType), screenType)
+        const newItems = compact(
+            moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType),
+            screenType)
         setItems(newItems)
         setActiveDragItem({...activeDrag, top, left})
         setPlaceholder(calculateItemDimensions(itemLayout, boardDimensions))
