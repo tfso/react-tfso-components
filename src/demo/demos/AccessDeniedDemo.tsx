@@ -10,11 +10,17 @@ const data = {
 }
 
 export default class AccessDeniedDemo extends React.PureComponent<{}>{
+    state = {
+        goBackString: ''
+    }
+
     handleIncrement = () => {
-        console.log('Click happened')
+    }
+    translate = (key) => {
+        return key
     }
     goBack = () =>{
-        window.history.back()
+        this.setState({goBackString: 'back link clicked'})
     }
     render(){
         return (
@@ -24,10 +30,16 @@ export default class AccessDeniedDemo extends React.PureComponent<{}>{
                     List of no access
                 </DemoHelp>
                 <DemoProps>
-                    <DemoProp name='title' type='string' default='' description=''/>
+                    <DemoProp name='onButtonClick' type='function' default='' description='Callback invoked when the user click on the button'/>
+                    <DemoProp name='goBack' type='function' default='' description='Callback invoked when the user click on the link.'/>
+                    <DemoProp name='data' type='object' default='' description='an object that gets data'/>
+                    <DemoProp name='translate' type='function' default='' description='translation function'/>
                 </DemoProps>
                 <DemoContent>
-                    <AccessDenied data={data} goBack={this.goBack} onButtonClick={this.handleIncrement}/>
+                    {this.state.goBackString &&
+                        <div>{this.state.goBackString}</div>
+                    }
+                    <AccessDenied data={data} translate={this.translate} goBack={this.goBack} onButtonClick={this.handleIncrement}/>
                 </DemoContent>
             </Demo>
         )

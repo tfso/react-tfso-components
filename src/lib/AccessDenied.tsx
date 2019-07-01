@@ -6,10 +6,12 @@ import styled from 'styled-components/macro'
 import Link from '@material-ui/core/Link'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import Typography from '@material-ui/core/Typography'
+// import {Translate} from '../types'
 type AccessDeniedProps ={
     data: any
     onButtonClick: (event: any, value: string) => void
     goBack: () => void
+    translate: (key: string) => string
 }
 const CustomDiv = styled.div`
         width: 400px;
@@ -17,6 +19,7 @@ const CustomDiv = styled.div`
     `
 const CustomPaper = styled(Paper)`
 &&{
+    width: 100%;
     height: 100%;
     padding: 50px;
     display: flex;
@@ -25,19 +28,18 @@ const CustomPaper = styled(Paper)`
     text-align: center;
 } 
 `as typeof Paper
-const styles = {
-    position: 'absolute',
-    zIndex: '1',
-    color: 'rgba(0, 0, 0, 0.1)',
-    fontSize: '25em',
-    transform: 'translate(-50 %, -50 %)',
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+const CustomLockIcon = styled(LockIcon)` &&{
+    position: absolute;
+    z-index: 1;
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 25em;
+    transform: translate(-50 %, -50 %);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
-const styleButton = {
-    color: 'rgb(36,160,237)'
-}
+` as typeof LockIcon
+
 export default withScreenSize(class AccessDenied extends React.PureComponent<AccessDeniedProps & InjectedScreenSizeProps>{
     onButtonClick = (event) => {
         this.props.onButtonClick(event, this.props.data)
@@ -49,15 +51,15 @@ export default withScreenSize(class AccessDenied extends React.PureComponent<Acc
     render(){
         return (
             <CustomPaper>
-                <LockIcon style={styles as any}/>
+                <CustomLockIcon/>
                 <CustomDiv>
-                    <Typography variant='h3'>Access Denied</Typography> <br/>
-                    <Typography variant='body1'>Ops! Ser ut som du ikke har tilgang her. Trykk på knappen under, så gir vi beskjed til en administrator at du øsnker tilgang til følgene:</Typography>
+                    <Typography variant='h3'>{this.props.translate('Access Denied')}</Typography> <br/>
+                    <Typography variant='body1'>{this.props.translate('accessdenieddescription')}</Typography>
                     <ul style={{listStyle: 'none', padding: 0, fontWeight: 'bold'}}>
                         {this.props.data.modules.map((module) => <li key={module.id}>{module.name} </li>) }
                     </ul>
-                    <Button size='large' color='primary' style={styleButton} onClick={this.onButtonClick}>Click here</Button><br/>
-                    <Link onClick={this.goBack}>Go back</Link>
+                    <Button size='large' color='primary' onClick={this.onButtonClick}>{this.props.translate('Request access')}</Button><br/>
+                    <Link onClick={this.goBack}>{this.props.translate('Go back')}</Link>
                 </CustomDiv>
             </CustomPaper>
         )

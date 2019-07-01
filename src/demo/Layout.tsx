@@ -47,6 +47,7 @@ import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
 import InfiniteScrollDemo from './demos/InfiniteScrollDemo'
+import CardReportsDemo from './demos/CardReportsDemo'
 
 const menuGroups = {
     home: {
@@ -111,6 +112,10 @@ const menuGroups = {
             accessdenied: {
                 label: 'AccessDenied',
                 component: AccessDeniedDemo
+            },
+            cardreport: {
+                label: 'CardReport',
+                component: CardReportsDemo
             }
         }
     },
