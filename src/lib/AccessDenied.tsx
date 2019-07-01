@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 import Link from '@material-ui/core/Link'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import Typography from '@material-ui/core/Typography'
-// import {Translate} from '../types'
+
 type AccessDeniedProps ={
     data: any
     onButtonClick: (event: any, value: string) => void
@@ -16,7 +16,7 @@ type AccessDeniedProps ={
 const CustomDiv = styled.div`
         width: 400px;
         z-index: 2;
-    `
+`
 const CustomPaper = styled(Paper)`
 &&{
     width: 100%;

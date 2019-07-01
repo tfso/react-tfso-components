@@ -19,7 +19,7 @@ export default class AccessDeniedDemo extends React.PureComponent<{}>{
     translate = (key) => {
         return key
     }
-    goBack = () =>{
+    goBack = () => {
         this.setState({goBackString: 'back link clicked'})
     }
     render(){

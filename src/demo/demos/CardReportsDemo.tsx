@@ -14,7 +14,7 @@ const translate = (text) => { return text }
 
 export default class CardReportsDemo extends PureComponent{
     render(){
-        return(
+        return (
             <Demo>
                 <DemoTitle srcPath='CardReport.tsx' demoPath='CardReportsDemo.tsx'>CardReport</DemoTitle>
                 <DemoHelp>
