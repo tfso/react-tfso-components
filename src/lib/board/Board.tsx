@@ -41,10 +41,15 @@ const Board = (props: BoardProps) => {
     const [placeholder, setPlaceholder] = React.useState<BoardItemPlaceholdProps | null>(null)
     const [width, setWidth] = React.useState(1920)
 
+    // Component received new Items
+    React.useEffect(() => {
+        setItems(props.items)
+    }, [props.items])
+
     // Board dimensions
     useWidth(rootRef, (width) => setWidth(width))
     const screenType = useScreenType(width)
-    const height = useHeight(props, screenType)
+    const height = useHeight({items, spacing: props.spacing, rowHeight: props.rowHeight}, screenType)
     const colWidth = React.useMemo(() => Math.round((width + spacing) / (columns)) - spacing, [spacing, width])
     const boardDimensions = React.useMemo(() => ({rowHeight, colWidth, spacing}), [rowHeight, colWidth, spacing])
 
@@ -68,9 +73,7 @@ const Board = (props: BoardProps) => {
 
         // TODO: Move items out of collisions.
         const newDragItem = {...activeDrag, top, left}
-        const newItems = compact(
-            moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType),
-            screenType)
+        const newItems = compact(moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType), screenType)
         setItems(newItems)
         setActiveDragItem({...activeDrag, top, left})
         setPlaceholder(calculateItemDimensions(newItems[activeDrag.key][screenType]!, boardDimensions))
@@ -91,7 +94,10 @@ const Board = (props: BoardProps) => {
 
         setActiveDragItem(null)
         setPlaceholder(null)
-    }, [activeDrag, oldDragItem, items, screenType, boardDimensions, onChange, screenType])
+    }, [activeDrag, oldDragItem, items, screenType, boardDimensions, onChange])
+
+    // Hmm, there's a bunch of renders, maybe some can be optimized away..
+    console.log('render')
 
     return (
         <div ref={rootRef}>
@@ -130,7 +136,7 @@ const Board = (props: BoardProps) => {
 }
 
 Board.propTypes = {
-    items: PropTypes.object.isRequired,
+    items: PropTypes.object.isRequired, // Maybe todo: more specific checking?
     locked: PropTypes.bool,
     onChange: PropTypes.func,
     rowHeight: PropTypes.number.isRequired,

@@ -6,6 +6,7 @@ import Board, {BoardProps} from '../../lib/board/Board'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Paper, {PaperProps} from '@material-ui/core/Paper'
+import {addBoardItem} from '../../lib/board/utils'
 
 const ItemWrapper = ({backgroundColor, ...props}: PaperProps & {backgroundColor: string}) => <Paper {...props} />
 const Item = styled(ItemWrapper)`&&{
@@ -159,37 +160,26 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
     onAddItem = () => {
         const {
             addItemId: id,
-            // addColor: backgroundColor,
-            addWidth: width,
-            addHeight: height,
+            addColor: backgroundColor,
+            addWidth: colSpan,
+            addHeight: rowSpan,
             addCol: col,
             addRow: row,
-            // items,
         } = this.state
-        /*
-        const item = {
-            id: id.toString(),
-            backgroundColor,
-            children: <Item backgroundColor={backgroundColor}>{`${id}`}</Item>
-        }
-        */
-
-        const itemLayout = {
-            id: id.toString(),
-            width: Number(width),
-            height: Number(height),
-            col,
-            row: col + width > 12 ? row + 1 : row
-        }
-        console.log(itemLayout)
-        // const addCol = col + width
-        // this.setState({
-        //     items: [...items, item],
-        //     items: {...layout, xl: {...layout.xl, [itemLayout.id]: itemLayout}},
-        //     addItemId: this.state.addItemId + 1,
-        //     addCol: addCol >= 12 ? 0 : addCol,
-        //     addRow: addCol === 0 ? row + height : col + width > 12 ? row + 1 : row
-        // })
+        const layout = {col, row, colSpan, rowSpan}
+        const newItems = addBoardItem(this.state.items, {
+            key: id.toString(),
+            component: () => <Item backgroundColor={backgroundColor}>{id}</Item>,
+            desktop: layout,
+            tablet: layout,
+            mobile: layout
+        })
+        this.setState({
+            items: newItems,
+            addItemId: id + 1,
+            addCol: col >= 12 ? 0 : col,
+            addRow: col === 0 ? row + rowSpan : col + colSpan > 12 ? row + 1 : row
+        })
     }
 
     handleChange = (key: keyof State) => (event: React.ChangeEvent<HTMLInputElement>, checked?: boolean) => {
@@ -219,7 +209,7 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
                     <DemoProp required name='rowHeight' type='number' />
                     <DemoProp name='spacing' type='number' default='0'/>
                     <DemoProp name='locked' type='boolean' description='When true, no items can be moved' default='false' />
-                    <DemoProp required name='items' type='GridItem[]' default='' description='' />
+                    <DemoProp required name='items' type='{[key: string]: BoardItem}' default='' description='' />
                     <DemoProp name='onChange' type='(items: {[key: string]: BoardItem}) => void' default='' description='' />
                 </DemoProps>
                 <DemoProps title='BoardItem' >
