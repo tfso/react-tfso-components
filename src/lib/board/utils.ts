@@ -88,7 +88,7 @@ export function compact(items: BoardItems, screenType: ScreenType): BoardItems{
         }
         newLayout[itemLayout.key] = itemWasChanged
             ? {...items[itemLayout.key], [screenType]: itemLayout}
-            : items[itemLayout.key] // don't want to duplicated items.
+            : items[itemLayout.key] // don't want to duplicate items.
     }
 
     return layoutWasChanged
