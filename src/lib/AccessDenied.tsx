@@ -11,9 +11,9 @@ type ModuleDescriptor = {id: number, name: string}
 type Modules = Array<ModuleDescriptor>
 
 type AccessDeniedProps ={
-    title: string
-    description: string
-    status: number
+    // title: string
+    // description: string
+    // status: number
     modules: Modules
     onButtonClick: (event: any, value: any) => void
     goBack: () => void
@@ -69,17 +69,22 @@ export default withScreenSize(class AccessDenied extends React.PureComponent<Acc
     }
     render(){
         const {translate, modules} = this.props
+        const content = (
+            <>
+                <Typography variant='h3'>{translate('Access Denied')}</Typography> <br/>
+                <Typography variant='body1'>{translate('Accessdenied_description')}</Typography>
+                <List>
+                    {modules.map((module) => <li key={module.id}>{translate(module.name)} </li>)}
+                </List>
+                <RequestButton size='large' color='primary' variant='contained' onClick={this.onButtonClick}>{translate('Request access')}</RequestButton><br/>
+                <Link onClick={this.goBack}>{translate('Go back')}</Link>
+            </>
+        )
         const desktopView = (
             <CustomPaper>
                 <CustomLockIcon/>
                 <CustomDiv>
-                    <Typography variant='h3'>{translate('Access Denied')}</Typography> <br/>
-                    <Typography variant='body1'>{translate('accessdenieddescription')}</Typography>
-                    <List>
-                        {modules.map((module) => <li key={module.id}>{translate(module.name)} </li>)}
-                    </List>
-                    <RequestButton size='large' color='primary' variant='contained' onClick={this.onButtonClick}>{translate('Request access')}</RequestButton><br/>
-                    <Link onClick={this.goBack}>{translate('Go back')}</Link>
+                    {content}
                 </CustomDiv>
             </CustomPaper>
         )
@@ -87,13 +92,7 @@ export default withScreenSize(class AccessDenied extends React.PureComponent<Acc
             <CustomPaper>
                 <CustomLockIcon/>
                 <div>
-                    <Typography variant='h3'>{translate('Access Denied')}</Typography> <br/>
-                    <Typography variant='body1'>{translate('accessdenieddescription')}</Typography>
-                    <List>
-                        {modules.map((module) => <li key={module.id}>{translate(module.name)} </li>)}
-                    </List>
-                    <RequestButton size='large' color='primary' variant='contained' onClick={this.onButtonClick}>{translate('Request access')}</RequestButton><br/>
-                    <Link onClick={this.goBack}>{translate('Go back')}</Link>
+                    {content}
                 </div>
             </CustomPaper>
         )

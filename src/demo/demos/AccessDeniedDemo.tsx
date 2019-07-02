@@ -3,9 +3,9 @@ import AccessDenied from '../../lib/AccessDenied'
 import {Demo, DemoTitle, DemoHelp, DemoContent, DemoProp, DemoProps} from '../components/demo'
 
 const data = {
-    title: 'Access Denied',
-    description: 'hallo',
-    status: 403,
+    // title: 'Access Denied',
+    // description: 'hallo',
+    // status: 403,
     modules: [{id: 1, name: 'bank'}, {id: 2, name: 'status'}]
 }
 
@@ -32,9 +32,6 @@ export default class AccessDeniedDemo extends React.PureComponent<{}>{
                 <DemoProps>
                     <DemoProp name='onButtonClick' type='function' default='' description='Callback invoked when the user click on the button'/>
                     <DemoProp name='goBack' type='function' default='' description='Callback invoked when the user click on the link.'/>
-                    <DemoProp name='title' type='string' default='' description=''/>
-                    <DemoProp name='description' type='string' default='' description=''/>
-                    <DemoProp name='status' type='number' default='' description=''/>
                     <DemoProp name='*modules' type='ModuleItem[]' default='' description=''/>
                     <DemoProp name='translate' type='function' default='' description='translation function'/>
                 </DemoProps>
