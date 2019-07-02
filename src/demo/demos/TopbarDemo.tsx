@@ -1,6 +1,5 @@
 import React from 'react'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
-import Topbar from '../../lib/layout/Topbar'
 
 export default class TopbarDemo extends React.PureComponent{
     state = {
