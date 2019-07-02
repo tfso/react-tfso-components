@@ -7,13 +7,10 @@ import Link from '@material-ui/core/Link'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import Typography from '@material-ui/core/Typography'
 
-type ModuleDescriptor = {id: number, name: string}
+type ModuleDescriptor = {id: string, name: string}
 type Modules = Array<ModuleDescriptor>
 
 type AccessDeniedProps ={
-    // title: string
-    // description: string
-    // status: number
     modules: Modules
     onButtonClick: (event: any, value: any) => void
     goBack: () => void

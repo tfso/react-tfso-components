@@ -6,7 +6,7 @@ const data = {
     // title: 'Access Denied',
     // description: 'hallo',
     // status: 403,
-    modules: [{id: 1, name: 'bank'}, {id: 2, name: 'status'}]
+    modules: [{id: 'bank', name: 'bank'}, {id: 'status', name: 'status'}]
 }
 
 export default class AccessDeniedDemo extends React.PureComponent<{}>{
@@ -36,7 +36,7 @@ export default class AccessDeniedDemo extends React.PureComponent<{}>{
                     <DemoProp name='translate' type='function' default='' description='translation function'/>
                 </DemoProps>
                 <DemoProps title='ModuleItem'>
-                    <DemoProp name='id' type='number' default='' description=''/>
+                    <DemoProp name='id' type='string' default='' description=''/>
                     <DemoProp name='name' type='string' default='' description=''/>
                 </DemoProps>
                 <DemoContent>
