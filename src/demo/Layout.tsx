@@ -30,6 +30,7 @@ import EmojiDemo from './demos/EmojiDemo'
 import AccessDeniedDemo from './demos/AccessDeniedDemo'
 import BoardDemo from './demos/BoardDemo'
 import HoverableDemo from './demos/HoverableDemo'
+import TopbarDemo from './demos/TopbarDemo'
 import DelayDemo from './demos/DelayDemo'
 import WizardDemo from './demos/WizardDemo'
 import ScreenSizeDemo from './demos/ScreenSizeDemo'
@@ -147,7 +148,7 @@ const menuGroups = {
             },
             topbar: {
                 label: 'Topbar',
-                component: () => <div>TODO<br />The topbar above</div>
+                component: TopbarDemo
             }
         }
     },
