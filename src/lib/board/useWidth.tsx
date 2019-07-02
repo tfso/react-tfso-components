@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-export const useWidth = <T extends React.ReactInstance>(
+export function useWidth<T extends React.ReactInstance>(
     ref: React.RefObject<T | null>,
     onWidthChange: (width: number) => void
-) => {
+){
     const handleResize = React.useCallback(() => {
         const domNode = ReactDOM.findDOMNode(ref.current)
         if(domNode instanceof HTMLElement){

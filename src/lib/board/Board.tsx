@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BoardContainer from './BoardContainer'
-import {BoardItems, ScreenType, BoardItem} from './types'
-import {calculateBoardHeight, calculateBoardRows, calculateItemDimensions, calculateItemLayout, compact, moveItem} from './utils'
-import BoardItemContainer, {BoardItemContainerProps} from './BoardItemContainer'
+import {BoardItems, ScreenType, BoardDimensions} from './types'
+import {calculateBoardHeight, calculateBoardRows, calculateItemDimensions} from './utils'
+import BoardItemContainer from './BoardItemContainer'
 import {useWidth} from './useWidth'
 import useScreenType from './useScreenType'
 import {DraggableCore, DraggableData, DraggableEvent} from 'react-draggable'
-import BoardItemPlaceholder, {BoardItemPlaceholdProps} from './BoardItemPlaceholder'
-import isEqual from 'lodash/isEqual'
+import BoardItemPlaceholder from './BoardItemPlaceholder'
+import {boardReducer, boardInit, BoardActionType} from './boardState'
 
 export type BoardProps = {
     locked?: boolean
@@ -19,7 +19,7 @@ export type BoardProps = {
     children?: undefined
 }
 
-const columns = 12
+const COLUMNS = 12
 
 const useHeight = (
     {items, spacing = 0, rowHeight}: Pick<BoardProps, 'items'|'spacing'|'rowHeight'>,
@@ -35,70 +35,36 @@ const Board = (props: BoardProps) => {
     const rootRef = React.useRef<HTMLDivElement>(null)
 
     // State
-    const [items, setItems] = React.useState(props.items)
-    const [activeDrag, setActiveDragItem] = React.useState<BoardItemContainerProps & {key: React.Key} | null>(null)
-    const [oldDragItem, setOldDragItem] = React.useState<BoardItem | null>(null)
-    const [placeholder, setPlaceholder] = React.useState<BoardItemPlaceholdProps | null>(null)
+    const [state, dispatch] = React.useReducer(boardReducer, props.items, boardInit)
     const [width, setWidth] = React.useState(1920)
 
     // Component received new Items
-    React.useEffect(() => {
-        setItems(props.items)
-    }, [props.items])
+    React.useEffect(() => dispatch({type: BoardActionType.RESET_ITEMS, items: props.items}), [props.items])
 
     // Board dimensions
-    useWidth(rootRef, (width) => setWidth(width))
+    useWidth(rootRef, React.useCallback(newWidth => setWidth(newWidth), [setWidth]))
     const screenType = useScreenType(width)
-    const height = useHeight({items, spacing: props.spacing, rowHeight: props.rowHeight}, screenType)
-    const colWidth = React.useMemo(() => Math.round((width + spacing) / (columns)) - spacing, [spacing, width])
-    const boardDimensions = React.useMemo(() => ({rowHeight, colWidth, spacing}), [rowHeight, colWidth, spacing])
+    const height = useHeight({items: state.items, spacing: props.spacing, rowHeight: props.rowHeight}, screenType)
+    const colWidth = React.useMemo(() => Math.round((width + spacing) / (COLUMNS)) - spacing, [spacing, width])
+    const boardDimensions = React.useMemo<BoardDimensions>(() => ({rowHeight, colWidth, spacing, width}), [rowHeight, colWidth, spacing, width])
 
     // Callbacks
     const onDragStart = React.useCallback((key: React.Key) => {
-        const item = {...items[key]}
-        const dimensions = calculateItemDimensions(item[screenType]!, boardDimensions)
-        setActiveDragItem({...dimensions, key, dragging: true})
-        setOldDragItem(item)
-    }, [items, screenType, boardDimensions])
+        dispatch({type: BoardActionType.DRAG_START, key, boardDimensions, screenType})
+    }, [screenType, boardDimensions])
 
     const onDrag = React.useCallback((_: DraggableEvent, {deltaX, deltaY}: DraggableData) => {
-        if(!activeDrag) return
-
-        // Constraining movement to within the container bounds
-        const top = Math.max(activeDrag.top + deltaY, 0)
-        const left = Math.min(Math.max(activeDrag.left + deltaX, 0), width - activeDrag.width)
-
-        const item = {...items[activeDrag.key]}
-        const itemLayout = calculateItemLayout(item[screenType]!, {top, left}, boardDimensions)
-
-        // TODO: Move items out of collisions.
-        const newDragItem = {...activeDrag, top, left}
-        const newItems = compact(moveItem(newDragItem.key, items, itemLayout.col, itemLayout.row, screenType), screenType)
-        setItems(newItems)
-        setActiveDragItem({...activeDrag, top, left})
-        setPlaceholder(calculateItemDimensions(newItems[activeDrag.key][screenType]!, boardDimensions))
-    }, [activeDrag, items, screenType, boardDimensions, width])
+        dispatch({type: BoardActionType.DRAGGING, deltaX, deltaY, boardDimensions, screenType})
+    }, [screenType, boardDimensions])
 
     const onDragStop = React.useCallback(() => {
-        if(!activeDrag){
-            return
+        dispatch({type: BoardActionType.DRAG_STOP, boardDimensions, screenType})
+        if(onChange && state.items !== props.items){
+            onChange(state.items)
         }
-        const {key} = activeDrag
-        const item = {...items[key], [screenType]: calculateItemLayout(items[key][screenType]!, activeDrag, boardDimensions)}
-        const newItems = compact({...items, [activeDrag.key]: item}, screenType)
-        setItems(newItems)
+    }, [screenType, boardDimensions, onChange, props.items, state.items])
 
-        if(onChange && !isEqual(item, oldDragItem)){
-            onChange(newItems)
-        }
-
-        setActiveDragItem(null)
-        setPlaceholder(null)
-    }, [activeDrag, oldDragItem, items, screenType, boardDimensions, onChange])
-
-    // Hmm, there's a bunch of renders, maybe some can be optimized away..
-    console.log('render')
-
+    const {items, activeDrag, placeholder} = state
     return (
         <div ref={rootRef}>
             <BoardContainer height={height}>

@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro'
 import {BoardItemDimensions} from './types'
 
-export type BoardItemPlaceholdProps = BoardItemDimensions
+export type BoardItemPlaceholderProps = BoardItemDimensions
 
-const BoardItemPlaceholder = styled.div.attrs((props: BoardItemPlaceholdProps) => ({
+const BoardItemPlaceholder = styled.div.attrs((props: BoardItemPlaceholderProps) => ({
     style: {
         // This property changes very often, if it's in the styled macro, a new class will be generated for each change to the position.
         transform: `translate(${props.left}px, ${props.top}px)`
     }
-}))<BoardItemPlaceholdProps>`&&{
+}))<BoardItemPlaceholderProps>`&&{
     position: absolute;
     width: ${({width}) => width}px;
     height: ${({height}) => height}px;
