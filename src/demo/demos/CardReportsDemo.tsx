@@ -26,12 +26,7 @@ export default class CardReportsDemo extends PureComponent{
                     <DemoProp name='onClick' type='function' default='' description='handles when it gets clicked'/>
                 </DemoProps>
                 <DemoContent>
-                    <div style={{width: '200px'}}>
-                        <CardReport onClick={this.onClick} options={options} translate={this.translate} />
-                    </div>
-                    <div style={{width: '250px'}}>
-                        <CardReport onClick={this.onClick} options={options} translate={this.translate} />
-                    </div>
+                    <CardReport onClick={this.onClick} options={options} translate={this.translate} />
                 </DemoContent>
             </Demo>
 
