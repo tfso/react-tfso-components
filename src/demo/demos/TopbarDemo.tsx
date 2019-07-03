@@ -66,6 +66,8 @@ export default withScreenSize(class TopbarDemo extends React.PureComponent<Layou
             anchorEl: null,
         })
     }
+    translate = (key) => key
+
     render(){
         const {anchorEl} = this.state
         const open = Boolean(anchorEl)
@@ -84,7 +86,7 @@ export default withScreenSize(class TopbarDemo extends React.PureComponent<Layou
                         mobile={this.props.screenSize.mobile}
                     >
                         <Button onClick={this.handleClick}>dropdown</Button>
-                        <ProfileCard identity={this.state.identity} signOutText="Sign out" open={open} onClose={this.onClose} onSignOut={() => {}} anchorEl={anchorEl}/>
+                        <ProfileCard identity={this.state.identity} translate={this.translate} open={open} onClose={this.onClose} onSignOut={() => {}} anchorEl={anchorEl}/>
                     </TopBar>
                 </DemoContent>
             </Demo>

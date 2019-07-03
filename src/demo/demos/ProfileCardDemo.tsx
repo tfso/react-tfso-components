@@ -99,18 +99,20 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
         console.log('on help')
     }
 
+    translate = (key) => (key)
+
     render(){
         const {anchorEl} = this.state
         const open = Boolean(anchorEl)
         return (
             <Demo>
                 <DemoTitle srcPath='ProfileCard.tsx' demoPath='ProfileCardDemo.tsx'>Profile Card</DemoTitle>
-                <DemoHelp>Testing</DemoHelp>
+                <DemoHelp>Profile card for logged in user. items can be added as children</DemoHelp>
                 <DemoProps>
                     <DemoProp name='open' type='boolean' default='' description=''/>
                     <DemoProp name='onClose' type='function' default='' description=''/>
                     <DemoProp name='onSignOut' type='function' default='' description=''/>
-                    <DemoProp name='signOutText' type='string' description='Text for sign out button'/>
+                    <DemoProp name='translate' type='function' default='' description='handles translation inside component'/>
                     <DemoProp name='anchorEl' type='HTMLElement' default='' description='Element to anchors the pop up'/>
                     <DemoProp name='children' type='React.ReactNode' default='' description='ListItems to add to the menu below settings'/>
                 </DemoProps>
@@ -123,7 +125,7 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                     >
                         View profile
                     </Button>
-                    <ProfileCard identity={this.state.identity} signOutText="Sign out" open={open} onClose={this.onClose} onSignOut={this.onSignOut} anchorEl={anchorEl}>
+                    <ProfileCard identity={this.state.identity} translate={this.translate} open={open} onClose={this.onClose} onSignOut={this.onSignOut} anchorEl={anchorEl}>
                         <ScreenSize>
                             {({mobile}) => (
                                 <List dense={!mobile}>

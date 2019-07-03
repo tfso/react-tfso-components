@@ -446,7 +446,7 @@ class Profile extends React.PureComponent{
                     onClose={this.onClose}
                     onSignOut={() => {}}
                     identity={identity}
-                    signOutText="Log out"
+                    translate={(key) => key}
                 >
                     <ScreenSize>
                         {({mobile}) => (

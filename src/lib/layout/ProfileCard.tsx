@@ -14,15 +14,15 @@ import CloseIcon from '@material-ui/icons/Close'
 import Dialog from '@material-ui/core/Dialog'
 import Slide from '@material-ui/core/Slide'
 import ScreenSize from '../ScreenSize'
+import {Tooltip} from '@material-ui/core'
 
 export type ProfileCardProps = {
     open: boolean
     onClose: () => void
     onSignOut: () => void
-
     children?: React.ReactNode
     identity: any
-    signOutText: string
+    translate: (key: string) => string
     anchorEl?: null | HTMLElement
 }
 
@@ -86,8 +86,7 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
     static propTypes = {
         open: PropTypes.bool.isRequired,
         onClose: PropTypes.func.isRequired,
-        // identity: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-        signOutText: PropTypes.string.isRequired
+        translate: PropTypes.func.isRequired
     }
 
     onClose = () => {
@@ -113,9 +112,11 @@ export default class ProfileCard extends React.PureComponent<ProfileCardProps, S
             </CustomCardContent>
             <CardActions>
                 <Right>
-                    <Button variant="outlined" size="small" color="secondary" onClick={this.onSignOut}>
-                        {this.props.signOutText}
-                    </Button>
+                    <Tooltip title={this.props.translate('Sign out')}>
+                        <Button variant="outlined" size="small" color="secondary" onClick={this.onSignOut}>
+                            {this.props.translate('Sign out')}
+                        </Button>
+                    </Tooltip>
                 </Right>
             </CardActions>
         </CustomCard>
