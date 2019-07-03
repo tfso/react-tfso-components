@@ -1,9 +1,11 @@
 import React from 'react'
-import {BoardItems, ScreenType, BoardItem, BoardDimensions} from './types'
+import isEqual from 'lodash/isEqual'
+
+import {BoardItems, ScreenType, BoardItem} from '.'
+import {BoardDimensions} from './types'
 import {calculateItemDimensions, calculateItemLayout, compact, moveItem} from './utils'
 import {BoardItemContainerProps} from './BoardItemContainer'
 import {BoardItemPlaceholderProps} from './BoardItemPlaceholder'
-import isEqual from 'lodash/isEqual'
 
 export type BoardState = {
     items: BoardItems

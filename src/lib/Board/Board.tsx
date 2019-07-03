@@ -1,23 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BoardContainer from './BoardContainer'
-import {BoardItems, ScreenType, BoardDimensions} from './types'
-import {calculateBoardHeight, calculateBoardRows, calculateItemDimensions} from './utils'
-import BoardItemContainer from './BoardItemContainer'
-import {useWidth} from './useWidth'
-import useScreenType from './useScreenType'
 import {DraggableCore, DraggableData, DraggableEvent} from 'react-draggable'
-import BoardItemPlaceholder from './BoardItemPlaceholder'
-import {boardReducer, boardInit, BoardActionType} from './boardState'
 
-export type BoardProps = {
-    locked?: boolean
-    items: BoardItems
-    spacing?: number
-    rowHeight: number
-    onChange?: (items: BoardItems) => void
-    children?: undefined
-}
+import {BoardProps, ScreenType} from '.'
+import {BoardDimensions} from './types'
+import {calculateBoardHeight, calculateBoardRows, calculateItemDimensions} from './utils'
+import {boardReducer, boardInit, BoardActionType} from './boardState'
+import BoardContainer from './BoardContainer'
+import BoardItemContainer from './BoardItemContainer'
+import BoardItemPlaceholder from './BoardItemPlaceholder'
+import useWidth from './useWidth'
+import useScreenType from './useScreenType'
 
 const COLUMNS = 12
 

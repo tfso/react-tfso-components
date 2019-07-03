@@ -1,5 +1,6 @@
-import {BoardItems, ScreenType, BoardItemDimensions, BoardItemLayout, BoardDimensions, BoardItem} from './types'
 import {Breakpoint, BreakpointValues} from '@material-ui/core/styles/createBreakpoints'
+import {BoardItems, ScreenType, BoardItemLayout, BoardItem} from '.'
+import {BoardItemDimensions, BoardDimensions} from './types'
 
 export function calculateBoardRows(items: BoardItems, screenType: ScreenType){
     return Object.values(items)

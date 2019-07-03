@@ -5,6 +5,7 @@ import * as layout from './layout'
 
 import Alert from './Alert'
 import BigNumber from './BigNumber'
+import Board from './Board'
 import ConfirmationDialog from './ConfirmationDialog'
 import SearchField from './SearchField'
 import TextFieldEditor from './TextFieldEditor'
@@ -24,6 +25,7 @@ export {layout}
 
 export {Alert}
 export {BigNumber}
+export {Board}
 export {ConfirmationDialog}
 export {SearchField}
 export {TextFieldEditor}

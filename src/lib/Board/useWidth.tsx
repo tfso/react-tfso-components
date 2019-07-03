@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-export function useWidth<T extends React.ReactInstance>(
+export default function useWidth<T extends React.ReactInstance>(
     ref: React.RefObject<T | null>,
     onWidthChange: (width: number) => void
 ){
