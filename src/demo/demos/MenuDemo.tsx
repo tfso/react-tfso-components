@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu, {MenuItem, MenuRootItem} from '../../lib/layout/Menu'
+import Menu, {MenuRootItem} from '../../lib/layout/Menu'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import {ScreenSizeData, withScreenSize} from '../../lib/ScreenSize'
 import {Button} from '@material-ui/core'
