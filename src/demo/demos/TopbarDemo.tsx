@@ -2,9 +2,7 @@ import React from 'react'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import TopBar from '../../lib/layout/Topbar'
 import {ScreenSizeData, withScreenSize} from '../../lib/ScreenSize'
-import {Avatar} from '@material-ui/core'
 import Button from '@material-ui/core/es/Button'
-import ListPicker from '../../lib/ListPicker'
 import ProfileCard from '../../lib/layout/ProfileCard'
 
 type LayoutProps = {

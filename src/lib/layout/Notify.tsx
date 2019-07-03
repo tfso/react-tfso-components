@@ -152,10 +152,8 @@ export type NotifierProps = {
 
     open: boolean
 
-    /**
-     * Provide your translated value of e.g `Mark all as read`
-     */
-    readAllButtonText: string
+    /* function for translation */
+    translate: (key: string) => string
 
     /**
      * Callback when the user clicked the bell and opens the list of notifications.
@@ -198,7 +196,7 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
         count: PropTypes.number.isRequired,
         loading: PropTypes.bool,
         open: PropTypes.bool.isRequired,
-        readAllButtonText: PropTypes.string.isRequired,
+        translate: PropTypes.func.isRequired,
         onOpen: PropTypes.func.isRequired,
         onReadAll: PropTypes.func.isRequired,
         onLoadMore: PropTypes.func.isRequired,
@@ -231,11 +229,11 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
             <Toolbar variant='dense' disableGutters={mobile} style={{marginRight: mobile ? 32 : 0}}>
                 <Grid container justify='space-between' alignItems='baseline' spacing={8} wrap='nowrap'>
                     <Grid item xs>
-                        <Typography variant={mobile ? 'subtitle1' : 'subtitle2'} >Notifications</Typography>
+                        <Typography variant={mobile ? 'subtitle1' : 'subtitle2'} >{this.props.translate('Notifications')}</Typography>
                     </Grid>
                     <Grid item>
                         <Button onClick={this.props.onReadAll} variant='text' size='small' color='primary' fullWidth>
-                            {this.props.readAllButtonText}
+                            {this.props.translate('Mark all as read')}
                         </Button>
                     </Grid>
                 </Grid>

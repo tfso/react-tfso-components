@@ -119,6 +119,10 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
         this.setState({notifications: this.generateNotifications()})
     }
 
+    translate = (key: string) => {
+        return key
+    }
+
     render(){
         const {currentTarget, currentTargetNotification} = this.state
 
@@ -151,7 +155,7 @@ export default class NotifyDemo extends React.PureComponent<{}, State>{
                 <DemoContent>
                     <Notifier
                         open={this.state.open}
-                        readAllButtonText='Mark all as read'
+                        translate={this.translate}
                         count={this.state.notifications.filter(n => !n.seen).length}
                         onOpen={this.onOpen}
                         onClose={this.onClose}
