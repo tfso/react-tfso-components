@@ -30,6 +30,7 @@ before_build:
   - echo version %APPVEYOR_BUILD_VERSION%
   - npm version %APPVEYOR_BUILD_VERSION% --no-git-tag-version
   - npm run lint
+  - npm run test
 
 build: off
 build_script:

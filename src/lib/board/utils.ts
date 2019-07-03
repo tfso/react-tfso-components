@@ -13,6 +13,9 @@ export function calculateBoardRows(items: BoardItems, screenType: ScreenType){
 }
 
 export function calculateBoardHeight(rows: number, spacing: number, rowHeight: number){
+    if(rows <= 0){
+        return 0
+    }
     return rows * rowHeight + (rows - 1) * spacing
 }
 
@@ -102,10 +105,10 @@ export function compact(items: BoardItems, screenType: ScreenType): BoardItems{
     let layoutWasChanged = false
     const sortedItemLayouts = Object.values(items)
         .filter(item => item.hasOwnProperty(screenType))
-        .map(item => ({key: item.key, ...item[screenType]!}))
-        .sort(compareBoardItemLayout)
+        .map(item => ({key: item.key, layout: item[screenType]!}))
+        .sort(({layout: layoutA}, {layout: layoutB}) => compareBoardItemLayout(layoutA, layoutB))
 
-    for(let itemLayout of sortedItemLayouts){
+    for(let {key, layout: itemLayout} of sortedItemLayouts){
         let itemWasChanged = false
         while(true){
             const test = {...itemLayout, row: itemLayout.row - 1}
@@ -115,14 +118,15 @@ export function compact(items: BoardItems, screenType: ScreenType): BoardItems{
             itemLayout = test
             itemWasChanged = layoutWasChanged = true
         }
-        newLayout[itemLayout.key] = itemWasChanged
-            ? {...items[itemLayout.key], [screenType]: itemLayout}
-            : items[itemLayout.key] // don't want to duplicate items.
+        newLayout[key] = itemWasChanged
+            ? {...items[key], [screenType]: itemLayout}
+            : items[key] // don't want to duplicate items.
     }
 
-    return layoutWasChanged
-        ? newLayout
-        : items
+    return layoutWasChanged ? {
+        ...items, // to populate other items that didn't have the screenType being compacted.
+        ...newLayout
+    } : items
 }
 
 function compareBoardItemLayout(a: BoardItemLayout, b: BoardItemLayout){
@@ -151,13 +155,15 @@ export function moveItem(
     const targetItem = {...sourceItem, [screenType]: targetItemLayout}
 
     let newItems = {...items, [targetItem.key]: targetItem}
-    const collisions = Object.values(newItems).filter(otherItem => targetItem.key !== otherItem.key && collides(otherItem[screenType], targetItemLayout))
+    const collisions = Object.values(newItems)
+        .filter(otherItem => targetItem.key !== otherItem.key && collides(otherItem[screenType], targetItemLayout))
+        .sort((a, b) => compareBoardItemLayout(a[screenType]!, b[screenType]!)) // The sort may be importand in case one colliding item must be move to fix a previous colliding item
+        .reverse() // so we move the bottommost item down first
 
     if(!collisions.length){
         return newItems
     }
 
-    const movedItems = new Set<string | number>([targetItem.key])
     for(const collision of collisions){
         const collisionLayout = collision[screenType]!
         const collissionMovedUp = {
@@ -170,10 +176,9 @@ export function moveItem(
 
         // Can switch places (move collision above target)
         if(!Object.values(newItems).find(item => item.key !== collision.key && collides(item[screenType], collissionMovedUp[screenType]))){
-            movedItems.add(collision.key)
             newItems = {...newItems, [collision.key]: collissionMovedUp}
         }else{
-            newItems = moveCollidingItem(targetItem, collision, newItems, screenType, movedItems)
+            newItems = moveCollidingItem(targetItem, collision, newItems, screenType)
         }
     }
     return newItems
@@ -183,11 +188,8 @@ function moveCollidingItem(
     source: BoardItem,
     collidesWith: BoardItem,
     items: BoardItems,
-    screenType: ScreenType,
-    movedItems: Set<string | number>
+    screenType: ScreenType
 ){
-    movedItems.add(collidesWith.key)
-
     const collissionMovedDown = {
         ...collidesWith,
         [screenType]: {
@@ -198,14 +200,14 @@ function moveCollidingItem(
 
     let newItems = {...items, [collissionMovedDown.key]: collissionMovedDown}
     const collisions = Object.values(newItems)
-        .filter(otherItem => !movedItems.has(otherItem.key) && collides(otherItem[screenType], collissionMovedDown[screenType]))
+        .filter(otherItem => otherItem.key !== collidesWith.key && collides(otherItem[screenType], collissionMovedDown[screenType]))
 
     if(!collisions.length){
         return newItems
     }
 
     for(const collision of collisions){
-        newItems = moveCollidingItem(collissionMovedDown, collision, newItems, screenType, movedItems)
+        newItems = moveCollidingItem(collissionMovedDown, collision, newItems, screenType)
     }
 
     return newItems
@@ -245,13 +247,28 @@ export function addBoardItem(
             continue
         }
 
-        const movedItems = new Set<string | number>([constrainedItem.key])
         for(const collision of collisions){
-            newItems = moveCollidingItem(constrainedItem, collision, newItems, screenType, movedItems)
+            newItems = moveCollidingItem(constrainedItem, collision, newItems, screenType)
         }
         newItems = compact(newItems, screenType)
     }
     return newItems
+}
+
+export function removeBoardItem(items: BoardItems, key: string){
+    const deletedItem = {...items[key]}
+    let newItems = {...items} as any
+    delete newItems[key]
+    if(deletedItem.desktop){
+        newItems = compact(newItems, 'desktop')
+    }
+    if(deletedItem.tablet){
+        newItems = compact(newItems, 'tablet')
+    }
+    if(deletedItem.mobile){
+        newItems = compact(newItems, 'mobile')
+    }
+    return newItems as BoardItems
 }
 
 export function hideBoardItem(items: BoardItems, key: string, screenType: ScreenType){
