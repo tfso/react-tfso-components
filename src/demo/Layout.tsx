@@ -35,6 +35,8 @@ import DelayDemo from './demos/DelayDemo'
 import WizardDemo from './demos/WizardDemo'
 import ScreenSizeDemo from './demos/ScreenSizeDemo'
 import ProfileCardDemo from './demos/ProfileCardDemo'
+import MenuDemo from './demos/MenuDemo'
+import LayoutDemo from './demos/LayoutDemo'
 import Avatar from '@material-ui/core/Avatar'
 import List from '@material-ui/core/List'
 import Button from '@material-ui/core/Button'
@@ -48,7 +50,6 @@ import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
 import InfiniteScrollDemo from './demos/InfiniteScrollDemo'
 import CardReportsDemo from './demos/CardReportsDemo'
-import MenuDemo from './demos/MenuDemo'
 
 const menuGroups = {
     home: {
@@ -127,7 +128,7 @@ const menuGroups = {
         items: {
             layout: {
                 label: 'Layout',
-                component: () => <div>TODO<br />This page uses the Layout</div>
+                component: LayoutDemo
             },
             menu: {
                 label: 'Menu',
