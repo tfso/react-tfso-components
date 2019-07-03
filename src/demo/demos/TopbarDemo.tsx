@@ -74,7 +74,7 @@ export default withScreenSize(class TopbarDemo extends React.PureComponent<Layou
         return (
             <Demo>
                 <DemoTitle demoPath='TopbarDemo.tsx' srcPath='Topbar.tsx' >TopBar</DemoTitle>
-                <DemoHelp>The topbar</DemoHelp>
+                <DemoHelp>A topbar with a dropdown element and menubutton</DemoHelp>
                 <DemoProps>
                     <DemoProp name='mobile' type='boolean' default='' description='mobile device or desktop' />
                     <DemoProp name='onMenuToggle' type='function' default='' description='opens the menu-icon'/>

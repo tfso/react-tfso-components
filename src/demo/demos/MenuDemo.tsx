@@ -1,16 +1,46 @@
 import React from 'react'
-import Menu from '../../lib/layout/Menu'
+import Menu, {MenuItem, MenuRootItem} from '../../lib/layout/Menu'
 import {Demo, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 import {ScreenSizeData, withScreenSize} from '../../lib/ScreenSize'
 import {Button} from '@material-ui/core'
+import BuildIcon from '@material-ui/icons/Build'
+import HomeIcon from '@material-ui/icons/Home'
 
 type MenuProps = {
-    screenSize: ScreenSizeData
-    children: ['Tull', 'Tull2']
+    screenSize: ScreenSizeData,
 }
 type LayoutState = {
     menuOpen: boolean | null
 }
+
+const menuItems = [{
+    icon: HomeIcon,
+    label: 'test',
+    href: '/',
+    selected: false
+},
+{
+    icon: BuildIcon,
+    label: 'test1',
+    href: '/',
+    selected: false
+
+},
+{
+    icon: BuildIcon,
+    label: 'test2',
+    href: '/',
+    selected: true
+
+},
+{
+    icon: BuildIcon,
+    label: 'test3',
+    href: '/',
+    selected: false
+
+}]
+
 export default withScreenSize(class MenuDemo extends React.PureComponent<MenuProps, LayoutState>{
     state: LayoutState = {
         menuOpen: null
@@ -27,7 +57,7 @@ export default withScreenSize(class MenuDemo extends React.PureComponent<MenuPro
         return (
             <Demo>
                 <DemoTitle demoPath='MenuDemo.tsx' srcPath='Menu.tsx' >Menu</DemoTitle>
-                <DemoHelp>Menu</DemoHelp>
+                <DemoHelp>A menu that can hide and show on commando, mobile friendly</DemoHelp>
                 <DemoProps title='MenuProps'>
                     <DemoProp name='mobile' type='boolean' default='' description='if mobile' />
                     <DemoProp name='onClose' type='function' default='' description='Callback invoked when the menu is closed. Set false to close it'/>
@@ -56,7 +86,7 @@ export default withScreenSize(class MenuDemo extends React.PureComponent<MenuPro
                     <DemoProp name='label' type='string' default='' description='list item text'/>
                     <DemoProp name='chipLabel' type='string' default='' description='Label in a chip component'/>
                     <DemoProp name='chipColor' type='warning| information' default='' description='Color switcher'/>
-                    <DemoProp name='selected' type='boolean' default='' description=''/>
+                    <DemoProp name='selected' type='boolean' default='' description='makes the value'/>
                     <DemoProp name='href' type='string| ((content: React.ReactChild) => React.ReactChild)' default='' description='liked up with menuItems'/>
                 </DemoProps>
                 <DemoContent>
@@ -66,7 +96,16 @@ export default withScreenSize(class MenuDemo extends React.PureComponent<MenuPro
                         onClose={this.onCloseMenu}
                         mobile={this.props.screenSize.mobile}
                     >
-                        {this.props.children}
+                        {menuItems.map((menuItem) => (
+                            <MenuRootItem
+                                icon={menuItem.icon}
+                                key={menuItem.label}
+                                label={menuItem.label}
+                                subtitle={menuItem.label}
+                                href={menuItem.href}
+                                selected={menuItem.selected}
+                            />
+                        ))}
                     </Menu>
                 </DemoContent>
             </Demo>
