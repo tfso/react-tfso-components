@@ -16,7 +16,7 @@ export type BoardItem = Readonly<{
     mobile?: BoardItemLayout
     tablet?: BoardItemLayout
     desktop: BoardItemLayout
-    component: React.ElementType<{screenType: ScreenType}>
+    component: BoardItemComponent
 }>
 
 export type BoardItems = Readonly<{
