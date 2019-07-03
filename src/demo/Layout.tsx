@@ -48,6 +48,7 @@ import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
 import InfiniteScrollDemo from './demos/InfiniteScrollDemo'
 import CardReportsDemo from './demos/CardReportsDemo'
+import MenuDemo from './demos/MenuDemo'
 
 const menuGroups = {
     home: {
@@ -130,7 +131,7 @@ const menuGroups = {
             },
             menu: {
                 label: 'Menu',
-                component: () => <div>TODO<br />The menu to the left</div>
+                component: MenuDemo
             },
             notify: {
                 label: 'Notify',
