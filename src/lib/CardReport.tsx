@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import _ from 'lodash'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import {Tooltip} from '@material-ui/core'
-import TfsoReportImage from '../lib/images/TfsoReportImage.svg'
+import TfsoReportImage from './images/TfsoReportImage.svg'
 
 export type ReportsProps = {
     options: {id: number, title: string, description: string, url: string, image: any}
