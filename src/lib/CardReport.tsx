@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import _ from 'lodash'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import {Tooltip} from '@material-ui/core'
-import TfsoReportImage from './images/TfsoReportImage.svg'
+import TfsoReport from './icons/TfsoReport'
 
 export type ReportsProps = {
     options: {id: number, title: string, description: string, url: string, image: any}
@@ -49,15 +49,18 @@ const CustomContent = styled(CardContent)` &&{
   }  
 }` as typeof CardContent
 
-const CustomMedia = styled(CardMedia)` &&{
-  background: #f5f5f5;
-  padding: 10px 10px 0 10px;
-}` as typeof CardMedia
-
 const CustomArea = styled(CardActionArea)` &&{
-  max-height: 100px;
+  background: #f5f5f5;
+  min-height: 100px;
+  max-height: 150px;
+  padding: 10px 10px 0 10px;
   position: relative;
 }` as typeof CardActionArea
+
+const CustomViewArea = styled.div`
+  background-color: #FFF;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
+`
 
 export default withScreenSize(class CardReport extends PureComponent<ReportsProps & InjectedScreenSizeProps>{
     onClickLink = (event, report) => {
@@ -86,12 +89,13 @@ export default withScreenSize(class CardReport extends PureComponent<ReportsProp
         )
         const reportImage = (
             <CustomArea onClick={(e) => this.onClickLink(e, options)}>
-
-                <CustomMedia
-                    component="img"
-                    image={options.image ? options.image : TfsoReportImage}
-                    title={translate(_.capitalize(options.title))}
-                />
+                <CustomViewArea>
+                    <CardMedia
+                        component={options.image ? 'img' : (props) => <TfsoReport style={{width: '100%', minHeight: '110px'}}/>}
+                        image={options.image ? options.image : null}
+                        title={translate(_.capitalize(options.title))}
+                    />
+                </CustomViewArea>
             </CustomArea>
         )
         const desktopCard = (

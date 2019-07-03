@@ -7,7 +7,7 @@ export type TfsoReportImageProps = {} & SvgIconProps
 const TfsoReport = React.memo((props: TfsoReportImageProps) => (
     <SvgIcon
         {...props}
-        viewBox='0 0 148 78'
+        viewBox='-50 20 250 40'
     >
         <path d="M11 77H0C0.1 72 5.2 70.8 8.1 68C9 67.2 9.5 66 9.5 64.8C9.5 62.9 8 61.4 6.1 61.4C6 61.4 5.9 61.4 5.8 61.4C3 61.4 2 63.6 2 66.1H0.5C0.4 62.7 2.2 60.2 5.8 60.2C8.7 60.2 11 61.8 11 64.9C11 67.7 9 69.4 6.8 70.9C5.2 72 2.2 73.5 1.8 75.7H11.1L11 77Z" fill="#00B8F3"/>
         <path d="M13.2 71.4L20.9 60.3H22.3V71.6H24.8V72.9H22.3V77.1H20.9V72.9H13.2V71.4ZM20.9 71.6V62.5L14.5999 71.6C14.5999 71.5 20.9 71.5 20.9 71.6Z" fill="#00B8F3"/>
