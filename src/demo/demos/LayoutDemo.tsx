@@ -1,8 +1,7 @@
 import React from 'react'
-import {Demo, DemoCode, DemoContent, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
+import {Demo, DemoCode, DemoHelp, DemoProp, DemoProps, DemoTitle} from '../components/demo'
 
-export default class LayoutDemo extends React.PureComponent{
-
+export default class LayoutDemo extends React.PureComponent<{}>{
     render(){
         return (
             <Demo>
