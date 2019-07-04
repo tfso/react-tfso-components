@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import OpenInNew from '@material-ui/icons/OpenInNew'
 import IconButton from '@material-ui/core/IconButton'
-import _ from 'lodash'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import {Tooltip} from '@material-ui/core'
 import TfsoReport from './icons/TfsoReport'
@@ -67,13 +66,13 @@ export default withScreenSize(class CardReport extends PureComponent<ReportsProp
         this.props.onClick(event, report)
     }
     render(){
-        const {translate, options, screenSize} = this.props
+        const {options, screenSize} = this.props
         const report = (
             <CustomContent>
                 <TitleContainer>
                     <Tooltip title={options.title}>
                         <CustomHeader noWrap gutterBottom variant="body1">
-                            {translate(_.capitalize(this.props.options.title))}
+                            {this.props.options.title}
                         </CustomHeader>
                     </Tooltip>
                     <CustomIconButton color='primary' onClick={(e) => { this.onClickLink(e, options) }}>
@@ -82,7 +81,7 @@ export default withScreenSize(class CardReport extends PureComponent<ReportsProp
                 </TitleContainer>
                 <Tooltip title={options.description}>
                     <CustomDescription variant="body2" color="textSecondary" noWrap>
-                        {translate(_.capitalize(options.description))}
+                        {options.description}
                     </CustomDescription>
                 </Tooltip>
             </CustomContent>
@@ -93,7 +92,7 @@ export default withScreenSize(class CardReport extends PureComponent<ReportsProp
                     <CardMedia
                         component={options.image ? 'img' : (props) => <TfsoReport style={{width: '100%', minHeight: '110px'}}/>}
                         image={options.image ? options.image : null}
-                        title={translate(_.capitalize(options.title))}
+                        title={options.title}
                     />
                 </CustomViewArea>
             </CustomArea>
