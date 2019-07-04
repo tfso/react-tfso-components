@@ -91,7 +91,7 @@ export default withScreenSize(class CardReport extends PureComponent<ReportsProp
                 <CustomViewArea>
                     <CardMedia
                         component={options.image ? 'img' : (props) => <TfsoReport style={{width: '100%', minHeight: '110px'}}/>}
-                        image={options.image ? options.image : null}
+                        image={options.image ? options.image : 'dummy'}
                         title={options.title}
                     />
                 </CustomViewArea>
