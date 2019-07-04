@@ -40,14 +40,14 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
                 mobile: {
                     col: 0,
                     row: 0,
-                    colSpan: 4,
+                    colSpan: 6,
                     rowSpan: 1
                 },
                 tablet: {
                     col: 0,
                     row: 0,
                     colSpan: 3,
-                    rowSpan: 1
+                    rowSpan: 2
                 },
                 desktop: {
                     col: 0,
@@ -60,14 +60,14 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
             b: {
                 key: 'b',
                 mobile: {
-                    col: 0,
-                    row: 1,
-                    colSpan: 4,
+                    col: 6,
+                    row: 0,
+                    colSpan: 6,
                     rowSpan: 1
                 },
                 tablet: {
                     col: 3,
-                    row: 0,
+                    row: 1,
                     colSpan: 3,
                     rowSpan: 1
                 },
@@ -83,12 +83,12 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
                 key: 'c',
                 mobile: {
                     col: 0,
-                    row: 2,
-                    colSpan: 4,
-                    rowSpan: 1
+                    row: 1,
+                    colSpan: 3,
+                    rowSpan: 2
                 },
                 tablet: {
-                    col: 0,
+                    col: 6,
                     row: 1,
                     colSpan: 3,
                     rowSpan: 1
@@ -107,16 +107,16 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
             d: {
                 key: 'd',
                 mobile: {
-                    col: 0,
-                    row: 2,
-                    colSpan: 4,
-                    rowSpan: 1
-                },
-                tablet: {
-                    col: 0,
+                    col: 3,
                     row: 1,
                     colSpan: 3,
-                    rowSpan: 1
+                    rowSpan: 2
+                },
+                tablet: {
+                    col: 9,
+                    row: 0,
+                    colSpan: 3,
+                    rowSpan: 2
                 },
                 desktop: {
                     col: 9,
@@ -129,14 +129,14 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
             e: {
                 key: 'e',
                 mobile: {
-                    col: 0,
-                    row: 3,
-                    colSpan: 4,
-                    rowSpan: 1
+                    col: 6,
+                    row: 1,
+                    colSpan: 6,
+                    rowSpan: 2
                 },
                 tablet: {
-                    col: 0,
-                    row: 2,
+                    col: 3,
+                    row: 0,
                     colSpan: 6,
                     rowSpan: 1
                 },

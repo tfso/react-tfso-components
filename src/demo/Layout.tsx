@@ -72,8 +72,6 @@ const menuGroups = {
             emoji: {
                 label: 'Emoji',
                 component: EmojiDemo,
-                chipLabel: 'New',
-                chipColor: 'success'
             },
             alert: {
                 label: 'Alert',
@@ -86,14 +84,10 @@ const menuGroups = {
             progressbar: {
                 label: 'ProgressBar',
                 component: ProgressBarDemo,
-                chipLabel: 'NEW',
-                chipColor: 'success'
             },
             confirmationdialog: {
-                label: 'ConfirmationDialog 123123213',
+                label: 'ConfirmationDialog',
                 component: ConfirmationDialogDemo,
-                chipLabel: 'NEW',
-                chipColor: 'success'
             },
             listpicker: {
                 label: 'ListPicker',
@@ -113,11 +107,21 @@ const menuGroups = {
             },
             accessdenied: {
                 label: 'AccessDenied',
+                chipLabel: 'New',
+                chipColor: 'success',
                 component: AccessDeniedDemo
             },
             cardreport: {
                 label: 'CardReport',
+                chipLabel: 'New',
+                chipColor: 'success',
                 component: CardReportsDemo
+            },
+            board: {
+                label: 'Board',
+                chipLabel: 'New',
+                chipColor: 'success',
+                component: BoardDemo
             }
         }
     },
@@ -137,8 +141,6 @@ const menuGroups = {
             notify: {
                 label: 'Notify',
                 component: NotifyDemo,
-                chipLabel: 'New',
-                chipColor: 'info',
             },
             profilecard: {
                 label: 'ProfileCard',
@@ -186,8 +188,6 @@ const menuGroups = {
         subtitle: 'Well duh',
         component: Icons,
         icon: FontDownloadIcon,
-        chipLabel: 'New',
-        chipColor: 'info',
     },
     labs: {
         label: 'Labs',
@@ -195,14 +195,6 @@ const menuGroups = {
         icon: CodeIcon,
         accessDenied: true,
         items: {
-            // gridlayout: {
-            //     label: 'GridLayout',
-            //     component: GridLayoutDemo
-            // },
-            board: {
-                label: 'Board',
-                component: BoardDemo
-            }
         }
     },
 }
