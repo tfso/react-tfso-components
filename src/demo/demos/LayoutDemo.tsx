@@ -5,13 +5,12 @@ export default class LayoutDemo extends React.PureComponent<{}>{
     render(){
         return (
             <Demo>
-                <DemoTitle demoPath='LayoutDemo.tsx' srcPath='Layout.tsx' >Layout</DemoTitle>
+                <DemoTitle demoPath='LayoutDemo.tsx' srcPath='Layout.tsx'>Layout</DemoTitle>
                 <DemoHelp></DemoHelp>
                 <DemoProps>
                     <DemoProp name='docTitle' type='string' description='Document title' />
                     <DemoProp name='menuContent' type='React.ReactNode' description='menu content' />
                     <DemoProp name='topMenuContent' type='React.ReactNode' description='top bar content' />
-                    <DemoProp name='screenSize' type='ScreenSizeData' description='' />
                 </DemoProps>
                 <DemoCode language='tsx'>
                     {`
