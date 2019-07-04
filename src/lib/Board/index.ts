@@ -1,4 +1,19 @@
+import Board from './Board'
+
+export {addBoardItem, removeBoardItem, hideBoardItem, showBoardItem} from './utils'
+
+export default Board
+
 export type ScreenType = 'mobile' | 'tablet' | 'desktop'
+
+export type BoardProps = {
+    locked?: boolean
+    items: BoardItems
+    spacing?: number
+    rowHeight: number
+    onChange?: (items: BoardItems) => void
+    children?: undefined
+}
 
 export type BoardItemLayout = Readonly<{
     col: number
@@ -21,18 +36,4 @@ export type BoardItem = Readonly<{
 
 export type BoardItems = Readonly<{
     [key: string]: BoardItem
-}>
-
-export type BoardDimensions = Readonly<{
-    colWidth: number
-    rowHeight: number
-    spacing: number
-    width: number
-}>
-
-export type BoardItemDimensions = Readonly<{
-    top: number
-    left: number
-    width: number
-    height: number
 }>

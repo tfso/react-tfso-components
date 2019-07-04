@@ -1,9 +1,11 @@
 import React from 'react'
-import {BoardItems, ScreenType, BoardItem, BoardDimensions} from './types'
+import isEqual from 'lodash/isEqual'
+
+import {BoardItems, ScreenType, BoardItem} from '.'
+import {BoardDimensions} from './types'
 import {calculateItemDimensions, calculateItemLayout, compact, moveItem} from './utils'
 import {BoardItemContainerProps} from './BoardItemContainer'
 import {BoardItemPlaceholderProps} from './BoardItemPlaceholder'
-import isEqual from 'lodash/isEqual'
 
 export type BoardState = {
     items: BoardItems
@@ -68,7 +70,7 @@ export function boardReducer(state: BoardState, action: BoardAction): BoardState
     case BoardActionType.DRAGGING:{
         const {activeDrag, items} = state
         const {deltaX, deltaY, boardDimensions, screenType} = action
-        if(!activeDrag || !(deltaX + deltaY)){
+        if(!activeDrag || (deltaX === 0 && deltaY === 0)){
             return state
         }
 
@@ -96,7 +98,9 @@ export function boardReducer(state: BoardState, action: BoardAction): BoardState
         }
         const {key} = activeDrag
         const item = {...items[key], [screenType]: calculateItemLayout(items[key][screenType]!, activeDrag, boardDimensions)}
-        if(isEqual(item, oldDragItem)){
+        const newItems = compact({...items, [activeDrag.key]: item}, screenType)
+
+        if(isEqual(newItems[key], oldDragItem)){
             return {
                 items: state.items,
                 activeDrag: null,
@@ -104,7 +108,6 @@ export function boardReducer(state: BoardState, action: BoardAction): BoardState
                 oldDragItem: null
             }
         }
-        const newItems = compact({...items, [activeDrag.key]: item}, screenType)
 
         return {
             items: newItems,

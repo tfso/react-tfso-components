@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScreenType} from './types'
+import {ScreenType} from '.'
 import {getBreakpointFromWidth} from './utils'
 import {materialuiTheme} from '../theme'
 

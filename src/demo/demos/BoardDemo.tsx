@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {Demo, DemoContent, DemoTitle, DemoHelp, DemoProps, DemoProp} from '../components/demo'
-import Board, {BoardProps} from '../../lib/board/Board'
+import Board, {BoardProps} from '../../lib/Board'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Paper, {PaperProps} from '@material-ui/core/Paper'
-import {addBoardItem} from '../../lib/board/utils'
+import {addBoardItem} from '../../lib/Board/utils'
 
 const ItemWrapper = ({backgroundColor, ...props}: PaperProps & {backgroundColor: string}) => <Paper {...props} />
 const Item = styled(ItemWrapper)`&&{
@@ -203,7 +203,7 @@ export default class BoardDemo extends React.PureComponent<{}, State>{
     render(){
         return (
             <Demo>
-                <DemoTitle srcPath='Board.tsx' demoPath='BoardDemo.tsx'>Board</DemoTitle>
+                <DemoTitle srcPath='Board/Board.tsx' demoPath='BoardDemo.tsx'>Board</DemoTitle>
                 <DemoHelp>A Board layout</DemoHelp>
                 <DemoProps title='BoardProps'>
                     <DemoProp required name='rowHeight' type='number' />

@@ -1,3 +1,4 @@
+import {BreakpointValues} from '@material-ui/core/styles/createBreakpoints'
 import {
     calculateBoardHeight,
     calculateBoardRows,
@@ -11,8 +12,8 @@ import {
     // showBoardItem,
     // hideBoardItem,
 } from './utils'
-import {BoardItems, BoardItemLayout, BoardItemDimensions} from './types'
-import {BreakpointValues} from '@material-ui/core/styles/createBreakpoints'
+import {BoardItems, BoardItemLayout} from '.'
+import {BoardItemDimensions} from './types'
 
 // TODO: Write more tests.. (this mantra could be the meaning of life, who knows, it's always that voice in your head whispering 'write.more.testsssss' when you're about to fall asleep or when you're on the toilet a misty early morning, squeesing a chunky snickers, suddenly filling you with anxiety that your code may blow up any second now.)
 
