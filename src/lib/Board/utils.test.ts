@@ -5,7 +5,7 @@ import {
     calculateItemDimensions,
     calculateItemLayout,
     getBreakpointFromWidth,
-    // compact,
+    compact,
     moveItem,
     addBoardItem,
     // removeBoardItem,
@@ -292,7 +292,43 @@ describe('utils', () => {
 
     })
     describe('compact', () => {
-
+        it('compacts moves an item that fits above other items up', () => {
+            const component = null as any
+            const items: BoardItems = {
+                a: {
+                    key: 'a',
+                    component,
+                    desktop: {
+                        row: 0,
+                        col: 2,
+                        rowSpan: 1,
+                        colSpan: 2
+                    }
+                },
+                b: {
+                    key: 'b',
+                    component,
+                    desktop: {
+                        row: 1,
+                        col: 0,
+                        rowSpan: 2,
+                        colSpan: 12,
+                    }
+                },
+                c: {
+                    key: 'c',
+                    component,
+                    desktop: { // should fit to the left of a
+                        row: 5,
+                        col: 0,
+                        rowSpan: 1,
+                        colSpan: 2
+                    }
+                }
+            }
+            const newItems = compact(items, 'desktop')
+            expect(newItems['c'].desktop.row).toBe(0)
+        })
     })
     describe('moveItem', () => {
         it('moves vertically stacked items down that both collides with a taller item moved horizontally', () => {

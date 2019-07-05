@@ -109,18 +109,19 @@ export function compact(items: BoardItems, screenType: ScreenType): BoardItems{
         .map(item => ({key: item.key, layout: item[screenType]!}))
         .sort(({layout: layoutA}, {layout: layoutB}) => compareBoardItemLayout(layoutA, layoutB))
 
-    for(let {key, layout: itemLayout} of sortedItemLayouts){
+    for(let {key, layout} of sortedItemLayouts){
         let itemWasChanged = false
-        while(true){
-            const test = {...itemLayout, row: itemLayout.row - 1}
-            if(test.row < 0 || !!Object.values(newLayout).find(otherItem => collides(otherItem[screenType], test))){
-                break
+        let {row} = layout
+        while(--row >= 0){
+            const test = {...layout, row}
+            if(!Object.values(newLayout).find(otherItem => collides(otherItem[screenType], test))){
+                // Doesn't collide with anything, but there may yet be more space somewhere higher up we can move to. So we can't break yet.
+                layout = test
+                itemWasChanged = layoutWasChanged = true
             }
-            itemLayout = test
-            itemWasChanged = layoutWasChanged = true
         }
         newLayout[key] = itemWasChanged
-            ? {...items[key], [screenType]: itemLayout}
+            ? {...items[key], [screenType]: layout}
             : items[key] // don't want to duplicate items.
     }
 
