@@ -60,6 +60,7 @@
     "eslint": "5.16.0",
     "eslint-config": "github:tfso/eslint-config",
     "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
     "gh-pages": "^2.0.1",
     "history": "^4.9.0",
     "jest": "24.7.1",
