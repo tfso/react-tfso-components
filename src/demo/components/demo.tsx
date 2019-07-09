@@ -42,7 +42,7 @@ export const DemoTitle = (props: DemoTitleProps) => {
                 </Typography>
             </Grid>
             {props.srcPath || props.demoPath
-                ? <Grid item xs container spacing={16} justify='flex-end' wrap='nowrap'>
+                ? <Grid item xs container spacing={2} justify='flex-end' wrap='nowrap'>
                     {props.demoPath && <Grid item><GitHubLink iconProps={{fontSize: 'default', color: 'secondary'}} path={`blob/master/src/demo/demos/${props.demoPath}`} tooltip={`View demo source for ${props.children}`} /></Grid>}
                     {props.srcPath && <Grid item><GitHubLink iconProps={{fontSize: 'default', color: 'primary'}} path={`blob/master/src/lib/${props.srcPath}`} tooltip={`View source for ${props.children}`}/></Grid> }
                 </Grid>
@@ -57,7 +57,7 @@ export const DemoContent = (props: { children: Array<ReactChild> | ReactChild}) 
         <Typography variant="subtitle1" >Example</Typography>
         <Divider />
         <br />
-        <Grid container spacing={16} alignItems='center'>
+        <Grid container spacing={2} alignItems='center'>
             {props.children && Array.isArray(props.children)
                 ? props.children.map((child, i) => (
                     <Grid item key={i} xs={i === 0 ? 12 : false}>

@@ -58,7 +58,7 @@ const ProfileAvatar = styled(Avatar)`
     &&{
      width: 60px;
      height: 60px;
-     margin: ${({theme}) => theme.mui.spacing.unit}px;  
+     margin: ${({theme}) => theme.mui.spacing()}px;  
     }
 ` as typeof Avatar
 const CustomCloseIconButton = styled(IconButton)`
@@ -72,7 +72,7 @@ const CustomCloseIconButton = styled(IconButton)`
 
 const RightPanel = styled.div`
   flex: 1 0 auto;
-  padding: ${({theme}) => theme.mui.spacing.unit}px;;
+  padding: ${({theme}) => theme.mui.spacing()}px;;
 `
 
 const Right = styled.div`

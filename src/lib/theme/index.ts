@@ -86,9 +86,6 @@ const layout = {
 }
 
 export const materialuiTheme = createMuiTheme({
-    typography: {
-        useNextVariants: true,
-    },
     palette: {
         secondary: {
             dark: '#1b2c3c',

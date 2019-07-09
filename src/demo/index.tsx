@@ -8,12 +8,14 @@ import Layout from './Layout'
 
 ReactDOM.render(
     <React.Fragment>
+        {/* <React.StrictMode> */}
         <CssBaseline />
         <MuiThemeProvider theme={theme.materialuiTheme}>
             <StyledThemeProvider theme={theme.styledTheme}>
                 <Layout />
             </StyledThemeProvider>
         </MuiThemeProvider>
+        {/* </React.StrictMode> */}
     </React.Fragment>,
     document.getElementById('root')
 )

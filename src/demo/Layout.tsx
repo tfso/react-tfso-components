@@ -44,7 +44,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Tooltip from '@material-ui/core/Tooltip'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import SettingsIcon from '@material-ui/core/SvgIcon/SvgIcon'
+import SettingsIcon from '@material-ui/icons/Settings'
 import ScreenSize from '../lib/ScreenSize'
 import ListPicker from '../lib/ListPicker'
 import NotifyDemo from './demos/NotifyDemo'
@@ -456,7 +456,7 @@ class Profile extends React.PureComponent{
                                             <SettingsIcon fontSize='small'/>
                                         </ListItemIcon>
                                     </Tooltip>
-                                    <ListItemText inset primary="Settings"/>
+                                    <ListItemText primary="Settings"/>
                                 </ListItem>
                                 {mobile && <ListItem divider button>
                                     <Tooltip title='Switch client'>

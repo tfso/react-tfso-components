@@ -141,7 +141,7 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                                                 <SettingsIcon fontSize='small'/>
                                             </ListItemIcon>
                                         </Tooltip>
-                                        <ListItemText inset primary="Settings"/>
+                                        <ListItemText primary="Settings"/>
                                     </ListItem>
                                     {mobile && <ListItem divider button>
                                         <Tooltip title='Switch client'>

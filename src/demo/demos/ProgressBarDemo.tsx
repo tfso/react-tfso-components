@@ -35,7 +35,7 @@ export default class ProgressBarDemo extends React.PureComponent<{}, ProgressBar
                     <DemoProp name='color' type='string' default='#6699bb' description='The color of the bar.'></DemoProp>
                 </DemoProps>
                 <DemoContent>
-                    <Grid container alignItems='center' spacing={32}>
+                    <Grid container alignItems='center' spacing={2}>
                         <Grid item>
                             <ProgressBar targetValue={this.state.targetValue} currentValue={this.state.currentValue} color={this.state.color} name={this.state.name} />
                         </Grid>

@@ -44,7 +44,7 @@ const CustomContent = styled(CardContent)` &&{
   position: relative;
   background-color: white;
   :last-child{
-    padding-bottom: ${({theme}) => theme.mui.spacing.unit * 2}px;
+    padding-bottom: ${({theme}) => theme.mui.spacing(2)}px;
   }  
 }` as typeof CardContent
 

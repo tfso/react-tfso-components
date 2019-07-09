@@ -27,8 +27,8 @@ const emojis = {
 }
 
 const Section = styled.div`&&{
-    margin-top: ${({theme}) => theme.mui.spacing.unit * 4}px;
-    margin-bottom: ${({theme}) => theme.mui.spacing.unit * 2}px;
+    margin-top: ${({theme}) => theme.mui.spacing(4)}px;
+    margin-bottom: ${({theme}) => theme.mui.spacing(2)}px;
 }`
 
 const SubHeading = (props: TypographyProps) => <Typography variant='h4' paragraph {...props} />

@@ -33,12 +33,12 @@ const TransitionComponent = props => <Slide direction='down' {...props} />
 
 const CloseIconButton = styled(IconButton)`&&{
     position: absolute;
-    right: ${({theme}) => theme.mui.spacing.unit}px;
-    top: ${({theme}) => theme.mui.spacing.unit}px;
+    right: ${({theme}) => theme.mui.spacing()}px;
+    top: ${({theme}) => theme.mui.spacing()}px;
 }` as typeof IconButton
 
-const ListItemWrapper = ({read, ...props}: ListItemProps & {read?: boolean}) => <ListItem {...props} />
-const ReadListItem = styled(ListItemWrapper)`&&{
+// const ListItemWrapper = ({read, ...props}: ListItemProps & {read?: boolean}) => <ListItem {...props} />
+const ReadListItem = styled(ListItem)<{read?: boolean}>`&&{
     background-color: ${({read, theme}) => read ? 'inherit' : theme.tfso.colors.notification};
     :hover {
         background-color: ${({read, theme}) => read ? theme.mui.palette.action.hover : theme.tfso.colors.notificationHover};
@@ -227,7 +227,7 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
     renderToolbar = (mobile: boolean) => (
         <>
             <Toolbar variant='dense' disableGutters={mobile} style={{marginRight: mobile ? 32 : 0}}>
-                <Grid container justify='space-between' alignItems='baseline' spacing={8} wrap='nowrap'>
+                <Grid container justify='space-between' alignItems='baseline' spacing={2} wrap='nowrap'>
                     <Grid item xs>
                         <Typography variant={mobile ? 'subtitle1' : 'subtitle2'} >{this.props.translate('Notifications')}</Typography>
                     </Grid>

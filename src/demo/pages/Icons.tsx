@@ -19,14 +19,14 @@ export default class Icons extends React.PureComponent{
 type TfsoLogoDemoState = {
     color: TfsoIconProps['color']
     fontSize: TfsoIconProps['fontSize']
-    nativeColor: TfsoIconProps['nativeColor']
+    htmlColor: TfsoIconProps['htmlColor']
 }
 
 class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
     state:TfsoLogoDemoState = {
         color: 'primary',
         fontSize: 'large',
-        nativeColor: ''
+        htmlColor: ''
     }
 
     handleChange = (target: keyof TfsoLogoDemoState) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -45,7 +45,7 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
                     <Tfso
                         color={this.state.color}
                         fontSize={this.state.fontSize}
-                        nativeColor={this.state.nativeColor}
+                        htmlColor={this.state.htmlColor}
                     />
                     <TextField
                         select
@@ -75,8 +75,8 @@ class TfsoDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
                     <TextField
                         label='nativeColor'
                         placeholder='#00B8F3'
-                        value={this.state.nativeColor}
-                        onChange={this.handleChange('nativeColor')}
+                        value={this.state.htmlColor}
+                        onChange={this.handleChange('htmlColor')}
                     />
                 </DemoContent>
             </Demo>
@@ -88,7 +88,7 @@ class TfsoLoadingDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
     state:TfsoLogoDemoState = {
         color: 'primary',
         fontSize: 'large',
-        nativeColor: ''
+        htmlColor: ''
     }
 
     handleChange = (target: keyof TfsoLogoDemoState) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -108,7 +108,7 @@ class TfsoLoadingDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
                     <TfsoLoading
                         color={this.state.color}
                         fontSize={this.state.fontSize}
-                        nativeColor={this.state.nativeColor}
+                        htmlColor={this.state.htmlColor}
                     />
                     <TextField
                         select
@@ -137,8 +137,8 @@ class TfsoLoadingDemo extends React.PureComponent<{}, TfsoLogoDemoState>{
                     <TextField
                         label='nativeColor'
                         placeholder='#00B8F3'
-                        value={this.state.nativeColor}
-                        onChange={this.handleChange('nativeColor')}
+                        value={this.state.htmlColor}
+                        onChange={this.handleChange('htmlColor')}
                     />
                 </DemoContent>
             </Demo>

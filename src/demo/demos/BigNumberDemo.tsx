@@ -33,7 +33,7 @@ export default class BigNumberDemo extends React.PureComponent<{}, BigNumberStat
                     {/* <DemoProp name='...' type='SvgIconProps' default='' description='Any other prop is spread to the SvgIcon'></DemoProp> */}
                 </DemoProps>
                 <DemoContent>
-                    <Grid container alignItems='center' spacing={32}>
+                    <Grid container alignItems='center' spacing={2}>
                         <Grid item>
                             <div style={{backgroundColor: this.state.color === 'light' ? '#11beff' : 'inherit', padding: 10}}>
                                 <BigNumber

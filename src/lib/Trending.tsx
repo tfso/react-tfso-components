@@ -29,10 +29,10 @@ const getColor = (variant: TrendingProps['variant'], theme: DefaultTheme) => {
 
 const trending = ({variant, theme, ...iconProps}: TrendingProps & WithTheme) => {
     const Icon = iconMap[variant]
-    const nativeColor = getColor(variant, theme)
+    const htmlColor = getColor(variant, theme)
     return (
         <Icon
-            nativeColor={nativeColor}
+            htmlColor={htmlColor}
             {...iconProps}
         />
     )

@@ -84,7 +84,7 @@ const StyledChip = styled(ChipWrapper)`&&{
 }`
 
 const StyledListItemText = styled(ListItemText)`&&{
-  flex: 1; //Ie fix
+  flex: 1; /*IE fix*/
 }` as typeof ListItemText
 
 export type MenuProps = {
@@ -121,7 +121,7 @@ const ListItemSecondaryText = styled(Typography)`&&{
 
 const MenuIcon = styled(ListItemIcon)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
-    margin-right: 0;
+    min-width: 36px;
 }` as typeof ListItemIcon
 
 export type MenuGroupProps = {
@@ -133,7 +133,7 @@ export type MenuGroupProps = {
     children: React.ReactNode
 }
 
-const ListItemWrapper = ({expanded, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props} />
+const ListItemWrapper = ({expanded, ...props}: ListItemProps & {expanded: boolean}) => <ListItem {...props as any} />
 
 const MenuGroupListItem = styled(ListItemWrapper)`&&{
     background-color: ${({theme, expanded}) => expanded ? theme.tfso.colors.menuExpanded : theme.tfso.colors.menu};
@@ -144,7 +144,7 @@ const MenuGroupListItem = styled(ListItemWrapper)`&&{
     :focus :hover, :hover {
         background-color: ${({theme}) => theme.tfso.colors.menuItem};
     };
-}` as typeof ListItemWrapper
+}` as React.ComponentType<ListItemProps & {expanded: boolean}>
 
 const MenuGroupExpandLess = styled(ExpandLess)`&&{
     color: ${({theme}) => theme.tfso.colors.menuItemText};
@@ -188,7 +188,7 @@ export const MenuGroup = withScreenSize(class MenuGroup extends React.PureCompon
                     expanded={expanded}
                     onClick={this.onToggleExpanded}
                     button
-                    disableRipple
+                    {...{disableRipple: true} as any} // fuck of types...
                     disableTouchRipple
                 >
                     <MenuIcon><Icon fontSize='small' /></MenuIcon>
@@ -268,11 +268,18 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
                 selected={this.props.selected}
             >
                 <MenuIcon><Icon fontSize='small' /></MenuIcon>
-                <StyledListItemText primaryTypographyProps={{color: 'inherit'}}>
+                <StyledListItemText
+                    primaryTypographyProps={{color: 'initial'}}
+                    // secondaryTypographyProps={{variant: 'caption', noWrap: true}}
+                    // primary={this.props.label}
+                    // secondary={this.props.subtitle}
+                >
                     {this.props.label}
-                    <ListItemSecondaryText variant='caption' noWrap>
-                        {this.props.subtitle}
-                    </ListItemSecondaryText>
+                    <div>
+                        <ListItemSecondaryText variant='caption' noWrap>
+                            {this.props.subtitle}
+                        </ListItemSecondaryText>
+                    </div>
                 </StyledListItemText>
                 {this.props.chipLabel &&
                     <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
