@@ -37,8 +37,8 @@ const CloseIconButton = styled(IconButton)`&&{
     top: ${({theme}) => theme.mui.spacing()}px;
 }` as typeof IconButton
 
-// const ListItemWrapper = ({read, ...props}: ListItemProps & {read?: boolean}) => <ListItem {...props} />
-const ReadListItem = styled(ListItem)<{read?: boolean}>`&&{
+const ListItemWrapper = ({read, ...props}: ListItemProps & {read?: boolean}) => <ListItem {...props as any} />
+const ReadListItem = styled(ListItemWrapper)`&&{
     background-color: ${({read, theme}) => read ? 'inherit' : theme.tfso.colors.notification};
     :hover {
         background-color: ${({read, theme}) => read ? theme.mui.palette.action.hover : theme.tfso.colors.notificationHover};
