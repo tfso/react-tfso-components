@@ -85,6 +85,9 @@ const StyledChip = styled(ChipWrapper)`&&{
 
 const StyledListItemText = styled(ListItemText)`&&{
   flex: 1; /*IE fix*/
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }` as typeof ListItemText
 
 export type MenuProps = {
@@ -269,18 +272,15 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
             >
                 <MenuIcon><Icon fontSize='small' /></MenuIcon>
                 <StyledListItemText
-                    primaryTypographyProps={{color: 'initial'}}
-                    // secondaryTypographyProps={{variant: 'caption', noWrap: true}}
-                    // primary={this.props.label}
-                    // secondary={this.props.subtitle}
-                >
-                    {this.props.label}
-                    <div>
-                        <ListItemSecondaryText variant='caption' noWrap>
-                            {this.props.subtitle}
-                        </ListItemSecondaryText>
-                    </div>
-                </StyledListItemText>
+                    disableTypography
+                    primary={<Typography color='initial'>{this.props.label}</Typography>}
+                    secondary={<ListItemSecondaryText variant='caption' noWrap>{this.props.subtitle}</ListItemSecondaryText>}
+                />
+                {/* {this.props.label}
+                <ListItemSecondaryText variant='caption' noWrap>
+                    {this.props.subtitle}
+                </ListItemSecondaryText> */}
+                {/* </StyledListItemText> */}
                 {this.props.chipLabel &&
                     <StyledChip color={this.props.chipColor} label={this.props.chipLabel}/>
                 }

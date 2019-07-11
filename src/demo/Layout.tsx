@@ -54,7 +54,7 @@ import CardReportsDemo from './demos/CardReportsDemo'
 const menuGroups = {
     home: {
         label: 'Tfso-Components',
-        subtitle: 'Where magic happens',
+        subtitle: 'Where magic happens and stuff, maybe this subtitle is a tad long?',
         icon: HomeIcon,
         component: Home
     },
@@ -66,7 +66,7 @@ const menuGroups = {
     },
     components: {
         label: 'Components',
-        subtitle: 'Presentational',
+        subtitle: 'Presentational components for presenting stuff',
         icon: ViewCompactIcon,
         items: {
             emoji: {
