@@ -1,28 +1,6 @@
 {
-  "compileOnSave": true,
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "noImplicitAny": false,
-    "isolatedModules": true,
-    "downlevelIteration": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
     "types": ["jest"]
   },
   "include": [
