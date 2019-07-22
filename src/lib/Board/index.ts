@@ -30,7 +30,7 @@ export type BoardItem = Readonly<{
     key: React.Key
     mobile?: BoardItemLayout
     tablet?: BoardItemLayout
-    desktop: BoardItemLayout
+    desktop?: BoardItemLayout
     component: BoardItemComponent
 }>
 
