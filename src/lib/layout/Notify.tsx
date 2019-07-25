@@ -17,25 +17,19 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import IconButton from '@material-ui/core/IconButton'
 import Dialog from '@material-ui/core/Dialog'
 import Slide from '@material-ui/core/Slide'
-import DialogContent from '@material-ui/core/DialogContent'
 import Typography from '@material-ui/core/Typography'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
+import Box from '@material-ui/core/Box'
 
 import ScreenSize from '../ScreenSize'
 import Delay from '../Delay'
 import InfiniteScroll from '../InfiniteScroll'
 
 const TransitionComponent = props => <Slide direction='down' {...props} />
-
-const CloseIconButton = styled(IconButton)`&&{
-    position: absolute;
-    right: ${({theme}) => theme.mui.spacing()}px;
-    top: ${({theme}) => theme.mui.spacing()}px;
-}` as typeof IconButton
 
 const ListItemWrapper = ({read, ...props}: ListItemProps & {read?: boolean}) => <ListItem {...props as any} />
 const ReadListItem = styled(ListItemWrapper)`&&{
@@ -45,11 +39,11 @@ const ReadListItem = styled(ListItemWrapper)`&&{
     };
 }`
 
-const MobileToolbarWrapper = styled.div`&&{
-    margin: 0;
-    padding: 24px 24px 0 24px;
-    flex: 0 0 auto;
-}`
+const CustomDialogTitle = styled.div`
+  display: flex;
+  flex-flow: row-reverse;
+  padding: 5px;
+`
 
 const getNotificateSecondaryText = (date: Date) => {
     const hours = Math.floor(Math.abs(date.getTime() - Date.now()) / 3600000)
@@ -226,8 +220,8 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
 
     renderToolbar = (mobile: boolean) => (
         <>
-            <Toolbar variant='dense' disableGutters={mobile} style={{marginRight: mobile ? 32 : 0}}>
-                <Grid container justify='space-between' alignItems='baseline' spacing={2} wrap='nowrap'>
+            <Toolbar variant='dense' >
+                <Grid container justify='space-between' alignItems='baseline' spacing={8} wrap='nowrap'>
                     <Grid item xs>
                         <Typography variant={mobile ? 'subtitle1' : 'subtitle2'} >{this.props.translate('Notifications')}</Typography>
                     </Grid>
@@ -246,7 +240,7 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
     renderContent(mobile: boolean){
         return (
             <InfiniteScroll height={mobile ? undefined : 500} threshold={0.2} onReachThreshold={this.props.onLoadMore}>
-                <List dense disablePadding>
+                <List dense={!mobile} disablePadding>
                     {this.props.children}
                 </List>
             </InfiniteScroll>
@@ -277,13 +271,15 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
                 onClose={this.onClose}
                 fullScreen
             >
-                <MobileToolbarWrapper>
+                <CustomDialogTitle>
+                    <IconButton href="#" size="small" onClick={this.onClose} aria-label="Close">
+                        <CloseIcon />
+                    </IconButton>
+                </CustomDialogTitle>
+                <Box>
                     {this.renderToolbar(true)}
-                    <CloseIconButton onClick={this.onClose}><CloseIcon /></CloseIconButton>
-                </MobileToolbarWrapper>
-                <DialogContent>
-                    {this.renderContent(true)}
-                </DialogContent>
+                </Box>
+                {this.renderContent(true)}
             </Dialog>
         )
     }

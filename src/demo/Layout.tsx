@@ -91,6 +91,8 @@ const menuGroups = {
             },
             listpicker: {
                 label: 'ListPicker',
+                chipLabel: 'Updated',
+                chipColor: 'info',
                 component: ListPickerDemo,
             },
             searchfield: {
@@ -140,6 +142,8 @@ const menuGroups = {
             },
             notify: {
                 label: 'Notify',
+                chipLabel: 'Updated',
+                chipColor: 'info',
                 component: NotifyDemo,
             },
             profilecard: {
@@ -185,13 +189,13 @@ const menuGroups = {
     },
     icons: {
         label: 'Icons',
-        subtitle: 'Well duh',
         component: Icons,
+        subtitle: '',
         icon: FontDownloadIcon,
     },
     labs: {
         label: 'Labs',
-        subtitle: 'Works in progress',
+        subtitle: 'Work in progress. Testing out new stuff',
         icon: CodeIcon,
         accessDenied: true,
         items: {
