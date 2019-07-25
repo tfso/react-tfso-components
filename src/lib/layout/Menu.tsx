@@ -196,14 +196,14 @@ export const MenuGroup = withScreenSize(class MenuGroup extends React.PureCompon
                         {label}
                         <Collapse in={!expanded} timeout='auto'>
                             <Tooltip title={subtitle} enterDelay={500}>
-                                <ListItemSecondaryText variant='caption' noWrap>
+                                <ListItemSecondaryText variant='caption' noWrap style={{display: 'block'}}>
                                     {subtitle}
                                 </ListItemSecondaryText>
                             </Tooltip>
                         </Collapse>
                     </StyledListItemText>
                     <ListItemSecondaryAction>
-                        <IconButton onClick={this.onToggleExpanded} disableRipple disableTouchRipple>
+                        <IconButton onClick={this.onToggleExpanded} disableRipple disableTouchRipple size="small">
                             {expanded ? <MenuGroupExpandLess /> : <MenuGroupExpandMore />}
                         </IconButton>
                     </ListItemSecondaryAction>
@@ -276,7 +276,7 @@ export class MenuRootItem extends React.PureComponent<MenuRootItemProps>{
                 >
                     {this.props.label}
                     <div>
-                        <ListItemSecondaryText variant='caption' noWrap>
+                        <ListItemSecondaryText variant='caption' noWrap style={{display: 'block'}}>
                             {this.props.subtitle}
                         </ListItemSecondaryText>
                     </div>

@@ -15,6 +15,9 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import {InjectedScreenSizeProps, withScreenSize} from './ScreenSize'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Box from '@material-ui/core/Box'
+import Delay from './Delay'
 
 export type ListPickerProps = {
     open: boolean
@@ -98,13 +101,16 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
     }
 
     render(){
-        const renderLinearProgress = (
-            <>
-            {this.props.loading &&
-                <LinearProgress color='secondary'/>
-            }
-            </>
-        )
+        const renderLoading = () => {
+            const Spacer = <div style={{height: 4}} />
+            return (
+                this.props.loading ? (
+                    <Delay delayMs={200} beforeShow={Spacer}>
+                        <LinearProgress color='secondary' />
+                    </Delay>
+                ) : Spacer
+            )
+        }
 
         const renderItems = (
             <>
@@ -115,8 +121,9 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                     onChange={this.onFilter}
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
+                    fullWidth={this.props.screenSize.mobile}
                 />
-
+                {renderLoading()}
                 <
                     // @ts-ignore
                     MenuList ref={this._listRef}>
@@ -129,16 +136,18 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                                 key={i}
                                 onClick={() => { this.onSelect(option.value) }}
                             >
-                                <AvatarColor color={this.props.avatarColor === 'default' ? '' : this.props.avatarColor}>
-                                    <Typography variant='caption' color='inherit'>
-                                        {option.label.split(' ')
-                                            .slice(0, 3)
-                                            .map((words) => (
-                                                words[0]
-                                            ))
-                                        }
-                                    </Typography>
-                                </AvatarColor>
+                                <ListItemAvatar>
+                                    <AvatarColor color={this.props.avatarColor === 'default' ? '' : this.props.avatarColor}>
+                                        <Typography variant='caption' color='inherit'>
+                                            {option.label.split(' ')
+                                                .slice(0, 3)
+                                                .map((words) => (
+                                                    words[0]
+                                                ))
+                                            }
+                                        </Typography>
+                                    </AvatarColor>
+                                </ListItemAvatar>
                                 <ListItemText primary={option.label} />
                             </MenuItem>
                         ))
@@ -161,7 +170,6 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                 open={this.props.open}
                 onClose={this.onClose}
             >
-                {renderLinearProgress}
                 <DialogContent>
                     {renderItems}
                 </DialogContent>
@@ -178,15 +186,14 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                 fullWidth
                 maxWidth='sm'
             >
-                {renderLinearProgress}
                 <CustomDialogTitle>
-                    <IconButton onClick={this.onClose} aria-label="Close">
+                    <IconButton size="small" onClick={this.onClose} aria-label="Close">
                         <CloseIcon />
                     </IconButton>
                 </CustomDialogTitle>
-                <DialogContent>
+                <Box p={1}>
                     {renderItems}
-                </DialogContent>
+                </Box>
             </Dialog>
         )
 
