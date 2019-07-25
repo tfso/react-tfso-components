@@ -1,0 +1,85 @@
+{
+  "name": "react-tfso-components",
+  "version": "1.1.125",
+  "description": "",
+  "author": "tfso",
+  "license": "MIT",
+  "homepage": "https://tfso.github.io/react-tfso-components",
+  "repository": "tfso/react-tfso-components",
+  "main": "dist/",
+  "types": "dist/",
+  "module": "dist/",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
+    "deploy": "npm run build:demo && gh-pages -d build",
+    "publish": "npm run build && publish-to-git --force",
+    "lint": "node node_modules/eslint/bin/eslint.js --ext .ts,.tsx,.js ./src",
+    "build": "npm run build:clean && npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly -p tsconfig-build.json",
+    "build:js": "cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files --source-maps --extensions \".ts\",\".tsx\" --ignore \"src/**/*.test.js\"",
+    "build:clean": "rm -rf dist",
+    "build:demo": "react-scripts build"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.2.0",
+    "styled-components": "^4.3.2",
+    "react": "^16.8.6 || ^17.0.0",
+    "react-dom": "^16.8.6 || ^17.0.0"
+  },
+  "optionalPeerDependencies": {
+    "react-draggable": "^3.3.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.5.0",
+    "@babel/core": "7.5.0",
+    "@material-ui/core": "4.2.0",
+    "@material-ui/icons": "4.2.1",
+    "@material-ui/styles": "4.2.0",
+    "@types/history": "^4.7.2",
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.136",
+    "@types/prismjs": "^1.16.0",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "@types/styled-components": "^4.1.16",
+    "@typescript-eslint/eslint-plugin": "1.11.0",
+    "@typescript-eslint/parser": "1.11.0",
+    "babel-preset-react-app": "9.0.0",
+    "cross-env": "^5.2.0",
+    "eslint": "5.16.0",
+    "eslint-config": "github:tfso/eslint-config",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "gh-pages": "^2.0.1",
+    "history": "^4.9.0",
+    "prismjs": "^1.16.0",
+    "publish-to-git": "github:tfso/publish-to-git",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-draggable": "^3.3.0",
+    "react-scripts": "3.0.1",
+    "styled-components": "4.3.2",
+    "typescript": "^3.5.3"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie < 11",
+    "not op_mini all"
+  ]
+}
