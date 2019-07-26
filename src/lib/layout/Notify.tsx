@@ -19,7 +19,6 @@ import Dialog from '@material-ui/core/Dialog'
 import Slide from '@material-ui/core/Slide'
 import Typography from '@material-ui/core/Typography'
 import Toolbar from '@material-ui/core/Toolbar'
-import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import {SvgIconProps} from '@material-ui/core/SvgIcon'
@@ -220,17 +219,13 @@ export default class Notifier extends React.PureComponent<NotifierProps>{
 
     renderToolbar = (mobile: boolean) => (
         <>
-            <Toolbar variant='dense' >
-                <Grid container justify='space-between' alignItems='baseline' spacing={8} wrap='nowrap'>
-                    <Grid item xs>
-                        <Typography variant={mobile ? 'subtitle1' : 'subtitle2'} >{this.props.translate('Notifications')}</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Button onClick={this.props.onReadAll} variant='text' size='small' color='primary' fullWidth>
-                            {this.props.translate('Mark all as read')}
-                        </Button>
-                    </Grid>
-                </Grid>
+            <Toolbar variant='dense'>
+                <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+                    <Typography style={{flex: 1}} variant={mobile ? 'subtitle1' : 'subtitle2'} >{this.props.translate('Notifications')}</Typography>
+                    <Button onClick={this.props.onReadAll} variant='text' size='small' color='primary' >
+                        {this.props.translate('Mark all as read')}
+                    </Button>
+                </div>
             </Toolbar>
             {this.renderLoading()}
             <Divider />
