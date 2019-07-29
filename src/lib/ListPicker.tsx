@@ -121,7 +121,7 @@ export default withScreenSize(class ListPicker extends React.PureComponent<ListP
                     onChange={this.onFilter}
                     value={this.state.filterValue}
                     onKeyDown={this.onKeyDown}
-                    fullWidth={this.props.screenSize.mobile}
+                    fullWidth
                 />
                 {renderLoading()}
                 <

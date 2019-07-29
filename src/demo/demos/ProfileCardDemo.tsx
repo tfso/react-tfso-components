@@ -13,6 +13,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import HelpIcon from '@material-ui/icons/Help'
 import List from '@material-ui/core/List'
 import ScreenSize from '../../lib/ScreenSize'
+import Typography from '@material-ui/core/Typography'
 
 type State = {
     // variant
@@ -130,10 +131,10 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                             {({mobile}) => (
                                 <List dense={!mobile}>
                                     <ListItem button onClick={this.onProfile}>
-                                        <ListItemText inset primary="Profile"/>
+                                        <ListItemText primary="Profile"/>
                                     </ListItem>
                                     <ListItem button onClick={this.onRequests}>
-                                        <ListItemText inset primary="Forespørsler"/>
+                                        <ListItemText primary="Forespørsler"/>
                                     </ListItem>
                                     <ListItem button divider onClick={this.onSettings}>
                                         <Tooltip title='Profile settings'>
@@ -149,7 +150,9 @@ export default class ProfileCardDemo extends React.PureComponent<{}, State>{
                                                 <SwapHorizIcon />
                                             </ListItemIcon>
                                         </Tooltip>
-                                        <ListItemText onClick={this.onClient} inset primary={this.state.identity.client.name} secondary='Administrer'/>
+                                        <ListItemText onClick={this.onClient} disableTypography secondary='Administrer'>
+                                            <Typography noWrap>{this.state.identity.client.name}</Typography>
+                                        </ListItemText>
                                     </ListItem>}
                                     <ListItem button divider onClick={this.onHelp}>
                                         <Tooltip title='Help me'>
